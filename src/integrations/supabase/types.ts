@@ -14,7 +14,269 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      faqs: {
+        Row: {
+          answer: string
+          id: string
+          question: string
+        }
+        Insert: {
+          answer: string
+          id?: string
+          question: string
+        }
+        Update: {
+          answer?: string
+          id?: string
+          question?: string
+        }
+        Relationships: []
+      }
+      products: {
+        Row: {
+          brand: Database["public"]["Enums"]["company_brand"]
+          category: string
+          created_at: string
+          description: string | null
+          id: string
+          image_url: string | null
+          name: string
+          specifications: Json | null
+        }
+        Insert: {
+          brand: Database["public"]["Enums"]["company_brand"]
+          category: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          name: string
+          specifications?: Json | null
+        }
+        Update: {
+          brand?: Database["public"]["Enums"]["company_brand"]
+          category?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          name?: string
+          specifications?: Json | null
+        }
+        Relationships: []
+      }
+      project_images: {
+        Row: {
+          alt_text: string | null
+          id: string
+          image_url: string
+          project_id: string | null
+        }
+        Insert: {
+          alt_text?: string | null
+          id?: string
+          image_url: string
+          project_id?: string | null
+        }
+        Update: {
+          alt_text?: string | null
+          id?: string
+          image_url?: string
+          project_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_images_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      projects: {
+        Row: {
+          category: Database["public"]["Enums"]["solution_type"]
+          cover_image_url: string | null
+          created_at: string
+          description: string | null
+          id: string
+          location: string | null
+          title: string
+        }
+        Insert: {
+          category: Database["public"]["Enums"]["solution_type"]
+          cover_image_url?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          location?: string | null
+          title: string
+        }
+        Update: {
+          category?: Database["public"]["Enums"]["solution_type"]
+          cover_image_url?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          location?: string | null
+          title?: string
+        }
+        Relationships: []
+      }
+      quotes: {
+        Row: {
+          created_at: string
+          email: string | null
+          entity_type: Database["public"]["Enums"]["entity_type"] | null
+          estimated_area_sqft: number | null
+          id: string
+          monthly_bill: number | null
+          name: string
+          phone: string
+          power_demand_kw: number | null
+          project_location: string | null
+          referral: string | null
+          solution_classification:
+            | Database["public"]["Enums"]["solution_type"]
+            | null
+          source: Database["public"]["Enums"]["quote_source"]
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          entity_type?: Database["public"]["Enums"]["entity_type"] | null
+          estimated_area_sqft?: number | null
+          id?: string
+          monthly_bill?: number | null
+          name: string
+          phone: string
+          power_demand_kw?: number | null
+          project_location?: string | null
+          referral?: string | null
+          solution_classification?:
+            | Database["public"]["Enums"]["solution_type"]
+            | null
+          source: Database["public"]["Enums"]["quote_source"]
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          entity_type?: Database["public"]["Enums"]["entity_type"] | null
+          estimated_area_sqft?: number | null
+          id?: string
+          monthly_bill?: number | null
+          name?: string
+          phone?: string
+          power_demand_kw?: number | null
+          project_location?: string | null
+          referral?: string | null
+          solution_classification?:
+            | Database["public"]["Enums"]["solution_type"]
+            | null
+          source?: Database["public"]["Enums"]["quote_source"]
+        }
+        Relationships: []
+      }
+      service_requests: {
+        Row: {
+          created_at: string
+          customer_id: string | null
+          id: string
+          installation_date: string | null
+          installed_company: Database["public"]["Enums"]["company_brand"] | null
+          name: string
+          phone: string
+          problem_description: string
+          solution_classification:
+            | Database["public"]["Enums"]["solution_type"]
+            | null
+        }
+        Insert: {
+          created_at?: string
+          customer_id?: string | null
+          id?: string
+          installation_date?: string | null
+          installed_company?:
+            | Database["public"]["Enums"]["company_brand"]
+            | null
+          name: string
+          phone: string
+          problem_description: string
+          solution_classification?:
+            | Database["public"]["Enums"]["solution_type"]
+            | null
+        }
+        Update: {
+          created_at?: string
+          customer_id?: string | null
+          id?: string
+          installation_date?: string | null
+          installed_company?:
+            | Database["public"]["Enums"]["company_brand"]
+            | null
+          name?: string
+          phone?: string
+          problem_description?: string
+          solution_classification?:
+            | Database["public"]["Enums"]["solution_type"]
+            | null
+        }
+        Relationships: []
+      }
+      services: {
+        Row: {
+          created_at: string
+          description: string | null
+          icon_key: string | null
+          id: string
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          icon_key?: string | null
+          id?: string
+          title: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          icon_key?: string | null
+          id?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      testimonials: {
+        Row: {
+          customer_name: string
+          feedback: string
+          id: string
+          project_id: string | null
+        }
+        Insert: {
+          customer_name: string
+          feedback: string
+          id?: string
+          project_id?: string | null
+        }
+        Update: {
+          customer_name?: string
+          feedback?: string
+          id?: string
+          project_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "testimonials_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +285,15 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      company_brand: "Reliance" | "Sakti" | "Tata"
+      entity_type: "Individual" | "Enterprise"
+      quote_source: "Quote Form" | "AI Chatbot"
+      solution_type:
+        | "Residential"
+        | "Commercial"
+        | "Commercial and industrial DG"
+        | "BIPv"
+        | "Utility-scale"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +420,17 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      company_brand: ["Reliance", "Sakti", "Tata"],
+      entity_type: ["Individual", "Enterprise"],
+      quote_source: ["Quote Form", "AI Chatbot"],
+      solution_type: [
+        "Residential",
+        "Commercial",
+        "Commercial and industrial DG",
+        "BIPv",
+        "Utility-scale",
+      ],
+    },
   },
 } as const
