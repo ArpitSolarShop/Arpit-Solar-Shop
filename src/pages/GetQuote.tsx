@@ -31,19 +31,21 @@ const GetQuote = () => {
     setLoading(true);
 
     try {
-      const { error } = await supabase.from("quotes").insert({
+      const insertData = {
         name: formData.name,
         phone: formData.phone,
         email: formData.email || null,
-        entity_type: formData.entity_type || null,
-        solution_classification: formData.solution_classification || null,
+        entity_type: (formData.entity_type as "Individual" | "Enterprise") || null,
+        solution_classification: (formData.solution_classification as "Residential" | "Commercial" | "Commercial and industrial DG" | "BIPv" | "Utility-scale") || null,
         estimated_area_sqft: formData.estimated_area_sqft ? parseFloat(formData.estimated_area_sqft) : null,
         monthly_bill: formData.monthly_bill ? parseFloat(formData.monthly_bill) : null,
         power_demand_kw: formData.power_demand_kw ? parseFloat(formData.power_demand_kw) : null,
         project_location: formData.project_location || null,
         referral: formData.referral || null,
-        source: "Quote Form",
-      });
+        source: "Quote Form" as const,
+      };
+
+      const { error } = await supabase.from("quotes").insert(insertData);
 
       if (error) throw error;
 
