@@ -6,14 +6,24 @@ import heroImage from "@/assets/hero-solar-house.jpg";
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Overlay */}
+      {/* Video Background */}
       <div className="absolute inset-0">
-        <img
-          src={heroImage}
-          alt="Solar panels on modern house"
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
           className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 hero-gradient opacity-75"></div>
+        >
+          <source src="https://videos.pexels.com/video-files/7579943/7579943-uhd_3840_2160_25fps.mp4" type="video/mp4" />
+          {/* Fallback to image if video fails to load */}
+          <img
+            src={heroImage}
+            alt="Solar panels on modern house"
+            className="w-full h-full object-cover"
+          />
+        </video>
+        <div className="absolute inset-0 bg-black/40"></div>
       </div>
 
       {/* Content */}
@@ -36,7 +46,7 @@ const HeroSection = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12 animate-slide-in">
-              <Button asChild size="lg" className="sunset-gradient text-white font-semibold glow-effect">
+              <Button asChild size="lg" className="bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold hover:bg-white/20 rounded-xl">
                 <Link to="/get-quote" className="flex items-center">
                   Get Free Quote
                   <ArrowRight className="ml-2 w-5 h-5" />
@@ -45,7 +55,7 @@ const HeroSection = () => {
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm"
+                className="border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm bg-transparent rounded-xl"
               >
                 <Play className="mr-2 w-5 h-5" />
                 Watch Demo
@@ -81,9 +91,9 @@ const HeroSection = () => {
           {/* Right Column - Interactive Element */}
           <div className="hidden lg:flex items-center justify-center">
             <div className="relative">
-              <div className="w-64 h-64 rounded-full sunset-gradient opacity-20 animate-float"></div>
+              <div className="w-64 h-64 rounded-full bg-white/5 backdrop-blur-sm opacity-20 animate-float border border-white/10"></div>
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="glass-morphism rounded-2xl p-8 max-w-sm">
+                <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 max-w-sm">
                   <div className="text-center text-white">
                     <h3 className="text-2xl font-bold mb-2">Save Up To</h3>
                     <div className="text-4xl font-bold text-solar-orange mb-2">90%</div>
