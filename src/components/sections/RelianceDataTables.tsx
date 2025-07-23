@@ -452,7 +452,7 @@ const KitItemsTable: React.FC = () => {
 // Terms and Conditions Component
 const TermsAndConditions: React.FC = () => {
   const terms = [
-    "This pricing is effective from 22st May 2025 to 30th June 2025 subject, to material availability.",
+    "This pricing is effective from 22nd May 2025 to 30th June 2025 subject to material availability.",
     "All prices are subject to change without notice and are not guaranteed, except that prices for an order that have been accepted by RIL.",
     "Published prices are basic and are exclusive of taxes. Goods and Services Tax (GST) as applicable will be extra.",
     "Above prices are Ex- Work prices",

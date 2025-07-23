@@ -283,7 +283,7 @@ const Reliance = () => {
             </Badge>
             <h2 className="text-4xl font-bold mb-4 reliance-text">Reliance Solar System Configurations</h2>
             <p className="text-xl reliance-body-text max-w-3xl mx-auto">
-              Choose from our comprehensive range of HJT and standard modules with competitive pricing
+              Choose from our comprehensive range of HJT modules with competitive pricing and flexible configurations
             </p>
           </div>
 
@@ -470,7 +470,7 @@ const Reliance = () => {
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
                   <span className="text-[#BFA161] font-bold min-w-[2rem]">1.</span>
-                  <p>This pricing is effective from 22 May 2025 to 30th June 2025 subject, to material availability.</p>
+                  <p>This pricing is effective from 22nd May 2025 to 30th June 2025 subject to material availability.</p>
                 </div>
                 
                 <div className="flex items-start gap-3">
@@ -494,62 +494,62 @@ const Reliance = () => {
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">7.</span>
+                  <span className="text-[#BFA161] font-bold min-w-[2rem]">6.</span>
                   <p>Orders to be placed on specified Purchase Order template issued by RIL in favour of Reliance Industries Limited.</p>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">8.</span>
+                  <span className="text-[#BFA161] font-bold min-w-[2rem]">7.</span>
                   <p>NDCR Modules supplied will have a capacity of 690-720 Wp subject to availability.</p>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">9.</span>
+                  <span className="text-[#BFA161] font-bold min-w-[2rem]">8.</span>
                   <p>Delivery of material will occur within approx. 5 weeks on receipt of accepted purchase order and full payment, depending on distance and availability of material.</p>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">10.</span>
-                  <p>Materials not supplied directly by RIL must be sourced from approved manufacturers and specifications as shared by Ril...</p>
+                  <span className="text-[#BFA161] font-bold min-w-[2rem]">9.</span>
+                  <p>Materials not supplied directly by RIL must be sourced from approved manufacturers and specifications as shared by RIL.</p>
                 </div>
               </div>
               
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">11.</span>
+                  <span className="text-[#BFA161] font-bold min-w-[2rem]">10.</span>
                   <p>Warranty terms and conditions as specified in the warranty certificate issued on QA check.</p>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">12.</span>
-                  <p>Before installation of the system at the customer premises, site survey form, site layout and array layout supported with photographs must be approved by RIL.. Any modifications/changes suggested by RIL, shall have to be followed and implemented mandatorily, without which warranty certificate will not be applicable.</p>
+                  <span className="text-[#BFA161] font-bold min-w-[2rem]">11.</span>
+                  <p>Before installation of the system at the customer premises, site survey form, site layout and array layout supported with photographs must be approved by RIL. Any modifications/changes suggested by RIL shall have to be followed and implemented mandatorily, without which warranty certificate will not be applicable.</p>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">13.</span>
+                  <span className="text-[#BFA161] font-bold min-w-[2rem]">12.</span>
                   <div>
-                    <p className="mb-2">Installation and commissioning of the system are the responsibility of the Channel Partner, following RIL guidelines. All installed systems must be offered for RIL. quality inspection for issuing the warranty certification with the specified completed installation & commissioning checklist and photographs.</p>
+                    <p className="mb-2">Installation and commissioning of the system are the responsibility of the Channel Partner, following RIL guidelines. All installed systems must be offered for RIL quality inspection for issuing the warranty certification with the specified completed installation & commissioning checklist and photographs.</p>
                     <p className="italic">Proper personal protective equipment (PPE) and safety protocols must be followed during installation.</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">14.</span>
+                  <span className="text-[#BFA161] font-bold min-w-[2rem]">13.</span>
                   <p>All site-related activities, including net metering and DISCOM synchronization approvals, are the responsibility of the Channel Partners.</p>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">15.</span>
+                  <span className="text-[#BFA161] font-bold min-w-[2rem]">14.</span>
                   <p>Cancellation of any previous orders will attract 2% of Purchase order value.</p>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">16.</span>
-                  <p>Any information, suggestions, or ideas transmitted by RIL connection with this price list a secret or confidential or submitted in confidence to Channel Partner, except as may be specifically agreed to in writing by Channel Partner.</p>
+                  <span className="text-[#BFA161] font-bold min-w-[2rem]">15.</span>
+                  <p>Any information, suggestions, or ideas transmitted by RIL in connection with this price list are secret or confidential or submitted in confidence to Channel Partner, except as may be specifically agreed to in writing by Channel Partner.</p>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">17.</span>
+                  <span className="text-[#BFA161] font-bold min-w-[2rem]">16.</span>
                   <p>All terms and conditions will be valid as per the Channel Partner Agreement.</p>
                 </div>
               </div>
