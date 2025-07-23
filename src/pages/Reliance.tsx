@@ -505,35 +505,7 @@ const Reliance = () => {
             </div>
 
             {/* Technology Verdict Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-              <Card className="relative overflow-hidden border-2 border-blue-200 dark:border-blue-800 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30">
-                <CardHeader className="pb-3">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                      <Zap className="h-4 w-4 text-white" />
-                    </div>
-                    <CardTitle className="text-blue-700 dark:text-blue-300">HJT (Heterojunction)</CardTitle>
-                  </div>
-                  <div className="text-2xl font-bold text-blue-600">"Premium Class"</div>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex items-start gap-2">
-                      <span className="text-green-600">✅</span>
-                      <span>Best performance, best durability</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <span className="text-green-600">✅</span>
-                      <span>Great in hot climates, shaded areas</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <span className="text-red-600">❌</span>
-                      <span>Expensive, limited availability</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
               <Card className="relative overflow-hidden border-2 border-green-200 dark:border-green-800 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30">
                 <CardHeader className="pb-3">
                   <div className="flex items-center gap-3 mb-2">
@@ -591,12 +563,6 @@ const Reliance = () => {
               </Card>
             </div>
 
-            <div className="mt-8 text-center">
-              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg">
-                <Award className="h-5 w-5" />
-                HJT: The "Tesla of Solar Panels" — Premium-priced but packed with cutting-edge tech
-              </div>
-            </div>
           </div>
         </div>
       </section>
