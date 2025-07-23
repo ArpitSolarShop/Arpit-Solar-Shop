@@ -145,7 +145,7 @@ const Navbar = () => {
           <div className="w-full max-w-7xl">
             {/* Navigation Bar */}
             <nav className="w-full">
-              <div className={`bg-black/20 backdrop-blur-lg border border-white/10 rounded-full px-6 py-3 shadow-xl transition-all duration-300 ${
+              <div className={`bg-black/20 backdrop-blur-lg border border-white/10 rounded-full px-4 py-2 shadow-xl transition-all duration-300 ${
                 scrolled ? 'bg-black/40' : 'bg-black/20'
               }`}>
                 {/* Desktop Navigation */}
@@ -154,16 +154,16 @@ const Navbar = () => {
                     {/* Logo as first navigation item */}
                     <Link
                       to="/"
-                      className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 hover:bg-white/10 bg-white/20 backdrop-blur-md border border-white/20 ${
+                      className={`flex items-center px-3 py-1.5 rounded-full transition-all duration-200 hover:bg-white/10 ${
                         isActivePath("/")
-                          ? "bg-white/30"
+                          ? "bg-white/20"
                           : ""
                       }`}
                     >
                       <img
                         src="/logo.png"
                         alt="Arpit Solar Logo"
-                        className="w-12 h-12 object-contain rounded-full"
+                        className="w-9 h-9 object-contain rounded-full"
                       />
                     </Link>
                     {navigationItems.map((item) => (
