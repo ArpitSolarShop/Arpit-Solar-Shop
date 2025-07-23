@@ -195,25 +195,6 @@ const Navbar = () => {
 
                   {/* Right Side Actions */}
                   <div className="flex items-center space-x-2">
-                    {/* Mobile Social Icons (XL screens only) */}
-                    <div className="hidden xl:flex items-center space-x-1 mr-2">
-                      {socialLinks.slice(0, 3).map((social) => {
-                        const IconComponent = social.icon;
-                        return (
-                          <Button
-                            key={social.name}
-                            variant="ghost"
-                            size="icon"
-                            className="w-8 h-8 text-white/60 hover:text-white hover:bg-white/10 transition-all duration-200"
-                            onClick={() => window.open(social.url, '_blank')}
-                            aria-label={`Visit our ${social.name} page`}
-                          >
-                            <IconComponent />
-                          </Button>
-                        );
-                      })}
-                      <div className="w-px h-5 bg-white/20 mx-2"></div>
-                    </div>
                     
                     <Button
                       variant="ghost"
