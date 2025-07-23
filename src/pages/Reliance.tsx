@@ -324,33 +324,6 @@ const Reliance = () => {
             </Swiper>
           </div>
 
-          {/* Strategy Synthesis */}
-          <div className="mt-16 bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 shadow-2xl">
-            <div className="text-center mb-6">
-              <h3 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
-                The Complete Strategy
-              </h3>
-              <p className="text-lg text-gray-700 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
-                These three strategic moves form a single, cohesive strategy to control the entire solar value chain: 
-                from raw materials and cutting-edge technology to global sales and manufacturing at scale.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-              <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-blue-200/20 hover:scale-105 transition-transform duration-300">
-                <h4 className="font-bold text-blue-600 text-xl mb-3">1. Acquire (REC)</h4>
-                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">Instantly gain world-class brand, HJT technology, and global market access</p>
-              </div>
-              <div className="bg-gradient-to-br from-emerald-500/10 to-teal-500/10 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-emerald-200/20 hover:scale-105 transition-transform duration-300">
-                <h4 className="font-bold text-emerald-600 text-xl mb-3">2. Innovate (NexWafe)</h4>
-                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">Invest in future-proof technology to leapfrog competition on cost and efficiency</p>
-              </div>
-              <div className="bg-gradient-to-br from-orange-500/10 to-pink-500/10 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-orange-200/20 hover:scale-105 transition-transform duration-300">
-                <h4 className="font-bold text-orange-600 text-xl mb-3">3. Build (PLI Scheme)</h4>
-                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">Leverage acquired expertise and innovative technology for giga-scale manufacturing</p>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
