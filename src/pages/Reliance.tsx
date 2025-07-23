@@ -73,13 +73,6 @@ const Reliance = () => {
                 Get HJT Solar Quote
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-white/30 text-white hover:bg-white/10 hover:text-white backdrop-blur-sm"
-              >
-                View Technology
-              </Button>
             </div>
           </div>
         </div>
@@ -339,13 +332,6 @@ const Reliance = () => {
               <MessageSquare className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
               Get Free Quote Now
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="border-white/30 text-white hover:bg-white/10 hover:text-white backdrop-blur-sm"
-            >
-              Partner With Us
             </Button>
           </div>
           
