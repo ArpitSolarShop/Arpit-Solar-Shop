@@ -154,16 +154,16 @@ const Navbar = () => {
                     {/* Logo as first navigation item */}
                     <Link
                       to="/"
-                      className={`flex items-center gap-1 px-3 py-2 rounded-full text-sm font-medium transition-all duration-200 hover:bg-white/10 ${
+                      className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 hover:bg-white/10 bg-white/20 backdrop-blur-md border border-white/20 ${
                         isActivePath("/")
-                          ? "bg-white/10"
+                          ? "bg-white/30"
                           : ""
                       }`}
                     >
                       <img
                         src="/logo.png"
                         alt="Arpit Solar Logo"
-                        className="w-8 h-8 object-contain rounded-full"
+                        className="w-12 h-12 object-contain rounded-full"
                       />
                     </Link>
                     {navigationItems.map((item) => (
@@ -291,19 +291,19 @@ const Navbar = () => {
                       {/* Logo for mobile */}
                       <Link
                         to="/"
-                        className={`flex items-center gap-2 px-3 py-2 text-sm font-medium transition-colors duration-200 rounded-lg ${
+                        className={`flex items-center gap-3 px-4 py-3 text-sm font-medium transition-colors duration-200 rounded-lg bg-white/20 backdrop-blur-md border border-white/20 ${
                           isActivePath("/")
-                            ? "text-primary bg-primary/10"
-                            : "text-foreground hover:text-primary hover:bg-muted"
+                            ? "bg-primary/20 border-primary/30"
+                            : "hover:bg-muted"
                         }`}
                         onClick={() => setIsOpen(false)}
                       >
                         <img
                           src="/logo.png"
                           alt="Arpit Solar Logo"
-                          className="w-6 h-6 object-contain rounded-full"
+                          className="w-10 h-10 object-contain rounded-full"
                         />
-                        Home
+                        <span className="font-semibold">Home</span>
                       </Link>
                       {navigationItems.map((item) => (
                         <div key={item.name}>
