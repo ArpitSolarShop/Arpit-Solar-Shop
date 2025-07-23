@@ -33,6 +33,7 @@ interface LargeSystemData {
   slNo: number;
   systemSizeKWp: number;
   systemSizeKW: number;
+  noOfModules: number;
   inverterCapacity: number;
   phase: string;
   shortRailTinShedPricePerWatt: number;
@@ -68,13 +69,13 @@ const gridTieSystemData: GridTieSystemData[] = [
 ];
 
 const largeSystemData: LargeSystemData[] = [
-  { slNo: 1, systemSizeKWp: 19.32, systemSizeKW: 15, inverterCapacity: 15, phase: 'Three', shortRailTinShedPricePerWatt: 33.91, shortRailTinShedPrice: 655060, hdgElevatedRccPricePerWatt: 38.91, hdgElevatedRccPrice: 751660, preGiMmsPricePerWatt: 36.57, preGiMmsPrice: 706500 },
-  { slNo: 2, systemSizeKWp: 33.12, systemSizeKW: 25, inverterCapacity: 20, phase: 'Three', shortRailTinShedPricePerWatt: 32.92, shortRailTinShedPrice: 1090460, hdgElevatedRccPricePerWatt: 37.92, hdgElevatedRccPrice: 1256060, preGiMmsPricePerWatt: 36.08, preGiMmsPrice: 1195060 },
-  { slNo: 3, systemSizeKWp: 52.44, systemSizeKW: 40, inverterCapacity: 40, phase: 'Three', shortRailTinShedPricePerWatt: 31.96, shortRailTinShedPrice: 1676180, hdgElevatedRccPricePerWatt: 36.96, hdgElevatedRccPrice: 1938380, preGiMmsPricePerWatt: 35.62, preGiMmsPrice: 1867900 },
-  { slNo: 4, systemSizeKWp: 65.55, systemSizeKW: 50, inverterCapacity: 50, phase: 'Three', shortRailTinShedPricePerWatt: 31.23, shortRailTinShedPrice: 2047350, hdgElevatedRccPricePerWatt: 36.23, hdgElevatedRccPrice: 2375100, preGiMmsPricePerWatt: 34.39, preGiMmsPrice: 2254300 },
-  { slNo: 5, systemSizeKWp: 105.57, systemSizeKW: 80, inverterCapacity: 80, phase: 'Three', shortRailTinShedPricePerWatt: 30.22, shortRailTinShedPrice: 3190020, hdgElevatedRccPricePerWatt: 35.22, hdgElevatedRccPrice: 3717870, preGiMmsPricePerWatt: 34.87, preGiMmsPrice: 3681725 },
-  { slNo: 6, systemSizeKWp: 124.2, systemSizeKW: 100, inverterCapacity: 100, phase: 'Three', shortRailTinShedPricePerWatt: 30.04, shortRailTinShedPrice: 3731500, hdgElevatedRccPricePerWatt: 35.04, hdgElevatedRccPrice: 4352500, preGiMmsPricePerWatt: 34.21, preGiMmsPrice: 4248400 },
-  { slNo: 7, systemSizeKWp: 165.6, systemSizeKW: 125, inverterCapacity: 125, phase: 'Three', shortRailTinShedPricePerWatt: 29.46, shortRailTinShedPrice: 4878300, hdgElevatedRccPricePerWatt: 34.46, hdgElevatedRccPrice: 5706300, preGiMmsPricePerWatt: 34.62, preGiMmsPrice: 5732600 },
+  { slNo: 1, systemSizeKWp: 19.32, systemSizeKW: 15, noOfModules: 28, inverterCapacity: 15, phase: 'Three', shortRailTinShedPricePerWatt: 33.91, shortRailTinShedPrice: 655060, hdgElevatedRccPricePerWatt: 38.91, hdgElevatedRccPrice: 751660, preGiMmsPricePerWatt: 36.57, preGiMmsPrice: 706500 },
+  { slNo: 2, systemSizeKWp: 33.12, systemSizeKW: 25, noOfModules: 48, inverterCapacity: 20, phase: 'Three', shortRailTinShedPricePerWatt: 32.92, shortRailTinShedPrice: 1090460, hdgElevatedRccPricePerWatt: 37.92, hdgElevatedRccPrice: 1256060, preGiMmsPricePerWatt: 36.08, preGiMmsPrice: 1195060 },
+  { slNo: 3, systemSizeKWp: 52.44, systemSizeKW: 40, noOfModules: 76, inverterCapacity: 40, phase: 'Three', shortRailTinShedPricePerWatt: 31.96, shortRailTinShedPrice: 1676180, hdgElevatedRccPricePerWatt: 36.96, hdgElevatedRccPrice: 1938380, preGiMmsPricePerWatt: 35.62, preGiMmsPrice: 1867900 },
+  { slNo: 4, systemSizeKWp: 65.55, systemSizeKW: 50, noOfModules: 95, inverterCapacity: 50, phase: 'Three', shortRailTinShedPricePerWatt: 31.23, shortRailTinShedPrice: 2047350, hdgElevatedRccPricePerWatt: 36.23, hdgElevatedRccPrice: 2375100, preGiMmsPricePerWatt: 34.39, preGiMmsPrice: 2254300 },
+  { slNo: 5, systemSizeKWp: 105.57, systemSizeKW: 80, noOfModules: 153, inverterCapacity: 80, phase: 'Three', shortRailTinShedPricePerWatt: 30.22, shortRailTinShedPrice: 3190020, hdgElevatedRccPricePerWatt: 35.22, hdgElevatedRccPrice: 3717870, preGiMmsPricePerWatt: 34.87, preGiMmsPrice: 3681725 },
+  { slNo: 6, systemSizeKWp: 124.2, systemSizeKW: 100, noOfModules: 180, inverterCapacity: 100, phase: 'Three', shortRailTinShedPricePerWatt: 30.04, shortRailTinShedPrice: 3731500, hdgElevatedRccPricePerWatt: 35.04, hdgElevatedRccPrice: 4352500, preGiMmsPricePerWatt: 34.21, preGiMmsPrice: 4248400 },
+  { slNo: 7, systemSizeKWp: 165.6, systemSizeKW: 125, noOfModules: 240, inverterCapacity: 125, phase: 'Three', shortRailTinShedPricePerWatt: 29.46, shortRailTinShedPrice: 4878300, hdgElevatedRccPricePerWatt: 34.46, hdgElevatedRccPrice: 5706300, preGiMmsPricePerWatt: 34.62, preGiMmsPrice: 5732600 },
 ];
 
 const dcCableData: DCCableData[] = [
@@ -198,6 +199,10 @@ const LargeSystemTable: React.FC = () => {
     }),
     largeSystemColumnHelper.accessor('systemSizeKW', {
       header: 'System Size (kW)',
+      cell: info => info.getValue(),
+    }),
+    largeSystemColumnHelper.accessor('noOfModules', {
+      header: 'No. of Modules',
       cell: info => info.getValue(),
     }),
     largeSystemColumnHelper.accessor('inverterCapacity', {
