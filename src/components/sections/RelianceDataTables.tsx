@@ -449,45 +449,6 @@ const KitItemsTable: React.FC = () => {
   );
 };
 
-// Terms and Conditions Component
-const TermsAndConditions: React.FC = () => {
-  const terms = [
-    "This pricing is effective from 22nd May 2025 to 30th June 2025 subject to material availability.",
-    "All prices are subject to change without notice and are not guaranteed, except that prices for an order that have been accepted by RIL.",
-    "Published prices are basic and are exclusive of taxes. Goods and Services Tax (GST) as applicable will be extra.",
-    "Above prices are Ex- Work prices",
-    "Full payment (100%) is required in advance upon placing the order.",
-    "Orders to be placed on specified Purchase Order template issued by RIL in favour of Reliance Industries Limited.",
-    "NDCR Modules supplied will have a capacity of 690-720 Wp subject to availability.",
-    "Delivery of material will occur within approx. 5 weeks on receipt of accepted purchase order and full payment, depending on distance and availability of material.",
-    "Materials not supplied directly by RIL must be sourced from approved manufacturers and specifications as shared by RIL.",
-    "Warranty terms and conditions as specified in the warranty certificate issued on QA check.",
-    "Before installation of the system at the customer premises, site survey form, site layout and array layout supported with photographs must be approved by RIL. Any modifications/changes suggested by RIL shall have to be followed and implemented mandatorily, without which warranty certificate will not be applicable.",
-    "Installation and commissioning of the system are the responsibility of the Channel Partner, following RIL guidelines. All installed systems must be offered for RIL quality inspection for issuing the warranty certification with the specified completed installation & commissioning checklist and photographs. Proper personal protective equipment (PPE) and safety protocols must be followed during installation.",
-    "All site-related activities, including net metering and DISCOM synchronization approvals, are the responsibility of the Channel Partners.",
-    "Cancellation of any previous orders will attract 2% of Purchase order value.",
-    "Any information, suggestions, or ideas transmitted by RIL connection with this price list a secret or confidential or submitted in confidence to Channel Partner, except as may be specifically agreed to in writing by Channel Partner.",
-    "All terms and conditions will be valid as per the Channel Partner Agreement."
-  ];
-
-  return (
-    <Box mb={4}>
-      <Typography variant="h5" component="h3" gutterBottom color="primary" fontWeight="bold">
-        Terms and Conditions
-      </Typography>
-      <Paper elevation={2} sx={{ p: 3 }}>
-        <ol>
-          {terms.map((term, index) => (
-            <li key={index} style={{ marginBottom: '8px', fontSize: '14px', lineHeight: '1.5' }}>
-              {term}
-            </li>
-          ))}
-        </ol>
-      </Paper>
-    </Box>
-  );
-};
-
 // Main component that exports all tables
 const RelianceDataTables: React.FC = () => {
   return (
@@ -496,7 +457,6 @@ const RelianceDataTables: React.FC = () => {
       <LargeSystemTable />
       <DCCableTable />
       <KitItemsTable />
-      <TermsAndConditions />
     </Box>
   );
 };
