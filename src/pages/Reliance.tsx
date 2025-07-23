@@ -201,7 +201,7 @@ const Reliance = () => {
         <div className="container px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <Badge className="mb-4 reliance-bg-primary text-white border-transparent">
+              <Badge className="mb-4 bg-[#BFA161] text-white border-transparent">
                 Advanced Technology
               </Badge>
               <h2 className="text-4xl font-bold mb-6 reliance-text">
@@ -336,7 +336,7 @@ const Reliance = () => {
             <Button 
               size="lg" 
               onClick={() => setQuoteFormOpen(true)}
-              className="bg-transparent border-2 border-[#BFA161] text-[#BFA161] hover:bg-[#BFA161]/10 font-semibold shadow-lg group"
+              className="bg-white text-[#BFA161] hover:bg-white/90 font-semibold shadow-lg group border-2 border-[#BFA161]"
             >
               <MessageSquare className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
               Get Free Quote Now
