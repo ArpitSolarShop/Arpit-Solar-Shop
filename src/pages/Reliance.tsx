@@ -54,7 +54,7 @@ const Reliance = () => {
         
         <div className="container relative z-10 text-center text-white px-4">
           <div className="animate-fade-in">
-            <Badge className="mb-4 bg-primary/20 text-white border-white/20 hover:bg-primary/30">
+            <Badge className="mb-4 bg-white/20 text-white border-white/20 hover:bg-white/30">
               Leading India's Solar Revolution
             </Badge>
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
@@ -67,7 +67,7 @@ const Reliance = () => {
               <Button 
                 size="lg" 
                 onClick={() => setQuoteFormOpen(true)}
-                className="bg-primary hover:bg-primary/90 text-white shadow-xl border border-white/20 backdrop-blur-sm group"
+                className="reliance-bg-primary hover:opacity-90 text-white shadow-xl border border-white/20 backdrop-blur-sm group"
               >
                 <Quote className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
                 Get HJT Solar Quote
@@ -327,7 +327,7 @@ const Reliance = () => {
             <Button 
               size="lg" 
               onClick={() => setQuoteFormOpen(true)}
-              className="bg-white text-primary hover:bg-white/90 font-semibold shadow-lg group border-2 border-transparent hover:border-white/20"
+              className="bg-white reliance-text hover:bg-white/90 font-semibold shadow-lg group border-2 border-transparent hover:border-white/20"
             >
               <MessageSquare className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
               Get Free Quote Now
