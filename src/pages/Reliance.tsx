@@ -54,6 +54,15 @@ const Reliance = () => {
         
         <div className="container relative z-10 text-center text-white px-4">
           <div className="animate-fade-in">
+            {/* Reliance Logo */}
+            <div className="mb-6 flex justify-center">
+              <img 
+                src="/reliance-industries-ltd.png" 
+                alt="Reliance Industries Ltd" 
+                className="h-16 md:h-20 w-auto opacity-90"
+              />
+            </div>
+            
             <Badge className="mb-4 bg-white/20 text-white border-white/20 hover:bg-white/30">
               Leading India's Solar Revolution
             </Badge>
