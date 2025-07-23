@@ -93,12 +93,21 @@ const RelianceQuoteForm = ({ open, onOpenChange }: RelianceQuoteFormProps) => {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader className="relative">
+          {/* Reliance Logo */}
+          <div className="flex justify-center mb-4">
+            <img 
+              src="/reliance-industries-ltd.png" 
+              alt="Reliance Industries Ltd" 
+              className="h-12 w-auto"
+            />
+          </div>
+          
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 bg-[#BFA161] rounded-lg flex items-center justify-center">
               <Zap className="h-5 w-5 text-white" />
             </div>
             <div>
-              <DialogTitle className="text-2xl font-bold text-primary">
+              <DialogTitle className="text-2xl font-bold text-[#BFA161]">
                 Reliance Solar HJT Quote
               </DialogTitle>
               <DialogDescription className="text-base">
@@ -111,11 +120,11 @@ const RelianceQuoteForm = ({ open, onOpenChange }: RelianceQuoteFormProps) => {
         <Card className="border-0 shadow-none">
           <CardHeader className="px-0 pb-4">
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <CheckCircle className="h-4 w-4 text-primary" />
+              <CheckCircle className="h-4 w-4 text-[#BFA161]" />
               <span>Premium HJT Technology</span>
-              <CheckCircle className="h-4 w-4 text-primary" />
+              <CheckCircle className="h-4 w-4 text-[#BFA161]" />
               <span>22%+ Efficiency</span>
-              <CheckCircle className="h-4 w-4 text-primary" />
+              <CheckCircle className="h-4 w-4 text-[#BFA161]" />
               <span>25+ Year Warranty</span>
             </div>
           </CardHeader>
@@ -277,7 +286,7 @@ const RelianceQuoteForm = ({ open, onOpenChange }: RelianceQuoteFormProps) => {
                 <Button
                   type="submit"
                   disabled={loading || !formData.name || !formData.phone}
-                  className="w-full bg-primary hover:bg-primary/90 text-white font-semibold h-12 text-base"
+                  className="w-full bg-transparent border-2 border-[#BFA161] text-[#BFA161] hover:bg-[#BFA161]/10 font-semibold h-12 text-base"
                 >
                   {loading ? "Submitting..." : "Get My Reliance Solar Quote"}
                 </Button>
