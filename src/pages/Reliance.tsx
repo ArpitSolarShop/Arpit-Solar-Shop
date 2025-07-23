@@ -127,18 +127,18 @@ const Reliance = () => {
       </section>
 
       {/* Strategic Achievements Section */}
-      <section className="py-20 bg-gradient-to-br from-[#eef4fa] to-white overflow-hidden animate-on-scroll">
+      <section className="py-20 reliance-bg overflow-hidden animate-on-scroll">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-5xl font-extrabold mb-5 text-gray-900 leading-tight">
+            <h2 className="text-5xl font-extrabold mb-5 reliance-text leading-tight">
               Strategic{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-700">
+              <span className="reliance-primary">
                 Achievements
               </span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-4xl mx-auto font-light">
+            <p className="text-xl reliance-body-text max-w-4xl mx-auto font-light">
               Three transformative strategic moves in 2021 that positioned Reliance at the forefront of global solar innovation: 
-              <span className="font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent"> Acquire • Innovate • Build</span>
+              <span className="font-bold reliance-secondary"> Acquire • Innovate • Build</span>
             </p>
           </div>
 
@@ -160,19 +160,19 @@ const Reliance = () => {
             >
               {/* Technology Acquisition - NexWafe */}
               <SwiperSlide className="h-auto">
-                <Card className="h-full flex flex-col rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 ease-in-out transform hover:-translate-y-2 border border-gray-100 bg-white">
+                <Card className="h-full flex flex-col rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 ease-in-out transform hover:-translate-y-2 reliance-border border-2 reliance-bg">
                   <CardHeader className="p-0 relative">
-                    <div className="w-full h-48 bg-gradient-to-br from-blue-500 via-purple-600 to-indigo-700 overflow-hidden flex items-center justify-center relative">
+                    <div className="w-full h-48 reliance-bg-primary overflow-hidden flex items-center justify-center relative">
                       <img 
                         src={nexwafeTechnology} 
                         alt="NexWafe Technology" 
                         loading="lazy"
                         className="w-full h-full object-cover transition-transform duration-300 opacity-80"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/60 via-purple-600/60 to-indigo-700/60"></div>
+                      <div className="absolute inset-0 bg-black/30"></div>
                     </div>
                     <div className="absolute top-4 left-4">
-                      <div className="px-3 py-1 text-xs font-semibold rounded-full shadow-sm bg-white text-blue-600">
+                      <div className="px-3 py-1 text-xs font-semibold rounded-full shadow-sm reliance-bg reliance-text">
                         Technology Acquisition
                       </div>
                     </div>
@@ -183,30 +183,30 @@ const Reliance = () => {
                     </div>
                   </CardHeader>
                   <CardContent className="flex-grow flex flex-col p-6">
-                    <CardTitle className="text-2xl font-bold mb-2 text-gray-800">
+                    <CardTitle className="text-2xl font-bold mb-2 reliance-text">
                       NexWafe GmbH
                     </CardTitle>
-                    <CardDescription className="text-sm text-gray-600 flex-grow mb-4 leading-relaxed">
+                    <CardDescription className="text-sm reliance-body-text flex-grow mb-4 leading-relaxed">
                       €25 Million investment in revolutionary "Green Solar Wafer" technology that eliminates up to 40% silicon waste through epitaxial kerf-free manufacturing.
                     </CardDescription>
                     <div className="space-y-2 mb-4">
-                      <div className="flex items-center gap-2 text-sm text-gray-700">
-                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                      <div className="flex items-center gap-2 text-sm reliance-body-text">
+                        <div className="w-2 h-2 reliance-bg-secondary rounded-full"></div>
                         <span>Zero kerf waste technology</span>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-gray-700">
-                        <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                      <div className="flex items-center gap-2 text-sm reliance-body-text">
+                        <div className="w-2 h-2 reliance-bg-secondary rounded-full"></div>
                         <span>Massive cost reduction</span>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-gray-700">
-                        <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
+                      <div className="flex items-center gap-2 text-sm reliance-body-text">
+                        <div className="w-2 h-2 reliance-bg-secondary rounded-full"></div>
                         <span>Supply chain control</span>
                       </div>
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      <Badge className="bg-blue-100 text-blue-700 hover:bg-blue-200">Zero Kerf</Badge>
-                      <Badge className="bg-purple-100 text-purple-700 hover:bg-purple-200">Cost Leader</Badge>
-                      <Badge className="bg-green-100 text-green-700 hover:bg-green-200">Green Tech</Badge>
+                      <Badge className="reliance-bg-secondary text-white">Zero Kerf</Badge>
+                      <Badge className="reliance-bg-primary text-white">Cost Leader</Badge>
+                      <Badge className="reliance-bg-secondary text-white">Green Tech</Badge>
                     </div>
                   </CardContent>
                 </Card>
@@ -214,19 +214,19 @@ const Reliance = () => {
 
               {/* Market Entry & Scale - REC Solar */}
               <SwiperSlide className="h-auto">
-                <Card className="h-full flex flex-col rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 ease-in-out transform hover:-translate-y-2 border border-gray-100 bg-white">
+                <Card className="h-full flex flex-col rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 ease-in-out transform hover:-translate-y-2 reliance-border border-2 reliance-bg">
                   <CardHeader className="p-0 relative">
-                    <div className="w-full h-48 bg-gradient-to-br from-emerald-500 via-teal-600 to-cyan-700 overflow-hidden flex items-center justify-center relative">
+                    <div className="w-full h-48 reliance-bg-secondary overflow-hidden flex items-center justify-center relative">
                       <img 
                         src={hjtTechnology} 
                         alt="HJT Technology" 
                         loading="lazy"
                         className="w-full h-full object-cover transition-transform duration-300 opacity-80"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/60 via-teal-600/60 to-cyan-700/60"></div>
+                      <div className="absolute inset-0 bg-black/30"></div>
                     </div>
                     <div className="absolute top-4 left-4">
-                      <div className="px-3 py-1 text-xs font-semibold rounded-full shadow-sm bg-white text-emerald-600">
+                      <div className="px-3 py-1 text-xs font-semibold rounded-full shadow-sm reliance-bg reliance-text">
                         Market Entry & Scale
                       </div>
                     </div>
@@ -237,30 +237,30 @@ const Reliance = () => {
                     </div>
                   </CardHeader>
                   <CardContent className="flex-grow flex flex-col p-6">
-                    <CardTitle className="text-2xl font-bold mb-2 text-gray-800">
+                    <CardTitle className="text-2xl font-bold mb-2 reliance-text">
                       REC Solar Holdings AS
                     </CardTitle>
-                    <CardDescription className="text-sm text-gray-600 flex-grow mb-4 leading-relaxed">
+                    <CardDescription className="text-sm reliance-body-text flex-grow mb-4 leading-relaxed">
                       $771 Million acquisition of world-class Tier-1 brand with pioneering Heterojunction Technology and proven Alpha series panels among the world's most efficient.
                     </CardDescription>
                     <div className="space-y-2 mb-4">
-                      <div className="flex items-center gap-2 text-sm text-gray-700">
-                        <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>
+                      <div className="flex items-center gap-2 text-sm reliance-body-text">
+                        <div className="w-2 h-2 reliance-bg-secondary rounded-full"></div>
                         <span>Tier-1 global brand</span>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-gray-700">
-                        <div className="w-2 h-2 bg-teal-500 rounded-full"></div>
+                      <div className="flex items-center gap-2 text-sm reliance-body-text">
+                        <div className="w-2 h-2 reliance-bg-secondary rounded-full"></div>
                         <span>Advanced HJT technology</span>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-gray-700">
-                        <div className="w-2 h-2 bg-cyan-500 rounded-full"></div>
+                      <div className="flex items-center gap-2 text-sm reliance-body-text">
+                        <div className="w-2 h-2 reliance-bg-secondary rounded-full"></div>
                         <span>Global operations</span>
                       </div>
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      <Badge className="bg-emerald-100 text-emerald-700 hover:bg-emerald-200">HJT Pioneer</Badge>
-                      <Badge className="bg-teal-100 text-teal-700 hover:bg-teal-200">Global Brand</Badge>
-                      <Badge className="bg-cyan-100 text-cyan-700 hover:bg-cyan-200">Tier-1</Badge>
+                      <Badge className="reliance-bg-secondary text-white">HJT Pioneer</Badge>
+                      <Badge className="reliance-bg-primary text-white">Global Brand</Badge>
+                      <Badge className="reliance-bg-secondary text-white">Tier-1</Badge>
                     </div>
                   </CardContent>
                 </Card>
@@ -268,19 +268,19 @@ const Reliance = () => {
 
               {/* Domestic Manufacturing - PLI Scheme */}
               <SwiperSlide className="h-auto">
-                <Card className="h-full flex flex-col rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 ease-in-out transform hover:-translate-y-2 border border-gray-100 bg-white">
+                <Card className="h-full flex flex-col rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 ease-in-out transform hover:-translate-y-2 reliance-border border-2 reliance-bg">
                   <CardHeader className="p-0 relative">
-                    <div className="w-full h-48 bg-gradient-to-br from-orange-500 via-red-600 to-pink-700 overflow-hidden flex items-center justify-center relative">
+                    <div className="w-full h-48 reliance-bg-primary overflow-hidden flex items-center justify-center relative">
                       <img 
                         src={relianceFacility} 
                         alt="Reliance Facility" 
                         loading="lazy"
                         className="w-full h-full object-cover transition-transform duration-300 opacity-80"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-br from-orange-500/60 via-red-600/60 to-pink-700/60"></div>
+                      <div className="absolute inset-0 bg-black/30"></div>
                     </div>
                     <div className="absolute top-4 left-4">
-                      <div className="px-3 py-1 text-xs font-semibold rounded-full shadow-sm bg-white text-orange-600">
+                      <div className="px-3 py-1 text-xs font-semibold rounded-full shadow-sm reliance-bg reliance-text">
                         Domestic Manufacturing
                       </div>
                     </div>
@@ -291,30 +291,30 @@ const Reliance = () => {
                     </div>
                   </CardHeader>
                   <CardContent className="flex-grow flex flex-col p-6">
-                    <CardTitle className="text-2xl font-bold mb-2 text-gray-800">
+                    <CardTitle className="text-2xl font-bold mb-2 reliance-text">
                       PLI Scheme Success
                     </CardTitle>
-                    <CardDescription className="text-sm text-gray-600 flex-grow mb-4 leading-relaxed">
+                    <CardDescription className="text-sm reliance-body-text flex-grow mb-4 leading-relaxed">
                       4 GW integrated solar manufacturing facility at Jamnagar Green Energy Complex. Complete integration from polysilicon to modules with PLI incentives.
                     </CardDescription>
                     <div className="space-y-2 mb-4">
-                      <div className="flex items-center gap-2 text-sm text-gray-700">
-                        <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                      <div className="flex items-center gap-2 text-sm reliance-body-text">
+                        <div className="w-2 h-2 reliance-bg-secondary rounded-full"></div>
                         <span>4 GW annual capacity</span>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-gray-700">
-                        <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                      <div className="flex items-center gap-2 text-sm reliance-body-text">
+                        <div className="w-2 h-2 reliance-bg-secondary rounded-full"></div>
                         <span>Complete integration</span>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-gray-700">
-                        <div className="w-2 h-2 bg-pink-500 rounded-full"></div>
+                      <div className="flex items-center gap-2 text-sm reliance-body-text">
+                        <div className="w-2 h-2 reliance-bg-secondary rounded-full"></div>
                         <span>Government support</span>
                       </div>
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      <Badge className="bg-orange-100 text-orange-700 hover:bg-orange-200">4GW Capacity</Badge>
-                      <Badge className="bg-red-100 text-red-700 hover:bg-red-200">Full Integration</Badge>
-                      <Badge className="bg-pink-100 text-pink-700 hover:bg-pink-200">PLI Incentives</Badge>
+                      <Badge className="reliance-bg-primary text-white">4GW Capacity</Badge>
+                      <Badge className="reliance-bg-secondary text-white">Full Integration</Badge>
+                      <Badge className="reliance-bg-primary text-white">PLI Incentives</Badge>
                     </div>
                   </CardContent>
                 </Card>
@@ -345,26 +345,26 @@ const Reliance = () => {
                 Heterojunction solar cells are hybrid solar cells that combine a base layer of crystalline silicon with two thin layers of amorphous silicon (a-Si:H) on both sides. This creates a highly efficient junction with fewer electron losses, better light absorption, and superior temperature performance.
               </p>
               
-              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl p-6 mb-8 border border-blue-100 dark:border-blue-800">
-                <h4 className="font-bold text-blue-800 dark:text-blue-300 mb-4 flex items-center gap-2">
+              <div className="reliance-bg-alt rounded-2xl p-6 mb-8 reliance-border border-2">
+                <h4 className="font-bold reliance-text mb-4 flex items-center gap-2">
                   <Zap className="h-5 w-5" />
                   How It Works (Simply)
                 </h4>
-                <div className="space-y-2 text-sm text-blue-700 dark:text-blue-300">
+                <div className="space-y-2 text-sm reliance-body-text">
                   <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                    <div className="w-2 h-2 reliance-bg-secondary rounded-full mt-2"></div>
                     <span>Light hits the front layer → electrons excited</span>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                    <div className="w-2 h-2 reliance-bg-secondary rounded-full mt-2"></div>
                     <span>Amorphous silicon layers act as passivation layers, reducing energy loss</span>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                    <div className="w-2 h-2 reliance-bg-secondary rounded-full mt-2"></div>
                     <span>Electrons flow through the crystalline silicon core</span>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                    <div className="w-2 h-2 reliance-bg-secondary rounded-full mt-2"></div>
                     <span>Energy is collected through transparent conductive layers on both sides</span>
                   </div>
                 </div>
@@ -414,12 +414,12 @@ const Reliance = () => {
               </div>
               
               {/* Floating stats */}
-              <div className="absolute -top-4 -right-4 bg-white reliance-border border shadow-lg rounded-lg p-4 animate-float">
+              <div className="absolute -top-4 -right-4 reliance-bg reliance-border border-2 shadow-lg rounded-lg p-4 animate-float">
                 <div className="text-2xl font-bold reliance-primary">25%</div>
                 <div className="text-sm reliance-body-text">Max Efficiency</div>
               </div>
               
-              <div className="absolute -bottom-4 -left-4 bg-white reliance-border border shadow-lg rounded-lg p-4 animate-float" style={{ animationDelay: '1s' }}>
+              <div className="absolute -bottom-4 -left-4 reliance-bg reliance-border border-2 shadow-lg rounded-lg p-4 animate-float" style={{ animationDelay: '1s' }}>
                 <div className="text-2xl font-bold reliance-primary">90%</div>
                 <div className="text-sm reliance-body-text">Bifaciality</div>
               </div>
@@ -427,12 +427,12 @@ const Reliance = () => {
           </div>
 
           {/* Technology Comparison Section */}
-          <div className="bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900/50 dark:to-blue-900/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+          <div className="reliance-bg-alt rounded-3xl p-8 reliance-border border-2">
             <div className="text-center mb-12">
-              <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+              <h3 className="text-3xl font-bold mb-4 reliance-text">
                 Solar Technology Comparison: HJT vs TOPCon vs PERC
               </h3>
-              <p className="text-lg text-gray-600 dark:text-gray-300 max-w-4xl mx-auto">
+              <p className="text-lg reliance-body-text max-w-4xl mx-auto">
                 Compare the three most popular solar cell technologies in 2025 to understand why HJT represents the premium choice
               </p>
             </div>
@@ -441,61 +441,61 @@ const Reliance = () => {
             <div className="overflow-x-auto">
               <table className="w-full text-sm rounded-2xl overflow-hidden shadow-lg">
                 <thead>
-                  <tr className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+                  <tr className="reliance-bg-primary text-white">
                     <th className="p-4 text-left font-semibold">Feature / Metric</th>
                     <th className="p-4 text-center font-semibold">⚡ HJT (Heterojunction)</th>
                     <th className="p-4 text-center font-semibold">🔆 TOPCon</th>
                     <th className="p-4 text-center font-semibold">🔅 PERC</th>
                   </tr>
                 </thead>
-                <tbody className="bg-white dark:bg-slate-800">
-                  <tr className="border-b border-gray-100 dark:border-slate-700">
-                    <td className="p-4 font-semibold text-gray-700 dark:text-gray-300">Cell Type</td>
-                    <td className="p-4 text-center text-blue-600 font-semibold">N-Type</td>
-                    <td className="p-4 text-center text-green-600 font-semibold">N-Type</td>
-                    <td className="p-4 text-center text-orange-600 font-semibold">P-Type (mostly)</td>
+                <tbody className="reliance-bg">
+                  <tr className="reliance-border border-b">
+                    <td className="p-4 font-semibold reliance-text">Cell Type</td>
+                    <td className="p-4 text-center reliance-secondary font-semibold">N-Type</td>
+                    <td className="p-4 text-center reliance-secondary font-semibold">N-Type</td>
+                    <td className="p-4 text-center reliance-primary font-semibold">P-Type (mostly)</td>
                   </tr>
-                  <tr className="border-b border-gray-100 dark:border-slate-700 bg-blue-25 dark:bg-blue-900/10">
-                    <td className="p-4 font-semibold text-gray-700 dark:text-gray-300">Efficiency</td>
-                    <td className="p-4 text-center font-bold text-blue-600">⭐ 23–25%</td>
-                    <td className="p-4 text-center font-bold text-green-600">⭐ 22–24%</td>
-                    <td className="p-4 text-center font-bold text-orange-600">⭐ 19–21%</td>
+                  <tr className="reliance-border border-b reliance-bg-alt">
+                    <td className="p-4 font-semibold reliance-text">Efficiency</td>
+                    <td className="p-4 text-center font-bold reliance-secondary">⭐ 23–25%</td>
+                    <td className="p-4 text-center font-bold reliance-secondary">⭐ 22–24%</td>
+                    <td className="p-4 text-center font-bold reliance-primary">⭐ 19–21%</td>
                   </tr>
-                  <tr className="border-b border-gray-100 dark:border-slate-700">
-                    <td className="p-4 font-semibold text-gray-700 dark:text-gray-300">Temperature Coefficient</td>
-                    <td className="p-4 text-center font-bold text-blue-600">🔥 ~ -0.25%/°C (best)</td>
-                    <td className="p-4 text-center font-bold text-green-600">🔥 ~ -0.30%/°C</td>
-                    <td className="p-4 text-center font-bold text-red-600">❌ ~ -0.38%/°C (worst)</td>
+                  <tr className="reliance-border border-b">
+                    <td className="p-4 font-semibold reliance-text">Temperature Coefficient</td>
+                    <td className="p-4 text-center font-bold reliance-secondary">🔥 ~ -0.25%/°C (best)</td>
+                    <td className="p-4 text-center font-bold reliance-secondary">🔥 ~ -0.30%/°C</td>
+                    <td className="p-4 text-center font-bold reliance-text">❌ ~ -0.38%/°C (worst)</td>
                   </tr>
-                  <tr className="border-b border-gray-100 dark:border-slate-700 bg-blue-25 dark:bg-blue-900/10">
-                    <td className="p-4 font-semibold text-gray-700 dark:text-gray-300">Bifacial Capability</td>
-                    <td className="p-4 text-center font-bold text-blue-600">✅ Excellent (~90%)</td>
-                    <td className="p-4 text-center font-bold text-green-600">✅ Good (~70–80%)</td>
-                    <td className="p-4 text-center font-bold text-orange-600">⚠️ Moderate (~60%)</td>
+                  <tr className="reliance-border border-b reliance-bg-alt">
+                    <td className="p-4 font-semibold reliance-text">Bifacial Capability</td>
+                    <td className="p-4 text-center font-bold reliance-secondary">✅ Excellent (~90%)</td>
+                    <td className="p-4 text-center font-bold reliance-secondary">✅ Good (~70–80%)</td>
+                    <td className="p-4 text-center font-bold reliance-primary">⚠️ Moderate (~60%)</td>
                   </tr>
-                  <tr className="border-b border-gray-100 dark:border-slate-700">
-                    <td className="p-4 font-semibold text-gray-700 dark:text-gray-300">Degradation Rate</td>
-                    <td className="p-4 text-center font-bold text-blue-600">🔒 Very Low (~0.25%/yr)</td>
-                    <td className="p-4 text-center font-bold text-green-600">🔒 Low (~0.3%/yr)</td>
-                    <td className="p-4 text-center font-bold text-orange-600">⚠️ Higher (~0.5%/yr)</td>
+                  <tr className="reliance-border border-b">
+                    <td className="p-4 font-semibold reliance-text">Degradation Rate</td>
+                    <td className="p-4 text-center font-bold reliance-secondary">🔒 Very Low (~0.25%/yr)</td>
+                    <td className="p-4 text-center font-bold reliance-secondary">🔒 Low (~0.3%/yr)</td>
+                    <td className="p-4 text-center font-bold reliance-primary">⚠️ Higher (~0.5%/yr)</td>
                   </tr>
-                  <tr className="border-b border-gray-100 dark:border-slate-700 bg-blue-25 dark:bg-blue-900/10">
-                    <td className="p-4 font-semibold text-gray-700 dark:text-gray-300">LID (Light Induced Degradation)</td>
-                    <td className="p-4 text-center font-bold text-blue-600">❌ None (N-type)</td>
-                    <td className="p-4 text-center font-bold text-green-600">❌ None (N-type)</td>
-                    <td className="p-4 text-center font-bold text-red-600">⚠️ Yes (P-type silicon)</td>
+                  <tr className="reliance-border border-b reliance-bg-alt">
+                    <td className="p-4 font-semibold reliance-text">LID (Light Induced Degradation)</td>
+                    <td className="p-4 text-center font-bold reliance-secondary">❌ None (N-type)</td>
+                    <td className="p-4 text-center font-bold reliance-secondary">❌ None (N-type)</td>
+                    <td className="p-4 text-center font-bold reliance-text">⚠️ Yes (P-type silicon)</td>
                   </tr>
-                  <tr className="border-b border-gray-100 dark:border-slate-700">
-                    <td className="p-4 font-semibold text-gray-700 dark:text-gray-300">Cost per Watt</td>
-                    <td className="p-4 text-center font-bold text-red-600">💸 High</td>
-                    <td className="p-4 text-center font-bold text-yellow-600">💵 Medium</td>
-                    <td className="p-4 text-center font-bold text-green-600">💰 Low</td>
+                  <tr className="reliance-border border-b">
+                    <td className="p-4 font-semibold reliance-text">Cost per Watt</td>
+                    <td className="p-4 text-center font-bold reliance-text">💸 High</td>
+                    <td className="p-4 text-center font-bold reliance-primary">💵 Medium</td>
+                    <td className="p-4 text-center font-bold reliance-secondary">💰 Low</td>
                   </tr>
-                  <tr className="border-b border-gray-100 dark:border-slate-700 bg-blue-25 dark:bg-blue-900/10">
-                    <td className="p-4 font-semibold text-gray-700 dark:text-gray-300">Best Use Case</td>
-                    <td className="p-4 text-center text-blue-600 font-semibold">Premium homes, commercial rooftops</td>
-                    <td className="p-4 text-center text-green-600 font-semibold">Balanced use in modern systems</td>
-                    <td className="p-4 text-center text-orange-600 font-semibold">Budget projects, price-sensitive areas</td>
+                  <tr className="reliance-border border-b reliance-bg-alt">
+                    <td className="p-4 font-semibold reliance-text">Best Use Case</td>
+                    <td className="p-4 text-center reliance-secondary font-semibold">Premium homes, commercial rooftops</td>
+                    <td className="p-4 text-center reliance-secondary font-semibold">Balanced use in modern systems</td>
+                    <td className="p-4 text-center reliance-primary font-semibold">Budget projects, price-sensitive areas</td>
                   </tr>
                 </tbody>
               </table>
@@ -625,10 +625,10 @@ const Reliance = () => {
       </section>
 
       {/* Terms and Conditions Footer */}
-      <footer className="bg-gray-900 text-white py-16">
+      <footer className="reliance-text reliance-bg py-16 reliance-border border-t-2">
         <div className="container px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Terms and Conditions</h2>
+            <h2 className="text-3xl font-bold mb-4 reliance-text">Terms and Conditions</h2>
             <div className="w-24 h-1 reliance-bg-primary mx-auto"></div>
           </div>
           
@@ -637,12 +637,12 @@ const Reliance = () => {
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
                   <span className="reliance-primary font-bold min-w-[2rem]">1.</span>
-                  <p>This pricing is effective from 22nd May 2025 to 30th June 2025 subject to material availability.</p>
+                  <p className="reliance-body-text">This pricing is effective from 22nd May 2025 to 30th June 2025 subject to material availability.</p>
                 </div>
                 
                 <div className="flex items-start gap-3">
                   <span className="reliance-primary font-bold min-w-[2rem]">2.</span>
-                  <p>All prices are subject to change without notice and are not guaranteed, except that prices for an order that have been accepted by RIL</p>
+                  <p className="reliance-body-text">All prices are subject to change without notice and are not guaranteed, except that prices for an order that have been accepted by RIL</p>
                 </div>
                 
                 <div className="flex items-start gap-3">

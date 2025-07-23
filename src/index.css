@@ -42,15 +42,15 @@ All colors MUST be HSL.
     --solar-navy: 213 87% 25%;
     --solar-gold: 45 100% 51%;
     
-    /* Reliance Page Colors - Updated Theme */
-    --reliance-primary: 41 31% 57%; /* #BFA161 - Primary gold/brown */
-    --reliance-secondary: 151 100% 30%; /* #009B4D - Secondary green */
-    --reliance-text: 0 0% 0%; /* #000000 - Black text */
-    --reliance-body: 0 0% 20%; /* #333333 - Dark gray body text */
-    --reliance-background: 0 0% 100%; /* #FFFFFF - White background */
-    --reliance-background-alt: 0 0% 98%; /* #FAFAFA - Light gray background */
-    --reliance-hover: 41 31% 85%; /* Light version of primary for hover */
-    --reliance-border: 0 0% 90%; /* Light gray borders */
+    /* Reliance Page Colors - Simplified Black/White/#BFA161/Green Theme */
+    --reliance-primary: 41 31% 57%; /* #BFA161 - Primary gold */
+    --reliance-secondary: 120 100% 25%; /* Green */
+    --reliance-text: 0 0% 0%; /* Black text */
+    --reliance-body: 0 0% 0%; /* Black body text */
+    --reliance-background: 0 0% 100%; /* White background */
+    --reliance-background-alt: 0 0% 100%; /* White background */
+    --reliance-hover: 41 31% 70%; /* Lighter version of primary for hover */
+    --reliance-border: 0 0% 0%; /* Black borders */
     
     /* Gradients - Eco Green Theme */
     --gradient-sunset: linear-gradient(135deg, hsl(122 39% 49%) 0%, hsl(45 100% 51%) 100%);
