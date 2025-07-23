@@ -56,6 +56,7 @@ interface DCCableData {
 interface KitItem {
   srNo: number;
   item: string;
+  description: string;
 }
 
 // Sample data based on user input
@@ -84,12 +85,12 @@ const dcCableData: DCCableData[] = [
 ];
 
 const kitItems: KitItem[] = [
-  { srNo: 1, item: 'Module' },
-  { srNo: 2, item: 'Inverter' },
-  { srNo: 3, item: 'ACDB' },
-  { srNo: 4, item: 'MC4 Connector' },
-  { srNo: 5, item: 'Sig Device' },
-  { srNo: 6, item: 'MMS' },
+  { srNo: 1, item: 'Module', description: 'RIL 690-720 Wp Module - Silicon' },
+  { srNo: 2, item: 'Inverter', description: '3 String Invert (According to system size)' },
+  { srNo: 3, item: 'ACDB', description: 'ACDB, IP65 Protected with MCB 4P-1 Nos.,' },
+  { srNo: 4, item: 'MC4 Connector', description: 'Male & female (both)' },
+  { srNo: 5, item: 'Sig Device', description: 'Network device, with 5 year of network' },
+  { srNo: 6, item: 'MMS', description: '' },
 ];
 
 // Column helpers
@@ -391,6 +392,10 @@ const KitItemsTable: React.FC = () => {
     }),
     kitColumnHelper.accessor('item', {
       header: 'Item',
+      cell: info => info.getValue(),
+    }),
+    kitColumnHelper.accessor('description', {
+      header: 'Description',
       cell: info => info.getValue(),
     }),
   ];
