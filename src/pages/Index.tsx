@@ -6,6 +6,7 @@ import ProjectHighlights from "@/components/sections/ProjectHighlights";
 import Certifications from "@/components/sections/Certifications";
 import HappyCustomers from "@/components/sections/HappyCustomers";
 import FAQ from "@/components/sections/FAQ";
+import ImageNavigation from "@/components/sections/ImageNavigation";
 
 const Index = () => {
   return (
@@ -13,6 +14,7 @@ const Index = () => {
       <Navbar />
       <main>
         <HeroSection />
+        <ImageNavigation />
         <HowItWorks />
         <ProjectHighlights />
         <Certifications />
