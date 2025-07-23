@@ -50,14 +50,14 @@ const Reliance = () => {
           backgroundPosition: 'center',
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-blue-600/20"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-black/20"></div>
         
         <div className="container relative z-10 text-center text-white px-4">
           <div className="animate-fade-in">
             <Badge className="mb-4 bg-primary/20 text-white border-white/20 hover:bg-primary/30">
               Leading India's Solar Revolution
             </Badge>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
               Reliance Solar Energy
             </h1>
             <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90">
@@ -67,7 +67,7 @@ const Reliance = () => {
               <Button 
                 size="lg" 
                 onClick={() => setQuoteFormOpen(true)}
-                className="bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 text-white shadow-xl border border-white/20 backdrop-blur-sm group"
+                className="bg-primary hover:bg-primary/90 text-white shadow-xl border border-white/20 backdrop-blur-sm group"
               >
                 <Quote className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
                 Get HJT Solar Quote
@@ -85,9 +85,9 @@ const Reliance = () => {
         </div>
 
         {/* Floating elements animation */}
-        <div className="absolute top-20 left-10 w-4 h-4 bg-blue-400 rounded-full animate-float"></div>
-        <div className="absolute top-40 right-20 w-6 h-6 bg-green-400 rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute bottom-40 left-20 w-3 h-3 bg-yellow-400 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-20 left-10 w-4 h-4 bg-white/30 rounded-full animate-float"></div>
+        <div className="absolute top-40 right-20 w-6 h-6 bg-white/20 rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute bottom-40 left-20 w-3 h-3 bg-white/40 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
       </section>
 
       {/* Strategic Achievements Section */}
@@ -104,7 +104,7 @@ const Reliance = () => {
             {/* NexWafe Investment */}
             <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-gradient-to-br from-card to-card/50">
               <CardHeader>
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-green-500 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/70 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <Zap className="h-6 w-6 text-white" />
                 </div>
                 <CardTitle className="text-2xl group-hover:text-primary transition-colors">
@@ -134,7 +134,7 @@ const Reliance = () => {
             {/* REC Solar Acquisition */}
             <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-gradient-to-br from-card to-card/50">
               <CardHeader>
-                <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/70 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <Globe className="h-6 w-6 text-white" />
                 </div>
                 <CardTitle className="text-2xl group-hover:text-primary transition-colors">
@@ -164,7 +164,7 @@ const Reliance = () => {
             {/* PLI Scheme */}
             <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-gradient-to-br from-card to-card/50">
               <CardHeader>
-                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/70 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <Factory className="h-6 w-6 text-white" />
                 </div>
                 <CardTitle className="text-2xl group-hover:text-primary transition-colors">
@@ -195,7 +195,7 @@ const Reliance = () => {
       </section>
 
       {/* HJT Technology Deep Dive */}
-      <section className="py-20 bg-gradient-to-br from-primary/5 to-blue-600/5 animate-on-scroll">
+      <section className="py-20 bg-gradient-to-br from-muted/50 to-card animate-on-scroll">
         <div className="container px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -312,17 +312,17 @@ const Reliance = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 bg-gradient-to-r from-primary via-blue-600 to-purple-600 text-white animate-on-scroll relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-r from-primary to-primary/80 text-white animate-on-scroll relative overflow-hidden">
         {/* Background decoration */}
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-blue-600/20"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/20"></div>
         <div className="absolute top-10 left-10 w-32 h-32 bg-white/5 rounded-full blur-2xl"></div>
-        <div className="absolute bottom-10 right-10 w-40 h-40 bg-blue-400/10 rounded-full blur-2xl"></div>
+        <div className="absolute bottom-10 right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
         
         <div className="container px-4 text-center relative z-10">
           <Badge className="mb-6 bg-white/10 text-white border-white/20 hover:bg-white/20">
             Join India's Solar Revolution
           </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-100 bg-clip-text text-transparent">
             Ready to Power Your Future with HJT Solar?
           </h2>
           <p className="text-xl mb-8 max-w-3xl mx-auto opacity-90 leading-relaxed">

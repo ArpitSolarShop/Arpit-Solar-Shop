@@ -94,11 +94,11 @@ const RelianceQuoteForm = ({ open, onOpenChange }: RelianceQuoteFormProps) => {
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader className="relative">
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary to-blue-600 rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
               <Zap className="h-5 w-5 text-white" />
             </div>
             <div>
-              <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
+              <DialogTitle className="text-2xl font-bold text-primary">
                 Reliance Solar HJT Quote
               </DialogTitle>
               <DialogDescription className="text-base">
@@ -111,11 +111,11 @@ const RelianceQuoteForm = ({ open, onOpenChange }: RelianceQuoteFormProps) => {
         <Card className="border-0 shadow-none">
           <CardHeader className="px-0 pb-4">
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <CheckCircle className="h-4 w-4 text-green-500" />
+              <CheckCircle className="h-4 w-4 text-primary" />
               <span>Premium HJT Technology</span>
-              <CheckCircle className="h-4 w-4 text-green-500" />
+              <CheckCircle className="h-4 w-4 text-primary" />
               <span>22%+ Efficiency</span>
-              <CheckCircle className="h-4 w-4 text-green-500" />
+              <CheckCircle className="h-4 w-4 text-primary" />
               <span>25+ Year Warranty</span>
             </div>
           </CardHeader>
@@ -277,7 +277,7 @@ const RelianceQuoteForm = ({ open, onOpenChange }: RelianceQuoteFormProps) => {
                 <Button
                   type="submit"
                   disabled={loading || !formData.name || !formData.phone}
-                  className="w-full bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 text-white font-semibold h-12 text-base"
+                  className="w-full bg-primary hover:bg-primary/90 text-white font-semibold h-12 text-base"
                 >
                   {loading ? "Submitting..." : "Get My Reliance Solar Quote"}
                 </Button>
