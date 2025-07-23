@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { ChevronDown } from "lucide-react";
 
 interface Product {
   id: string;
@@ -22,7 +24,29 @@ const Products = () => {
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [selectedBrand, setSelectedBrand] = useState<string>("all");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [selectedCompany, setSelectedCompany] = useState<string>("all");
   const [loading, setLoading] = useState(true);
+
+  const solarCompanies = [
+    {
+      id: "reliance",
+      name: "Reliance Solar",
+      description: "Leading renewable energy solutions with cutting-edge technology",
+      icon: "⚡"
+    },
+    {
+      id: "shakti",
+      name: "Shakti Solar", 
+      description: "Innovative solar solutions for sustainable energy future",
+      icon: "☀️"
+    },
+    {
+      id: "tata",
+      name: "Tata Solar",
+      description: "Trusted solar power systems with proven reliability",
+      icon: "🔋"
+    }
+  ];
 
   useEffect(() => {
     fetchProducts();
@@ -30,7 +54,7 @@ const Products = () => {
 
   useEffect(() => {
     filterProducts();
-  }, [products, selectedBrand, selectedCategory]);
+  }, [products, selectedBrand, selectedCategory, selectedCompany]);
 
   const fetchProducts = async () => {
     try {
@@ -50,6 +74,20 @@ const Products = () => {
 
   const filterProducts = () => {
     let filtered = products;
+
+    if (selectedCompany !== "all") {
+      const companyNames = {
+        "reliance": "Reliance",
+        "shakti": "Shakti", 
+        "tata": "Tata"
+      };
+      const companyName = companyNames[selectedCompany as keyof typeof companyNames];
+      if (companyName) {
+        filtered = filtered.filter(product => 
+          product.brand.toLowerCase().includes(companyName.toLowerCase())
+        );
+      }
+    }
 
     if (selectedBrand !== "all") {
       filtered = filtered.filter(product => product.brand === selectedBrand);
@@ -86,6 +124,65 @@ const Products = () => {
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Explore our comprehensive range of premium solar products from leading manufacturers
             </p>
+          </div>
+
+          {/* Company Selector Dropdown */}
+          <div className="mb-8">
+            <Select value={selectedCompany} onValueChange={setSelectedCompany}>
+              <SelectTrigger className="w-full h-auto p-0 border-0 bg-transparent shadow-none">
+                <SelectValue placeholder="Select a solar company">
+                  <div className="flex items-center justify-between w-full p-4 bg-card border rounded-lg hover:bg-accent/50 transition-colors">
+                    <div className="flex items-center gap-3">
+                      <div className="text-2xl">
+                        {selectedCompany === "all" ? "🏢" : 
+                         solarCompanies.find(c => c.id === selectedCompany)?.icon || "🏢"}
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-lg">
+                          {selectedCompany === "all" ? "All Solar Companies" :
+                           solarCompanies.find(c => c.id === selectedCompany)?.name || "Select Company"}
+                        </h3>
+                        <p className="text-sm text-muted-foreground">
+                          {selectedCompany === "all" ? "Browse products from all manufacturers" :
+                           solarCompanies.find(c => c.id === selectedCompany)?.description || ""}
+                        </p>
+                      </div>
+                    </div>
+                    <ChevronDown className="h-5 w-5 text-muted-foreground" />
+                  </div>
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent className="w-full p-2">
+                <SelectItem value="all" className="p-0 focus:bg-transparent">
+                  <Card className="w-full hover:bg-accent/50 transition-colors cursor-pointer border-0 shadow-none">
+                    <CardContent className="p-4">
+                      <div className="flex items-center gap-3">
+                        <div className="text-2xl">🏢</div>
+                        <div>
+                          <h3 className="font-semibold">All Solar Companies</h3>
+                          <p className="text-sm text-muted-foreground">Browse products from all manufacturers</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </SelectItem>
+                {solarCompanies.map((company) => (
+                  <SelectItem key={company.id} value={company.id} className="p-0 focus:bg-transparent">
+                    <Card className="w-full hover:bg-accent/50 transition-colors cursor-pointer border-0 shadow-none">
+                      <CardContent className="p-4">
+                        <div className="flex items-center gap-3">
+                          <div className="text-2xl">{company.icon}</div>
+                          <div>
+                            <h3 className="font-semibold">{company.name}</h3>
+                            <p className="text-sm text-muted-foreground">{company.description}</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
           {/* Filters */}
