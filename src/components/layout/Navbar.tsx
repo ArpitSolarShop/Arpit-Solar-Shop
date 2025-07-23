@@ -63,7 +63,7 @@ const Navbar = () => {
       dropdown: [
         { 
           name: "Reliance Solar", 
-          href: "/products?company=reliance", 
+          href: "/reliance", 
           image: "/reliance-industries-ltd.png",
           description: "Leading renewable energy solutions"
         },
