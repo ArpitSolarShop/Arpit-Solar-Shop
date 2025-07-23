@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Zap, Globe, Factory, TrendingUp, Award, Target } from "lucide-react";
+import { ArrowRight, Zap, Globe, Factory, TrendingUp, Award, Target, Quote, MessageSquare } from "lucide-react";
+import RelianceQuoteForm from "@/components/forms/RelianceQuoteForm";
 
 // Import generated images
 import relianceHero from "@/assets/reliance-hero.jpg";
@@ -15,6 +16,7 @@ import relianceFacility from "@/assets/reliance-facility.jpg";
 const Reliance = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
+  const [quoteFormOpen, setQuoteFormOpen] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -62,11 +64,21 @@ const Reliance = () => {
               Pioneering Advanced Heterojunction Technology (HJT) to power India's sustainable future with world-class solar solutions
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white shadow-lg">
-                Explore Technology <ArrowRight className="ml-2 h-5 w-5" />
+              <Button 
+                size="lg" 
+                onClick={() => setQuoteFormOpen(true)}
+                className="bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 text-white shadow-xl border border-white/20 backdrop-blur-sm group"
+              >
+                <Quote className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
+                Get HJT Solar Quote
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
-                Download Brochure
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-white/30 text-white hover:bg-white/10 hover:text-white backdrop-blur-sm"
+              >
+                View Technology
               </Button>
             </div>
           </div>
@@ -300,28 +312,64 @@ const Reliance = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 bg-gradient-to-r from-primary to-blue-600 text-white animate-on-scroll">
-        <div className="container px-4 text-center">
-          <h2 className="text-4xl font-bold mb-6">
-            Join Reliance in Powering India's Solar Future
+      <section className="py-20 bg-gradient-to-r from-primary via-blue-600 to-purple-600 text-white animate-on-scroll relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-blue-600/20"></div>
+        <div className="absolute top-10 left-10 w-32 h-32 bg-white/5 rounded-full blur-2xl"></div>
+        <div className="absolute bottom-10 right-10 w-40 h-40 bg-blue-400/10 rounded-full blur-2xl"></div>
+        
+        <div className="container px-4 text-center relative z-10">
+          <Badge className="mb-6 bg-white/10 text-white border-white/20 hover:bg-white/20">
+            Join India's Solar Revolution
+          </Badge>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
+            Ready to Power Your Future with HJT Solar?
           </h2>
-          <p className="text-xl mb-8 max-w-3xl mx-auto opacity-90">
-            Partner with India's most ambitious solar energy initiative. From cutting-edge HJT technology to 
-            revolutionary manufacturing processes, we're building the foundation for sustainable energy independence.
+          <p className="text-xl mb-8 max-w-3xl mx-auto opacity-90 leading-relaxed">
+            Experience the superior efficiency of Heterojunction Technology. Get a personalized quote for 
+            India's most advanced solar panels with 22%+ efficiency and 25+ year warranty.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90">
-              Partner With Us <ArrowRight className="ml-2 h-5 w-5" />
+            <Button 
+              size="lg" 
+              onClick={() => setQuoteFormOpen(true)}
+              className="bg-white text-primary hover:bg-white/90 font-semibold shadow-lg group border-2 border-transparent hover:border-white/20"
+            >
+              <MessageSquare className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+              Get Free Quote Now
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
-              Investor Relations
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="border-white/30 text-white hover:bg-white/10 hover:text-white backdrop-blur-sm"
+            >
+              Partner With Us
             </Button>
+          </div>
+          
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <div className="text-center p-4 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
+              <div className="text-2xl font-bold text-white mb-1">24 Hours</div>
+              <div className="text-white/80 text-sm">Response Time</div>
+            </div>
+            <div className="text-center p-4 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
+              <div className="text-2xl font-bold text-white mb-1">Free</div>
+              <div className="text-white/80 text-sm">Site Assessment</div>
+            </div>
+            <div className="text-center p-4 bg-white/5 rounded-lg backdrop-blur-sm border border-white/10">
+              <div className="text-2xl font-bold text-white mb-1">25+ Years</div>
+              <div className="text-white/80 text-sm">Performance Warranty</div>
+            </div>
           </div>
         </div>
       </section>
 
       <Footer />
+      
+      {/* Quote Form Modal */}
+      <RelianceQuoteForm open={quoteFormOpen} onOpenChange={setQuoteFormOpen} />
     </div>
   );
 };
