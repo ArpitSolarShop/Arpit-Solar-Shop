@@ -1,35 +1,41 @@
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import { ArrowRight, Play, Zap, Shield, Award } from "lucide-react";
-import heroImage from "@/assets/hero-solar-house.jpg";
 
 const HeroSection = () => {
+  const [videoError, setVideoError] = useState(false);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Video Background */}
+      {/* Background Video or Fallback Image */}
       <div className="absolute inset-0">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover"
-        >
-          <source src="https://videos.pexels.com/video-files/7579943/7579943-uhd_3840_2160_25fps.mp4" type="video/mp4" />
-          {/* Fallback to image if video fails to load */}
-          <img
-            src={heroImage}
-            alt="Solar panels on modern house"
+        {!videoError ? (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            onError={() => setVideoError(true)}
             className="w-full h-full object-cover"
+          >
+            <source src="/Solar_Video_Ready_Arpit_Solar.mp4" type="video/mp4" />
+          </video>
+        ) : (
+          <img
+            src="/enhance-quality.png"
+            alt="Fallback: solar house"
+            className="w-full h-full object-cover"
+            loading="lazy"
           />
-        </video>
+        )}
         <div className="absolute inset-0 bg-black/40"></div>
       </div>
 
-      {/* Content */}
+      {/* Main Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left Column - Text Content */}
+          {/* Left Column */}
           <div className="text-center lg:text-left">
             <div className="animate-fade-in">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
@@ -39,7 +45,7 @@ const HeroSection = () => {
                 </span>
               </h1>
               <p className="text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed">
-                Transform your energy costs with premium solar solutions. 
+                Transform your energy costs with premium solar solutions.
                 Join thousands of satisfied customers who've made the switch to clean, renewable energy.
               </p>
             </div>
@@ -52,9 +58,9 @@ const HeroSection = () => {
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Link>
               </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
+              <Button
+                variant="outline"
+                size="lg"
                 className="border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm bg-transparent rounded-xl"
               >
                 <Play className="mr-2 w-5 h-5" />
@@ -88,7 +94,7 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Right Column - Interactive Element */}
+          {/* Right Column */}
           <div className="hidden lg:flex items-center justify-center">
             <div className="relative">
               <div className="w-64 h-64 rounded-full bg-white/5 backdrop-blur-sm opacity-20 animate-float border border-white/10"></div>
