@@ -70,13 +70,13 @@ const Navbar = () => {
         { 
           name: "Shakti Solar", 
           href: "/products?company=shakti", 
-          image: "/Shakti Solar.png",
+          image: "/Shakti%20Solar.png",
           description: "Innovative solar solutions"
         },
         { 
           name: "Tata Solar", 
           href: "/products?company=tata", 
-          image: "/Tata Power Solar.png",
+          image: "/Tata%20Power%20Solar.png",
           description: "Trusted solar power systems"
         },
       ],
@@ -181,18 +181,18 @@ const Navbar = () => {
                               </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent 
-                              className="w-80 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border border-white/20 rounded-xl shadow-xl mt-2 p-3"
+                              className="w-96 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border border-white/20 rounded-xl shadow-xl mt-2 p-4"
                               sideOffset={5}
                             >
                               {item.name === "Products" ? (
-                                <div className="grid grid-cols-3 gap-3">
+                                <div className="grid grid-cols-3 gap-4">
                                   {item.dropdown.map((dropdownItem) => (
                                     <DropdownMenuItem key={dropdownItem.name} asChild className="p-0">
                                       <Link
                                         to={dropdownItem.href}
-                                        className="flex flex-col items-center gap-2 p-3 cursor-pointer hover:bg-primary/10 rounded-lg transition-colors duration-200 border border-transparent hover:border-primary/20 group"
+                                        className="flex flex-col items-center gap-3 p-4 cursor-pointer hover:bg-primary/10 rounded-lg transition-colors duration-200 border border-transparent hover:border-primary/20 group"
                                       >
-                                        <div className="w-16 h-16 bg-white rounded-lg p-2 shadow-sm group-hover:shadow-md transition-shadow duration-200">
+                                        <div className="w-20 h-20 bg-white rounded-lg p-2 shadow-sm group-hover:shadow-md transition-shadow duration-200">
                                           <img
                                             src={dropdownItem.image}
                                             alt={dropdownItem.name}
@@ -200,7 +200,7 @@ const Navbar = () => {
                                           />
                                         </div>
                                         <div className="text-center">
-                                          <div className="text-xs font-medium text-foreground">{dropdownItem.name}</div>
+                                          <div className="text-sm font-medium text-foreground">{dropdownItem.name}</div>
                                         </div>
                                       </Link>
                                     </DropdownMenuItem>
@@ -297,15 +297,15 @@ const Navbar = () => {
                                 {item.name}
                               </div>
                               {item.name === "Products" ? (
-                                <div className="grid grid-cols-3 gap-2 px-2 py-2">
+                                <div className="grid grid-cols-3 gap-3 px-3 py-3">
                                   {item.dropdown.map((dropdownItem) => (
                                     <Link
                                       key={dropdownItem.name}
                                       to={dropdownItem.href}
-                                      className="flex flex-col items-center gap-2 p-2 cursor-pointer hover:bg-muted transition-colors duration-200 rounded-lg border border-transparent hover:border-primary/20"
+                                      className="flex flex-col items-center gap-2 p-3 cursor-pointer hover:bg-muted transition-colors duration-200 rounded-lg border border-transparent hover:border-primary/20"
                                       onClick={() => setIsOpen(false)}
                                     >
-                                      <div className="w-12 h-12 bg-white rounded-lg p-1 shadow-sm">
+                                      <div className="w-16 h-16 bg-white rounded-lg p-2 shadow-sm">
                                         <img
                                           src={dropdownItem.image}
                                           alt={dropdownItem.name}
