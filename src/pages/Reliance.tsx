@@ -402,9 +402,6 @@ const Reliance = () => {
                 </div>
               </div>
 
-              <Button size="lg" className="bg-transparent border-2 reliance-border reliance-primary hover:reliance-hover">
-                Learn More About HJT <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
             </div>
             
             <div className="relative">
@@ -504,64 +501,6 @@ const Reliance = () => {
               </table>
             </div>
 
-            {/* Technology Verdict Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-              <Card className="relative overflow-hidden border-2 border-green-200 dark:border-green-800 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30">
-                <CardHeader className="pb-3">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center">
-                      <TrendingUp className="h-4 w-4 text-white" />
-                    </div>
-                    <CardTitle className="text-green-700 dark:text-green-300">TOPCon</CardTitle>
-                  </div>
-                  <div className="text-2xl font-bold text-green-600">"Best Balance"</div>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex items-start gap-2">
-                      <span className="text-green-600">✅</span>
-                      <span>Best cost-performance balance</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <span className="text-green-600">✅</span>
-                      <span>N-type silicon = no LID, better lifespan</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <span className="text-green-600">✅</span>
-                      <span>Becoming industry standard 2025–26</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="relative overflow-hidden border-2 border-orange-200 dark:border-orange-800 bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/30 dark:to-orange-800/30">
-                <CardHeader className="pb-3">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center">
-                      <Target className="h-4 w-4 text-white" />
-                    </div>
-                    <CardTitle className="text-orange-700 dark:text-orange-300">PERC</CardTitle>
-                  </div>
-                  <div className="text-2xl font-bold text-orange-600">"Entry Level"</div>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex items-start gap-2">
-                      <span className="text-green-600">✅</span>
-                      <span>Cheapest, reliable, well-known tech</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <span className="text-green-600">✅</span>
-                      <span>Good for budget-friendly systems</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <span className="text-red-600">❌</span>
-                      <span>Lower efficiency, worse in heat</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
 
           </div>
         </div>
