@@ -67,7 +67,7 @@ const Reliance = () => {
               <Button 
                 size="lg" 
                 onClick={() => setQuoteFormOpen(true)}
-                className="reliance-bg-primary hover:opacity-90 text-white shadow-xl border border-white/20 backdrop-blur-sm group"
+                className="bg-transparent border-2 border-[#BFA161] text-[#BFA161] hover:bg-[#BFA161]/10 shadow-xl backdrop-blur-sm group"
               >
                 <Quote className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
                 Get HJT Solar Quote
@@ -235,7 +235,7 @@ const Reliance = () => {
                 </div>
               </div>
 
-              <Button size="lg" className="reliance-bg-primary hover:opacity-90 text-white">
+              <Button size="lg" className="bg-transparent border-2 border-[#BFA161] text-[#BFA161] hover:bg-[#BFA161]/10">
                 Learn More About HJT <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
@@ -327,7 +327,7 @@ const Reliance = () => {
             <Button 
               size="lg" 
               onClick={() => setQuoteFormOpen(true)}
-              className="bg-white reliance-text hover:bg-white/90 font-semibold shadow-lg group border-2 border-transparent hover:border-white/20"
+              className="bg-transparent border-2 border-[#BFA161] text-[#BFA161] hover:bg-[#BFA161]/10 font-semibold shadow-lg group"
             >
               <MessageSquare className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
               Get Free Quote Now
