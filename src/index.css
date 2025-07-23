@@ -42,6 +42,15 @@ All colors MUST be HSL.
     --solar-navy: 213 87% 25%;
     --solar-gold: 45 100% 51%;
     
+    /* Reliance Page Colors */
+    --reliance-primary: 41 39% 56%;
+    --reliance-text: 0 0% 0%;
+    --reliance-body: 0 0% 20%;
+    --reliance-background: 60 9% 98%;
+    --reliance-background-alt: 48 20% 96%;
+    --reliance-hover: 35 18% 87%;
+    --reliance-divider: 35 18% 85%;
+    
     /* Gradients - Eco Green Theme */
     --gradient-sunset: linear-gradient(135deg, hsl(122 39% 49%) 0%, hsl(45 100% 51%) 100%);
     --gradient-sky: linear-gradient(135deg, hsl(213 87% 35%) 0%, hsl(122 39% 49%) 100%);
@@ -162,5 +171,38 @@ All colors MUST be HSL.
   .animate-on-scroll.animate-fade-in {
     opacity: 1;
     transform: translateY(0);
+  }
+  
+  /* Reliance Page Utility Classes */
+  .reliance-bg {
+    background-color: hsl(var(--reliance-background));
+  }
+  
+  .reliance-bg-alt {
+    background-color: hsl(var(--reliance-background-alt));
+  }
+  
+  .reliance-text {
+    color: hsl(var(--reliance-text));
+  }
+  
+  .reliance-body-text {
+    color: hsl(var(--reliance-body));
+  }
+  
+  .reliance-primary {
+    color: hsl(var(--reliance-primary));
+  }
+  
+  .reliance-bg-primary {
+    background-color: hsl(var(--reliance-primary));
+  }
+  
+  .reliance-hover:hover {
+    background-color: hsl(var(--reliance-hover));
+  }
+  
+  .reliance-border {
+    border-color: hsl(var(--reliance-divider));
   }
 }

@@ -37,7 +37,7 @@ const Reliance = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-background/50">
+    <div className="min-h-screen reliance-bg">
       <Navbar />
       
       {/* Hero Section */}
@@ -91,26 +91,26 @@ const Reliance = () => {
       </section>
 
       {/* Strategic Achievements Section */}
-      <section className="py-20 bg-card animate-on-scroll">
+      <section className="py-20 reliance-bg-alt animate-on-scroll">
         <div className="container px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Strategic Achievements</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <h2 className="text-4xl font-bold mb-4 reliance-text">Strategic Achievements</h2>
+            <p className="text-xl reliance-body-text max-w-3xl mx-auto">
               Three transformative investments that position Reliance at the forefront of global solar technology
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* NexWafe Investment */}
-            <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-gradient-to-br from-card to-card/50">
+            <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 reliance-hover bg-white border reliance-border">
               <CardHeader>
-                <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/70 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-12 h-12 reliance-bg-primary rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <Zap className="h-6 w-6 text-white" />
                 </div>
-                <CardTitle className="text-2xl group-hover:text-primary transition-colors">
+                <CardTitle className="text-2xl group-hover:reliance-primary transition-colors reliance-text">
                   €25M NexWafe Investment
                 </CardTitle>
-                <CardDescription>Revolutionary Green Solar Wafer Technology</CardDescription>
+                <CardDescription className="reliance-body-text">Revolutionary Green Solar Wafer Technology</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="aspect-video mb-4 rounded-lg overflow-hidden">
@@ -120,7 +120,7 @@ const Reliance = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <p className="text-sm text-muted-foreground mb-4">
+                <p className="text-sm reliance-body-text mb-4">
                   Kerf-free wafer manufacturing eliminates 40% silicon waste, dramatically reducing costs and environmental impact.
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -132,15 +132,15 @@ const Reliance = () => {
             </Card>
 
             {/* REC Solar Acquisition */}
-            <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-gradient-to-br from-card to-card/50">
+            <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 reliance-hover bg-white border reliance-border">
               <CardHeader>
-                <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/70 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-12 h-12 reliance-bg-primary rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <Globe className="h-6 w-6 text-white" />
                 </div>
-                <CardTitle className="text-2xl group-hover:text-primary transition-colors">
+                <CardTitle className="text-2xl group-hover:reliance-primary transition-colors reliance-text">
                   $771M REC Solar Acquisition
                 </CardTitle>
-                <CardDescription>World-Class HJT Technology & Global Brand</CardDescription>
+                <CardDescription className="reliance-body-text">World-Class HJT Technology & Global Brand</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="aspect-video mb-4 rounded-lg overflow-hidden">
@@ -150,7 +150,7 @@ const Reliance = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <p className="text-sm text-muted-foreground mb-4">
+                <p className="text-sm reliance-body-text mb-4">
                   Advanced Heterojunction Technology delivers superior efficiency and performance in REC's Alpha series panels.
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -162,15 +162,15 @@ const Reliance = () => {
             </Card>
 
             {/* PLI Scheme */}
-            <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-gradient-to-br from-card to-card/50">
+            <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 reliance-hover bg-white border reliance-border">
               <CardHeader>
-                <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/70 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-12 h-12 reliance-bg-primary rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <Factory className="h-6 w-6 text-white" />
                 </div>
-                <CardTitle className="text-2xl group-hover:text-primary transition-colors">
+                <CardTitle className="text-2xl group-hover:reliance-primary transition-colors reliance-text">
                   4GW Integrated Facility
                 </CardTitle>
-                <CardDescription>IREDA PLI Scheme Manufacturing Hub</CardDescription>
+                <CardDescription className="reliance-body-text">IREDA PLI Scheme Manufacturing Hub</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="aspect-video mb-4 rounded-lg overflow-hidden">
@@ -180,7 +180,7 @@ const Reliance = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <p className="text-sm text-muted-foreground mb-4">
+                <p className="text-sm reliance-body-text mb-4">
                   End-to-end solar manufacturing from polysilicon to finished modules at Jamnagar Green Energy Complex.
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -195,54 +195,54 @@ const Reliance = () => {
       </section>
 
       {/* HJT Technology Deep Dive */}
-      <section className="py-20 bg-gradient-to-br from-muted/50 to-card animate-on-scroll">
+      <section className="py-20 reliance-bg animate-on-scroll">
         <div className="container px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
+              <Badge className="mb-4 reliance-bg-primary text-white border-transparent">
                 Advanced Technology
               </Badge>
-              <h2 className="text-4xl font-bold mb-6">
+              <h2 className="text-4xl font-bold mb-6 reliance-text">
                 Heterojunction Technology (HJT): The Future of Solar
               </h2>
-              <p className="text-lg text-muted-foreground mb-8">
+              <p className="text-lg reliance-body-text mb-8">
                 Through our acquisition of REC Solar, Reliance now commands one of the world's most advanced solar technologies. 
                 HJT cells combine the best of crystalline and amorphous silicon to achieve unprecedented efficiency levels.
               </p>
               
               <div className="space-y-4 mb-8">
                 <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center mt-1">
+                  <div className="w-6 h-6 reliance-bg-primary rounded-full flex items-center justify-center mt-1">
                     <TrendingUp className="h-3 w-3 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold">Superior Efficiency</h4>
-                    <p className="text-sm text-muted-foreground">Up to 22%+ efficiency in commercial modules</p>
+                    <h4 className="font-semibold reliance-text">Superior Efficiency</h4>
+                    <p className="text-sm reliance-body-text">Up to 22%+ efficiency in commercial modules</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center mt-1">
+                  <div className="w-6 h-6 reliance-bg-primary rounded-full flex items-center justify-center mt-1">
                     <Award className="h-3 w-3 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold">Premium Performance</h4>
-                    <p className="text-sm text-muted-foreground">Lower temperature coefficients and better low-light performance</p>
+                    <h4 className="font-semibold reliance-text">Premium Performance</h4>
+                    <p className="text-sm reliance-body-text">Lower temperature coefficients and better low-light performance</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center mt-1">
+                  <div className="w-6 h-6 reliance-bg-primary rounded-full flex items-center justify-center mt-1">
                     <Target className="h-3 w-3 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold">Reliability</h4>
-                    <p className="text-sm text-muted-foreground">25+ year warranties with minimal degradation</p>
+                    <h4 className="font-semibold reliance-text">Reliability</h4>
+                    <p className="text-sm reliance-body-text">25+ year warranties with minimal degradation</p>
                   </div>
                 </div>
               </div>
 
-              <Button size="lg" className="bg-primary hover:bg-primary/90">
+              <Button size="lg" className="reliance-bg-primary hover:opacity-90 text-white">
                 Learn More About HJT <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
@@ -257,14 +257,14 @@ const Reliance = () => {
               </div>
               
               {/* Floating stats */}
-              <div className="absolute -top-4 -right-4 bg-card border shadow-lg rounded-lg p-4 animate-float">
-                <div className="text-2xl font-bold text-primary">22%+</div>
-                <div className="text-sm text-muted-foreground">Efficiency</div>
+              <div className="absolute -top-4 -right-4 bg-white reliance-border border shadow-lg rounded-lg p-4 animate-float">
+                <div className="text-2xl font-bold reliance-primary">22%+</div>
+                <div className="text-sm reliance-body-text">Efficiency</div>
               </div>
               
-              <div className="absolute -bottom-4 -left-4 bg-card border shadow-lg rounded-lg p-4 animate-float" style={{ animationDelay: '1s' }}>
-                <div className="text-2xl font-bold text-primary">25+</div>
-                <div className="text-sm text-muted-foreground">Year Warranty</div>
+              <div className="absolute -bottom-4 -left-4 bg-white reliance-border border shadow-lg rounded-lg p-4 animate-float" style={{ animationDelay: '1s' }}>
+                <div className="text-2xl font-bold reliance-primary">25+</div>
+                <div className="text-sm reliance-body-text">Year Warranty</div>
               </div>
             </div>
           </div>
@@ -272,49 +272,49 @@ const Reliance = () => {
       </section>
 
       {/* Statistics Section */}
-      <section ref={statsRef} className="py-20 bg-card animate-on-scroll">
+      <section ref={statsRef} className="py-20 reliance-bg-alt animate-on-scroll">
         <div className="container px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Reliance Solar by Numbers</h2>
-            <p className="text-xl text-muted-foreground">Leading India's renewable energy transformation</p>
+            <h2 className="text-4xl font-bold mb-4 reliance-text">Reliance Solar by Numbers</h2>
+            <p className="text-xl reliance-body-text">Leading India's renewable energy transformation</p>
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center group">
-              <div className="text-4xl md:text-5xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform duration-300">
+              <div className="text-4xl md:text-5xl font-bold reliance-primary mb-2 group-hover:scale-110 transition-transform duration-300">
                 4GW
               </div>
-              <div className="text-muted-foreground">Annual Capacity</div>
+              <div className="reliance-body-text">Annual Capacity</div>
             </div>
             
             <div className="text-center group">
-              <div className="text-4xl md:text-5xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform duration-300">
+              <div className="text-4xl md:text-5xl font-bold reliance-primary mb-2 group-hover:scale-110 transition-transform duration-300">
                 $800M+
               </div>
-              <div className="text-muted-foreground">Total Investment</div>
+              <div className="reliance-body-text">Total Investment</div>
             </div>
             
             <div className="text-center group">
-              <div className="text-4xl md:text-5xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform duration-300">
+              <div className="text-4xl md:text-5xl font-bold reliance-primary mb-2 group-hover:scale-110 transition-transform duration-300">
                 22%+
               </div>
-              <div className="text-muted-foreground">HJT Efficiency</div>
+              <div className="reliance-body-text">HJT Efficiency</div>
             </div>
             
             <div className="text-center group">
-              <div className="text-4xl md:text-5xl font-bold text-primary mb-2 group-hover:scale-110 transition-transform duration-300">
+              <div className="text-4xl md:text-5xl font-bold reliance-primary mb-2 group-hover:scale-110 transition-transform duration-300">
                 0%
               </div>
-              <div className="text-muted-foreground">Kerf Waste</div>
+              <div className="reliance-body-text">Kerf Waste</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Call to Action */}
-      <section className="py-20 bg-gradient-to-r from-primary to-primary/80 text-white animate-on-scroll relative overflow-hidden">
+      <section className="py-20 reliance-bg-primary text-white animate-on-scroll relative overflow-hidden">
         {/* Background decoration */}
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/20"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-black/10"></div>
         <div className="absolute top-10 left-10 w-32 h-32 bg-white/5 rounded-full blur-2xl"></div>
         <div className="absolute bottom-10 right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
         
