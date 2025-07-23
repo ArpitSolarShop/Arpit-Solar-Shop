@@ -127,204 +127,192 @@ const Reliance = () => {
       </section>
 
       {/* Strategic Achievements Section */}
-      <section className="py-20 reliance-bg overflow-hidden animate-on-scroll">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-extrabold mb-5 reliance-text leading-tight">
-              Strategic{" "}
-              <span className="reliance-primary">
-                Achievements
-              </span>
-            </h2>
-            <p className="text-xl reliance-body-text max-w-4xl mx-auto font-light">
-              Three transformative strategic moves in 2021 that positioned Reliance at the forefront of global solar innovation: 
-              <span className="font-bold reliance-secondary"> Acquire • Innovate • Build</span>
-            </p>
-          </div>
-
-          <div className="relative">
-            <Swiper
-              modules={[Autoplay, Pagination, Navigation]}
-              slidesPerView={1}
-              spaceBetween={30}
-              loop
-              breakpoints={{
-                640: { slidesPerView: 1.2, spaceBetween: 20 },
-                768: { slidesPerView: 1.5, spaceBetween: 30 },
-                1024: { slidesPerView: 2.5, spaceBetween: 40 },
-                1280: { slidesPerView: 3, spaceBetween: 40 },
+      <section className="relative overflow-hidden animate-on-scroll">
+        <Swiper
+          modules={[Autoplay, Pagination]}
+          slidesPerView={1}
+          loop
+          autoplay={{ delay: 5000, disableOnInteraction: false }}
+          pagination={{ clickable: true, dynamicBullets: true }}
+          className="h-screen"
+        >
+          {/* Technology Acquisition - NexWafe */}
+          <SwiperSlide>
+            <div 
+              className="relative w-full h-screen flex items-center justify-center"
+              style={{
+                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url(${nexwafeTechnology})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
               }}
-              autoplay={{ delay: 4000, disableOnInteraction: false }}
-              pagination={{ clickable: true, dynamicBullets: true }}
-              className="!pb-16"
             >
-              {/* Technology Acquisition - NexWafe */}
-              <SwiperSlide className="h-auto">
-                <Card className="h-full flex flex-col rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 ease-in-out transform hover:-translate-y-2 reliance-border border-2 reliance-bg">
-                  <CardHeader className="p-0 relative">
-                    <div className="w-full h-48 reliance-bg-primary overflow-hidden flex items-center justify-center relative">
-                      <img 
-                        src={nexwafeTechnology} 
-                        alt="NexWafe Technology" 
-                        loading="lazy"
-                        className="w-full h-full object-cover transition-transform duration-300 opacity-80"
-                      />
-                      <div className="absolute inset-0 bg-black/30"></div>
+              <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-white relative z-10">
+                <div className="max-w-4xl mx-auto">
+                  <div className="mb-6">
+                    <Badge className="mb-4 bg-white/20 text-white border-white/20 hover:bg-white/30">
+                      Technology Acquisition
+                    </Badge>
+                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-4">
+                      <Zap className="h-8 w-8 text-white" />
                     </div>
-                    <div className="absolute top-4 left-4">
-                      <div className="px-3 py-1 text-xs font-semibold rounded-full shadow-sm reliance-bg reliance-text">
-                        Technology Acquisition
-                      </div>
+                  </div>
+                  
+                  <h2 className="text-5xl md:text-6xl font-extrabold mb-6 text-white leading-tight">
+                    Strategic{" "}
+                    <span className="text-yellow-300">Achievements</span>
+                  </h2>
+                  
+                  <h3 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+                    NexWafe GmbH
+                  </h3>
+                  
+                  <p className="text-xl md:text-2xl mb-8 opacity-90 leading-relaxed">
+                    €25 Million investment in revolutionary "Green Solar Wafer" technology that eliminates up to 40% silicon waste through epitaxial kerf-free manufacturing.
+                  </p>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div className="text-center p-4 bg-white/10 rounded-lg backdrop-blur-sm border border-white/20">
+                      <div className="text-2xl font-bold text-white mb-2">Zero Kerf</div>
+                      <div className="text-white/80 text-sm">Waste Technology</div>
                     </div>
-                    <div className="absolute top-4 right-4">
-                      <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
-                        <Zap className="h-6 w-6 text-white" />
-                      </div>
+                    <div className="text-center p-4 bg-white/10 rounded-lg backdrop-blur-sm border border-white/20">
+                      <div className="text-2xl font-bold text-white mb-2">40%</div>
+                      <div className="text-white/80 text-sm">Cost Reduction</div>
                     </div>
-                  </CardHeader>
-                  <CardContent className="flex-grow flex flex-col p-6">
-                    <CardTitle className="text-2xl font-bold mb-2 reliance-text">
-                      NexWafe GmbH
-                    </CardTitle>
-                    <CardDescription className="text-sm reliance-body-text flex-grow mb-4 leading-relaxed">
-                      €25 Million investment in revolutionary "Green Solar Wafer" technology that eliminates up to 40% silicon waste through epitaxial kerf-free manufacturing.
-                    </CardDescription>
-                    <div className="space-y-2 mb-4">
-                      <div className="flex items-center gap-2 text-sm reliance-body-text">
-                        <div className="w-2 h-2 reliance-bg-secondary rounded-full"></div>
-                        <span>Zero kerf waste technology</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm reliance-body-text">
-                        <div className="w-2 h-2 reliance-bg-secondary rounded-full"></div>
-                        <span>Massive cost reduction</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm reliance-body-text">
-                        <div className="w-2 h-2 reliance-bg-secondary rounded-full"></div>
-                        <span>Supply chain control</span>
-                      </div>
+                    <div className="text-center p-4 bg-white/10 rounded-lg backdrop-blur-sm border border-white/20">
+                      <div className="text-2xl font-bold text-white mb-2">Full</div>
+                      <div className="text-white/80 text-sm">Supply Control</div>
                     </div>
-                    <div className="flex flex-wrap gap-2">
-                      <Badge className="reliance-bg-secondary text-white">Zero Kerf</Badge>
-                      <Badge className="reliance-bg-primary text-white">Cost Leader</Badge>
-                      <Badge className="reliance-bg-secondary text-white">Green Tech</Badge>
-                    </div>
-                  </CardContent>
-                </Card>
-              </SwiperSlide>
+                  </div>
+                  
+                  <div className="flex flex-wrap gap-3 justify-center">
+                    <Badge className="bg-green-600 text-white px-4 py-2">Zero Kerf</Badge>
+                    <Badge className="bg-yellow-600 text-white px-4 py-2">Cost Leader</Badge>
+                    <Badge className="bg-green-600 text-white px-4 py-2">Green Tech</Badge>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </SwiperSlide>
 
-              {/* Market Entry & Scale - REC Solar */}
-              <SwiperSlide className="h-auto">
-                <Card className="h-full flex flex-col rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 ease-in-out transform hover:-translate-y-2 reliance-border border-2 reliance-bg">
-                  <CardHeader className="p-0 relative">
-                    <div className="w-full h-48 reliance-bg-secondary overflow-hidden flex items-center justify-center relative">
-                      <img 
-                        src={hjtTechnology} 
-                        alt="HJT Technology" 
-                        loading="lazy"
-                        className="w-full h-full object-cover transition-transform duration-300 opacity-80"
-                      />
-                      <div className="absolute inset-0 bg-black/30"></div>
+          {/* Market Entry & Scale - REC Solar */}
+          <SwiperSlide>
+            <div 
+              className="relative w-full h-screen flex items-center justify-center"
+              style={{
+                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url(${hjtTechnology})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            >
+              <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-white relative z-10">
+                <div className="max-w-4xl mx-auto">
+                  <div className="mb-6">
+                    <Badge className="mb-4 bg-white/20 text-white border-white/20 hover:bg-white/30">
+                      Market Entry & Scale
+                    </Badge>
+                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-4">
+                      <Globe className="h-8 w-8 text-white" />
                     </div>
-                    <div className="absolute top-4 left-4">
-                      <div className="px-3 py-1 text-xs font-semibold rounded-full shadow-sm reliance-bg reliance-text">
-                        Market Entry & Scale
-                      </div>
+                  </div>
+                  
+                  <h2 className="text-5xl md:text-6xl font-extrabold mb-6 text-white leading-tight">
+                    Strategic{" "}
+                    <span className="text-yellow-300">Achievements</span>
+                  </h2>
+                  
+                  <h3 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+                    REC Solar Holdings AS
+                  </h3>
+                  
+                  <p className="text-xl md:text-2xl mb-8 opacity-90 leading-relaxed">
+                    $771 Million acquisition of world-class Tier-1 brand with pioneering Heterojunction Technology and proven Alpha series panels among the world's most efficient.
+                  </p>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div className="text-center p-4 bg-white/10 rounded-lg backdrop-blur-sm border border-white/20">
+                      <div className="text-2xl font-bold text-white mb-2">Tier-1</div>
+                      <div className="text-white/80 text-sm">Global Brand</div>
                     </div>
-                    <div className="absolute top-4 right-4">
-                      <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
-                        <Globe className="h-6 w-6 text-white" />
-                      </div>
+                    <div className="text-center p-4 bg-white/10 rounded-lg backdrop-blur-sm border border-white/20">
+                      <div className="text-2xl font-bold text-white mb-2">HJT</div>
+                      <div className="text-white/80 text-sm">Technology</div>
                     </div>
-                  </CardHeader>
-                  <CardContent className="flex-grow flex flex-col p-6">
-                    <CardTitle className="text-2xl font-bold mb-2 reliance-text">
-                      REC Solar Holdings AS
-                    </CardTitle>
-                    <CardDescription className="text-sm reliance-body-text flex-grow mb-4 leading-relaxed">
-                      $771 Million acquisition of world-class Tier-1 brand with pioneering Heterojunction Technology and proven Alpha series panels among the world's most efficient.
-                    </CardDescription>
-                    <div className="space-y-2 mb-4">
-                      <div className="flex items-center gap-2 text-sm reliance-body-text">
-                        <div className="w-2 h-2 reliance-bg-secondary rounded-full"></div>
-                        <span>Tier-1 global brand</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm reliance-body-text">
-                        <div className="w-2 h-2 reliance-bg-secondary rounded-full"></div>
-                        <span>Advanced HJT technology</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm reliance-body-text">
-                        <div className="w-2 h-2 reliance-bg-secondary rounded-full"></div>
-                        <span>Global operations</span>
-                      </div>
+                    <div className="text-center p-4 bg-white/10 rounded-lg backdrop-blur-sm border border-white/20">
+                      <div className="text-2xl font-bold text-white mb-2">Global</div>
+                      <div className="text-white/80 text-sm">Operations</div>
                     </div>
-                    <div className="flex flex-wrap gap-2">
-                      <Badge className="reliance-bg-secondary text-white">HJT Pioneer</Badge>
-                      <Badge className="reliance-bg-primary text-white">Global Brand</Badge>
-                      <Badge className="reliance-bg-secondary text-white">Tier-1</Badge>
-                    </div>
-                  </CardContent>
-                </Card>
-              </SwiperSlide>
+                  </div>
+                  
+                  <div className="flex flex-wrap gap-3 justify-center">
+                    <Badge className="bg-green-600 text-white px-4 py-2">HJT Pioneer</Badge>
+                    <Badge className="bg-yellow-600 text-white px-4 py-2">Global Brand</Badge>
+                    <Badge className="bg-green-600 text-white px-4 py-2">Tier-1</Badge>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </SwiperSlide>
 
-              {/* Domestic Manufacturing - PLI Scheme */}
-              <SwiperSlide className="h-auto">
-                <Card className="h-full flex flex-col rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 ease-in-out transform hover:-translate-y-2 reliance-border border-2 reliance-bg">
-                  <CardHeader className="p-0 relative">
-                    <div className="w-full h-48 reliance-bg-primary overflow-hidden flex items-center justify-center relative">
-                      <img 
-                        src={relianceFacility} 
-                        alt="Reliance Facility" 
-                        loading="lazy"
-                        className="w-full h-full object-cover transition-transform duration-300 opacity-80"
-                      />
-                      <div className="absolute inset-0 bg-black/30"></div>
+          {/* Domestic Manufacturing - PLI Scheme */}
+          <SwiperSlide>
+            <div 
+              className="relative w-full h-screen flex items-center justify-center"
+              style={{
+                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url(${relianceFacility})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            >
+              <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-white relative z-10">
+                <div className="max-w-4xl mx-auto">
+                  <div className="mb-6">
+                    <Badge className="mb-4 bg-white/20 text-white border-white/20 hover:bg-white/30">
+                      Domestic Manufacturing
+                    </Badge>
+                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-4">
+                      <Factory className="h-8 w-8 text-white" />
                     </div>
-                    <div className="absolute top-4 left-4">
-                      <div className="px-3 py-1 text-xs font-semibold rounded-full shadow-sm reliance-bg reliance-text">
-                        Domestic Manufacturing
-                      </div>
+                  </div>
+                  
+                  <h2 className="text-5xl md:text-6xl font-extrabold mb-6 text-white leading-tight">
+                    Strategic{" "}
+                    <span className="text-yellow-300">Achievements</span>
+                  </h2>
+                  
+                  <h3 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+                    PLI Scheme Success
+                  </h3>
+                  
+                  <p className="text-xl md:text-2xl mb-8 opacity-90 leading-relaxed">
+                    4 GW integrated solar manufacturing facility at Jamnagar Green Energy Complex. Complete integration from polysilicon to modules with PLI incentives.
+                  </p>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div className="text-center p-4 bg-white/10 rounded-lg backdrop-blur-sm border border-white/20">
+                      <div className="text-2xl font-bold text-white mb-2">4 GW</div>
+                      <div className="text-white/80 text-sm">Annual Capacity</div>
                     </div>
-                    <div className="absolute top-4 right-4">
-                      <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
-                        <Factory className="h-6 w-6 text-white" />
-                      </div>
+                    <div className="text-center p-4 bg-white/10 rounded-lg backdrop-blur-sm border border-white/20">
+                      <div className="text-2xl font-bold text-white mb-2">Full</div>
+                      <div className="text-white/80 text-sm">Integration</div>
                     </div>
-                  </CardHeader>
-                  <CardContent className="flex-grow flex flex-col p-6">
-                    <CardTitle className="text-2xl font-bold mb-2 reliance-text">
-                      PLI Scheme Success
-                    </CardTitle>
-                    <CardDescription className="text-sm reliance-body-text flex-grow mb-4 leading-relaxed">
-                      4 GW integrated solar manufacturing facility at Jamnagar Green Energy Complex. Complete integration from polysilicon to modules with PLI incentives.
-                    </CardDescription>
-                    <div className="space-y-2 mb-4">
-                      <div className="flex items-center gap-2 text-sm reliance-body-text">
-                        <div className="w-2 h-2 reliance-bg-secondary rounded-full"></div>
-                        <span>4 GW annual capacity</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm reliance-body-text">
-                        <div className="w-2 h-2 reliance-bg-secondary rounded-full"></div>
-                        <span>Complete integration</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm reliance-body-text">
-                        <div className="w-2 h-2 reliance-bg-secondary rounded-full"></div>
-                        <span>Government support</span>
-                      </div>
+                    <div className="text-center p-4 bg-white/10 rounded-lg backdrop-blur-sm border border-white/20">
+                      <div className="text-2xl font-bold text-white mb-2">PLI</div>
+                      <div className="text-white/80 text-sm">Support</div>
                     </div>
-                    <div className="flex flex-wrap gap-2">
-                      <Badge className="reliance-bg-primary text-white">4GW Capacity</Badge>
-                      <Badge className="reliance-bg-secondary text-white">Full Integration</Badge>
-                      <Badge className="reliance-bg-primary text-white">PLI Incentives</Badge>
-                    </div>
-                  </CardContent>
-                </Card>
-              </SwiperSlide>
-
-              <SwiperNavButtons />
-            </Swiper>
-          </div>
-
-        </div>
+                  </div>
+                  
+                  <div className="flex flex-wrap gap-3 justify-center">
+                    <Badge className="bg-yellow-600 text-white px-4 py-2">4GW Capacity</Badge>
+                    <Badge className="bg-green-600 text-white px-4 py-2">Full Integration</Badge>
+                    <Badge className="bg-yellow-600 text-white px-4 py-2">PLI Incentives</Badge>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </SwiperSlide>
+        </Swiper>
       </section>
 
       {/* HJT Technology Deep Dive */}
