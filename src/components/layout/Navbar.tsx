@@ -110,38 +110,8 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Top Social Bar - Only on larger screens */}
-      <div className="hidden xl:block fixed top-0 left-0 right-0 z-40 bg-gradient-primary/95 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 py-2">
-          <div className="flex items-center justify-between text-white text-sm">
-            <div className="flex items-center space-x-4">
-              <span>📞 +91 98765 43210</span>
-              <span>✉️ info@arpitsolar.com</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <span className="mr-2">Follow us:</span>
-              {socialLinks.map((social) => {
-                const IconComponent = social.icon;
-                return (
-                  <Button
-                    key={social.name}
-                    variant="ghost"
-                    size="icon"
-                    className="w-7 h-7 text-white/80 hover:text-white hover:bg-white/10"
-                    onClick={() => window.open(social.url, '_blank')}
-                    aria-label={`Visit our ${social.name} page`}
-                  >
-                    <IconComponent />
-                  </Button>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Main Navigation */}
-      <div className={`fixed ${scrolled ? 'top-0 xl:top-10' : 'top-4 xl:top-14'} left-0 right-0 z-50 transition-all duration-300`}>
+      <div className={`fixed ${scrolled ? 'top-0' : 'top-4'} left-0 right-0 z-50 transition-all duration-300`}>
         <div className="flex items-center justify-center px-4">
           <div className="flex items-center gap-x-4 w-full max-w-7xl">
             {/* Logo */}
@@ -244,6 +214,24 @@ const Navbar = () => {
 
                   {/* Right Side Actions */}
                   <div className="flex items-center space-x-2">
+                    {/* Social Media Icons */}
+                    <div className="hidden md:flex items-center space-x-1 mr-2">
+                      {socialLinks.map((social) => {
+                        const IconComponent = social.icon;
+                        return (
+                          <Button
+                            key={social.name}
+                            variant="ghost"
+                            size="icon"
+                            className="w-8 h-8 text-white/80 hover:text-white hover:bg-white/10"
+                            onClick={() => window.open(social.url, '_blank')}
+                            aria-label={`Visit our ${social.name} page`}
+                          >
+                            <IconComponent />
+                          </Button>
+                        );
+                      })}
+                    </div>
                     
                     <Button
                       variant="ghost"
