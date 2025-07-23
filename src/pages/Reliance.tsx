@@ -366,82 +366,116 @@ const Reliance = () => {
 
           {/* Grid Tie System - HJT Modules */}
           <div className="mb-16">
-            <h3 className="text-2xl font-bold reliance-text mb-6">Grid Tie with Non DCR RIL 690 Wp HJT Modules</h3>
+            <h3 className="text-2xl font-bold reliance-text mb-6">Grid Tie with Non DCR RIL 690 Wp HJT Modules (Excluding GST & Net Metering)</h3>
             <div className="bg-white rounded-lg shadow-lg overflow-hidden reliance-border border">
               <div className="overflow-x-auto">
-                <table className="w-full text-sm">
+                <table className="w-full text-xs">
                   <thead className="reliance-bg-primary text-white">
                     <tr>
-                      <th className="px-3 py-3 text-left">Si No.</th>
-                      <th className="px-3 py-3 text-left">System Size (kWp)</th>
-                      <th className="px-3 py-3 text-left">Modules</th>
-                      <th className="px-3 py-3 text-left">Inverter (kW)</th>
-                      <th className="px-3 py-3 text-left">Phase</th>
-                      <th className="px-3 py-3 text-left">HDG Elevated</th>
-                      <th className="px-3 py-3 text-left">RCC Mount</th>
-                      <th className="px-3 py-3 text-left">No MMS</th>
+                      <th className="px-2 py-2 text-left">SI No.</th>
+                      <th className="px-2 py-2 text-left">System Size (kWp)</th>
+                      <th className="px-2 py-2 text-left">Inverter Capacity (kW)</th>
+                      <th className="px-2 py-2 text-left">No of Modules</th>
+                      <th className="px-2 py-2 text-left">Phase</th>
+                      <th className="px-2 py-2 text-left">Final Pricing/watt (₹)</th>
+                      <th className="px-2 py-2 text-left">Short Rail for tin Shed (₹)</th>
+                      <th className="px-2 py-2 text-left">Final Pricing/watt (₹)</th>
+                      <th className="px-2 py-2 text-left">Price HDG Elevated for Rcc (₹)</th>
+                      <th className="px-2 py-2 text-left">Final Pricing/watt (₹)</th>
+                      <th className="px-2 py-2 text-left">Price Without MMS NOC required (₹)</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr className="border-b border-gray-100">
-                      <td className="px-3 py-3 reliance-body-text">1</td>
-                      <td className="px-3 py-3 font-semibold reliance-text">19.32</td>
-                      <td className="px-3 py-3 reliance-body-text">28</td>
-                      <td className="px-3 py-3 reliance-body-text">15</td>
-                      <td className="px-3 py-3 reliance-body-text">Three</td>
-                      <td className="px-3 py-3 font-bold text-green-600">₹6,55,060</td>
-                      <td className="px-3 py-3 font-bold text-blue-600">₹7,51,660</td>
-                      <td className="px-3 py-3 font-bold reliance-primary">₹5,19,560</td>
+                      <td className="px-2 py-2 reliance-body-text">1</td>
+                      <td className="px-2 py-2 font-semibold reliance-text">19.32</td>
+                      <td className="px-2 py-2 reliance-body-text">15</td>
+                      <td className="px-2 py-2 reliance-body-text">28</td>
+                      <td className="px-2 py-2 reliance-body-text">Three</td>
+                      <td className="px-2 py-2 font-semibold text-green-600">33.91</td>
+                      <td className="px-2 py-2 font-bold text-green-600">655060</td>
+                      <td className="px-2 py-2 font-semibold text-blue-600">38.91</td>
+                      <td className="px-2 py-2 font-bold text-blue-600">751660</td>
+                      <td className="px-2 py-2 font-semibold reliance-primary">32.07</td>
+                      <td className="px-2 py-2 font-bold reliance-primary">619560</td>
                     </tr>
                     <tr className="border-b border-gray-100">
-                      <td className="px-3 py-3 reliance-body-text">2</td>
-                      <td className="px-3 py-3 font-semibold reliance-text">33.12</td>
-                      <td className="px-3 py-3 reliance-body-text">48</td>
-                      <td className="px-3 py-3 reliance-body-text">25</td>
-                      <td className="px-3 py-3 reliance-body-text">Three</td>
-                      <td className="px-3 py-3 font-bold text-green-600">₹10,90,460</td>
-                      <td className="px-3 py-3 font-bold text-blue-600">₹12,56,060</td>
-                      <td className="px-3 py-3 font-bold reliance-primary">₹10,29,460</td>
+                      <td className="px-2 py-2 reliance-body-text">2</td>
+                      <td className="px-2 py-2 font-semibold reliance-text">33.12</td>
+                      <td className="px-2 py-2 reliance-body-text">25</td>
+                      <td className="px-2 py-2 reliance-body-text">48</td>
+                      <td className="px-2 py-2 reliance-body-text">Three</td>
+                      <td className="px-2 py-2 font-semibold text-green-600">32.92</td>
+                      <td className="px-2 py-2 font-bold text-green-600">1090460</td>
+                      <td className="px-2 py-2 font-semibold text-blue-600">37.92</td>
+                      <td className="px-2 py-2 font-bold text-blue-600">1256060</td>
+                      <td className="px-2 py-2 font-semibold reliance-primary">31.08</td>
+                      <td className="px-2 py-2 font-bold reliance-primary">1029460</td>
                     </tr>
                     <tr className="border-b border-gray-100">
-                      <td className="px-3 py-3 reliance-body-text">3</td>
-                      <td className="px-3 py-3 font-semibold reliance-text">52.44</td>
-                      <td className="px-3 py-3 reliance-body-text">76</td>
-                      <td className="px-3 py-3 reliance-body-text">40</td>
-                      <td className="px-3 py-3 reliance-body-text">Three</td>
-                      <td className="px-3 py-3 font-bold text-green-600">₹16,76,180</td>
-                      <td className="px-3 py-3 font-bold text-blue-600">₹19,38,380</td>
-                      <td className="px-3 py-3 font-bold reliance-primary">₹15,79,480</td>
+                      <td className="px-2 py-2 reliance-body-text">3</td>
+                      <td className="px-2 py-2 font-semibold reliance-text">52.44</td>
+                      <td className="px-2 py-2 reliance-body-text">40</td>
+                      <td className="px-2 py-2 reliance-body-text">76</td>
+                      <td className="px-2 py-2 reliance-body-text">Three</td>
+                      <td className="px-2 py-2 font-semibold text-green-600">31.96</td>
+                      <td className="px-2 py-2 font-bold text-green-600">1676180</td>
+                      <td className="px-2 py-2 font-semibold text-blue-600">36.96</td>
+                      <td className="px-2 py-2 font-bold text-blue-600">1938380</td>
+                      <td className="px-2 py-2 font-semibold reliance-primary">30.12</td>
+                      <td className="px-2 py-2 font-bold reliance-primary">1579480</td>
                     </tr>
                     <tr className="border-b border-gray-100">
-                      <td className="px-3 py-3 reliance-body-text">4</td>
-                      <td className="px-3 py-3 font-semibold reliance-text">65.55</td>
-                      <td className="px-3 py-3 reliance-body-text">95</td>
-                      <td className="px-3 py-3 reliance-body-text">50</td>
-                      <td className="px-3 py-3 reliance-body-text">Three</td>
-                      <td className="px-3 py-3 font-bold text-green-600">₹20,47,350</td>
-                      <td className="px-3 py-3 font-bold text-blue-600">₹23,75,100</td>
-                      <td className="px-3 py-3 font-bold reliance-primary">₹19,26,550</td>
+                      <td className="px-2 py-2 reliance-body-text">4</td>
+                      <td className="px-2 py-2 font-semibold reliance-text">65.55</td>
+                      <td className="px-2 py-2 reliance-body-text">50</td>
+                      <td className="px-2 py-2 reliance-body-text">95</td>
+                      <td className="px-2 py-2 reliance-body-text">Three</td>
+                      <td className="px-2 py-2 font-semibold text-green-600">31.23</td>
+                      <td className="px-2 py-2 font-bold text-green-600">2047350</td>
+                      <td className="px-2 py-2 font-semibold text-blue-600">36.23</td>
+                      <td className="px-2 py-2 font-bold text-blue-600">2375100</td>
+                      <td className="px-2 py-2 font-semibold reliance-primary">29.39</td>
+                      <td className="px-2 py-2 font-bold reliance-primary">1926550</td>
                     </tr>
                     <tr className="border-b border-gray-100">
-                      <td className="px-3 py-3 reliance-body-text">5</td>
-                      <td className="px-3 py-3 font-semibold reliance-text">105.57</td>
-                      <td className="px-3 py-3 reliance-body-text">153</td>
-                      <td className="px-3 py-3 reliance-body-text">80</td>
-                      <td className="px-3 py-3 reliance-body-text">Three</td>
-                      <td className="px-3 py-3 font-bold text-green-600">₹31,90,020</td>
-                      <td className="px-3 py-3 font-bold text-blue-600">₹37,17,870</td>
-                      <td className="px-3 py-3 font-bold reliance-primary">₹29,95,520</td>
+                      <td className="px-2 py-2 reliance-body-text">5</td>
+                      <td className="px-2 py-2 font-semibold reliance-text">105.57</td>
+                      <td className="px-2 py-2 reliance-body-text">80</td>
+                      <td className="px-2 py-2 reliance-body-text">153</td>
+                      <td className="px-2 py-2 reliance-body-text">Three</td>
+                      <td className="px-2 py-2 font-semibold text-green-600">30.22</td>
+                      <td className="px-2 py-2 font-bold text-green-600">3190020</td>
+                      <td className="px-2 py-2 font-semibold text-blue-600">35.22</td>
+                      <td className="px-2 py-2 font-bold text-blue-600">3717870</td>
+                      <td className="px-2 py-2 font-semibold reliance-primary">28.37</td>
+                      <td className="px-2 py-2 font-bold reliance-primary">2995520</td>
+                    </tr>
+                    <tr className="border-b border-gray-100">
+                      <td className="px-2 py-2 reliance-body-text">6</td>
+                      <td className="px-2 py-2 font-semibold reliance-text">124.2</td>
+                      <td className="px-2 py-2 reliance-body-text">100</td>
+                      <td className="px-2 py-2 reliance-body-text">180</td>
+                      <td className="px-2 py-2 reliance-body-text">Three</td>
+                      <td className="px-2 py-2 font-semibold text-green-600">30.04</td>
+                      <td className="px-2 py-2 font-bold text-green-600">3731500</td>
+                      <td className="px-2 py-2 font-semibold text-blue-600">35.04</td>
+                      <td className="px-2 py-2 font-bold text-blue-600">4352500</td>
+                      <td className="px-2 py-2 font-semibold reliance-primary">28.21</td>
+                      <td className="px-2 py-2 font-bold reliance-primary">3503200</td>
                     </tr>
                     <tr>
-                      <td className="px-3 py-3 reliance-body-text">6</td>
-                      <td className="px-3 py-3 font-semibold reliance-text">124.2</td>
-                      <td className="px-3 py-3 reliance-body-text">180</td>
-                      <td className="px-3 py-3 reliance-body-text">100</td>
-                      <td className="px-3 py-3 reliance-body-text">Three</td>
-                      <td className="px-3 py-3 font-bold text-green-600">₹37,31,500</td>
-                      <td className="px-3 py-3 font-bold text-blue-600">₹43,52,500</td>
-                      <td className="px-3 py-3 font-bold reliance-primary">₹35,03,200</td>
+                      <td className="px-2 py-2 reliance-body-text">7</td>
+                      <td className="px-2 py-2 font-semibold reliance-text">165.6</td>
+                      <td className="px-2 py-2 reliance-body-text">125</td>
+                      <td className="px-2 py-2 reliance-body-text">240</td>
+                      <td className="px-2 py-2 reliance-body-text">Three</td>
+                      <td className="px-2 py-2 font-semibold text-green-600">29.46</td>
+                      <td className="px-2 py-2 font-bold text-green-600">4878300</td>
+                      <td className="px-2 py-2 font-semibold text-blue-600">34.46</td>
+                      <td className="px-2 py-2 font-bold text-blue-600">5706300</td>
+                      <td className="px-2 py-2 font-semibold reliance-primary">27.62</td>
+                      <td className="px-2 py-2 font-bold reliance-primary">4573400</td>
                     </tr>
                   </tbody>
                 </table>
