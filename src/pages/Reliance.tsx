@@ -77,7 +77,7 @@ const Reliance = () => {
               <Button 
                 size="lg" 
                 onClick={() => setQuoteFormOpen(true)}
-                className="bg-transparent border-2 border-[#BFA161] text-[#BFA161] hover:bg-[#BFA161]/10 shadow-xl backdrop-blur-sm group"
+                className="bg-transparent border-2 reliance-border reliance-primary hover:reliance-hover shadow-xl backdrop-blur-sm group"
               >
                 <Quote className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
                 Get HJT Solar Quote
@@ -202,7 +202,7 @@ const Reliance = () => {
         <div className="container px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <Badge className="mb-4 bg-[#BFA161] text-white border-transparent">
+              <Badge className="mb-4 reliance-bg-primary text-white border-transparent">
                 Advanced Technology
               </Badge>
               <h2 className="text-4xl font-bold mb-6 reliance-text">
@@ -245,7 +245,7 @@ const Reliance = () => {
                 </div>
               </div>
 
-              <Button size="lg" className="bg-transparent border-2 border-[#BFA161] text-[#BFA161] hover:bg-[#BFA161]/10">
+              <Button size="lg" className="bg-transparent border-2 reliance-border reliance-primary hover:reliance-hover">
                 Learn More About HJT <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
@@ -278,7 +278,7 @@ const Reliance = () => {
       <section className="py-20 reliance-bg animate-on-scroll">
         <div className="container px-4">
           <div className="text-center mb-16">
-            <Badge className="mb-4 bg-[#BFA161] text-white border-transparent">
+            <Badge className="mb-4 reliance-bg-primary text-white border-transparent">
               Product Catalog
             </Badge>
             <h2 className="text-4xl font-bold mb-4 reliance-text">Reliance Solar System Configurations</h2>
@@ -294,7 +294,7 @@ const Reliance = () => {
             <Button 
               size="lg" 
               onClick={() => setQuoteFormOpen(true)}
-              className="bg-transparent border-2 border-[#BFA161] text-[#BFA161] hover:bg-[#BFA161]/10 shadow-lg"
+              className="bg-transparent border-2 reliance-border reliance-primary hover:reliance-hover shadow-lg"
             >
               <Quote className="mr-2 h-5 w-5" />
               Get Custom Quote for These Systems
@@ -367,7 +367,7 @@ const Reliance = () => {
             <Button 
               size="lg" 
               onClick={() => setQuoteFormOpen(true)}
-              className="bg-white text-[#BFA161] hover:bg-white/90 font-semibold shadow-lg group border-2 border-[#BFA161]"
+              className="bg-white reliance-primary hover:bg-white/90 font-semibold shadow-lg group border-2 reliance-border"
             >
               <MessageSquare className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
               Get Free Quote Now
@@ -397,71 +397,71 @@ const Reliance = () => {
         <div className="container px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Terms and Conditions</h2>
-            <div className="w-24 h-1 bg-[#BFA161] mx-auto"></div>
+            <div className="w-24 h-1 reliance-bg-primary mx-auto"></div>
           </div>
           
           <div className="max-w-4xl mx-auto space-y-6 text-sm leading-relaxed">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">1.</span>
+                  <span className="reliance-primary font-bold min-w-[2rem]">1.</span>
                   <p>This pricing is effective from 22nd May 2025 to 30th June 2025 subject to material availability.</p>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">2.</span>
+                  <span className="reliance-primary font-bold min-w-[2rem]">2.</span>
                   <p>All prices are subject to change without notice and are not guaranteed, except that prices for an order that have been accepted by RIL</p>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">3.</span>
+                  <span className="reliance-primary font-bold min-w-[2rem]">3.</span>
                   <p>Published prices are basic and are exclusive of taxes. Goods and Services Tax (GST) as applicable will be extra.</p>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">4.</span>
+                  <span className="reliance-primary font-bold min-w-[2rem]">4.</span>
                   <p>Above prices are Ex-Work prices</p>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">5.</span>
+                  <span className="reliance-primary font-bold min-w-[2rem]">5.</span>
                   <p>Full payment (100%) is required in advance upon placing the order.</p>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">6.</span>
+                  <span className="reliance-primary font-bold min-w-[2rem]">6.</span>
                   <p>Orders to be placed on specified Purchase Order template issued by RIL in favour of Reliance Industries Limited.</p>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">7.</span>
+                  <span className="reliance-primary font-bold min-w-[2rem]">7.</span>
                   <p>NDCR Modules supplied will have a capacity of 690-720 Wp subject to availability.</p>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">8.</span>
+                  <span className="reliance-primary font-bold min-w-[2rem]">8.</span>
                   <p>Delivery of material will occur within approx. 5 weeks on receipt of accepted purchase order and full payment, depending on distance and availability of material.</p>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">9.</span>
+                  <span className="reliance-primary font-bold min-w-[2rem]">9.</span>
                   <p>Materials not supplied directly by RIL must be sourced from approved manufacturers and specifications as shared by RIL.</p>
                 </div>
               </div>
               
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">10.</span>
+                  <span className="reliance-primary font-bold min-w-[2rem]">10.</span>
                   <p>Warranty terms and conditions as specified in the warranty certificate issued on QA check.</p>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">11.</span>
+                  <span className="reliance-primary font-bold min-w-[2rem]">11.</span>
                   <p>Before installation of the system at the customer premises, site survey form, site layout and array layout supported with photographs must be approved by RIL. Any modifications/changes suggested by RIL shall have to be followed and implemented mandatorily, without which warranty certificate will not be applicable.</p>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">12.</span>
+                  <span className="reliance-primary font-bold min-w-[2rem]">12.</span>
                   <div>
                     <p className="mb-2">Installation and commissioning of the system are the responsibility of the Channel Partner, following RIL guidelines. All installed systems must be offered for RIL quality inspection for issuing the warranty certification with the specified completed installation & commissioning checklist and photographs.</p>
                     <p className="italic">Proper personal protective equipment (PPE) and safety protocols must be followed during installation.</p>
@@ -469,22 +469,22 @@ const Reliance = () => {
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">13.</span>
+                  <span className="reliance-primary font-bold min-w-[2rem]">13.</span>
                   <p>All site-related activities, including net metering and DISCOM synchronization approvals, are the responsibility of the Channel Partners.</p>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">14.</span>
+                  <span className="reliance-primary font-bold min-w-[2rem]">14.</span>
                   <p>Cancellation of any previous orders will attract 2% of Purchase order value.</p>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">15.</span>
+                  <span className="reliance-primary font-bold min-w-[2rem]">15.</span>
                   <p>Any information, suggestions, or ideas transmitted by RIL in connection with this price list are secret or confidential or submitted in confidence to Channel Partner, except as may be specifically agreed to in writing by Channel Partner.</p>
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <span className="text-[#BFA161] font-bold min-w-[2rem]">16.</span>
+                  <span className="reliance-primary font-bold min-w-[2rem]">16.</span>
                   <p>All terms and conditions will be valid as per the Channel Partner Agreement.</p>
                 </div>
               </div>
