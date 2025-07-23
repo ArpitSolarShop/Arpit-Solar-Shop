@@ -98,101 +98,217 @@ const Reliance = () => {
         <div className="container px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 reliance-text">Strategic Achievements</h2>
-            <p className="text-xl reliance-body-text max-w-3xl mx-auto">
-              Three transformative investments that position Reliance at the forefront of global solar technology
+            <p className="text-xl reliance-body-text max-w-4xl mx-auto">
+              Three transformative strategic moves in 2021 that positioned Reliance at the forefront of global solar innovation: 
+              <span className="font-semibold reliance-primary"> Acquire • Innovate • Build</span>
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* NexWafe Investment */}
-            <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 reliance-hover bg-white border reliance-border">
+          {/* Strategy Overview */}
+          <div className="mb-16 text-center">
+            <div className="inline-flex items-center gap-4 bg-white rounded-full px-8 py-4 shadow-lg border reliance-border">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 reliance-bg-primary rounded-full"></div>
+                <span className="font-semibold reliance-text">Acquire (REC)</span>
+              </div>
+              <ArrowRight className="h-4 w-4 reliance-primary" />
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 reliance-bg-primary rounded-full"></div>
+                <span className="font-semibold reliance-text">Innovate (NexWafe)</span>
+              </div>
+              <ArrowRight className="h-4 w-4 reliance-primary" />
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 reliance-bg-primary rounded-full"></div>
+                <span className="font-semibold reliance-text">Build (PLI Scheme)</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Technology Acquisition - NexWafe */}
+            <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 reliance-hover bg-white border reliance-border h-full">
               <CardHeader>
                 <div className="w-12 h-12 reliance-bg-primary rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <Zap className="h-6 w-6 text-white" />
                 </div>
                 <CardTitle className="text-2xl group-hover:reliance-primary transition-colors reliance-text">
-                  €25M NexWafe Investment
+                  Technology Acquisition
                 </CardTitle>
-                <CardDescription className="reliance-body-text">Revolutionary Green Solar Wafer Technology</CardDescription>
+                <CardDescription className="reliance-body-text font-semibold text-lg">
+                  €25 Million Investment in NexWafe GmbH
+                </CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="aspect-video mb-4 rounded-lg overflow-hidden">
+              <CardContent className="space-y-4">
+                <div className="aspect-video rounded-lg overflow-hidden">
                   <img 
                     src={nexwafeTechnology} 
                     alt="NexWafe Technology" 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <p className="text-sm reliance-body-text mb-4">
-                  Kerf-free wafer manufacturing eliminates 40% silicon waste, dramatically reducing costs and environmental impact.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant="secondary">No Kerf Waste</Badge>
-                  <Badge variant="secondary">Cost Reduction</Badge>
-                  <Badge variant="secondary">Green Tech</Badge>
+                
+                <div className="space-y-3">
+                  <h4 className="font-semibold reliance-text">Revolutionary "Green Solar Wafer" Technology</h4>
+                  <p className="text-sm reliance-body-text">
+                    NexWafe's pioneering epitaxial kerf-free wafer manufacturing process eliminates up to 40% silicon waste, 
+                    dramatically reducing costs and environmental impact.
+                  </p>
+                  
+                  <div className="space-y-2">
+                    <div className="flex items-start gap-2">
+                      <div className="w-2 h-2 reliance-bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                      <span className="text-sm reliance-body-text"><strong>Massive Cost Reduction:</strong> Silicon is the most expensive raw material - kerf-free technology creates competitive advantage</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <div className="w-2 h-2 reliance-bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                      <span className="text-sm reliance-body-text"><strong>Higher Efficiency:</strong> Ultra-thin, high-quality wafers perfect for HJT cells</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <div className="w-2 h-2 reliance-bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                      <span className="text-sm reliance-body-text"><strong>Supply Chain Control:</strong> Proprietary technology at critical manufacturing stage</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="flex flex-wrap gap-2 pt-2">
+                  <Badge variant="secondary">Zero Kerf Waste</Badge>
+                  <Badge variant="secondary">Cost Leadership</Badge>
+                  <Badge variant="secondary">Green Manufacturing</Badge>
                 </div>
               </CardContent>
             </Card>
 
-            {/* REC Solar Acquisition */}
-            <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 reliance-hover bg-white border reliance-border">
+            {/* Market Entry & Scale - REC Solar */}
+            <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 reliance-hover bg-white border reliance-border h-full">
               <CardHeader>
                 <div className="w-12 h-12 reliance-bg-primary rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <Globe className="h-6 w-6 text-white" />
                 </div>
                 <CardTitle className="text-2xl group-hover:reliance-primary transition-colors reliance-text">
-                  $771M REC Solar Acquisition
+                  Market Entry & Scale
                 </CardTitle>
-                <CardDescription className="reliance-body-text">World-Class HJT Technology & Global Brand</CardDescription>
+                <CardDescription className="reliance-body-text font-semibold text-lg">
+                  $771 Million Acquisition of REC Solar Holdings AS
+                </CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="aspect-video mb-4 rounded-lg overflow-hidden">
+              <CardContent className="space-y-4">
+                <div className="aspect-video rounded-lg overflow-hidden">
                   <img 
                     src={hjtTechnology} 
                     alt="HJT Technology" 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <p className="text-sm reliance-body-text mb-4">
-                  Advanced Heterojunction Technology delivers superior efficiency and performance in REC's Alpha series panels.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant="secondary">HJT Technology</Badge>
+                
+                <div className="space-y-3">
+                  <h4 className="font-semibold reliance-text">World-Class Brand & Advanced HJT Technology</h4>
+                  <p className="text-sm reliance-body-text">
+                    Founded in Norway (1996), REC is a trusted Tier-1 global brand with pioneering Heterojunction Technology 
+                    and proven Alpha series panels among the world's most efficient.
+                  </p>
+                  
+                  <div className="space-y-2">
+                    <div className="flex items-start gap-2">
+                      <div className="w-2 h-2 reliance-bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                      <span className="text-sm reliance-body-text"><strong>Tier-1 Global Brand:</strong> Bankable brand in US, Europe, Australia markets</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <div className="w-2 h-2 reliance-bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                      <span className="text-sm reliance-body-text"><strong>Advanced HJT Technology:</strong> Pioneer in Heterojunction with market-leading efficiency</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <div className="w-2 h-2 reliance-bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                      <span className="text-sm reliance-body-text"><strong>Global Operations:</strong> Manufacturing facilities in Singapore, Norway with worldwide distribution</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="flex flex-wrap gap-2 pt-2">
+                  <Badge variant="secondary">HJT Pioneer</Badge>
                   <Badge variant="secondary">Global Brand</Badge>
-                  <Badge variant="secondary">Tier-1 Panels</Badge>
+                  <Badge variant="secondary">Vertical Integration</Badge>
                 </div>
               </CardContent>
             </Card>
 
-            {/* PLI Scheme */}
-            <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 reliance-hover bg-white border reliance-border">
+            {/* Domestic Manufacturing - PLI Scheme */}
+            <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 reliance-hover bg-white border reliance-border h-full">
               <CardHeader>
                 <div className="w-12 h-12 reliance-bg-primary rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <Factory className="h-6 w-6 text-white" />
                 </div>
                 <CardTitle className="text-2xl group-hover:reliance-primary transition-colors reliance-text">
-                  4GW Integrated Facility
+                  Domestic Manufacturing Push
                 </CardTitle>
-                <CardDescription className="reliance-body-text">IREDA PLI Scheme Manufacturing Hub</CardDescription>
+                <CardDescription className="reliance-body-text font-semibold text-lg">
+                  4 GW Integrated Solar Manufacturing Facility
+                </CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="aspect-video mb-4 rounded-lg overflow-hidden">
+              <CardContent className="space-y-4">
+                <div className="aspect-video rounded-lg overflow-hidden">
                   <img 
                     src={relianceFacility} 
                     alt="Reliance Facility" 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                <p className="text-sm reliance-body-text mb-4">
-                  End-to-end solar manufacturing from polysilicon to finished modules at Jamnagar Green Energy Complex.
-                </p>
-                <div className="flex flex-wrap gap-2">
+                
+                <div className="space-y-3">
+                  <h4 className="font-semibold reliance-text">IREDA PLI Scheme Success</h4>
+                  <p className="text-sm reliance-body-text">
+                    Reliance New Energy Solar Ltd (RNESL) secured Government of India PLI incentives for a massive 
+                    integrated solar manufacturing facility at Jamnagar Green Energy Complex.
+                  </p>
+                  
+                  <div className="space-y-2">
+                    <div className="flex items-start gap-2">
+                      <div className="w-2 h-2 reliance-bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                      <span className="text-sm reliance-body-text"><strong>Complete Integration:</strong> Polysilicon → Ingots → Wafers → Cells → Modules</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <div className="w-2 h-2 reliance-bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                      <span className="text-sm reliance-body-text"><strong>Government Support:</strong> PLI scheme reduces India's dependence on Chinese imports</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <div className="w-2 h-2 reliance-bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                      <span className="text-sm reliance-body-text"><strong>Giga-Scale Ambition:</strong> 4 GW annual capacity with REC expertise and NexWafe technology</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="flex flex-wrap gap-2 pt-2">
                   <Badge variant="secondary">4GW Capacity</Badge>
-                  <Badge variant="secondary">Vertical Integration</Badge>
-                  <Badge variant="secondary">PLI Support</Badge>
+                  <Badge variant="secondary">Full Integration</Badge>
+                  <Badge variant="secondary">PLI Incentives</Badge>
                 </div>
               </CardContent>
             </Card>
+          </div>
+
+          {/* Strategy Synthesis */}
+          <div className="mt-16 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 border reliance-border">
+            <div className="text-center mb-6">
+              <h3 className="text-2xl font-bold reliance-text mb-3">The Complete Strategy</h3>
+              <p className="text-lg reliance-body-text max-w-4xl mx-auto">
+                These three strategic moves form a single, cohesive strategy to control the entire solar value chain: 
+                from raw materials and cutting-edge technology to global sales and manufacturing at scale.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border reliance-border">
+                <h4 className="font-bold reliance-primary text-lg mb-2">1. Acquire (REC)</h4>
+                <p className="text-sm reliance-body-text">Instantly gain world-class brand, HJT technology, and global market access</p>
+              </div>
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border reliance-border">
+                <h4 className="font-bold reliance-primary text-lg mb-2">2. Innovate (NexWafe)</h4>
+                <p className="text-sm reliance-body-text">Invest in future-proof technology to leapfrog competition on cost and efficiency</p>
+              </div>
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border reliance-border">
+                <h4 className="font-bold reliance-primary text-lg mb-2">3. Build (PLI Scheme)</h4>
+                <p className="text-sm reliance-body-text">Leverage acquired expertise and innovative technology for giga-scale manufacturing</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
