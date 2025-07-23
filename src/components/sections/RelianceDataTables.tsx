@@ -254,7 +254,7 @@ const LargeSystemTable: React.FC = () => {
   return (
     <Box mb={4}>
       <Typography variant="h5" component="h3" gutterBottom color="primary" fontWeight="bold">
-        Large Scale Solar Systems
+        Grid Tie with Non DCR RIL 690 Wp HJT Modules (Excluding GST& Net Metering)
       </Typography>
       <TableContainer component={Paper} elevation={3}>
         <Table size="small">
