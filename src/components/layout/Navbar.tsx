@@ -16,7 +16,7 @@ import {
   Facebook,
   Linkedin,
   Instagram,
-  
+  Home,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -46,6 +46,7 @@ const Navbar = () => {
   };
 
   const navigationItems = [
+    { name: "Home", icon: Home, href: "/" },
     {
       name: "Solutions",
       icon: PackageCheck,
@@ -142,30 +143,29 @@ const Navbar = () => {
       {/* Main Navigation */}
       <div className={`fixed ${scrolled ? 'top-0 xl:top-10' : 'top-4 xl:top-14'} left-0 right-0 z-50 transition-all duration-300`}>
         <div className="flex items-center justify-center px-4">
-          <div className="w-full max-w-7xl">
+          <div className="flex items-center gap-x-4 w-full max-w-7xl">
+            {/* Logo */}
+            <Link
+              to="/"
+              className={`bg-white/20 backdrop-blur-md border border-white/20 rounded-full p-2 transition-all duration-300 hover:bg-white/30 ${
+                scrolled ? 'scale-90' : 'scale-100'
+              }`}
+            >
+              <img
+                src="/logo.png"
+                alt="Arpit Solar Logo"
+                className="w-12 h-12 object-contain rounded-full"
+              />
+            </Link>
+
             {/* Navigation Bar */}
-            <nav className="w-full">
+            <nav className="flex-1">
               <div className={`bg-black/20 backdrop-blur-lg border border-white/10 rounded-full px-6 py-3 shadow-xl transition-all duration-300 ${
                 scrolled ? 'bg-black/40' : 'bg-black/20'
               }`}>
                 {/* Desktop Navigation */}
                 <div className="hidden lg:flex items-center justify-between">
                   <div className="flex items-center space-x-1">
-                    {/* Logo as first navigation item */}
-                    <Link
-                      to="/"
-                      className={`flex items-center gap-1 px-3 py-2 rounded-full text-sm font-medium transition-all duration-200 hover:bg-white/10 ${
-                        isActivePath("/")
-                          ? "bg-white/10"
-                          : ""
-                      }`}
-                    >
-                      <img
-                        src="/logo.png"
-                        alt="Arpit Solar Logo"
-                        className="w-8 h-8 object-contain rounded-full"
-                      />
-                    </Link>
                     {navigationItems.map((item) => (
                       <div key={item.name}>
                         {item.dropdown ? (
@@ -288,23 +288,6 @@ const Navbar = () => {
                 <div className="lg:hidden absolute top-full left-0 right-0 mt-2 mx-2">
                   <div className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border border-white/20 rounded-2xl shadow-xl overflow-hidden">
                     <div className="px-4 pt-4 pb-4 space-y-2">
-                      {/* Logo for mobile */}
-                      <Link
-                        to="/"
-                        className={`flex items-center gap-2 px-3 py-2 text-sm font-medium transition-colors duration-200 rounded-lg ${
-                          isActivePath("/")
-                            ? "text-primary bg-primary/10"
-                            : "text-foreground hover:text-primary hover:bg-muted"
-                        }`}
-                        onClick={() => setIsOpen(false)}
-                      >
-                        <img
-                          src="/logo.png"
-                          alt="Arpit Solar Logo"
-                          className="w-6 h-6 object-contain rounded-full"
-                        />
-                        Home
-                      </Link>
                       {navigationItems.map((item) => (
                         <div key={item.name}>
                           {item.dropdown ? (
