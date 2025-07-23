@@ -330,7 +330,7 @@ const Reliance = () => {
       {/* HJT Technology Deep Dive */}
       <section className="py-20 reliance-bg animate-on-scroll">
         <div className="container px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
             <div>
               <Badge className="mb-4 reliance-bg-primary text-white border-transparent">
                 Advanced Technology
@@ -338,10 +338,37 @@ const Reliance = () => {
               <h2 className="text-4xl font-bold mb-6 reliance-text">
                 Heterojunction Technology (HJT): The Future of Solar
               </h2>
-              <p className="text-lg reliance-body-text mb-8">
-                Through our acquisition of REC Solar, Reliance now commands one of the world's most advanced solar technologies. 
-                HJT cells combine the best of crystalline and amorphous silicon to achieve unprecedented efficiency levels.
+              <p className="text-lg reliance-body-text mb-4">
+                <strong>HJT = Crystalline Silicon + Amorphous Silicon Layers</strong>
               </p>
+              <p className="text-lg reliance-body-text mb-8">
+                Heterojunction solar cells are hybrid solar cells that combine a base layer of crystalline silicon with two thin layers of amorphous silicon (a-Si:H) on both sides. This creates a highly efficient junction with fewer electron losses, better light absorption, and superior temperature performance.
+              </p>
+              
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl p-6 mb-8 border border-blue-100 dark:border-blue-800">
+                <h4 className="font-bold text-blue-800 dark:text-blue-300 mb-4 flex items-center gap-2">
+                  <Zap className="h-5 w-5" />
+                  How It Works (Simply)
+                </h4>
+                <div className="space-y-2 text-sm text-blue-700 dark:text-blue-300">
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                    <span>Light hits the front layer → electrons excited</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                    <span>Amorphous silicon layers act as passivation layers, reducing energy loss</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                    <span>Electrons flow through the crystalline silicon core</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                    <span>Energy is collected through transparent conductive layers on both sides</span>
+                  </div>
+                </div>
+              </div>
               
               <div className="space-y-4 mb-8">
                 <div className="flex items-start gap-3">
@@ -350,7 +377,7 @@ const Reliance = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold reliance-text">Superior Efficiency</h4>
-                    <p className="text-sm reliance-body-text">Up to 22%+ efficiency in commercial modules</p>
+                    <p className="text-sm reliance-body-text">23–25% efficiency (very high)</p>
                   </div>
                 </div>
                 
@@ -360,7 +387,7 @@ const Reliance = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold reliance-text">Premium Performance</h4>
-                    <p className="text-sm reliance-body-text">Lower temperature coefficients and better low-light performance</p>
+                    <p className="text-sm reliance-body-text">~ -0.25% /°C temperature coefficient (less power drop in heat)</p>
                   </div>
                 </div>
                 
@@ -369,8 +396,8 @@ const Reliance = () => {
                     <Target className="h-3 w-3 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold reliance-text">Reliability</h4>
-                    <p className="text-sm reliance-body-text">25+ year warranties with minimal degradation</p>
+                    <h4 className="font-semibold reliance-text">Exceptional Reliability</h4>
+                    <p className="text-sm reliance-body-text">Very low degradation (~0.25% per year) with excellent bifaciality</p>
                   </div>
                 </div>
               </div>
@@ -391,13 +418,183 @@ const Reliance = () => {
               
               {/* Floating stats */}
               <div className="absolute -top-4 -right-4 bg-white reliance-border border shadow-lg rounded-lg p-4 animate-float">
-                <div className="text-2xl font-bold reliance-primary">22%+</div>
-                <div className="text-sm reliance-body-text">Efficiency</div>
+                <div className="text-2xl font-bold reliance-primary">25%</div>
+                <div className="text-sm reliance-body-text">Max Efficiency</div>
               </div>
               
               <div className="absolute -bottom-4 -left-4 bg-white reliance-border border shadow-lg rounded-lg p-4 animate-float" style={{ animationDelay: '1s' }}>
-                <div className="text-2xl font-bold reliance-primary">25+</div>
-                <div className="text-sm reliance-body-text">Year Warranty</div>
+                <div className="text-2xl font-bold reliance-primary">90%</div>
+                <div className="text-sm reliance-body-text">Bifaciality</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Technology Comparison Section */}
+          <div className="bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900/50 dark:to-blue-900/50 rounded-3xl p-8 border border-slate-200 dark:border-slate-700">
+            <div className="text-center mb-12">
+              <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                Solar Technology Comparison: HJT vs TOPCon vs PERC
+              </h3>
+              <p className="text-lg text-gray-600 dark:text-gray-300 max-w-4xl mx-auto">
+                Compare the three most popular solar cell technologies in 2025 to understand why HJT represents the premium choice
+              </p>
+            </div>
+
+            {/* Comparison Table */}
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm rounded-2xl overflow-hidden shadow-lg">
+                <thead>
+                  <tr className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+                    <th className="p-4 text-left font-semibold">Feature / Metric</th>
+                    <th className="p-4 text-center font-semibold">⚡ HJT (Heterojunction)</th>
+                    <th className="p-4 text-center font-semibold">🔆 TOPCon</th>
+                    <th className="p-4 text-center font-semibold">🔅 PERC</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white dark:bg-slate-800">
+                  <tr className="border-b border-gray-100 dark:border-slate-700">
+                    <td className="p-4 font-semibold text-gray-700 dark:text-gray-300">Cell Type</td>
+                    <td className="p-4 text-center text-blue-600 font-semibold">N-Type</td>
+                    <td className="p-4 text-center text-green-600 font-semibold">N-Type</td>
+                    <td className="p-4 text-center text-orange-600 font-semibold">P-Type (mostly)</td>
+                  </tr>
+                  <tr className="border-b border-gray-100 dark:border-slate-700 bg-blue-25 dark:bg-blue-900/10">
+                    <td className="p-4 font-semibold text-gray-700 dark:text-gray-300">Efficiency</td>
+                    <td className="p-4 text-center font-bold text-blue-600">⭐ 23–25%</td>
+                    <td className="p-4 text-center font-bold text-green-600">⭐ 22–24%</td>
+                    <td className="p-4 text-center font-bold text-orange-600">⭐ 19–21%</td>
+                  </tr>
+                  <tr className="border-b border-gray-100 dark:border-slate-700">
+                    <td className="p-4 font-semibold text-gray-700 dark:text-gray-300">Temperature Coefficient</td>
+                    <td className="p-4 text-center font-bold text-blue-600">🔥 ~ -0.25%/°C (best)</td>
+                    <td className="p-4 text-center font-bold text-green-600">🔥 ~ -0.30%/°C</td>
+                    <td className="p-4 text-center font-bold text-red-600">❌ ~ -0.38%/°C (worst)</td>
+                  </tr>
+                  <tr className="border-b border-gray-100 dark:border-slate-700 bg-blue-25 dark:bg-blue-900/10">
+                    <td className="p-4 font-semibold text-gray-700 dark:text-gray-300">Bifacial Capability</td>
+                    <td className="p-4 text-center font-bold text-blue-600">✅ Excellent (~90%)</td>
+                    <td className="p-4 text-center font-bold text-green-600">✅ Good (~70–80%)</td>
+                    <td className="p-4 text-center font-bold text-orange-600">⚠️ Moderate (~60%)</td>
+                  </tr>
+                  <tr className="border-b border-gray-100 dark:border-slate-700">
+                    <td className="p-4 font-semibold text-gray-700 dark:text-gray-300">Degradation Rate</td>
+                    <td className="p-4 text-center font-bold text-blue-600">🔒 Very Low (~0.25%/yr)</td>
+                    <td className="p-4 text-center font-bold text-green-600">🔒 Low (~0.3%/yr)</td>
+                    <td className="p-4 text-center font-bold text-orange-600">⚠️ Higher (~0.5%/yr)</td>
+                  </tr>
+                  <tr className="border-b border-gray-100 dark:border-slate-700 bg-blue-25 dark:bg-blue-900/10">
+                    <td className="p-4 font-semibold text-gray-700 dark:text-gray-300">LID (Light Induced Degradation)</td>
+                    <td className="p-4 text-center font-bold text-blue-600">❌ None (N-type)</td>
+                    <td className="p-4 text-center font-bold text-green-600">❌ None (N-type)</td>
+                    <td className="p-4 text-center font-bold text-red-600">⚠️ Yes (P-type silicon)</td>
+                  </tr>
+                  <tr className="border-b border-gray-100 dark:border-slate-700">
+                    <td className="p-4 font-semibold text-gray-700 dark:text-gray-300">Cost per Watt</td>
+                    <td className="p-4 text-center font-bold text-red-600">💸 High</td>
+                    <td className="p-4 text-center font-bold text-yellow-600">💵 Medium</td>
+                    <td className="p-4 text-center font-bold text-green-600">💰 Low</td>
+                  </tr>
+                  <tr className="border-b border-gray-100 dark:border-slate-700 bg-blue-25 dark:bg-blue-900/10">
+                    <td className="p-4 font-semibold text-gray-700 dark:text-gray-300">Best Use Case</td>
+                    <td className="p-4 text-center text-blue-600 font-semibold">Premium homes, commercial rooftops</td>
+                    <td className="p-4 text-center text-green-600 font-semibold">Balanced use in modern systems</td>
+                    <td className="p-4 text-center text-orange-600 font-semibold">Budget projects, price-sensitive areas</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            {/* Technology Verdict Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+              <Card className="relative overflow-hidden border-2 border-blue-200 dark:border-blue-800 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                      <Zap className="h-4 w-4 text-white" />
+                    </div>
+                    <CardTitle className="text-blue-700 dark:text-blue-300">HJT (Heterojunction)</CardTitle>
+                  </div>
+                  <div className="text-2xl font-bold text-blue-600">"Premium Class"</div>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex items-start gap-2">
+                      <span className="text-green-600">✅</span>
+                      <span>Best performance, best durability</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-green-600">✅</span>
+                      <span>Great in hot climates, shaded areas</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-red-600">❌</span>
+                      <span>Expensive, limited availability</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="relative overflow-hidden border-2 border-green-200 dark:border-green-800 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center">
+                      <TrendingUp className="h-4 w-4 text-white" />
+                    </div>
+                    <CardTitle className="text-green-700 dark:text-green-300">TOPCon</CardTitle>
+                  </div>
+                  <div className="text-2xl font-bold text-green-600">"Best Balance"</div>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex items-start gap-2">
+                      <span className="text-green-600">✅</span>
+                      <span>Best cost-performance balance</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-green-600">✅</span>
+                      <span>N-type silicon = no LID, better lifespan</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-green-600">✅</span>
+                      <span>Becoming industry standard 2025–26</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="relative overflow-hidden border-2 border-orange-200 dark:border-orange-800 bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/30 dark:to-orange-800/30">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center">
+                      <Target className="h-4 w-4 text-white" />
+                    </div>
+                    <CardTitle className="text-orange-700 dark:text-orange-300">PERC</CardTitle>
+                  </div>
+                  <div className="text-2xl font-bold text-orange-600">"Entry Level"</div>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex items-start gap-2">
+                      <span className="text-green-600">✅</span>
+                      <span>Cheapest, reliable, well-known tech</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-green-600">✅</span>
+                      <span>Good for budget-friendly systems</span>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-red-600">❌</span>
+                      <span>Lower efficiency, worse in heat</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="mt-8 text-center">
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg">
+                <Award className="h-5 w-5" />
+                HJT: The "Tesla of Solar Panels" — Premium-priced but packed with cutting-edge tech
               </div>
             </div>
           </div>
