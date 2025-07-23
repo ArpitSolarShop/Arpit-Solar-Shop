@@ -145,7 +145,7 @@ const Navbar = () => {
           <div className="w-full max-w-7xl">
             {/* Navigation Bar */}
             <nav className="w-full">
-              <div className={`bg-black/20 backdrop-blur-lg border border-white/10 rounded-full px-4 py-2 shadow-xl transition-all duration-300 ${
+              <div className={`bg-black/20 backdrop-blur-lg border border-white/10 rounded-full px-6 py-3 shadow-xl transition-all duration-300 ${
                 scrolled ? 'bg-black/40' : 'bg-black/20'
               }`}>
                 {/* Desktop Navigation */}
@@ -154,16 +154,16 @@ const Navbar = () => {
                     {/* Logo as first navigation item */}
                     <Link
                       to="/"
-                      className={`flex items-center px-3 py-1.5 rounded-full transition-all duration-200 hover:bg-white/10 ${
+                      className={`flex items-center gap-1 px-3 py-2 rounded-full text-sm font-medium transition-all duration-200 hover:bg-white/10 ${
                         isActivePath("/")
-                          ? "bg-white/20"
+                          ? "bg-white/10"
                           : ""
                       }`}
                     >
                       <img
                         src="/logo.png"
                         alt="Arpit Solar Logo"
-                        className="w-9 h-9 object-contain rounded-full"
+                        className="w-8 h-8 object-contain rounded-full"
                       />
                     </Link>
                     {navigationItems.map((item) => (
@@ -291,19 +291,19 @@ const Navbar = () => {
                       {/* Logo for mobile */}
                       <Link
                         to="/"
-                        className={`flex items-center gap-3 px-4 py-3 text-sm font-medium transition-colors duration-200 rounded-lg bg-white/20 backdrop-blur-md border border-white/20 ${
+                        className={`flex items-center gap-2 px-3 py-2 text-sm font-medium transition-colors duration-200 rounded-lg ${
                           isActivePath("/")
-                            ? "bg-primary/20 border-primary/30"
-                            : "hover:bg-muted"
+                            ? "text-primary bg-primary/10"
+                            : "text-foreground hover:text-primary hover:bg-muted"
                         }`}
                         onClick={() => setIsOpen(false)}
                       >
                         <img
                           src="/logo.png"
                           alt="Arpit Solar Logo"
-                          className="w-10 h-10 object-contain rounded-full"
+                          className="w-6 h-6 object-contain rounded-full"
                         />
-                        <span className="font-semibold">Home</span>
+                        Home
                       </Link>
                       {navigationItems.map((item) => (
                         <div key={item.name}>
