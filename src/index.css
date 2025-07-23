@@ -42,14 +42,14 @@ All colors MUST be HSL.
     --solar-navy: 213 87% 25%;
     --solar-gold: 45 100% 51%;
     
-    /* Reliance Page Colors */
-    --reliance-primary: 41 39% 56%;
-    --reliance-text: 0 0% 0%;
-    --reliance-body: 0 0% 20%;
-    --reliance-background: 60 9% 98%;
-    --reliance-background-alt: 48 20% 96%;
-    --reliance-hover: 35 18% 87%;
-    --reliance-divider: 35 18% 85%;
+    /* Reliance Page Colors - Updated Theme */
+    --reliance-primary: 41 39% 56%; /* #BFA161 */
+    --reliance-text: 0 0% 0%; /* #000000 */
+    --reliance-body: 0 0% 20%; /* #333333 */
+    --reliance-background: 60 9% 98%; /* #FAFAFA */
+    --reliance-background-alt: 48 20% 96%; /* #F5F5F0 */
+    --reliance-hover: 35 18% 87%; /* Soft beige */
+    --reliance-divider: 35 18% 85%; /* Soft gray */
     
     /* Gradients - Eco Green Theme */
     --gradient-sunset: linear-gradient(135deg, hsl(122 39% 49%) 0%, hsl(45 100% 51%) 100%);
