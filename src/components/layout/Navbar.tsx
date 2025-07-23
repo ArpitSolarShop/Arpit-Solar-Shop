@@ -59,7 +59,12 @@ const Navbar = () => {
     {
       name: "Products",
       icon: ShoppingCart,
-      href: "/products"
+      href: "/products",
+      dropdown: [
+        { name: "Reliance Solar", href: "/products?company=reliance", icon: "⚡" },
+        { name: "Shakti Solar", href: "/products?company=shakti", icon: "☀️" },
+        { name: "Tata Solar", href: "/products?company=tata", icon: "🔋" },
+      ],
     },
     { name: "Services", icon: Hammer, href: "/services" },
     { name: "Sustainability", icon: Leaf, href: "/sustainability" },
@@ -161,16 +166,28 @@ const Navbar = () => {
                               </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent 
-                              className="w-56 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border border-white/20 rounded-xl shadow-xl mt-2"
+                              className="w-72 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border border-white/20 rounded-xl shadow-xl mt-2 p-2"
                               sideOffset={5}
                             >
                               {item.dropdown.map((dropdownItem) => (
-                                <DropdownMenuItem key={dropdownItem.name} asChild>
+                                <DropdownMenuItem key={dropdownItem.name} asChild className="p-0">
                                   <Link
                                     to={dropdownItem.href}
-                                    className="w-full cursor-pointer hover:bg-primary/10 rounded-lg px-3 py-2 text-sm font-medium transition-colors duration-200"
+                                    className="flex items-center gap-3 w-full cursor-pointer hover:bg-primary/10 rounded-lg p-3 transition-colors duration-200 border border-transparent hover:border-primary/20"
                                   >
-                                    {dropdownItem.name}
+                                    {dropdownItem.icon && (
+                                      <div className="text-xl">{dropdownItem.icon}</div>
+                                    )}
+                                    <div className="flex-1">
+                                      <div className="text-sm font-medium text-foreground">{dropdownItem.name}</div>
+                                      {item.name === "Products" && (
+                                        <div className="text-xs text-muted-foreground mt-1">
+                                          {dropdownItem.name === "Reliance Solar" && "Leading renewable energy solutions"}
+                                          {dropdownItem.name === "Shakti Solar" && "Innovative solar solutions"}
+                                          {dropdownItem.name === "Tata Solar" && "Trusted solar power systems"}
+                                        </div>
+                                      )}
+                                    </div>
                                   </Link>
                                 </DropdownMenuItem>
                               ))}
@@ -251,10 +268,22 @@ const Navbar = () => {
                                 <Link
                                   key={dropdownItem.name}
                                   to={dropdownItem.href}
-                                  className="block px-6 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors duration-200 rounded-lg ml-4"
+                                  className="flex items-center gap-3 px-4 py-3 text-sm hover:bg-muted transition-colors duration-200 rounded-lg ml-2 border border-transparent hover:border-primary/20"
                                   onClick={() => setIsOpen(false)}
                                 >
-                                  {dropdownItem.name}
+                                  {dropdownItem.icon && (
+                                    <div className="text-lg">{dropdownItem.icon}</div>
+                                  )}
+                                  <div className="flex-1">
+                                    <div className="font-medium text-foreground">{dropdownItem.name}</div>
+                                    {item.name === "Products" && (
+                                      <div className="text-xs text-muted-foreground mt-1">
+                                        {dropdownItem.name === "Reliance Solar" && "Leading renewable energy solutions"}
+                                        {dropdownItem.name === "Shakti Solar" && "Innovative solar solutions"}
+                                        {dropdownItem.name === "Tata Solar" && "Trusted solar power systems"}
+                                      </div>
+                                    )}
+                                  </div>
                                 </Link>
                               ))}
                             </div>
