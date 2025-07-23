@@ -273,6 +273,261 @@ const Reliance = () => {
         </div>
       </section>
 
+      {/* Products & Pricing Section */}
+      <section className="py-20 reliance-bg animate-on-scroll">
+        <div className="container px-4">
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-[#BFA161] text-white border-transparent">
+              Product Catalog
+            </Badge>
+            <h2 className="text-4xl font-bold mb-4 reliance-text">Reliance Solar System Configurations</h2>
+            <p className="text-xl reliance-body-text max-w-3xl mx-auto">
+              Choose from our comprehensive range of HJT and standard modules with competitive pricing
+            </p>
+          </div>
+
+          {/* Grid Tie System - Standard Modules */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-bold reliance-text mb-6">Grid Tie System - Non DCR RIL 690 Wp Modules with String Inverter</h3>
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden reliance-border border">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="reliance-bg-primary text-white">
+                    <tr>
+                      <th className="px-4 py-3 text-left">Si No.</th>
+                      <th className="px-4 py-3 text-left">System Size (kWp)</th>
+                      <th className="px-4 py-3 text-left">No of Modules</th>
+                      <th className="px-4 py-3 text-left">Inverter Capacity (kW)</th>
+                      <th className="px-4 py-3 text-left">Phase</th>
+                      <th className="px-4 py-3 text-left">Price/Watt (₹)</th>
+                      <th className="px-4 py-3 text-left">Total Price (₹)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-b border-gray-100">
+                      <td className="px-4 py-3 reliance-body-text">1</td>
+                      <td className="px-4 py-3 font-semibold reliance-text">3.45</td>
+                      <td className="px-4 py-3 reliance-body-text">5</td>
+                      <td className="px-4 py-3 reliance-body-text">3</td>
+                      <td className="px-4 py-3 reliance-body-text">Single</td>
+                      <td className="px-4 py-3 font-semibold text-green-600">61.13</td>
+                      <td className="px-4 py-3 font-bold reliance-primary">₹2,10,900</td>
+                    </tr>
+                    <tr className="border-b border-gray-100">
+                      <td className="px-4 py-3 reliance-body-text">2</td>
+                      <td className="px-4 py-3 font-semibold reliance-text">5.52</td>
+                      <td className="px-4 py-3 reliance-body-text">8</td>
+                      <td className="px-4 py-3 reliance-body-text">5</td>
+                      <td className="px-4 py-3 reliance-body-text">Single</td>
+                      <td className="px-4 py-3 font-semibold text-green-600">60.22</td>
+                      <td className="px-4 py-3 font-bold reliance-primary">₹3,32,410</td>
+                    </tr>
+                    <tr className="border-b border-gray-100">
+                      <td className="px-4 py-3 reliance-body-text">3</td>
+                      <td className="px-4 py-3 font-semibold reliance-text">5.52</td>
+                      <td className="px-4 py-3 reliance-body-text">8</td>
+                      <td className="px-4 py-3 reliance-body-text">5</td>
+                      <td className="px-4 py-3 reliance-body-text">Three</td>
+                      <td className="px-4 py-3 font-semibold text-green-600">65.06</td>
+                      <td className="px-4 py-3 font-bold reliance-primary">₹3,59,153</td>
+                    </tr>
+                    <tr className="border-b border-gray-100">
+                      <td className="px-4 py-3 reliance-body-text">4</td>
+                      <td className="px-4 py-3 font-semibold reliance-text">8.28</td>
+                      <td className="px-4 py-3 reliance-body-text">12</td>
+                      <td className="px-4 py-3 reliance-body-text">10</td>
+                      <td className="px-4 py-3 reliance-body-text">Three</td>
+                      <td className="px-4 py-3 font-semibold text-green-600">58.55</td>
+                      <td className="px-4 py-3 font-bold reliance-primary">₹4,84,822</td>
+                    </tr>
+                    <tr className="border-b border-gray-100">
+                      <td className="px-4 py-3 reliance-body-text">5</td>
+                      <td className="px-4 py-3 font-semibold reliance-text">10.35</td>
+                      <td className="px-4 py-3 reliance-body-text">15</td>
+                      <td className="px-4 py-3 reliance-body-text">10</td>
+                      <td className="px-4 py-3 reliance-body-text">Three</td>
+                      <td className="px-4 py-3 font-semibold text-green-600">55.45</td>
+                      <td className="px-4 py-3 font-bold reliance-primary">₹5,73,910</td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-3 reliance-body-text">6</td>
+                      <td className="px-4 py-3 font-semibold reliance-text">13.8</td>
+                      <td className="px-4 py-3 reliance-body-text">20</td>
+                      <td className="px-4 py-3 reliance-body-text">10</td>
+                      <td className="px-4 py-3 reliance-body-text">Three</td>
+                      <td className="px-4 py-3 font-semibold text-green-600">53.49</td>
+                      <td className="px-4 py-3 font-bold reliance-primary">₹7,38,095</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          {/* Grid Tie System - HJT Modules */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-bold reliance-text mb-6">Grid Tie with Non DCR RIL 690 Wp HJT Modules</h3>
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden reliance-border border">
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead className="reliance-bg-primary text-white">
+                    <tr>
+                      <th className="px-3 py-3 text-left">Si No.</th>
+                      <th className="px-3 py-3 text-left">System Size (kWp)</th>
+                      <th className="px-3 py-3 text-left">Modules</th>
+                      <th className="px-3 py-3 text-left">Inverter (kW)</th>
+                      <th className="px-3 py-3 text-left">Phase</th>
+                      <th className="px-3 py-3 text-left">HDG Elevated</th>
+                      <th className="px-3 py-3 text-left">RCC Mount</th>
+                      <th className="px-3 py-3 text-left">No MMS</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-b border-gray-100">
+                      <td className="px-3 py-3 reliance-body-text">1</td>
+                      <td className="px-3 py-3 font-semibold reliance-text">19.32</td>
+                      <td className="px-3 py-3 reliance-body-text">28</td>
+                      <td className="px-3 py-3 reliance-body-text">15</td>
+                      <td className="px-3 py-3 reliance-body-text">Three</td>
+                      <td className="px-3 py-3 font-bold text-green-600">₹6,55,060</td>
+                      <td className="px-3 py-3 font-bold text-blue-600">₹7,51,660</td>
+                      <td className="px-3 py-3 font-bold reliance-primary">₹5,19,560</td>
+                    </tr>
+                    <tr className="border-b border-gray-100">
+                      <td className="px-3 py-3 reliance-body-text">2</td>
+                      <td className="px-3 py-3 font-semibold reliance-text">33.12</td>
+                      <td className="px-3 py-3 reliance-body-text">48</td>
+                      <td className="px-3 py-3 reliance-body-text">25</td>
+                      <td className="px-3 py-3 reliance-body-text">Three</td>
+                      <td className="px-3 py-3 font-bold text-green-600">₹10,90,460</td>
+                      <td className="px-3 py-3 font-bold text-blue-600">₹12,56,060</td>
+                      <td className="px-3 py-3 font-bold reliance-primary">₹10,29,460</td>
+                    </tr>
+                    <tr className="border-b border-gray-100">
+                      <td className="px-3 py-3 reliance-body-text">3</td>
+                      <td className="px-3 py-3 font-semibold reliance-text">52.44</td>
+                      <td className="px-3 py-3 reliance-body-text">76</td>
+                      <td className="px-3 py-3 reliance-body-text">40</td>
+                      <td className="px-3 py-3 reliance-body-text">Three</td>
+                      <td className="px-3 py-3 font-bold text-green-600">₹16,76,180</td>
+                      <td className="px-3 py-3 font-bold text-blue-600">₹19,38,380</td>
+                      <td className="px-3 py-3 font-bold reliance-primary">₹15,79,480</td>
+                    </tr>
+                    <tr className="border-b border-gray-100">
+                      <td className="px-3 py-3 reliance-body-text">4</td>
+                      <td className="px-3 py-3 font-semibold reliance-text">65.55</td>
+                      <td className="px-3 py-3 reliance-body-text">95</td>
+                      <td className="px-3 py-3 reliance-body-text">50</td>
+                      <td className="px-3 py-3 reliance-body-text">Three</td>
+                      <td className="px-3 py-3 font-bold text-green-600">₹20,47,350</td>
+                      <td className="px-3 py-3 font-bold text-blue-600">₹23,75,100</td>
+                      <td className="px-3 py-3 font-bold reliance-primary">₹19,26,550</td>
+                    </tr>
+                    <tr className="border-b border-gray-100">
+                      <td className="px-3 py-3 reliance-body-text">5</td>
+                      <td className="px-3 py-3 font-semibold reliance-text">105.57</td>
+                      <td className="px-3 py-3 reliance-body-text">153</td>
+                      <td className="px-3 py-3 reliance-body-text">80</td>
+                      <td className="px-3 py-3 reliance-body-text">Three</td>
+                      <td className="px-3 py-3 font-bold text-green-600">₹31,90,020</td>
+                      <td className="px-3 py-3 font-bold text-blue-600">₹37,17,870</td>
+                      <td className="px-3 py-3 font-bold reliance-primary">₹29,95,520</td>
+                    </tr>
+                    <tr>
+                      <td className="px-3 py-3 reliance-body-text">6</td>
+                      <td className="px-3 py-3 font-semibold reliance-text">124.2</td>
+                      <td className="px-3 py-3 reliance-body-text">180</td>
+                      <td className="px-3 py-3 reliance-body-text">100</td>
+                      <td className="px-3 py-3 reliance-body-text">Three</td>
+                      <td className="px-3 py-3 font-bold text-green-600">₹37,31,500</td>
+                      <td className="px-3 py-3 font-bold text-blue-600">₹43,52,500</td>
+                      <td className="px-3 py-3 font-bold reliance-primary">₹35,03,200</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          {/* Additional Products & Services */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* DC Cables */}
+            <Card className="bg-white reliance-border border">
+              <CardHeader>
+                <CardTitle className="text-xl reliance-text">DC Cables - Bulk Supply</CardTitle>
+                <CardDescription className="reliance-body-text">High-quality insulated DC cables</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                    <div>
+                      <div className="font-semibold reliance-text">DC Cable (500m)</div>
+                      <div className="text-sm reliance-body-text">Insulated cable per meter</div>
+                    </div>
+                    <div className="text-right">
+                      <div className="font-bold reliance-primary">₹46.67/m</div>
+                      <div className="text-sm text-gray-600">₹23,333 total</div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Kit Items */}
+            <Card className="bg-white reliance-border border">
+              <CardHeader>
+                <CardTitle className="text-xl reliance-text">Complete Kit Includes</CardTitle>
+                <CardDescription className="reliance-body-text">Everything you need for installation</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 reliance-bg-primary rounded-full"></div>
+                    <span className="reliance-body-text">RIL 690-720 Wp Silicon Modules</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 reliance-bg-primary rounded-full"></div>
+                    <span className="reliance-body-text">String Inverter (System Size Specific)</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 reliance-bg-primary rounded-full"></div>
+                    <span className="reliance-body-text">ACDB IP65 Protected with MCB 4P</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 reliance-bg-primary rounded-full"></div>
+                    <span className="reliance-body-text">MC4 Connectors (Male & Female)</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 reliance-bg-primary rounded-full"></div>
+                    <span className="reliance-body-text">Signal Device</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 reliance-bg-primary rounded-full"></div>
+                    <span className="reliance-body-text">Network Device (5 Year Data Plan)</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 reliance-bg-primary rounded-full"></div>
+                    <span className="reliance-body-text">MMS (Monitoring & Management)</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="text-center mt-12">
+            <Button 
+              size="lg" 
+              onClick={() => setQuoteFormOpen(true)}
+              className="bg-transparent border-2 border-[#BFA161] text-[#BFA161] hover:bg-[#BFA161]/10 shadow-lg"
+            >
+              <Quote className="mr-2 h-5 w-5" />
+              Get Custom Quote for These Systems
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* Statistics Section */}
       <section ref={statsRef} className="py-20 reliance-bg-alt animate-on-scroll">
         <div className="container px-4">
