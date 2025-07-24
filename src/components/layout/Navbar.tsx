@@ -162,7 +162,7 @@ const Navbar = () => {
                     {navigationItems.map((item) => (
                       <div key={item.name}>
                         {item.dropdown ? (
-                          <DropdownMenu>
+                          <DropdownMenu key={`desktop-${item.name}`}>
                             <DropdownMenuTrigger asChild>
                               <Button
                                 variant="ghost"
@@ -174,13 +174,13 @@ const Navbar = () => {
                               </Button>
                             </DropdownMenuTrigger>
                              <DropdownMenuContent 
-                               className="w-auto bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border border-white/20 rounded-xl shadow-xl mt-2 p-4"
+                               className="w-auto bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border border-white/20 rounded-xl shadow-xl mt-2 p-4 z-50"
                                sideOffset={5}
                              >
                                {item.name === "Products" || item.name === "Solutions" || item.name === "About" ? (
                                  <div className={`gap-4 ${item.name === "Products" ? "flex" : "grid grid-cols-2"}`}>
                                    {item.dropdown.map((dropdownItem) => (
-                                     <DropdownMenuItem key={dropdownItem.name} asChild className="p-0">
+                                     <DropdownMenuItem key={`${item.name}-${dropdownItem.name}`} asChild className="p-0">
                                        <Link
                                          to={dropdownItem.href}
                                          className="flex flex-col items-center gap-3 p-4 cursor-pointer hover:bg-primary/10 rounded-lg transition-colors duration-200 border border-transparent hover:border-primary/20 group"
@@ -207,7 +207,7 @@ const Navbar = () => {
                                  </div>
                                ) : (
                                  item.dropdown.map((dropdownItem) => (
-                                   <DropdownMenuItem key={dropdownItem.name} asChild className="p-0">
+                                   <DropdownMenuItem key={`${item.name}-${dropdownItem.name}`} asChild className="p-0">
                                      <Link
                                        to={dropdownItem.href}
                                        className="flex items-center gap-3 w-full cursor-pointer hover:bg-primary/10 rounded-lg p-3 transition-colors duration-200 border border-transparent hover:border-primary/20"
