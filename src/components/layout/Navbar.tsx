@@ -166,11 +166,10 @@ const Navbar = () => {
                           
                           {/* Banner Dropdown Content */}
                           {activeDropdown === item.name && (
-                            <div className="fixed w-screen bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-xl z-40" 
+                            <div className="fixed left-0 right-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-xl z-40" 
                                  style={{ 
-                                   top: scrolled ? '73px' : 'calc(1rem + 73px)', 
-                                   left: '50%',
-                                   transform: 'translateX(-50%)'
+                                   top: scrolled ? '73px' : 'calc(1rem + 73px)',
+                                   width: '100vw'
                                  }}>
                               <div className="container mx-auto px-4 py-6">
                                 <div className={`${
@@ -336,11 +335,10 @@ const Navbar = () => {
                               
                               {/* Banner Dropdown Content */}
                               {activeDropdown === item.name && (
-                                <div className="fixed w-screen bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border-b border-white/20 shadow-xl z-40"
+                                <div className="fixed left-0 right-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border-b border-white/20 shadow-xl z-40"
                                      style={{ 
-                                       top: scrolled ? '73px' : 'calc(1rem + 73px)', 
-                                       left: '50%',
-                                       transform: 'translateX(-50%)'
+                                       top: scrolled ? '73px' : 'calc(1rem + 73px)',
+                                       width: '100vw'
                                      }}>
                                   <div className="container mx-auto px-4 py-6">
                                     <div className={`${
