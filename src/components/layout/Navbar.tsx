@@ -166,8 +166,8 @@ const Navbar = () => {
                           
                           {/* Banner Dropdown Content */}
                           {activeDropdown === item.name && (
-                            <div className="fixed left-0 right-0 w-screen bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-xl z-40" 
-                                 style={{ top: scrolled ? '73px' : 'calc(1rem + 73px)' }}>
+                            <div className="fixed left-0 w-screen bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-xl z-40" 
+                                 style={{ top: scrolled ? '73px' : 'calc(1rem + 73px)', marginLeft: 'calc(-50vw + 50%)' }}>
                               <div className="container mx-auto px-4 py-6">
                                 <div className={`${
                                   item.name === "About" ? "max-w-4xl mx-auto" : 
@@ -332,8 +332,8 @@ const Navbar = () => {
                               
                               {/* Banner Dropdown Content */}
                               {activeDropdown === item.name && (
-                                <div className="fixed left-0 right-0 w-screen bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border-b border-white/20 shadow-xl z-40"
-                                     style={{ top: scrolled ? '73px' : 'calc(1rem + 73px)' }}>
+                                <div className="fixed left-0 w-screen bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border-b border-white/20 shadow-xl z-40"
+                                     style={{ top: scrolled ? '73px' : 'calc(1rem + 73px)', marginLeft: 'calc(-50vw + 50%)' }}>
                                   <div className="container mx-auto px-4 py-6">
                                     <div className={`${
                                       item.name === "About" ? "max-w-4xl mx-auto" : 
