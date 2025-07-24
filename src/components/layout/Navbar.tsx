@@ -97,7 +97,20 @@ const Navbar = () => {
     {
       name: "About",
       icon: Info,
-      href: "/about"
+      dropdown: [
+        { 
+          name: "About Solar Technology", 
+          href: "/about/solar-technology", 
+          image: "/logo.png",
+          description: "Learn about solar technology and innovation"
+        },
+        { 
+          name: "About Us", 
+          href: "/about/us", 
+          image: "/logo.png",
+          description: "Our company story and mission"
+        },
+      ],
     },
     { name: "Contact", icon: Phone, href: "/contact" },
   ];

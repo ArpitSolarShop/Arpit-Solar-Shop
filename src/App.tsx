@@ -9,6 +9,8 @@ import Products from "./pages/Products";
 import Services from "./pages/Services";
 import Sustainability from "./pages/Sustainability";
 import About from "./pages/About";
+import AboutSolarTechnology from "./pages/AboutSolarTechnology";
+import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
 import Reliance from "./pages/Reliance";
 import Residential from "./pages/Residential";
@@ -30,6 +32,8 @@ const App = () => (
           <Route path="/services" element={<Services />} />
           <Route path="/sustainability" element={<Sustainability />} />
           <Route path="/about" element={<About />} />
+          <Route path="/about/solar-technology" element={<AboutSolarTechnology />} />
+          <Route path="/about/us" element={<AboutUs />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/reliance" element={<Reliance />} />
           <Route path="/solutions/residential" element={<Residential />} />
