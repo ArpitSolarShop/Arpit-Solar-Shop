@@ -7,12 +7,12 @@ import Index from "./pages/Index";
 import GetQuote from "./pages/GetQuote";
 import Products from "./pages/Products";
 import Services from "./pages/Services";
-
 import About from "./pages/About";
 import AboutSolarTechnology from "./pages/AboutSolarTechnology";
 import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
 import Reliance from "./pages/Reliance";
+import ShaktiSolar from "./pages/ShaktiSolar";
 import Residential from "./pages/Residential";
 import CommercialIndustrial from "./pages/CommercialIndustrial";
 import NotFound from "./pages/NotFound";
@@ -35,6 +35,7 @@ const App = () => (
           <Route path="/about/us" element={<AboutUs />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/reliance" element={<Reliance />} />
+          <Route path="/shakti-solar" element={<ShaktiSolar />} />
           <Route path="/solutions/residential" element={<Residential />} />
           <Route path="/solutions/commercial-industrial" element={<CommercialIndustrial />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

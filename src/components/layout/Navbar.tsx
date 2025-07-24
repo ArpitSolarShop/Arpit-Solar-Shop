@@ -74,7 +74,7 @@ const Navbar = () => {
         },
         { 
           name: "Shakti Solar", 
-          href: "/products?company=shakti", 
+          href: "/shakti-solar", 
           image: "/Shakti%20Solar.png",
           description: "Innovative solar solutions",
           recommended: "Recommended for Residential"
