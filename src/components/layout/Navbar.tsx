@@ -164,13 +164,15 @@ const Navbar = () => {
                             <ChevronDown className="w-4 h-4 ml-1" />
                           </Button>
                           
-                          {/* Dropdown Content */}
+                          {/* Banner Dropdown Content */}
                           {activeDropdown === item.name && (
-                            <div className={`absolute top-full left-0 mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-xl p-4 z-50 ${
-                              item.name === "About" ? "min-w-[500px]" : 
-                              item.name === "Solutions" ? "min-w-[500px]" : 
-                              "w-auto"
-                            }`}>
+                            <div className="fixed left-0 top-full w-full bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-xl z-40">
+                              <div className="container mx-auto px-4 py-6">
+                                <div className={`${
+                                  item.name === "About" ? "max-w-4xl mx-auto" : 
+                                  item.name === "Solutions" ? "max-w-4xl mx-auto" : 
+                                  "max-w-6xl mx-auto"
+                                }`}>
                               {item.name === "Products" || item.name === "Solutions" || item.name === "About" ? (
                                 <div className={`gap-4 ${item.name === "Products" ? "flex" : "grid grid-cols-2"}`}>
                                   {item.dropdown.map((dropdownItem) => (
@@ -211,6 +213,8 @@ const Navbar = () => {
                                   </Link>
                                 ))
                               )}
+                                </div>
+                              </div>
                             </div>
                           )}
                         </>
@@ -325,13 +329,15 @@ const Navbar = () => {
                                 <ChevronDown className="w-4 h-4 ml-1" />
                               </Button>
                               
-                              {/* Dropdown Content */}
+                              {/* Banner Dropdown Content */}
                               {activeDropdown === item.name && (
-                                <div className={`absolute top-full left-0 mt-2 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border border-white/20 rounded-xl shadow-xl p-4 z-50 ${
-                                  item.name === "About" ? "min-w-[500px]" : 
-                                  item.name === "Solutions" ? "min-w-[500px]" : 
-                                  "w-auto"
-                                }`}>
+                                <div className="fixed left-0 top-full w-full bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border-b border-white/20 shadow-xl z-40">
+                                  <div className="container mx-auto px-4 py-6">
+                                    <div className={`${
+                                      item.name === "About" ? "max-w-4xl mx-auto" : 
+                                      item.name === "Solutions" ? "max-w-4xl mx-auto" : 
+                                      "max-w-6xl mx-auto"
+                                    }`}>
                                   {item.name === "Products" || item.name === "Solutions" || item.name === "About" ? (
                                     <div className={`gap-4 ${item.name === "Products" ? "flex" : "grid grid-cols-2"}`}>
                                       {item.dropdown.map((dropdownItem) => (
@@ -372,6 +378,8 @@ const Navbar = () => {
                                       </Link>
                                     ))
                                   )}
+                                    </div>
+                                  </div>
                                 </div>
                               )}
                             </>
