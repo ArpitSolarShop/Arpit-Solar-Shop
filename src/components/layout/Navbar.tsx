@@ -51,9 +51,8 @@ const Navbar = () => {
       name: "Solutions",
       icon: PackageCheck,
       dropdown: [
-        { name: "Residential Solar", href: "/solutions/residential" },
-        { name: "Commercial Solar", href: "/solutions/commercial" },
-        { name: "Industrial Solar", href: "/solutions/industrial" },
+        { name: "Residential", href: "/solutions/residential" },
+        { name: "Commercial/Industrial", href: "/solutions/commercial-industrial" },
       ],
     },
     {
