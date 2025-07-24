@@ -93,16 +93,16 @@ const Navbar = () => {
       ],
     },
     { name: "Services", icon: Hammer, href: "/services" },
-    { name: "Sustainability", icon: Leaf, href: "/sustainability" },
     {
       name: "About",
       icon: Info,
       dropdown: [
         { 
-          name: "About Solar Technology", 
-          href: "/about/solar-technology", 
+          name: "Sustainability", 
+          href: "/about/sustainability", 
           image: "/logo.png",
-          description: "Learn about solar technology and innovation"
+          description: "Our commitment to environmental sustainability",
+          icon: Leaf
         },
         { 
           name: "About Us", 

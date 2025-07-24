@@ -116,15 +116,15 @@ const AboutSolarTechnology = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <Badge className="mb-4 text-sm font-medium bg-white/20 text-white border-white/30">
-              Solar Technology Innovation
+              Environmental Sustainability
             </Badge>
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              The Science Behind
-              <span className="text-accent block">Solar Energy</span>
+              Our Commitment to
+              <span className="text-accent block">Sustainability</span>
             </h1>
             <p className="text-xl text-white/90 mb-8 leading-relaxed">
-              Discover how photovoltaic technology transforms sunlight into clean, renewable electricity 
-              powering homes and businesses worldwide.
+              Leading the transition to clean energy while protecting our planet for future generations 
+              through innovative solar solutions and sustainable practices.
             </p>
           </div>
         </div>
@@ -135,10 +135,10 @@ const AboutSolarTechnology = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Solar Technologies We Use
+              Sustainable Solar Technologies
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Advanced photovoltaic technologies designed for maximum efficiency and reliability.
+              Eco-friendly solar technologies that minimize environmental impact while maximizing clean energy production.
             </p>
           </div>
           
