@@ -101,8 +101,7 @@ const Navbar = () => {
           name: "Sustainability", 
           href: "/about/sustainability", 
           image: "/logo.png",
-          description: "Our commitment to environmental sustainability",
-          icon: Leaf
+          description: "Our commitment to environmental sustainability"
         },
         { 
           name: "About Us", 
