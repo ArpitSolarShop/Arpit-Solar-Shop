@@ -178,7 +178,7 @@ const Navbar = () => {
                                className="w-auto bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border border-white/20 rounded-xl shadow-xl mt-2 p-4"
                                sideOffset={5}
                              >
-                               {item.name === "Products" || item.name === "Solutions" ? (
+                               {item.name === "Products" || item.name === "Solutions" || item.name === "About" ? (
                                  <div className={`gap-4 ${item.name === "Products" ? "flex" : "grid grid-cols-2"}`}>
                                    {item.dropdown.map((dropdownItem) => (
                                      <DropdownMenuItem key={dropdownItem.name} asChild className="p-0">
@@ -311,7 +311,7 @@ const Navbar = () => {
                                 {item.icon && <item.icon className="w-4 h-4" />}
                                 {item.name}
                               </div>
-                               {item.name === "Products" || item.name === "Solutions" ? (
+                               {item.name === "Products" || item.name === "Solutions" || item.name === "About" ? (
                                  <div className={`gap-3 px-3 py-3 ${item.name === "Products" ? "flex" : "grid grid-cols-2"}`}>
                                    {item.dropdown.map((dropdownItem) => (
                                      <Link
