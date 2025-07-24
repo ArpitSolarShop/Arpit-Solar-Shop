@@ -159,12 +159,12 @@ const Navbar = () => {
                                 <ChevronDown className="w-4 h-4 ml-1" />
                               </Button>
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent 
-                              className="w-96 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border border-white/20 rounded-xl shadow-xl mt-2 p-4"
-                              sideOffset={5}
+                             <DropdownMenuContent 
+                               className="w-auto bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border border-white/20 rounded-xl shadow-xl mt-2 p-4"
+                               sideOffset={5}
                              >
                                {item.name === "Products" || item.name === "Solutions" ? (
-                                 <div className="grid grid-cols-2 gap-4">
+                                 <div className={`gap-4 ${item.name === "Products" ? "flex" : "grid grid-cols-2"}`}>
                                    {item.dropdown.map((dropdownItem) => (
                                      <DropdownMenuItem key={dropdownItem.name} asChild className="p-0">
                                        <Link
@@ -294,7 +294,7 @@ const Navbar = () => {
                                 {item.name}
                               </div>
                                {item.name === "Products" || item.name === "Solutions" ? (
-                                 <div className={`grid gap-3 px-3 py-3 ${item.name === "Products" ? "grid-cols-3" : "grid-cols-2"}`}>
+                                 <div className={`gap-3 px-3 py-3 ${item.name === "Products" ? "flex" : "grid grid-cols-2"}`}>
                                    {item.dropdown.map((dropdownItem) => (
                                      <Link
                                        key={dropdownItem.name}
