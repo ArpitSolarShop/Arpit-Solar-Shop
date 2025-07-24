@@ -18,17 +18,12 @@ import {
   Instagram,
   Home,
 } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const location = useLocation();
 
   // Handle scroll effect
@@ -160,67 +155,69 @@ const Navbar = () => {
                 <div className="hidden lg:flex items-center justify-between">
                   <div className="flex items-center space-x-1">
                     {navigationItems.map((item) => (
-                      <div key={item.name}>
+                      <div 
+                        key={item.name} 
+                        className="relative"
+                        onMouseEnter={() => item.dropdown && setActiveDropdown(item.name)}
+                        onMouseLeave={() => setActiveDropdown(null)}
+                      >
                         {item.dropdown ? (
-                          <DropdownMenu key={`desktop-${item.name}`}>
-                            <DropdownMenuTrigger asChild>
-                              <Button
-                                variant="ghost"
-                                className="flex items-center text-white hover:bg-white/10 space-x-1 px-4 py-2 rounded-full transition-all duration-200"
-                              >
-                                {item.icon && <item.icon className="w-4 h-4 mr-1" />}
-                                <span className="text-sm font-medium">{item.name}</span>
-                                <ChevronDown className="w-4 h-4 ml-1" />
-                              </Button>
-                            </DropdownMenuTrigger>
-                             <DropdownMenuContent 
-                               className="w-auto bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border border-white/20 rounded-xl shadow-xl mt-2 p-4 z-50"
-                               sideOffset={5}
-                             >
-                               {item.name === "Products" || item.name === "Solutions" || item.name === "About" ? (
-                                 <div className={`gap-4 ${item.name === "Products" ? "flex" : "grid grid-cols-2"}`}>
-                                   {item.dropdown.map((dropdownItem) => (
-                                     <DropdownMenuItem key={`${item.name}-${dropdownItem.name}`} asChild className="p-0">
-                                       <Link
-                                         to={dropdownItem.href}
-                                         className="flex flex-col items-center gap-3 p-4 cursor-pointer hover:bg-primary/10 rounded-lg transition-colors duration-200 border border-transparent hover:border-primary/20 group"
-                                       >
-                                         <div className="w-20 h-20 bg-white rounded-lg p-2 shadow-sm group-hover:shadow-md transition-shadow duration-200">
-                                           <img
-                                             src={dropdownItem.image}
-                                             alt={dropdownItem.name}
-                                             className="w-full h-full object-contain"
-                                           />
-                                         </div>
-                                         <div className="text-center">
-                                           <div className="text-sm font-medium text-foreground">{dropdownItem.name}</div>
-                                           {dropdownItem.description && (
-                                             <div className="text-xs text-muted-foreground mt-1">{dropdownItem.description}</div>
-                                           )}
-                                           {dropdownItem.recommended && (
-                                             <div className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full mt-2 inline-block">{dropdownItem.recommended}</div>
-                                           )}
-                                         </div>
-                                       </Link>
-                                     </DropdownMenuItem>
-                                   ))}
-                                 </div>
-                               ) : (
-                                 item.dropdown.map((dropdownItem) => (
-                                   <DropdownMenuItem key={`${item.name}-${dropdownItem.name}`} asChild className="p-0">
-                                     <Link
-                                       to={dropdownItem.href}
-                                       className="flex items-center gap-3 w-full cursor-pointer hover:bg-primary/10 rounded-lg p-3 transition-colors duration-200 border border-transparent hover:border-primary/20"
-                                     >
-                                       <div className="flex-1">
-                                         <div className="text-sm font-medium text-foreground">{dropdownItem.name}</div>
-                                       </div>
-                                     </Link>
-                                   </DropdownMenuItem>
-                                 ))
-                               )}
-                            </DropdownMenuContent>
-                          </DropdownMenu>
+                          <>
+                            <Button
+                              variant="ghost"
+                              className="flex items-center text-white hover:bg-white/10 space-x-1 px-4 py-2 rounded-full transition-all duration-200"
+                            >
+                              {item.icon && <item.icon className="w-4 h-4 mr-1" />}
+                              <span className="text-sm font-medium">{item.name}</span>
+                              <ChevronDown className="w-4 h-4 ml-1" />
+                            </Button>
+                            
+                            {/* Dropdown Content */}
+                            {activeDropdown === item.name && (
+                              <div className="absolute top-full left-0 mt-2 w-auto bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border border-white/20 rounded-xl shadow-xl p-4 z-50">
+                                {item.name === "Products" || item.name === "Solutions" || item.name === "About" ? (
+                                  <div className={`gap-4 ${item.name === "Products" ? "flex" : "grid grid-cols-2"}`}>
+                                    {item.dropdown.map((dropdownItem) => (
+                                      <Link
+                                        key={`${item.name}-${dropdownItem.name}`}
+                                        to={dropdownItem.href}
+                                        className="flex flex-col items-center gap-3 p-4 cursor-pointer hover:bg-primary/10 rounded-lg transition-colors duration-200 border border-transparent hover:border-primary/20 group"
+                                      >
+                                        <div className="w-20 h-20 bg-white rounded-lg p-2 shadow-sm group-hover:shadow-md transition-shadow duration-200">
+                                          <img
+                                            src={dropdownItem.image}
+                                            alt={dropdownItem.name}
+                                            className="w-full h-full object-contain"
+                                          />
+                                        </div>
+                                        <div className="text-center">
+                                          <div className="text-sm font-medium text-foreground">{dropdownItem.name}</div>
+                                          {dropdownItem.description && (
+                                            <div className="text-xs text-muted-foreground mt-1">{dropdownItem.description}</div>
+                                          )}
+                                          {dropdownItem.recommended && (
+                                            <div className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full mt-2 inline-block">{dropdownItem.recommended}</div>
+                                          )}
+                                        </div>
+                                      </Link>
+                                    ))}
+                                  </div>
+                                ) : (
+                                  item.dropdown.map((dropdownItem) => (
+                                    <Link
+                                      key={`${item.name}-${dropdownItem.name}`}
+                                      to={dropdownItem.href}
+                                      className="flex items-center gap-3 w-full cursor-pointer hover:bg-primary/10 rounded-lg p-3 transition-colors duration-200 border border-transparent hover:border-primary/20"
+                                    >
+                                      <div className="flex-1">
+                                        <div className="text-sm font-medium text-foreground">{dropdownItem.name}</div>
+                                      </div>
+                                    </Link>
+                                  ))
+                                )}
+                              </div>
+                            )}
+                          </>
                         ) : (
                           <Link
                             to={item.href}
