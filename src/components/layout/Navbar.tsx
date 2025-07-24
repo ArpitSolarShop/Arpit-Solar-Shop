@@ -51,8 +51,18 @@ const Navbar = () => {
       name: "Solutions",
       icon: PackageCheck,
       dropdown: [
-        { name: "Residential", href: "/solutions/residential" },
-        { name: "Commercial/Industrial", href: "/solutions/commercial-industrial" },
+        { 
+          name: "Residential", 
+          href: "/solutions/residential", 
+          image: "/logo.png",
+          description: "Solar solutions for homes"
+        },
+        { 
+          name: "Commercial/Industrial", 
+          href: "/solutions/commercial-industrial", 
+          image: "/reliance-industries-ltd.png",
+          description: "Large-scale solar systems"
+        },
       ],
     },
     {
@@ -152,46 +162,46 @@ const Navbar = () => {
                             <DropdownMenuContent 
                               className="w-96 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border border-white/20 rounded-xl shadow-xl mt-2 p-4"
                               sideOffset={5}
-                            >
-                              {item.name === "Products" ? (
-                                <div className="grid grid-cols-3 gap-4">
-                                  {item.dropdown.map((dropdownItem) => (
-                                    <DropdownMenuItem key={dropdownItem.name} asChild className="p-0">
-                                      <Link
-                                        to={dropdownItem.href}
-                                        className="flex flex-col items-center gap-3 p-4 cursor-pointer hover:bg-primary/10 rounded-lg transition-colors duration-200 border border-transparent hover:border-primary/20 group"
-                                      >
-                                        <div className="w-20 h-20 bg-white rounded-lg p-2 shadow-sm group-hover:shadow-md transition-shadow duration-200">
-                                          <img
-                                            src={dropdownItem.image}
-                                            alt={dropdownItem.name}
-                                            className="w-full h-full object-contain"
-                                          />
-                                        </div>
-                                        <div className="text-center">
-                                          <div className="text-sm font-medium text-foreground">{dropdownItem.name}</div>
-                                        </div>
-                                      </Link>
-                                    </DropdownMenuItem>
-                                  ))}
-                                </div>
-                              ) : (
-                                item.dropdown.map((dropdownItem) => (
-                                  <DropdownMenuItem key={dropdownItem.name} asChild className="p-0">
-                                    <Link
-                                      to={dropdownItem.href}
-                                      className="flex items-center gap-3 w-full cursor-pointer hover:bg-primary/10 rounded-lg p-3 transition-colors duration-200 border border-transparent hover:border-primary/20"
-                                    >
-                                      {dropdownItem.icon && (
-                                        <div className="text-xl">{dropdownItem.icon}</div>
-                                      )}
-                                      <div className="flex-1">
-                                        <div className="text-sm font-medium text-foreground">{dropdownItem.name}</div>
-                                      </div>
-                                    </Link>
-                                  </DropdownMenuItem>
-                                ))
-                              )}
+                             >
+                               {item.name === "Products" || item.name === "Solutions" ? (
+                                 <div className="grid grid-cols-2 gap-4">
+                                   {item.dropdown.map((dropdownItem) => (
+                                     <DropdownMenuItem key={dropdownItem.name} asChild className="p-0">
+                                       <Link
+                                         to={dropdownItem.href}
+                                         className="flex flex-col items-center gap-3 p-4 cursor-pointer hover:bg-primary/10 rounded-lg transition-colors duration-200 border border-transparent hover:border-primary/20 group"
+                                       >
+                                         <div className="w-20 h-20 bg-white rounded-lg p-2 shadow-sm group-hover:shadow-md transition-shadow duration-200">
+                                           <img
+                                             src={dropdownItem.image}
+                                             alt={dropdownItem.name}
+                                             className="w-full h-full object-contain"
+                                           />
+                                         </div>
+                                         <div className="text-center">
+                                           <div className="text-sm font-medium text-foreground">{dropdownItem.name}</div>
+                                           {dropdownItem.description && (
+                                             <div className="text-xs text-muted-foreground mt-1">{dropdownItem.description}</div>
+                                           )}
+                                         </div>
+                                       </Link>
+                                     </DropdownMenuItem>
+                                   ))}
+                                 </div>
+                               ) : (
+                                 item.dropdown.map((dropdownItem) => (
+                                   <DropdownMenuItem key={dropdownItem.name} asChild className="p-0">
+                                     <Link
+                                       to={dropdownItem.href}
+                                       className="flex items-center gap-3 w-full cursor-pointer hover:bg-primary/10 rounded-lg p-3 transition-colors duration-200 border border-transparent hover:border-primary/20"
+                                     >
+                                       <div className="flex-1">
+                                         <div className="text-sm font-medium text-foreground">{dropdownItem.name}</div>
+                                       </div>
+                                     </Link>
+                                   </DropdownMenuItem>
+                                 ))
+                               )}
                             </DropdownMenuContent>
                           </DropdownMenu>
                         ) : (
@@ -283,45 +293,45 @@ const Navbar = () => {
                                 {item.icon && <item.icon className="w-4 h-4" />}
                                 {item.name}
                               </div>
-                              {item.name === "Products" ? (
-                                <div className="grid grid-cols-3 gap-3 px-3 py-3">
-                                  {item.dropdown.map((dropdownItem) => (
-                                    <Link
-                                      key={dropdownItem.name}
-                                      to={dropdownItem.href}
-                                      className="flex flex-col items-center gap-2 p-3 cursor-pointer hover:bg-muted transition-colors duration-200 rounded-lg border border-transparent hover:border-primary/20"
-                                      onClick={() => setIsOpen(false)}
-                                    >
-                                      <div className="w-16 h-16 bg-white rounded-lg p-2 shadow-sm">
-                                        <img
-                                          src={dropdownItem.image}
-                                          alt={dropdownItem.name}
-                                          className="w-full h-full object-contain"
-                                        />
-                                      </div>
-                                      <div className="text-center">
-                                        <div className="text-xs font-medium text-foreground">{dropdownItem.name}</div>
-                                      </div>
-                                    </Link>
-                                  ))}
-                                </div>
-                              ) : (
-                                item.dropdown.map((dropdownItem) => (
-                                  <Link
-                                    key={dropdownItem.name}
-                                    to={dropdownItem.href}
-                                    className="flex items-center gap-3 px-4 py-3 text-sm hover:bg-muted transition-colors duration-200 rounded-lg ml-2 border border-transparent hover:border-primary/20"
-                                    onClick={() => setIsOpen(false)}
-                                  >
-                                    {dropdownItem.icon && (
-                                      <div className="text-lg">{dropdownItem.icon}</div>
-                                    )}
-                                    <div className="flex-1">
-                                      <div className="font-medium text-foreground">{dropdownItem.name}</div>
-                                    </div>
-                                  </Link>
-                                ))
-                              )}
+                               {item.name === "Products" || item.name === "Solutions" ? (
+                                 <div className={`grid gap-3 px-3 py-3 ${item.name === "Products" ? "grid-cols-3" : "grid-cols-2"}`}>
+                                   {item.dropdown.map((dropdownItem) => (
+                                     <Link
+                                       key={dropdownItem.name}
+                                       to={dropdownItem.href}
+                                       className="flex flex-col items-center gap-2 p-3 cursor-pointer hover:bg-muted transition-colors duration-200 rounded-lg border border-transparent hover:border-primary/20"
+                                       onClick={() => setIsOpen(false)}
+                                     >
+                                       <div className="w-16 h-16 bg-white rounded-lg p-2 shadow-sm">
+                                         <img
+                                           src={dropdownItem.image}
+                                           alt={dropdownItem.name}
+                                           className="w-full h-full object-contain"
+                                         />
+                                       </div>
+                                       <div className="text-center">
+                                         <div className="text-xs font-medium text-foreground">{dropdownItem.name}</div>
+                                         {dropdownItem.description && (
+                                           <div className="text-xs text-muted-foreground mt-1">{dropdownItem.description}</div>
+                                         )}
+                                       </div>
+                                     </Link>
+                                   ))}
+                                 </div>
+                               ) : (
+                                 item.dropdown.map((dropdownItem) => (
+                                   <Link
+                                     key={dropdownItem.name}
+                                     to={dropdownItem.href}
+                                     className="flex items-center gap-3 px-4 py-3 text-sm hover:bg-muted transition-colors duration-200 rounded-lg ml-2 border border-transparent hover:border-primary/20"
+                                     onClick={() => setIsOpen(false)}
+                                   >
+                                     <div className="flex-1">
+                                       <div className="font-medium text-foreground">{dropdownItem.name}</div>
+                                     </div>
+                                   </Link>
+                                 ))
+                               )}
                             </div>
                           ) : (
                             <Link
