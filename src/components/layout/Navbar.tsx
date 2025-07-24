@@ -74,7 +74,8 @@ const Navbar = () => {
           name: "Reliance Solar", 
           href: "/reliance", 
           image: "/reliance-industries-ltd.png",
-          description: "Leading renewable energy solutions"
+          description: "Leading renewable energy solutions",
+          recommended: "Recommended for commercial"
         },
         { 
           name: "Shakti Solar", 
@@ -182,6 +183,9 @@ const Navbar = () => {
                                            <div className="text-sm font-medium text-foreground">{dropdownItem.name}</div>
                                            {dropdownItem.description && (
                                              <div className="text-xs text-muted-foreground mt-1">{dropdownItem.description}</div>
+                                           )}
+                                           {dropdownItem.recommended && (
+                                             <div className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full mt-2 inline-block">{dropdownItem.recommended}</div>
                                            )}
                                          </div>
                                        </Link>
@@ -313,6 +317,9 @@ const Navbar = () => {
                                          <div className="text-xs font-medium text-foreground">{dropdownItem.name}</div>
                                          {dropdownItem.description && (
                                            <div className="text-xs text-muted-foreground mt-1">{dropdownItem.description}</div>
+                                         )}
+                                         {dropdownItem.recommended && (
+                                           <div className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full mt-2 inline-block">{dropdownItem.recommended}</div>
                                          )}
                                        </div>
                                      </Link>
