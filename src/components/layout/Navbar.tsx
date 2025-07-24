@@ -174,7 +174,11 @@ const Navbar = () => {
                             
                             {/* Dropdown Content */}
                             {activeDropdown === item.name && (
-                              <div className="absolute top-full left-0 mt-2 w-auto bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border border-white/20 rounded-xl shadow-xl p-4 z-50">
+                              <div className={`absolute top-full left-0 mt-2 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border border-white/20 rounded-xl shadow-xl p-4 z-50 ${
+                                item.name === "About" ? "min-w-[500px]" : 
+                                item.name === "Solutions" ? "min-w-[500px]" : 
+                                "w-auto"
+                              }`}>
                                 {item.name === "Products" || item.name === "Solutions" || item.name === "About" ? (
                                   <div className={`gap-4 ${item.name === "Products" ? "flex" : "grid grid-cols-2"}`}>
                                     {item.dropdown.map((dropdownItem) => (
