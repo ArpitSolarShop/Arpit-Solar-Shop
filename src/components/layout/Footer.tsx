@@ -24,36 +24,16 @@ const Footer = () => {
               Powering homes and businesses across India with sustainable energy.
             </p>
             <div className="flex space-x-3">
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                className="text-gray-300 hover:text-white hover:bg-white/10"
-                onClick={() => window.open('https://www.facebook.com/@arpitsolar', '_blank')}
-              >
+              <Button variant="ghost" size="icon" className="text-gray-300 hover:text-white hover:bg-white/10" onClick={() => window.open('https://www.facebook.com/@arpitsolar', '_blank')}>
                 <Facebook className="w-4 h-4" />
               </Button>
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                className="text-gray-300 hover:text-white hover:bg-white/10"
-                onClick={() => window.open('https://www.linkedin.com/in/arpit-solar-shop', '_blank')}
-              >
+              <Button variant="ghost" size="icon" className="text-gray-300 hover:text-white hover:bg-white/10" onClick={() => window.open('https://www.linkedin.com/in/arpit-solar-shop', '_blank')}>
                 <Linkedin className="w-4 h-4" />
               </Button>
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                className="text-gray-300 hover:text-white hover:bg-white/10"
-                onClick={() => window.open('https://www.instagram.com/arpitsolarweb/', '_blank')}
-              >
+              <Button variant="ghost" size="icon" className="text-gray-300 hover:text-white hover:bg-white/10" onClick={() => window.open('https://www.instagram.com/arpitsolarweb/', '_blank')}>
                 <Instagram className="w-4 h-4" />
               </Button>
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                className="text-gray-300 hover:text-white hover:bg-white/10"
-                onClick={() => window.open('https://in.pinterest.com/arpitsolar/', '_blank')}
-              >
+              <Button variant="ghost" size="icon" className="text-gray-300 hover:text-white hover:bg-white/10" onClick={() => window.open('https://in.pinterest.com/arpitsolar/', '_blank')}>
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 0C5.374 0 0 5.374 0 12s5.374 12 12 12c1.018 0 2.006-.133 2.939-.379-1.339-.723-2.028-2.168-2.028-2.168s-.277-1.104-.277-2.615c0-1.53.874-2.676 1.96-2.676.926 0 1.375.695 1.375 1.528 0 .93-.593 2.322-.9 3.616-.256 1.083.544 1.966 1.613 1.966 1.938 0 3.432-2.043 3.432-4.991 0-2.612-1.878-4.439-4.555-4.439-3.103 0-4.924 2.326-4.924 4.732 0 .937.361 1.943.814 2.486.089.108.102.202.075.313-.08.336-.258 1.035-.293 1.181-.046.192-.149.233-.344.14-1.295-.603-2.106-2.494-2.106-4.016 0-3.273 2.378-6.278 6.854-6.278 3.599 0 6.398 2.565 6.398 5.996 0 3.578-2.255 6.456-5.386 6.456-1.051 0-2.041-.547-2.379-1.201 0 0-.52 1.982-.647 2.469-.234.897-.866 2.024-1.289 2.708.97.299 2 .458 3.063.458 6.626 0 12-5.374 12-12S18.626 0 12 0z"/>
                 </svg>
@@ -68,7 +48,6 @@ const Footer = () => {
               {[
                 { name: "Home", href: "/" },
                 { name: "About Us", href: "/about/company" },
-                { name: "Solar Technology", href: "/about/technology" },
                 { name: "Products", href: "/products" },
                 { name: "Services", href: "/services" },
                 { name: "Sustainability", href: "/sustainability" },
@@ -109,38 +88,24 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact Info & Newsletter */}
+          {/* Contact Info */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Get In Touch</h3>
             <div className="space-y-3">
               <div className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-solar-orange mt-0.5 flex-shrink-0" />
                 <p className="text-gray-300 text-sm">
-                  123 Solar Street, Green Energy Complex<br />
-                  New Delhi, India 110001
+                  Arpit Solar Shop, Shivpur, Varanasi<br />
+                  Uttar Pradesh, India - 221003
                 </p>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-solar-orange flex-shrink-0" />
-                <p className="text-gray-300 text-sm">+91 98765 43210</p>
+                <p className="text-gray-300 text-sm">+91 90057 70466</p>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-solar-orange flex-shrink-0" />
                 <p className="text-gray-300 text-sm">info@arpitsolar.com</p>
-              </div>
-            </div>
-            
-            {/* Newsletter Signup */}
-            <div className="pt-4 border-t border-white/10">
-              <h4 className="text-sm font-semibold mb-2">Subscribe to Newsletter</h4>
-              <div className="flex space-x-2">
-                <Input
-                  placeholder="Enter your email"
-                  className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 text-sm"
-                />
-                <Button size="sm" className="sunset-gradient text-white font-medium">
-                  Subscribe
-                </Button>
               </div>
             </div>
           </div>

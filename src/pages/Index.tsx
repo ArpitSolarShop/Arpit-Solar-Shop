@@ -4,9 +4,9 @@ import HeroSection from "@/components/sections/HeroSection";
 import HowItWorks from "@/components/sections/HowItWorks";
 import ProjectHighlights from "@/components/sections/ProjectHighlights";
 import Certifications from "@/components/sections/Certifications";
-import HappyCustomers from "@/components/sections/HappyCustomers";
+
 import FAQ from "@/components/sections/FAQ";
-import ImageNavigation from "@/components/sections/ImageNavigation";
+import CleanEnergySolution from "@/components/sections/CleanEnergySolution";
 
 const Index = () => {
   return (
@@ -14,11 +14,11 @@ const Index = () => {
       <Navbar />
       <main>
         <HeroSection />
-        <ImageNavigation />
+        <CleanEnergySolution />
         <HowItWorks />
         <ProjectHighlights />
         <Certifications />
-        <HappyCustomers />
+       
         <FAQ />
       </main>
       <Footer />
