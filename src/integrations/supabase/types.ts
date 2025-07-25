@@ -135,8 +135,12 @@ export type Database = {
           name: string
           phone: string
           power_demand_kw: number | null
+          product_category: string | null
+          product_name: string | null
           project_location: string | null
           referral: string | null
+          referral_name: string | null
+          referral_phone: string | null
           solution_classification:
             | Database["public"]["Enums"]["solution_type"]
             | null
@@ -152,8 +156,12 @@ export type Database = {
           name: string
           phone: string
           power_demand_kw?: number | null
+          product_category?: string | null
+          product_name?: string | null
           project_location?: string | null
           referral?: string | null
+          referral_name?: string | null
+          referral_phone?: string | null
           solution_classification?:
             | Database["public"]["Enums"]["solution_type"]
             | null
@@ -169,8 +177,12 @@ export type Database = {
           name?: string
           phone?: string
           power_demand_kw?: number | null
+          product_category?: string | null
+          product_name?: string | null
           project_location?: string | null
           referral?: string | null
+          referral_name?: string | null
+          referral_phone?: string | null
           solution_classification?:
             | Database["public"]["Enums"]["solution_type"]
             | null

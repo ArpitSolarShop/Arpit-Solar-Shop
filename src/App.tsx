@@ -16,7 +16,7 @@ import ShaktiSolar from "./pages/ShaktiSolar";
 import Residential from "./pages/Residential";
 import CommercialIndustrial from "./pages/CommercialIndustrial";
 import NotFound from "./pages/NotFound";
-// import SolarChatWidget from "@/components/chat-widget/SolarChatWidget";
+import FloatingChatButton from "@/components/FloatingChatButton";
 
 
 
@@ -47,7 +47,7 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
-         {/* <SolarChatWidget />  */}
+        <FloatingChatButton />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

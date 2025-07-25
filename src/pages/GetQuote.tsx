@@ -23,7 +23,8 @@ const GetQuote = () => {
     monthly_bill: "",
     power_demand_kw: "",
     project_location: "",
-    referral: "",
+    referral_name: "",
+    referral_phone: "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -41,7 +42,8 @@ const GetQuote = () => {
         monthly_bill: formData.monthly_bill ? parseFloat(formData.monthly_bill) : null,
         power_demand_kw: formData.power_demand_kw ? parseFloat(formData.power_demand_kw) : null,
         project_location: formData.project_location || null,
-        referral: formData.referral || null,
+        referral_name: formData.referral_name || null,
+        referral_phone: formData.referral_phone || null,
         source: "Quote Form" as const,
       };
 
@@ -65,7 +67,8 @@ const GetQuote = () => {
         monthly_bill: "",
         power_demand_kw: "",
         project_location: "",
-        referral: "",
+        referral_name: "",
+        referral_phone: "",
       });
     } catch (error) {
       console.error("Error submitting quote:", error);
@@ -252,17 +255,33 @@ const GetQuote = () => {
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="referral" className="text-sm font-medium">
-                  How did you hear about us?
-                </Label>
-                <Textarea
-                  id="referral"
-                  value={formData.referral}
-                  onChange={(e) => handleInputChange("referral", e.target.value)}
-                  placeholder="Google search, friend referral, advertisement, etc."
-                  className="min-h-[80px]"
-                />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <Label htmlFor="referral_name" className="text-sm font-medium">
+                    Referral Name (Optional)
+                  </Label>
+                  <Input
+                    id="referral_name"
+                    type="text"
+                    value={formData.referral_name}
+                    onChange={(e) => handleInputChange("referral_name", e.target.value)}
+                    placeholder="Name of person who referred you"
+                    className="h-11"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="referral_phone" className="text-sm font-medium">
+                    Referral Phone Number (Optional)
+                  </Label>
+                  <Input
+                    id="referral_phone"
+                    type="tel"
+                    value={formData.referral_phone}
+                    onChange={(e) => handleInputChange("referral_phone", e.target.value)}
+                    placeholder="+91 98765 43210"
+                    className="h-11"
+                  />
+                </div>
               </div>
 
               {/* Submit Button */}

@@ -4,18 +4,18 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { X, Zap, CheckCircle } from "lucide-react";
+import { Droplets, CheckCircle } from "lucide-react";
 
-interface RelianceQuoteFormProps {
+interface ShaktiQuoteFormProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  productName?: string;
 }
 
-const RelianceQuoteForm = ({ open, onOpenChange }: RelianceQuoteFormProps) => {
+const ShaktiQuoteForm = ({ open, onOpenChange, productName = "Shakti Solar Product" }: ShaktiQuoteFormProps) => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -49,8 +49,8 @@ const RelianceQuoteForm = ({ open, onOpenChange }: RelianceQuoteFormProps) => {
         project_location: formData.project_location || null,
         referral_name: formData.referral_name || null,
         referral_phone: formData.referral_phone || null,
-        product_name: "Reliance Solar HJT Panel",
-        product_category: "Reliance",
+        product_name: productName,
+        product_category: "Shakti",
         source: "Quote Form" as const,
       };
 
@@ -60,7 +60,7 @@ const RelianceQuoteForm = ({ open, onOpenChange }: RelianceQuoteFormProps) => {
 
       toast({
         title: "Quote Request Submitted!",
-        description: "Our Reliance Solar team will contact you within 24 hours to discuss your HJT solar solution.",
+        description: "Our Shakti Solar team will contact you within 24 hours to discuss your solar solution.",
       });
 
       // Reset form and close dialog
@@ -98,25 +98,25 @@ const RelianceQuoteForm = ({ open, onOpenChange }: RelianceQuoteFormProps) => {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader className="relative">
-          {/* Reliance Logo */}
+          {/* Shakti Logo */}
           <div className="flex justify-center mb-4">
             <img 
-              src="/reliance-industries-ltd.png" 
-              alt="Reliance Industries Ltd" 
+              src="/Shakti Solar.png" 
+              alt="Shakti Solar" 
               className="h-12 w-auto"
             />
           </div>
           
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 bg-[#BFA161] rounded-lg flex items-center justify-center">
-              <Zap className="h-5 w-5 text-white" />
+            <div className="w-10 h-10 bg-orange-600 rounded-lg flex items-center justify-center">
+              <Droplets className="h-5 w-5 text-white" />
             </div>
             <div>
-              <DialogTitle className="text-2xl font-bold text-[#BFA161]">
-                Reliance Solar HJT Quote
+              <DialogTitle className="text-2xl font-bold text-orange-600">
+                Shakti Solar Quote
               </DialogTitle>
               <DialogDescription className="text-base">
-                Get a personalized quote for advanced Heterojunction Technology solar panels
+                Get a personalized quote for efficient solar solutions
               </DialogDescription>
             </div>
           </div>
@@ -125,12 +125,12 @@ const RelianceQuoteForm = ({ open, onOpenChange }: RelianceQuoteFormProps) => {
         <Card className="border-0 shadow-none">
           <CardHeader className="px-0 pb-4">
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <CheckCircle className="h-4 w-4 text-[#BFA161]" />
-              <span>Premium HJT Technology</span>
-              <CheckCircle className="h-4 w-4 text-[#BFA161]" />
-              <span>22%+ Efficiency</span>
-              <CheckCircle className="h-4 w-4 text-[#BFA161]" />
-              <span>25+ Year Warranty</span>
+              <CheckCircle className="h-4 w-4 text-orange-600" />
+              <span>High Efficiency Panels</span>
+              <CheckCircle className="h-4 w-4 text-orange-600" />
+              <span>Reliable Performance</span>
+              <CheckCircle className="h-4 w-4 text-orange-600" />
+              <span>Competitive Pricing</span>
             </div>
           </CardHeader>
           <CardContent className="px-0">
@@ -208,10 +208,10 @@ const RelianceQuoteForm = ({ open, onOpenChange }: RelianceQuoteFormProps) => {
                       <SelectValue placeholder="Select solution type" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="Residential">Residential HJT Panels</SelectItem>
-                      <SelectItem value="Commercial">Commercial HJT Panels</SelectItem>
-                      <SelectItem value="Commercial and industrial DG">Industrial HJT Systems</SelectItem>
-                      <SelectItem value="Utility-scale">Utility-scale HJT Projects</SelectItem>
+                      <SelectItem value="Residential">Residential Solar</SelectItem>
+                      <SelectItem value="Commercial">Commercial Solar</SelectItem>
+                      <SelectItem value="Commercial and industrial DG">Industrial Solar Systems</SelectItem>
+                      <SelectItem value="Utility-scale">Utility-scale Projects</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -307,12 +307,12 @@ const RelianceQuoteForm = ({ open, onOpenChange }: RelianceQuoteFormProps) => {
                 <Button
                   type="submit"
                   disabled={loading || !formData.name || !formData.phone}
-                  className="w-full bg-transparent border-2 border-[#BFA161] text-[#BFA161] hover:bg-[#BFA161]/10 font-semibold h-12 text-base"
+                  className="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold h-12 text-base"
                 >
-                  {loading ? "Submitting..." : "Get My Reliance Solar Quote"}
+                  {loading ? "Submitting..." : "Get My Shakti Solar Quote"}
                 </Button>
                 <p className="text-xs text-muted-foreground text-center mt-3">
-                  By submitting this form, you agree to be contacted by Reliance Solar representatives
+                  By submitting this form, you agree to be contacted by Shakti Solar representatives
                 </p>
               </div>
             </form>
@@ -323,4 +323,4 @@ const RelianceQuoteForm = ({ open, onOpenChange }: RelianceQuoteFormProps) => {
   );
 };
 
-export default RelianceQuoteForm;
+export default ShaktiQuoteForm;
