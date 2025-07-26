@@ -311,7 +311,11 @@ export type Database = {
     Enums: {
       company_brand: "Reliance" | "Sakti" | "Tata"
       entity_type: "Individual" | "Enterprise"
-      quote_source: "Quote Form" | "AI Chatbot"
+      quote_source:
+        | "Quote Form"
+        | "AI Chatbot"
+        | "Reliance Quote Form"
+        | "Shakti Quote Form"
       solution_type:
         | "Residential"
         | "Commercial"
@@ -447,7 +451,12 @@ export const Constants = {
     Enums: {
       company_brand: ["Reliance", "Sakti", "Tata"],
       entity_type: ["Individual", "Enterprise"],
-      quote_source: ["Quote Form", "AI Chatbot"],
+      quote_source: [
+        "Quote Form",
+        "AI Chatbot",
+        "Reliance Quote Form",
+        "Shakti Quote Form",
+      ],
       solution_type: [
         "Residential",
         "Commercial",

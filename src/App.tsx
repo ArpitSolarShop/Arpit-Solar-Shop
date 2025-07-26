@@ -16,6 +16,7 @@ import ShaktiSolar from "./pages/ShaktiSolar";
 import Residential from "./pages/Residential";
 import CommercialIndustrial from "./pages/CommercialIndustrial";
 import NotFound from "./pages/NotFound";
+import Admin from "./pages/Admin";
 import FloatingChatButton from "@/components/FloatingChatButton";
 
 
@@ -44,6 +45,7 @@ const App = () => (
           <Route path="/shakti-solar" element={<ShaktiSolar />} />
           <Route path="/solutions/residential" element={<Residential />} />
           <Route path="/solutions/commercial-industrial" element={<CommercialIndustrial />} />
+          <Route path="/admin" element={<Admin />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

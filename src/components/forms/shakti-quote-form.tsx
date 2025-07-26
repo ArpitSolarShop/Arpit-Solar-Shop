@@ -64,7 +64,7 @@ const ShaktiQuoteForm = ({
         referral_phone: formData.referral_phone || null,
         product_name: productName,
         product_category: "Shakti",
-        source: "Shakti Quote Form" as const,
+        source: "Quote Form" as const,
         customer_type: formData.entity_type === "Individual" ? "residential" : "commercial",
         referral_source: formData.referral_name ? "referral" : null,
       };
