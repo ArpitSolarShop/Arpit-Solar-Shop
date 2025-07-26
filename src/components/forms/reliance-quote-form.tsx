@@ -348,6 +348,7 @@ import { Badge } from "@/components/ui/badge"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { useToast } from "@/hooks/use-toast"
 import { CheckCircle, AlertCircle } from "lucide-react"
+import { supabase } from "@/integrations/supabase/client"
 
 interface RelianceQuoteFormProps {
   open: boolean
@@ -385,8 +386,29 @@ const RelianceQuoteForm = ({
     setLoading(true)
 
     try {
-      // Simulate API call - replace with actual Supabase integration
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      // Submit to Supabase database
+      const insertData = {
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email || null,
+        entity_type: (formData.entity_type as "Individual" | "Enterprise") || null,
+        solution_classification: (formData.solution_classification as "Residential" | "Commercial" | "Commercial and industrial DG" | "BIPv" | "Utility-scale") || null,
+        estimated_area_sqft: formData.estimated_area_sqft ? parseFloat(formData.estimated_area_sqft) : null,
+        monthly_bill: formData.monthly_bill ? parseFloat(formData.monthly_bill) : null,
+        power_demand_kw: formData.power_demand_kw ? parseFloat(formData.power_demand_kw) : null,
+        project_location: formData.project_location || null,
+        referral_name: formData.referral_name || null,
+        referral_phone: formData.referral_phone || null,
+        product_name: productName,
+        product_category: "Reliance",
+        source: "Reliance Quote Form" as const,
+        customer_type: formData.entity_type === "Individual" ? "residential" : "commercial",
+        referral_source: formData.referral_name ? "referral" : null,
+      };
+
+      const { error } = await supabase.from("quotes").insert(insertData);
+
+      if (error) throw error;
 
       toast({
         title: "Quote Request Submitted!",

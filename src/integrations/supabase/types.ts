@@ -127,11 +127,13 @@ export type Database = {
       quotes: {
         Row: {
           created_at: string
+          customer_type: string | null
           email: string | null
           entity_type: Database["public"]["Enums"]["entity_type"] | null
           estimated_area_sqft: number | null
           id: string
           monthly_bill: number | null
+          monthly_bill_range: string | null
           name: string
           phone: string
           power_demand_kw: number | null
@@ -141,6 +143,8 @@ export type Database = {
           referral: string | null
           referral_name: string | null
           referral_phone: string | null
+          referral_source: string | null
+          roof_area: number | null
           solution_classification:
             | Database["public"]["Enums"]["solution_type"]
             | null
@@ -148,11 +152,13 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          customer_type?: string | null
           email?: string | null
           entity_type?: Database["public"]["Enums"]["entity_type"] | null
           estimated_area_sqft?: number | null
           id?: string
           monthly_bill?: number | null
+          monthly_bill_range?: string | null
           name: string
           phone: string
           power_demand_kw?: number | null
@@ -162,6 +168,8 @@ export type Database = {
           referral?: string | null
           referral_name?: string | null
           referral_phone?: string | null
+          referral_source?: string | null
+          roof_area?: number | null
           solution_classification?:
             | Database["public"]["Enums"]["solution_type"]
             | null
@@ -169,11 +177,13 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          customer_type?: string | null
           email?: string | null
           entity_type?: Database["public"]["Enums"]["entity_type"] | null
           estimated_area_sqft?: number | null
           id?: string
           monthly_bill?: number | null
+          monthly_bill_range?: string | null
           name?: string
           phone?: string
           power_demand_kw?: number | null
@@ -183,6 +193,8 @@ export type Database = {
           referral?: string | null
           referral_name?: string | null
           referral_phone?: string | null
+          referral_source?: string | null
+          roof_area?: number | null
           solution_classification?:
             | Database["public"]["Enums"]["solution_type"]
             | null

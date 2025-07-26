@@ -215,6 +215,10 @@ export default function SolarChatWidget({ isOpen, onClose }: SolarChatWidgetProp
         referral_name: userData.referralName || null,
         referral_phone: userData.referralPhone || null,
         source: "AI Chatbot" as const,
+        customer_type: userData.entityType === 'home' ? 'residential' : 'commercial',
+        roof_area: userData.roofArea === 'small' ? 400 : userData.roofArea === 'medium' ? 750 : userData.roofArea === 'large' ? 1500 : 2500,
+        monthly_bill_range: userData.monthlyBill === 'low' ? 'Less than ₹2,000' : userData.monthlyBill === 'mid' ? '₹2,001 - ₹5,000' : userData.monthlyBill === 'high' ? '₹5,001 - ₹10,000' : 'More than ₹10,000',
+        referral_source: userData.referralSource || null,
       };
 
       const { error } = await supabase.from("quotes").insert(insertData);
