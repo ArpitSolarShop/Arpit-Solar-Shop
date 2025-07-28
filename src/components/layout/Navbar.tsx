@@ -49,43 +49,154 @@ type NavigationItem = {
   dropdown?: DropdownItem[]
 }
 
-const Navbar = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
-  const [dropdownHoverActive, setDropdownHoverActive] = useState(false)
-  const location = useLocation()
-  
-  const timerRef = useRef<NodeJS.Timeout | null>(null)
-  const leaveTimerRef = useRef<NodeJS.Timeout | null>(null)
+type SocialLink = {
+  name: string
+  icon: any
+  url: string
+}
 
-  // Clear timers on unmount
+const Navbar = () => {
+  // State management
+  const [isOpen, setIsOpen] = useState(false)
+  const [darkMode, setDarkMode] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const location = useLocation()
+  const menuCloseTimer = useRef<NodeJS.Timeout | null>(null)
+
+  // Memoized navigation items
+  const navigationItems: NavigationItem[] = useMemo(
+    () => [
+      {
+        name: "Solutions",
+        icon: PackageCheck,
+        dropdown: [
+          {
+            name: "Residential",
+            href: "/solutions/residential",
+            icon: Home,
+            description: "Solar solutions for homes",
+          },
+          {
+            name: "Commercial/Industrial",
+            href: "/solutions/commercial-industrial",
+            icon: Building,
+            description: "Large-scale solar systems",
+          },
+        ],
+      },
+      {
+        name: "Products",
+        icon: ShoppingCart,
+        href: "/products",
+        dropdown: [
+          {
+            name: "Reliance Solar",
+            href: "/reliance",
+            image: "/reliance-industries-ltd.png",
+            description: "Leading renewable energy solutions",
+            recommended: "Recommended for commercial",
+          },
+          {
+            name: "Shakti Solar",
+            href: "/shakti-solar",
+            image: "/Shakti%20Solar.png",
+            description: "Innovative solar solutions",
+            recommended: "Recommended for Residential",
+          },
+          {
+            name: "Tata Solar",
+            href: "/products?company=tata",
+            image: "/Tata%20Power%20Solar.png",
+            description: "Trusted solar power systems",
+            recommended: "Currently Out of Stock",
+          },
+        ],
+      },
+      { name: "Services", icon: Hammer, href: "/services" },
+      {
+        name: "About",
+        icon: Info,
+        dropdown: [
+          {
+            name: "Sustainability",
+            href: "/about/sustainability",
+            icon: Leaf,
+            iconClassName: "text-green-500",
+            description: "Our commitment to environmental sustainability",
+          },
+          {
+            name: "About Us",
+            href: "/about/us",
+            image: "/logo.png",
+            description: "Our company story and mission",
+          },
+        ],
+      },
+      { name: "Contact", icon: Phone, href: "/contact" },
+    ],
+    [],
+  )
+
+  // Memoized social links
+  const socialLinks: SocialLink[] = useMemo(
+    () => [
+      { name: "Facebook", icon: Facebook, url: "https://www.facebook.com/@arpitsolar" },
+      { name: "LinkedIn", icon: Linkedin, url: "https://www.linkedin.com/in/arpit-solar-shop" },
+      { name: "Instagram", icon: Instagram, url: "https://www.instagram.com/arpitsolarweb/" },
+      { name: "Pinterest", icon: PinterestIcon, url: "https://in.pinterest.com/arpitsolar/" },
+    ],
+    [],
+  )
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 100)
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  // Cleanup on unmount
   useEffect(() => {
     return () => {
-      if (timerRef.current) clearTimeout(timerRef.current)
-      if (leaveTimerRef.current) clearTimeout(leaveTimerRef.current)
+      if (menuCloseTimer.current) {
+        clearTimeout(menuCloseTimer.current)
+      }
     }
   }, [])
 
-  // Close mobile menu when route changes
-  useEffect(() => {
-    setMobileMenuOpen(false)
-  }, [location])
+  // Memoized handlers
+  const toggleDarkMode = useCallback(() => {
+    setDarkMode((prev) => {
+      const newMode = !prev
+      document.documentElement.classList.toggle("dark", newMode)
+      return newMode
+    })
+  }, [])
 
-  // Handle menu interactions
   const handleMenuEnter = useCallback((menuName: string) => {
-    if (leaveTimerRef.current) {
-      clearTimeout(leaveTimerRef.current)
-      leaveTimerRef.current = null
+    if (menuCloseTimer.current) {
+      clearTimeout(menuCloseTimer.current)
+      menuCloseTimer.current = null
     }
     setActiveDropdown(menuName)
-    setDropdownHoverActive(true)
   }, [])
 
   const handleMenuLeave = useCallback(() => {
-    leaveTimerRef.current = setTimeout(() => {
+    menuCloseTimer.current = setTimeout(() => {
       setActiveDropdown(null)
-      setDropdownHoverActive(false)
-    }, 100)
+    }, 200)
+  }, [])
+
+  const toggleMobileMenu = useCallback(() => {
+    setIsOpen((prev) => !prev)
+  }, [])
+
+  const closeMobileMenu = useCallback(() => {
+    setIsOpen(false)
   }, [])
 
   const handleSocialClick = useCallback((url: string) => {
@@ -94,86 +205,6 @@ const Navbar = () => {
 
   // Helper functions
   const isActivePath = useCallback((path: string) => location.pathname === path, [location.pathname])
-
-  // Navigation configuration
-  const navigationItems: NavigationItem[] = useMemo(() => [
-    {
-      name: "Products",
-      icon: PackageCheck,
-      iconClassName: "text-blue-600 dark:text-blue-400",
-      dropdown: [
-        {
-          name: "Reliance Solar",
-          href: "/reliance",
-          description: "Premium solar panels with cutting-edge technology",
-          icon: Sun,
-          iconClassName: "text-orange-500",
-          recommended: "Recommended"
-        },
-        {
-          name: "Shakti Solar",
-          href: "/shakti-solar", 
-          description: "Affordable and efficient solar solutions",
-          icon: Zap,
-          iconClassName: "text-yellow-500"
-        }
-      ]
-    },
-    {
-      name: "Solutions",
-      icon: Building,
-      iconClassName: "text-green-600 dark:text-green-400",
-      dropdown: [
-        {
-          name: "Residential",
-          href: "/solutions/residential",
-          description: "Perfect solar solutions for your home",
-          icon: Home,
-          iconClassName: "text-blue-500"
-        },
-        {
-          name: "Commercial & Industrial",
-          href: "/solutions/commercial-industrial",
-          description: "Large-scale solar installations",
-          icon: Building,
-          iconClassName: "text-purple-500"
-        }
-      ]
-    },
-    {
-      name: "Services",
-      icon: Hammer,
-      iconClassName: "text-purple-600 dark:text-purple-400",
-      href: "/services"
-    },
-    {
-      name: "About",
-      icon: Info,
-      iconClassName: "text-emerald-600 dark:text-emerald-400",
-      dropdown: [
-        {
-          name: "About Us",
-          href: "/about/us",
-          description: "Learn about our company and mission",
-          icon: Info,
-          iconClassName: "text-blue-500"
-        },
-        {
-          name: "Sustainability",
-          href: "/about/sustainability",
-          description: "Our commitment to clean energy",
-          icon: Leaf,
-          iconClassName: "text-green-500"
-        }
-      ]
-    },
-    {
-      name: "Contact",
-      icon: Phone,
-      iconClassName: "text-red-600 dark:text-red-400",
-      href: "/contact"
-    }
-  ], [])
 
   // Dropdown Content Component
   const DropdownContent = useCallback(
@@ -221,26 +252,41 @@ const Navbar = () => {
                             className={`w-10 h-10 ${dropdownItem.iconClassName || "text-gray-700 dark:text-gray-200 group-hover:text-gray-800 dark:group-hover:text-gray-100"}`}
                           />
                         ) : (
-                          <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
-                            <PackageCheck className="w-6 h-6 text-white" />
-                          </div>
+                          <img
+                            src={dropdownItem.image || "/placeholder.svg?height=40&width=40"}
+                            alt={dropdownItem.name}
+                            className="w-full h-full object-contain"
+                            loading="lazy"
+                          />
                         )}
                       </div>
                     )}
-                    <div className={`${item.name === "Products" || item.name === "Solutions" || item.name === "About" ? "text-center" : ""}`}>
-                      <div className="flex items-center gap-2">
-                        <h4 className="font-semibold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200">
-                          {dropdownItem.name}
-                        </h4>
-                        {dropdownItem.recommended && (
-                          <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-orange-100 text-orange-800 dark:bg-orange-900/50 dark:text-orange-200">
-                            {dropdownItem.recommended}
-                          </span>
-                        )}
+                    <div
+                      className={
+                        item.name === "Products" || item.name === "Solutions" || item.name === "About"
+                          ? "text-center"
+                          : "flex-1"
+                      }
+                    >
+                      <div className="text-sm font-medium text-gray-900 dark:text-gray-100 group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-200">
+                        {dropdownItem.name}
                       </div>
-                      <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
-                        {dropdownItem.description}
-                      </p>
+                      {dropdownItem.description && (
+                        <div className="text-xs text-gray-600 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300 mt-1 transition-colors duration-200">
+                          {dropdownItem.description}
+                        </div>
+                      )}
+                      {dropdownItem.recommended && (
+                        <div
+                          className={`text-xs px-2 py-1 rounded-full mt-2 inline-block transition-colors duration-200 ${
+                            dropdownItem.recommended === "Currently Out of Stock"
+                              ? "bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-400 group-hover:bg-red-200 dark:group-hover:bg-red-800"
+                              : "bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 group-hover:bg-blue-200 dark:group-hover:bg-blue-800"
+                          }`}
+                        >
+                          {dropdownItem.recommended}
+                        </div>
+                      )}
                     </div>
                   </Link>
                 ))}
@@ -250,167 +296,361 @@ const Navbar = () => {
         </div>
       )
     },
-    [handleMenuEnter, handleMenuLeave]
+    [handleMenuEnter, handleMenuLeave],
   )
 
-  return (
-    <>
-      <nav className="bg-white dark:bg-gray-900 shadow-sm border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50 transition-all duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            {/* Logo */}
-            <div className="flex-shrink-0">
-              <Link to="/" className="flex items-center space-x-2">
-                <img
-                  src="/logo.png"
-                  alt="Arpit Solar"
-                  className="h-10 w-auto"
-                />
-                <span className="text-xl font-bold text-gray-900 dark:text-white">
-                  Arpit Solar
-                </span>
-              </Link>
-            </div>
+  // Social Icons Component
+  const SocialIcons = useCallback(
+    ({ className }: { className: string }) => (
+      <div className={className}>
+        {socialLinks.map((social: SocialLink) => {
+          const IconComponent = social.icon
+          return (
+            <Button
+              key={social.name}
+              variant="ghost"
+              size="icon"
+              className="w-8 h-8 transition-all duration-200"
+              onClick={() => handleSocialClick(social.url)}
+              aria-label={`Visit our ${social.name} page`}
+            >
+              <IconComponent />
+            </Button>
+          )
+        })}
+      </div>
+    ),
+    [socialLinks, handleSocialClick],
+  )
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-4">
-                {navigationItems.map((item) => (
-                  <div
-                    key={item.name}
-                    className="relative"
-                    onMouseEnter={() => item.dropdown && handleMenuEnter(item.name)}
-                    onMouseLeave={() => item.dropdown && handleMenuLeave()}
-                  >
-                    {item.href ? (
-                      <Link
-                        to={item.href}
-                        className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center gap-2 ${
-                          isActivePath(item.href)
-                            ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/50"
-                            : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800"
-                        }`}
-                      >
-                        <item.icon className={`w-4 h-4 ${item.iconClassName || ""}`} />
-                        {item.name}
-                      </Link>
-                    ) : (
-                      <button
-                        className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center gap-2 ${
-                          activeDropdown === item.name
-                            ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/50"
-                            : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800"
-                        }`}
-                      >
-                        <item.icon className={`w-4 h-4 ${item.iconClassName || ""}`} />
-                        {item.name}
-                        {item.dropdown && (
-                          <ChevronDown
-                            className={`w-4 h-4 transition-transform duration-200 ${
-                              activeDropdown === item.name ? "rotate-180" : ""
-                            }`}
-                          />
-                        )}
-                      </button>
-                    )}
+  // Mobile Menu Component
+  const MobileMenu = useCallback(() => {
+    if (!isOpen) return null
+
+    return (
+      <div className="lg:hidden absolute top-full left-0 right-0 mt-2 mx-2 z-50">
+        <div className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border border-gray-200/20 dark:border-gray-700/20 rounded-2xl shadow-xl overflow-hidden">
+          <div className="px-4 pt-4 pb-4 space-y-2 max-h-[80vh] overflow-y-auto">
+            {navigationItems.map((item) => (
+              <div key={item.name}>
+                {item.dropdown ? (
+                  <div className="space-y-1">
+                    <div className="px-3 py-2 text-sm font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2">
+                      <item.icon className={`w-4 h-4 ${item.iconClassName || ""}`} />
+                      {item.name}
+                    </div>
+                    <div
+                      className={`gap-3 px-3 py-3 ${
+                        item.name === "Products" ? "flex overflow-x-auto pb-2" : "grid grid-cols-1 xs:grid-cols-2"
+                      }`}
+                    >
+                      {item.dropdown.map((dropdownItem) => (
+                        <Link
+                          key={dropdownItem.name}
+                          to={dropdownItem.href}
+                          className="flex flex-col items-center gap-2 p-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200 rounded-lg border border-transparent hover:border-blue-200 dark:hover:border-blue-700 flex-shrink-0 min-w-[140px]"
+                          onClick={closeMobileMenu}
+                        >
+                          <div className="w-16 h-16 bg-white dark:bg-gray-700 rounded-lg p-2 shadow-sm flex items-center justify-center">
+                            {dropdownItem.icon ? (
+                              <dropdownItem.icon
+                                className={`w-8 h-8 ${dropdownItem.iconClassName || "text-gray-700 dark:text-gray-200"}`}
+                              />
+                            ) : (
+                              <img
+                                src={dropdownItem.image || "/placeholder.svg?height=32&width=32"}
+                                alt={dropdownItem.name}
+                                className="w-full h-full object-contain"
+                                loading="lazy"
+                              />
+                            )}
+                          </div>
+                          <div className="text-center">
+                            <div className="text-xs font-medium text-gray-900 dark:text-gray-100">
+                              {dropdownItem.name}
+                            </div>
+                            {dropdownItem.description && (
+                              <div className="text-xs text-gray-600 dark:text-gray-400 mt-1 max-w-[120px] whitespace-normal leading-tight">
+                                {dropdownItem.description}
+                              </div>
+                            )}
+                            {dropdownItem.recommended && (
+                              <div
+                                className={`text-xs px-2 py-1 rounded-full mt-2 inline-block ${
+                                  dropdownItem.recommended === "Currently Out of Stock"
+                                    ? "bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-400"
+                                    : "bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400"
+                                }`}
+                              >
+                                {dropdownItem.recommended}
+                              </div>
+                            )}
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
                   </div>
-                ))}
+                ) : (
+                  <Link
+                    to={item.href!}
+                    className={`flex items-center gap-2 px-3 py-2 text-sm font-medium transition-colors duration-200 rounded-lg ${
+                      isActivePath(item.href!)
+                        ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
+                        : "text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                    }`}
+                    onClick={closeMobileMenu}
+                  >
+                    <item.icon className={`w-4 h-4 ${item.iconClassName || ""}`} />
+                    {item.name}
+                  </Link>
+                )}
               </div>
-            </div>
+            ))}
 
-            {/* CTA Button & Mobile menu button */}
-            <div className="flex items-center space-x-4">
-              <Link
-                to="/get-quote"
-                className="hidden md:inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-blue-600 to-orange-500 hover:from-blue-700 hover:to-orange-600 transition-all duration-200 shadow-lg hover:shadow-xl"
-              >
-                <ShoppingCart className="w-4 h-4 mr-2" />
-                Get Quote
-              </Link>
-
-              {/* Mobile menu button */}
-              <div className="md:hidden">
-                <button
-                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                  className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
-                  aria-expanded="false"
+            {/* Mobile Footer */}
+            <div className="border-t border-gray-200 dark:border-gray-700 pt-4 mt-4 space-y-3">
+              <div className="flex items-center justify-center space-x-3">
+                {socialLinks.map((social: SocialLink) => {
+                  const IconComponent = social.icon
+                  return (
+                    <Button
+                      key={social.name}
+                      variant="ghost"
+                      size="icon"
+                      className="w-9 h-9 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                      onClick={() => handleSocialClick(social.url)}
+                      aria-label={`Visit our ${social.name} page`}
+                    >
+                      <IconComponent />
+                    </Button>
+                  )
+                })}
+              </div>
+              <div className="flex items-center space-x-2">
+                <Button
+                  variant="ghost"
+                  onClick={toggleDarkMode}
+                  className="flex-1 justify-start text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800"
                 >
-                  <span className="sr-only">Open main menu</span>
-                  {mobileMenuOpen ? (
-                    <X className="block h-6 w-6" aria-hidden="true" />
-                  ) : (
-                    <Menu className="block h-6 w-6" aria-hidden="true" />
-                  )}
-                </button>
+                  {darkMode ? <Sun className="w-4 h-4 mr-2" /> : <Moon className="w-4 h-4 mr-2" />}
+                  {darkMode ? "Light Mode" : "Dark Mode"}
+                </Button>
+                <Button
+                  asChild
+                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-all duration-200"
+                >
+                  <Link to="/get-quote" onClick={closeMobileMenu}>
+                    Get Quote
+                  </Link>
+                </Button>
               </div>
             </div>
           </div>
         </div>
+      </div>
+    )
+  }, [isOpen, darkMode, isActivePath, closeMobileMenu, toggleDarkMode, handleSocialClick, navigationItems, socialLinks])
 
-        {/* Mobile menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              {navigationItems.map((item) => (
-                <div key={item.name}>
-                  {item.href ? (
-                    <Link
-                      to={item.href}
-                      className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 flex items-center gap-3 ${
-                        isActivePath(item.href)
-                          ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/50"
-                          : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800"
-                      }`}
-                      onClick={() => setMobileMenuOpen(false)}
+  // Main component logic
+  const isHomePage = location.pathname === "/"
+  const isTransparent = isHomePage && !scrolled && !activeDropdown
+  const underlineEffect =
+    "relative after:content-[''] after:absolute after:bottom-1 after:left-1/2 after:-translate-x-1/2 after:h-[2px] after:w-0 after:transition-all after:duration-300"
+
+  return (
+    <>
+      <div className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        {isTransparent ? (
+          // Transparent navbar
+          <div className="w-full px-4 py-4">
+            <div className="container mx-auto">
+              <div className="flex items-center justify-between">
+                {/* Logo */}
+                <Link to="/" className="flex items-center pl-2 sm:pl-4">
+                  <img
+                    src="/logo.png"
+                    alt="Arpit Solar Logo"
+                    className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
+                    loading="eager"
+                  />
+                </Link>
+
+                {/* Desktop Navigation */}
+                <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8 flex-1 justify-center">
+                  {navigationItems.map((item) => (
+                    <div
+                      key={item.name}
+                      className="relative group"
+                      onMouseEnter={() => item.dropdown && handleMenuEnter(item.name)}
+                      onMouseLeave={handleMenuLeave}
                     >
-                      <item.icon className={`w-5 h-5 ${item.iconClassName || ""}`} />
-                      {item.name}
-                    </Link>
-                  ) : (
-                    <div className="space-y-1">
-                      <div className="px-3 py-2 text-base font-medium text-gray-900 dark:text-gray-100 flex items-center gap-3">
-                        <item.icon className={`w-5 h-5 ${item.iconClassName || ""}`} />
-                        {item.name}
-                      </div>
-                      {item.dropdown && (
-                        <div className="pl-8 space-y-1">
-                          {item.dropdown.map((dropdownItem) => (
-                            <Link
-                              key={dropdownItem.name}
-                              to={dropdownItem.href}
-                              className="block px-3 py-2 rounded-md text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
-                              onClick={() => setMobileMenuOpen(false)}
-                            >
-                              {dropdownItem.name}
-                            </Link>
-                          ))}
-                        </div>
+                      {item.dropdown ? (
+                        <>
+                          <Button
+                            variant="ghost"
+                            className={`flex items-center text-white hover:text-black space-x-1 px-3 xl:px-4 py-2 transition-colors duration-200 hover:bg-transparent ${underlineEffect} after:bg-blue-600 group-hover:after:w-full`}
+                          >
+                            <item.icon
+                              className={`w-4 h-4 mr-1 group-hover:text-black dark:group-hover:text-white transition-colors duration-200 ${item.iconClassName || ""}`}
+                            />
+                            <span className="text-sm font-medium group-hover:text-black dark:group-hover:text-white transition-colors duration-200">
+                              {item.name}
+                            </span>
+                            <ChevronDown className="w-4 h-4 ml-1" />
+                          </Button>
+                          {activeDropdown === item.name && <DropdownContent item={item} isTransparent={true} />}
+                        </>
+                      ) : (
+                        <Link
+                          to={item.href!}
+                          className={`flex items-center gap-1 px-3 xl:px-4 py-2 text-sm font-medium transition-colors duration-200 text-white ${underlineEffect} after:bg-white ${
+                            isActivePath(item.href!) ? "after:w-full" : "after:w-0 group-hover:after:w-full"
+                          }`}
+                        >
+                          <item.icon className={`w-4 h-4 mr-1 ${item.iconClassName || ""}`} />
+                          {item.name}
+                        </Link>
                       )}
                     </div>
-                  )}
+                  ))}
+                </nav>
+
+                {/* Right Side Actions */}
+                <div className="flex items-center space-x-2 sm:space-x-4 pr-2 sm:pr-4">
+                  <SocialIcons className="hidden md:flex items-center space-x-2 text-white/80 hover:text-white" />
+
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={toggleDarkMode}
+                    className="hidden lg:flex w-8 h-8 sm:w-9 sm:h-9 text-white hover:text-white/80 transition-all duration-200"
+                    aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+                  >
+                    {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                  </Button>
+
+                  <Button
+                    asChild
+                    className="hidden lg:flex bg-white/20 hover:bg-white/30 text-white font-semibold px-4 sm:px-6 py-2 rounded-full border border-white/30 transition-all duration-200 text-sm"
+                  >
+                    <Link to="/get-quote">Get Quote</Link>
+                  </Button>
+
+                  {/* Mobile Menu Button */}
+                  <div className="lg:hidden">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={toggleMobileMenu}
+                      className="w-8 h-8 sm:w-9 sm:h-9 text-white hover:text-white/80 transition-all duration-200"
+                      aria-label="Toggle mobile menu"
+                    >
+                      {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                    </Button>
+                  </div>
                 </div>
-              ))}
-              
-              {/* Mobile CTA */}
-              <Link
-                to="/get-quote"
-                className="block w-full text-center px-3 py-2 mt-4 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-blue-600 to-orange-500 hover:from-blue-700 hover:to-orange-600 transition-all duration-200"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Get Quote
-              </Link>
+              </div>
+            </div>
+          </div>
+        ) : (
+          // Solid navbar
+          <div className="w-full bg-white dark:bg-gray-900 shadow-lg border-b border-gray-200 dark:border-gray-700">
+            <div className="container mx-auto px-4 py-3">
+              <div className="flex items-center justify-between">
+                {/* Logo */}
+                <Link to="/" className="flex items-center pl-2 sm:pl-4">
+                  <img
+                    src="/logo.png"
+                    alt="Arpit Solar Logo"
+                    className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
+                    loading="eager"
+                  />
+                </Link>
+
+                {/* Desktop Navigation */}
+                <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8 flex-1 justify-center">
+                  {navigationItems.map((item) => (
+                    <div
+                      key={item.name}
+                      className="relative group"
+                      onMouseEnter={() => item.dropdown && handleMenuEnter(item.name)}
+                      onMouseLeave={handleMenuLeave}
+                    >
+                      {item.dropdown ? (
+                        <>
+                          <Button
+                            variant="ghost"
+                            className={`flex items-center text-gray-700 dark:text-gray-200 hover:text-black dark:hover:text-white space-x-1 px-3 xl:px-4 py-2 transition-colors duration-200 hover:bg-transparent dark:hover:bg-transparent ${underlineEffect} after:bg-blue-600 dark:after:bg-blue-400 group-hover:after:w-full`}
+                          >
+                            <item.icon
+                              className={`w-4 h-4 mr-1 group-hover:text-black dark:group-hover:text-white transition-colors duration-200 ${item.iconClassName || ""}`}
+                            />
+                            <span className="text-sm font-medium group-hover:text-black dark:group-hover:text-white transition-colors duration-200">
+                              {item.name}
+                            </span>
+                            <ChevronDown className="w-4 h-4 ml-1" />
+                          </Button>
+                          {activeDropdown === item.name && <DropdownContent item={item} isTransparent={false} />}
+                        </>
+                      ) : (
+                        <Link
+                          to={item.href!}
+                          className={`flex items-center gap-1 px-3 xl:px-4 py-2 text-sm font-medium transition-colors duration-200 ${underlineEffect} after:bg-blue-600 dark:after:bg-blue-400 ${
+                            isActivePath(item.href!)
+                              ? "text-blue-600 dark:text-blue-400 after:w-full"
+                              : "text-gray-700 dark:text-gray-200 after:w-0 group-hover:after:w-full"
+                          }`}
+                        >
+                          <item.icon className={`w-4 h-4 mr-1 ${item.iconClassName || ""}`} />
+                          {item.name}
+                        </Link>
+                      )}
+                    </div>
+                  ))}
+                </nav>
+
+                {/* Right Side Actions */}
+                <div className="flex items-center space-x-2 sm:space-x-4 pr-2 sm:pr-4">
+                  <SocialIcons className="hidden md:flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400" />
+
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={toggleDarkMode}
+                    className="hidden lg:flex w-8 h-8 sm:w-9 sm:h-9 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400"
+                    aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+                  >
+                    {darkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                  </Button>
+
+                  <Button
+                    asChild
+                    className="hidden lg:flex bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 sm:px-6 py-2 rounded-full transition-all duration-200 text-sm"
+                  >
+                    <Link to="/get-quote">Get Quote</Link>
+                  </Button>
+
+                  {/* Mobile Menu Button */}
+                  <div className="lg:hidden">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={toggleMobileMenu}
+                      className="w-8 h-8 sm:w-9 sm:h-9 text-gray-700 dark:text-gray-200"
+                      aria-label="Toggle mobile menu"
+                    >
+                      {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                    </Button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         )}
-      </nav>
 
-      {/* Dropdown Content */}
-      {activeDropdown && dropdownHoverActive && (
-        <DropdownContent
-          item={navigationItems.find(item => item.name === activeDropdown)!}
-          isTransparent={false}
-        />
-      )}
+        {/* Mobile Menu */}
+        <MobileMenu />
+      </div>
     </>
   )
 }
