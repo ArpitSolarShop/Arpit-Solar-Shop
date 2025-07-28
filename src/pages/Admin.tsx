@@ -26,6 +26,8 @@ import {
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import * as XLSX from 'xlsx';
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
 interface QuoteData {
   id: string;
@@ -83,18 +85,26 @@ const AdminPage = () => {
   const loadQuotes = async () => {
     setLoading(true);
     try {
+      console.log('Loading quotes...');
       const { data, error } = await supabase
         .from('quotes')
         .select('*')
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
+      console.log('Quotes response:', { data, error });
+      
+      if (error) {
+        console.error('Supabase error:', error);
+        throw error;
+      }
+      
       setQuotes(data || []);
+      console.log('Quotes loaded successfully:', data?.length || 0);
     } catch (error) {
       console.error('Error loading quotes:', error);
       toast({
         title: "Error",
-        description: "Failed to load quotes",
+        description: `Failed to load quotes: ${error.message || 'Unknown error'}`,
         variant: "destructive",
       });
     } finally {
@@ -194,39 +204,45 @@ const AdminPage = () => {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-orange-50 flex items-center justify-center p-4">
-        <Card className="w-full max-w-md">
-          <CardHeader className="text-center">
-            <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Shield className="w-8 h-8 text-white" />
-            </div>
-            <CardTitle className="text-2xl font-bold">Admin Portal</CardTitle>
-            <p className="text-muted-foreground">Enter admin code to access</p>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="adminCode">Admin Code</Label>
-              <Input
-                id="adminCode"
-                type="password"
-                value={adminCode}
-                onChange={(e) => setAdminCode(e.target.value)}
-                placeholder="Enter admin code"
-                onKeyDown={(e) => e.key === 'Enter' && handleAdminLogin()}
-              />
-            </div>
-            <Button onClick={handleAdminLogin} className="w-full">
-              Access Admin Portal
-            </Button>
-          </CardContent>
-        </Card>
+      <div className="min-h-screen bg-gray-50">
+        <Navbar />
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-orange-50 flex items-center justify-center p-4">
+          <Card className="w-full max-w-md">
+            <CardHeader className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Shield className="w-8 h-8 text-white" />
+              </div>
+              <CardTitle className="text-2xl font-bold">Admin Portal</CardTitle>
+              <p className="text-muted-foreground">Enter admin code to access</p>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="adminCode">Admin Code</Label>
+                <Input
+                  id="adminCode"
+                  type="password"
+                  value={adminCode}
+                  onChange={(e) => setAdminCode(e.target.value)}
+                  placeholder="Enter admin code"
+                  onKeyDown={(e) => e.key === 'Enter' && handleAdminLogin()}
+                />
+              </div>
+              <Button onClick={handleAdminLogin} className="w-full">
+                Access Admin Portal
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+        <Footer />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
-      <div className="max-w-7xl mx-auto space-y-6">
+    <div className="min-h-screen bg-gray-50">
+      <Navbar />
+      <div className="p-4">
+        <div className="max-w-7xl mx-auto space-y-6">
         {/* Header */}
         <div className="bg-white rounded-lg shadow-sm p-6">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
@@ -511,7 +527,9 @@ const AdminPage = () => {
             )}
           </DialogContent>
         </Dialog>
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };
