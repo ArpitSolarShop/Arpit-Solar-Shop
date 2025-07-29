@@ -23,6 +23,12 @@ import {
 import RelianceQuoteForm from "@/components/forms/reliance-quote-form"
 import { relianceCommercialData, RELIANCE_COMPANY_NAME } from "./commercial-data"
 import type { RelianceCommercialData } from "./commercial-data"
+import heroImage from "@/assets/factory-businessmen-doing-sales-presentation-shareholders.jpg"
+import Step1 from "@/assets/1.jpg";
+import Step2 from "@/assets/2.jpg";
+import Step3 from "@/assets/3.jpg";
+import Step4 from "@/assets/4.jpg";
+import { Link } from "react-router-dom";
 
 // Reusable Card Component for Benefits Sections
 const BenefitCard = ({ title, description, Icon }: { title: string; description: string; Icon: any }) => (
@@ -51,7 +57,43 @@ const ChecklistItem = ({ text }: { text: string }) => (
   </div>
 )
 
-// Reusable Installation Step Component
+// Installation steps data - **Consolidated and using imported images**
+const installationSteps = [
+  {
+    title: "Site Assessment & Feasibility",
+    description:
+      "We conduct a detailed assessment of your site to determine energy requirements and installation viability.",
+    image: Step1,
+    alt: "Site Assessment",
+    reverse: false,
+  },
+  {
+    title: "Customized System Design",
+    description:
+      "Our engineers design a system tailored to your commercial needs, ensuring maximum efficiency and output.",
+    image: Step2,
+    alt: "System Design",
+    reverse: true,
+  },
+  {
+    title: "Installation & Commissioning",
+    description:
+      "Our experienced technicians install and test all components, ensuring safety and compliance.",
+    image: Step3,
+    alt: "Installation",
+    reverse: false,
+  },
+  {
+    title: "Monitoring & Maintenance",
+    description:
+      "We offer post-installation support, including real-time monitoring and preventive maintenance services.",
+    image: Step4,
+    alt: "Maintenance",
+    reverse: true,
+  },
+];
+
+// Installation step component
 const InstallationStep = ({
   title,
   description,
@@ -59,11 +101,11 @@ const InstallationStep = ({
   alt,
   reverse,
 }: {
-  title: string
-  description: string
-  image: string
-  alt: string
-  reverse: boolean
+  title: string;
+  description: string;
+  image: string; // Type should reflect it's a string path (from imported image)
+  alt: string;
+  reverse: boolean;
 }) => (
   <motion.div
     className={`flex flex-col ${reverse ? "md:flex-row-reverse" : "md:flex-row"} items-center gap-6 mb-8`}
@@ -72,13 +114,18 @@ const InstallationStep = ({
     viewport={{ once: true }}
     transition={{ duration: 0.5 }}
   >
-    <img src={image || "/placeholder.svg"} alt={alt} className="w-full md:w-1/2 h-64 object-cover rounded-lg" />
+    <img
+      src={image} // This now correctly uses the imported image path
+      alt={alt}
+      className="w-full md:w-1/2 h-64 object-cover rounded-lg shadow-md"
+    />
     <div className="md:w-1/2">
       <h3 className="text-2xl font-semibold text-gray-800 mb-2">{title}</h3>
       <p className="text-gray-600">{description}</p>
     </div>
   </motion.div>
-)
+);
+
 
 // Components for pricing tables
 function RelianceCommercialTable({ onRowClick }: { onRowClick: (product: RelianceCommercialData) => void }) {
@@ -230,8 +277,9 @@ function PriceComparison() {
       <CardContent>
         <div className="space-y-4">
           <div>
-            <label className="text-sm font-medium text-gray-700 mb-2 block">Select System Size (kWp):</label>
+            <label htmlFor="system-size-select" className="text-sm font-medium text-gray-700 mb-2 block">Select System Size (kWp):</label>
             <select
+              id="system-size-select" // Added ID for accessibility
               value={selectedSize}
               onChange={(e) => setSelectedSize(Number(e.target.value))}
               className="w-full p-2 border border-gray-300 rounded-md"
@@ -356,70 +404,38 @@ export default function CommercialIndustrial() {
     "25-year performance warranty and O&M support",
   ]
 
-  // Data for Installation Steps
-  const installationSteps = [
-    {
-      title: "1. Site Assessment & Energy Audit",
-      description:
-        "Our engineering team conducts a comprehensive site assessment and energy audit to design the optimal solar solution for your business.",
-      image: "/placeholder.svg?height=300&width=600&text=Commercial+Site+Assessment",
-      alt: "Commercial solar site assessment",
-      reverse: false,
-    },
-    {
-      title: "2. System Design & Engineering",
-      description:
-        "We create detailed engineering drawings and system specifications, handling all permits and approvals for seamless project execution.",
-      image: "/placeholder.svg?height=300&width=600&text=Commercial+System+Design",
-      alt: "Commercial solar system design",
-      reverse: true,
-    },
-    {
-      title: "3. Professional Installation",
-      description:
-        "Our certified installation teams deploy industrial-grade solar systems with minimal disruption to your business operations.",
-      image: "/placeholder.svg?height=300&width=600&text=Commercial+Installation",
-      alt: "Commercial solar installation",
-      reverse: false,
-    },
-    {
-      title: "4. Commissioning & Monitoring",
-      description:
-        "We commission your system, integrate monitoring solutions, and provide ongoing performance analytics and maintenance support.",
-      image: "/placeholder.svg?height=300&width=600&text=Commercial+Monitoring",
-      alt: "Commercial solar monitoring",
-      reverse: true,
-    },
-  ]
+  // **Removed redundant installationSteps data from here, using the global one defined above.**
 
   return (
     <div className="bg-gray-50 min-h-screen">
       {/* Hero Section */}
       <section
-        className="relative bg-cover bg-center h-[70vh]"
-        style={{ backgroundImage: "url('/placeholder.svg?height=800&width=1920&text=Commercial+Solar+Hero')" }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30 flex items-center justify-center">
-          <motion.div
-            className="text-center text-white px-4"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+      className="relative bg-cover bg-center h-[70vh]"
+      style={{ backgroundImage: `url(${heroImage})` }}
+    >
+      <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30 flex items-center justify-center">
+        <motion.div
+          className="text-center text-white px-4"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">
+            Commercial & Industrial Solar Solutions
+          </h1>
+          <p className="text-lg md:text-xl max-w-3xl mx-auto mb-6">
+            Power your business with scalable solar energy solutions. Reduce
+            costs, achieve sustainability goals, and gain energy independence.
+          </p>
+          <a
+            href="#pricing"
+            className="inline-block bg-blue-500 text-white py-3 px-8 rounded-full hover:bg-blue-600 transition font-semibold"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">Commercial & Industrial Solar Solutions</h1>
-            <p className="text-lg md:text-xl max-w-3xl mx-auto mb-6">
-              Power your business with scalable solar energy solutions. Reduce costs, achieve sustainability goals, and
-              gain energy independence.
-            </p>
-            <a
-              href="#pricing"
-              className="inline-block bg-blue-500 text-white py-3 px-8 rounded-full hover:bg-blue-600 transition font-semibold"
-            >
-              Get Commercial Quote
-            </a>
-          </motion.div>
-        </div>
-      </section>
+            Get Commercial Quote
+          </a>
+        </motion.div>
+      </div>
+    </section>
 
       {/* Why Choose Commercial Solar Section */}
       <section className="py-20 px-4 md:px-8">
@@ -544,6 +560,7 @@ export default function CommercialIndustrial() {
         </div>
       </section>
 
+
       {/* Custom Solutions */}
       <section className="py-20 px-4 md:px-8 bg-gray-100">
         <div className="max-w-7xl mx-auto">
@@ -600,8 +617,10 @@ export default function CommercialIndustrial() {
           <p className="text-lg mb-6 max-w-2xl mx-auto">
             Non DCR RIL 690 Wp HJT Solar Modules (Complete System Package - Excluding GST & Net Metering)
           </p>
-          <Button className="bg-white text-blue-600 hover:bg-gray-100">Request Commercial Energy Audit</Button>
+            <Link to="/get-quote"><Button className="bg-white text-blue-600 hover:bg-gray-100">Request Commercial Energy Audit</Button></Link>
+     
         </motion.div>
+
       </section>
 
       {/* Footer */}

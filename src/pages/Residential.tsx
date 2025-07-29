@@ -27,6 +27,14 @@ import {
   RELIANCE_WORK_SCOPE,
 } from "@/pages/residential-data"
 import type { ShaktiResidentialData, RelianceResidentialData } from "@/pages/residential-data"
+import heroImage from "@/assets/asian-women-working-hard-together-innovation.jpg"
+import Step1 from "@/assets/1.jpg";
+import Step2 from "@/assets/2.jpg";
+import Step3 from "@/assets/3.jpg";
+import Step4 from "@/assets/4.jpg";
+import { Link } from "react-router-dom";
+
+
 
 // Reusable Card Component for Benefits Sections
 const BenefitCard = ({ title, description, Icon }: { title: string; description: string; Icon: any }) => (
@@ -55,6 +63,41 @@ const ChecklistItem = ({ text }: { text: string }) => (
   </div>
 )
 
+// // Reusable Installation Step Component
+// const InstallationStep = ({
+//   title,
+//   description,
+//   image,
+//   alt,
+//   reverse,
+// }: {
+//   title: string
+//   description: string
+//   image: string
+//   alt: string
+//   reverse: boolean
+// }) => (
+//   <motion.div
+//     className={`flex flex-col ${reverse ? "md:flex-row-reverse" : "md:flex-row"} items-center gap-6 mb-8`}
+//     initial={{ opacity: 0, y: 20 }}
+//     whileInView={{ opacity: 1, y: 0 }}
+//     viewport={{ once: true }}
+//     transition={{ duration: 0.5 }}
+//   >
+//     <img src={image || "/placeholder.svg"} alt={alt} className="w-full md:w-1/2 h-64 object-cover rounded-lg" />
+//     <div className="md:w-1/2">
+//       <h3 className="text-2xl font-semibold text-gray-800 mb-2">{title}</h3>
+//       <p className="text-gray-600">{description}</p>
+//     </div>
+//   </motion.div>
+// )
+
+
+
+
+
+
+
 // Reusable Installation Step Component
 const InstallationStep = ({
   title,
@@ -63,11 +106,11 @@ const InstallationStep = ({
   alt,
   reverse,
 }: {
-  title: string
-  description: string
-  image: string
-  alt: string
-  reverse: boolean
+  title: string;
+  description: string;
+  image: string; // Type should reflect it's a string path (from imported image)
+  alt: string;
+  reverse: boolean;
 }) => (
   <motion.div
     className={`flex flex-col ${reverse ? "md:flex-row-reverse" : "md:flex-row"} items-center gap-6 mb-8`}
@@ -76,13 +119,89 @@ const InstallationStep = ({
     viewport={{ once: true }}
     transition={{ duration: 0.5 }}
   >
-    <img src={image || "/placeholder.svg"} alt={alt} className="w-full md:w-1/2 h-64 object-cover rounded-lg" />
+    <img
+      src={image} // This now correctly uses the imported image path
+      alt={alt}
+      className="w-full md:w-1/2 h-64 object-cover rounded-lg shadow-md"
+    />
     <div className="md:w-1/2">
       <h3 className="text-2xl font-semibold text-gray-800 mb-2">{title}</h3>
       <p className="text-gray-600">{description}</p>
     </div>
   </motion.div>
-)
+);
+
+// Installation steps data - Consolidated and using imported images (for Commercial)
+const commercialInstallationSteps = [
+  {
+    title: "Site Assessment & Feasibility",
+    description:
+      "We conduct a detailed assessment of your site to determine energy requirements and installation viability.",
+    image: Step1, // Assuming Step1 is imported from assets/1.jpg
+    alt: "Site Assessment",
+    reverse: false,
+  },
+  {
+    title: "Customized System Design",
+    description:
+      "Our engineers design a system tailored to your Residential needs, ensuring maximum efficiency and output.",
+    image: Step2, // Assuming Step2 is imported from assets/2.jpg
+    alt: "System Design",
+    reverse: true,
+  },
+  {
+    title: "Installation & Commissioning",
+    description:
+      "Our experienced technicians install and test all components, ensuring safety and compliance.",
+    image: Step3, // Assuming Step3 is imported from assets/3.jpg
+    alt: "Installation",
+    reverse: false,
+  },
+  {
+    title: "Monitoring & Maintenance",
+    description:
+      "We offer post-installation support, including real-time monitoring and preventive maintenance services.",
+    image: Step4, // Assuming Step4 is imported from assets/4.jpg
+    alt: "Maintenance",
+    reverse: true,
+  },
+];
+
+// Installation steps data for Residential (using the same structure and imported images)
+const residentialInstallationSteps = [
+  {
+    title: "1. Consultation & Assessment",
+    description:
+      "Our experts evaluate your home's energy needs, roof condition, and sun exposure to design a custom solar solution.",
+    image: Step1, // Using imported images
+    alt: "Solar consultation with homeowner",
+    reverse: false,
+  },
+  {
+    title: "2. System Design & Permitting",
+    description:
+      "We create a tailored solar system design and handle all necessary permits for a hassle-free experience.",
+    image: Step2, // Using imported images
+    alt: "Designing solar system layout",
+    reverse: true,
+  },
+  {
+    title: "3. Installation",
+    description:
+      "Our certified installers set up your solar panels with precision, ensuring optimal performance and aesthetics.",
+    image: Step3, // Using imported images
+    alt: "Installing solar panels on roof",
+    reverse: false,
+  },
+  {
+    title: "4. Activation & Monitoring",
+    description: "We activate your system and provide monitoring tools to track energy production and savings.",
+    image: Step4, // Using imported images
+    alt: "Monitoring solar system performance",
+    reverse: true,
+  },
+];
+
 
 // Components for pricing tables (keeping existing functionality)
 function ShaktiResidentialTable({ onRowClick }: { onRowClick: (product: ShaktiResidentialData) => void }) {
@@ -581,29 +700,32 @@ export default function Residential() {
     <div className="bg-gray-50 min-h-screen">
       {/* Hero Section */}
       <section
-        className="relative bg-cover bg-center h-[70vh]"
-        style={{ backgroundImage: "url('/placeholder.svg?height=800&width=1920&text=Residential+Solar+Hero')" }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30 flex items-center justify-center">
-          <motion.div
-            className="text-center text-white px-4"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+      className="relative bg-cover bg-center h-[70vh]"
+      style={{ backgroundImage: `url(${heroImage})` }}
+    >
+      <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/30 flex items-center justify-center">
+        <motion.div
+          className="text-center text-white px-4"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">
+            Residential Solar Solutions
+          </h1>
+          <p className="text-lg md:text-xl max-w-3xl mx-auto mb-6">
+            Power your home with clean, renewable energy. Save on bills and
+            contribute to a sustainable future.
+          </p>
+          <a
+            href="#pricing"
+            className="inline-block bg-green-500 text-white py-3 px-8 rounded-full hover:bg-green-600 transition font-semibold"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">Residential Solar Solutions</h1>
-            <p className="text-lg md:text-xl max-w-3xl mx-auto mb-6">
-              Power your home with clean, renewable energy. Save on bills and contribute to a sustainable future.
-            </p>
-            <a
-              href="#pricing"
-              className="inline-block bg-green-500 text-white py-3 px-8 rounded-full hover:bg-green-600 transition font-semibold"
-            >
-              Get a Free Quote
-            </a>
-          </motion.div>
-        </div>
-      </section>
+            Get a Free Quote
+          </a>
+        </motion.div>
+      </div>
+    </section>
 
       {/* Why Choose Residential Solar Section */}
       <section className="py-20 px-4 md:px-8">
@@ -720,7 +842,7 @@ export default function Residential() {
         </div>
       </section>
 
-      {/* Installation Process Section */}
+      {/* Installation Process Section
       <section className="py-20 px-4 md:px-8 bg-gray-100">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-semibold text-center text-gray-800 mb-12">
@@ -732,7 +854,26 @@ export default function Residential() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
+
+
+
+
+      
+{/* Installation Process Section for Commercial */}
+<section className="py-20 px-4 md:px-8 bg-gray-100">
+  <div className="max-w-7xl mx-auto">
+    <h2 className="text-3xl md:text-4xl font-semibold text-center text-gray-800 mb-12">
+      Our Residential Installation Process
+    </h2>
+    <div className="space-y-12">
+      {commercialInstallationSteps.map((step, index) => (
+        <InstallationStep key={index} {...step} />
+      ))}
+    </div>
+  </div>
+</section>
+
 
       {/* Custom Solutions */}
       <section className="py-20 px-4 md:px-8 bg-gray-100">
@@ -812,7 +953,8 @@ export default function Residential() {
           <p className="text-lg mb-6 max-w-2xl mx-auto">
             Contact us today to learn how solar energy can benefit your home. Get a free, no-obligation quote!
           </p>
-          <Button className="bg-white text-green-600 hover:bg-gray-100">Request Your Free Quote</Button>
+          
+  <Link to="/get-quote"><Button className="bg-white text-green-600 hover:bg-gray-100">Request Your Free Quote</Button></Link> 
         </motion.div>
       </section>
 
