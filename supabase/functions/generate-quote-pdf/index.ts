@@ -309,41 +309,142 @@ async function generateQuotePDF(formData: QuoteFormData): Promise<Uint8Array> {
 }
 
 function createSimplePDF(formData: QuoteFormData): Uint8Array {
-  // Create a very basic PDF-like structure (this is a simplified approach)
-  const content = `
-Solar Quote Request
+  // Create a proper PDF using basic PDF structure
+  const content = `POWERING INDIA'S ROOFTOPS
+AUTHORISED CHANNEL PARTNER
+ARPIT SOLAR SHOP
 
-Customer Information:
-Name: ${formData.name}
+Ho: Sh16/114/25-K-2, Sharvodaya Nagar, Kadipur Shivpur, Varanasi 221003
+Contact: 9005770466 | E-mail: arpitsolarshop@gmail.com
+
+=======================================
+
+To: ${formData.name}                    Date: ${new Date().toLocaleDateString()}
 Phone: ${formData.phone}
-Email: ${formData.email || 'Not provided'}
-Entity Type: ${formData.entity_type || 'Not specified'}
-Project Location: ${formData.project_location || 'Not specified'}
+${formData.email ? `Email: ${formData.email}` : ''}
+${formData.project_location ? `Location: ${formData.project_location}` : ''}
 
-Product Information:
-Product: ${formData.product_name || 'Not specified'}
-Category: ${formData.product_category || 'Not specified'}
+QUOTATION
 
-Project Specifications:
-Solution Type: ${formData.solution_classification || 'Not specified'}
-Installation Area: ${formData.estimated_area_sqft ? formData.estimated_area_sqft + ' sq ft' : 'Not specified'}
-Monthly Bill: ${formData.monthly_bill ? '₹' + formData.monthly_bill : 'Not specified'}
-Power Demand: ${formData.power_demand_kw ? formData.power_demand_kw + ' kW' : 'Not specified'}
+Subject: Roof Top Power Plant for ${formData.power_demand_kw || '3'}-KW 1 ph, Make- ${formData.product_category || 'Solar'}
 
-${formData.referral_name ? `
-Referral Information:
-Referred By: ${formData.referral_name}
-Referral Phone: ${formData.referral_phone || 'Not provided'}
-` : ''}
+PARTICULARS                CAPACITY(KW)    RATE         AMOUNT
+Cost of solar             ${formData.power_demand_kw || '3'}         2,15,000.00   2,15,000/-
+power system
+GST charged@13.8%                                      Included
+                         Total 100% of Cost           2,15,000.00
+
+Rs. (Two Lakh Fifty Thousand only)          Name: Arpit Solar Shop
+
+Subsidy Applicable                           A/c: 28660200000614
+1) State Government = Rs 30,000/-            Bank: Bank of Baroda Shivpur, Varanasi
+2) Central Subsidy = Rs 78,000/-             IFSC: BARB0SHIVBS
+
+Subsidy rate may change as per Government regulations at the time of Disbursal.
+
+TERMS AND CONDITIONS:
+1. 50% Advance Structure should be installed.
+2. 50% Before delivery of ${formData.product_category || 'Solar'} kit.
+3. Net meter fee will be charged to consumer's electricity bill directly by Discom.
+4. Structure elevation Charges & Civil Material is in Consumer's Scope.
+5. Name change, load increment new connection will be charged extra.
+6. GST-Applicable- 12% on 70% (Supply) of base value & 18% on 30% (Service) of base value.
+7. We will facilitate (Submit Documents etc.) for replacing Net Meter.
+8. For synchronizing with Grid power, voltage range should be between 185V to 275V.
+9. Jio Remote monitoring Service 5Years.
+10. Include 12Month Cleaning Once in a Month.
+11. Delivery: Within 4 weeks from confirmed order and payment.
+12. Installation: To be completed within 45 days from date of confirmed Purchase Order.
+13. AC wire will be provided up to 10m. Extra wire charged as per actual.
+14. Earthing wire provided up to 30m. Extra wire charged as per actual.
+15. Warranty: Solar Module: 25 Years, PCU: 5 Years from date of supply.
+
+For Arpit Solar Shop
+Ratnesh Mishra
+(Authorized Signatory)
+
+(Customer acceptance with sign)
 
 Generated on: ${new Date().toLocaleString()}
+`;
 
-This is an automated quote request. Our team will contact you within 24 hours.
-Thank you for choosing solar energy solutions!
-  `;
+  // Create a basic PDF structure
+  const pdfHeader = `%PDF-1.4
+1 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
 
-  // Convert text to Uint8Array (this is a very basic approach)
-  return new TextEncoder().encode(content);
+2 0 obj
+<<
+/Type /Pages
+/Kids [3 0 R]
+/Count 1
+>>
+endobj
+
+3 0 obj
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [0 0 612 792]
+/Contents 4 0 R
+/Resources <<
+/Font <<
+/F1 5 0 R
+>>
+>>
+>>
+endobj
+
+4 0 obj
+<<
+/Length ${content.length + 100}
+>>
+stream
+BT
+/F1 12 Tf
+50 750 Td
+`;
+
+  const pdfContent = content.split('\n').map((line, index) => 
+    `(${line.replace(/[()\\]/g, '\\$&')}) Tj 0 -15 Td`
+  ).join('\n');
+
+  const pdfFooter = `
+ET
+endstream
+endobj
+
+5 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+>>
+endobj
+
+xref
+0 6
+0000000000 65535 f 
+0000000010 00000 n 
+0000000053 00000 n 
+0000000110 00000 n 
+0000000252 00000 n 
+0000000350 00000 n 
+trailer
+<<
+/Size 6
+/Root 1 0 R
+>>
+startxref
+410
+%%EOF`;
+
+  const fullPdf = pdfHeader + pdfContent + pdfFooter;
+  return new TextEncoder().encode(fullPdf);
 }
 
 async function sendWhatsAppPDF(phone: string, pdfUrl: string, formData: QuoteFormData): Promise<any> {
@@ -352,23 +453,31 @@ async function sendWhatsAppPDF(phone: string, pdfUrl: string, formData: QuoteFor
   // Clean phone number (remove any non-digit characters except +)
   const cleanPhone = phone.replace(/[^\d+]/g, '');
   
-  // Format message
-  const message = `Hi ${formData.name}! 👋
+  // Format message with Arpit Solar Shop branding
+  const message = `🌞 *ARPIT SOLAR SHOP* 🌞
+POWERING INDIA'S ROOFTOPS
+
+Hi ${formData.name}! 👋
 
 Thank you for your interest in ${formData.product_category || 'our'} solar solutions! 
 
-We've generated your personalized solar quote based on your requirements:
+📋 Your personalized solar quote is ready:
 ${formData.solution_classification ? `• Solution Type: ${formData.solution_classification}` : ''}
 ${formData.power_demand_kw ? `• Power Demand: ${formData.power_demand_kw} kW` : ''}
 ${formData.estimated_area_sqft ? `• Installation Area: ${formData.estimated_area_sqft} sq ft` : ''}
 
-Please find your detailed quote document attached. Our team will contact you within 24 hours to discuss the next steps.
+📄 Please find your detailed quotation attached. Our team will contact you within 24 hours to discuss the next steps.
+
+📍 ARPIT SOLAR SHOP
+Address: Sh16/114/25-K-2, Sharvodaya Nagar, Kadipur Shivpur, Varanasi 221003
+📞 Contact: 9005770466
+📧 Email: arpitsolarshop@gmail.com
 
 Best regards,
-Solar Solutions Team ☀️`;
+Arpit Solar Shop Team ☀️`;
 
   try {
-    // Send document via DoubleTick API
+    // Send document via DoubleTick API - using correct endpoint
     const response = await fetch('https://api.doubletick.io/whatsapp/message/document', {
       method: 'POST',
       headers: {
@@ -377,10 +486,9 @@ Solar Solutions Team ☀️`;
       },
       body: JSON.stringify({
         to: cleanPhone,
-        message: message,
         document_url: pdfUrl,
-        filename: `Solar_Quote_${formData.name.replace(/\s+/g, '_')}.pdf`,
-        caption: `Solar Quote for ${formData.name}`
+        filename: `Arpit_Solar_Quote_${formData.name.replace(/\s+/g, '_')}.pdf`,
+        caption: message
       }),
     });
 
@@ -388,7 +496,31 @@ Solar Solutions Team ☀️`;
     
     if (!response.ok) {
       console.error('DoubleTick API error:', result);
-      throw new Error(`DoubleTick API error: ${result.message || 'Unknown error'}`);
+      
+      // Try alternative endpoint if first one fails
+      const altResponse = await fetch('https://api.doubletick.io/whatsapp/message/send-document', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${doubleTick_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          phone: cleanPhone,
+          document_url: pdfUrl,
+          filename: `Arpit_Solar_Quote_${formData.name.replace(/\s+/g, '_')}.pdf`,
+          caption: message
+        }),
+      });
+
+      const altResult = await altResponse.json();
+      
+      if (!altResponse.ok) {
+        console.error('Alternative DoubleTick API also failed:', altResult);
+        throw new Error(`DoubleTick API error: ${altResult.message || result.message || 'Unknown error'}`);
+      }
+      
+      console.log('WhatsApp message sent successfully via alternative endpoint:', altResult);
+      return altResult;
     }
 
     console.log('WhatsApp message sent successfully:', result);
