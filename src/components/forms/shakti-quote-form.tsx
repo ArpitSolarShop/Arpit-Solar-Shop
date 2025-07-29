@@ -73,11 +73,27 @@ const ShaktiQuoteForm = ({
 
       if (error) throw error;
 
+      // Call edge function to generate PDF and send via WhatsApp
+      try {
+        const pdfResponse = await supabase.functions.invoke('generate-quote-pdf', {
+          body: { formData: insertData }
+        });
+        
+        if (pdfResponse.error) {
+          console.error('PDF generation error:', pdfResponse.error);
+        } else {
+          console.log('PDF generated and sent successfully:', pdfResponse.data);
+        }
+      } catch (pdfError) {
+        console.error('Error calling PDF function:', pdfError);
+        // Don't throw - we don't want to fail the whole process if PDF fails
+      }
+
       toast({
         title: "Quote Request Submitted!",
         description: isLargeSystem
-          ? "Our sales team will contact you within 24 hours to discuss your large-scale solar project."
-          : "Our Shakti Solar team will contact you within 24 hours to discuss your solar solution.",
+          ? "Our sales team will contact you within 24 hours to discuss your large-scale solar project. You'll also receive a detailed quote via WhatsApp."
+          : "Our Shakti Solar team will contact you within 24 hours to discuss your solar solution. You'll also receive a detailed quote via WhatsApp.",
       })
 
       // Reset form and close dialog
