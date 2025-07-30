@@ -267,8 +267,8 @@ const ShaktiQuoteForm = ({
                     <SelectContent>
                       <SelectItem value="Residential">Residential Solar</SelectItem>
                       <SelectItem value="Commercial">Commercial Solar</SelectItem>
-                      <SelectItem value="Commercial and industrial DG">Industrial Solar Systems</SelectItem>
-                      <SelectItem value="Utility-scale">Utility-scale Projects</SelectItem>
+                      {/* <SelectItem value="Commercial and industrial DG">Industrial Solar Systems</SelectItem>
+                      <SelectItem value="Utility-scale">Utility-scale Projects</SelectItem> */}
                     </SelectContent>
                   </Select>
                 </div>
