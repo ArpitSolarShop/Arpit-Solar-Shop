@@ -15,12 +15,14 @@ interface Product {
   name: string;
   description: string;
   category: string;
-  brand: string;
+  brand: "Reliance" | "Sakti" | "Tata";
   specifications: any;
   image_url?: string;
   logo_url?: string;
   created_at: string;
 }
+
+type BrandType = "Reliance" | "Sakti" | "Tata";
 
 const ProductManager = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -31,7 +33,7 @@ const ProductManager = () => {
     name: "",
     description: "",
     category: "",
-    brand: "",
+    brand: "Reliance" as "Reliance" | "Sakti" | "Tata",
     specifications: {},
     image_url: "",
     logo_url: ""
@@ -86,7 +88,7 @@ const ProductManager = () => {
         name: "",
         description: "",
         category: "",
-        brand: "",
+        brand: "Reliance" as BrandType,
         specifications: {},
         image_url: "",
         logo_url: ""
@@ -175,7 +177,7 @@ const ProductManager = () => {
                 name: "",
                 description: "",
                 category: "",
-                brand: "",
+                brand: "Reliance" as BrandType,
                 specifications: {},
                 image_url: "",
                 logo_url: ""
@@ -229,7 +231,7 @@ const ProductManager = () => {
 
               <div>
                 <Label htmlFor="brand">Brand</Label>
-                <Select value={formData.brand} onValueChange={(value) => setFormData(prev => ({ ...prev, brand: value }))}>
+                <Select value={formData.brand} onValueChange={(value: BrandType) => setFormData(prev => ({ ...prev, brand: value }))}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select brand" />
                   </SelectTrigger>
