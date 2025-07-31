@@ -406,9 +406,11 @@ async function sendWhatsAppTemplate(phone: string, pdfUrl: string, formData: Quo
   console.log('Sending WhatsApp template to:', cleanPhone);
   console.log('Sending PDF document via WhatsApp with URL:', pdfUrl);
 
-  // Generate filename from PDF URL or use default
+  // Generate filename from PDF URL - extract only the actual filename without query parameters
   const urlParts = pdfUrl.split('/');
-  const fileName = urlParts[urlParts.length - 1] || `quote-${formData.name.replace(/\s+/g, '-')}-${Date.now()}.pdf`;
+  const lastPart = urlParts[urlParts.length - 1] || '';
+  // Remove query parameters (everything after '?') to get clean filename
+  const fileName = lastPart.split('?')[0] || `quote-${formData.name.replace(/\s+/g, '-')}-${Date.now()}.pdf`;
 
   // Send template message WITH document attachment using quotation_document template
   const payload = {
