@@ -389,7 +389,6 @@ startxref
 
 async function sendWhatsAppTemplate(phone: string, pdfUrl: string, formData: QuoteFormData): Promise<any> {
   const API_KEY = "key_o6Dp7MBLIwKlpKHlqcf4VaI8eGEyGkWfp76gluNY0gjjd3T5EuUblUNsbgqGMzj7LZhDfwbuoLbDxU8LTGehJW1m0sSDhqDvf2GAw4puBEAfInI5qV13rWPjpNPrvw812bitePsseEFcnJavcAOlVfqqg0bJoOA15DI06zDAhOhbXai7xW7LFWt0DdDpuby7kWHGc3pcsRrCqUGPDRvnjfSfBtlMcxwXzLJyi27Y6Mh4hfjcyU1bu1eZBmGo";
-  const SENDER_NUMBER = "+919044555572";
   
   // Clean and format phone number properly
   let cleanPhone = phone.replace(/[^\d]/g, ''); // Remove all non-digits
@@ -405,21 +404,27 @@ async function sendWhatsAppTemplate(phone: string, pdfUrl: string, formData: Quo
   }
   
   console.log('Sending WhatsApp template to:', cleanPhone);
-  console.log('PDF stored but not being sent to customer as requested');
+  console.log('Sending PDF document via WhatsApp with URL:', pdfUrl);
 
-  // Send template message WITHOUT document attachment (as requested)
+  // Generate filename from PDF URL or use default
+  const urlParts = pdfUrl.split('/');
+  const fileName = urlParts[urlParts.length - 1] || `quote-${formData.name.replace(/\s+/g, '-')}-${Date.now()}.pdf`;
+
+  // Send template message WITH document attachment using quotation_document template
   const payload = {
     messages: [{
       to: cleanPhone,
       content: {
-        templateName: "personalized_quotation_from_arpit_solar_shop_web_v2",
+        templateName: "quotation_document",
         language: "en",
         templateData: {
+          header: {
+            type: "DOCUMENT",
+            mediaUrl: pdfUrl,
+            filename: fileName
+          },
           body: {
-            placeholders: [
-              formData.name,
-              formData.product_category || 'solar solution'
-            ]
+            placeholders: []
           }
         }
       }
