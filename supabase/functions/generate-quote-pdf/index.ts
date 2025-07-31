@@ -1,4 +1,4 @@
-// Updated Deno serverless function with Reliance/Shakti PDF branching
+// Updated Deno serverless function with Reliance/Shakti PDF branching and URL shortening
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.52.0";
 
@@ -77,7 +77,8 @@ serve(async (req: Request) => {
     if (signedUrlError) throw new Error(`Failed to generate signed URL: ${signedUrlError.message}`);
 
     console.log('PDF uploaded successfully, attempting to send via WhatsApp');
-    const whatsappResult = await sendWhatsAppTemplate(formData.phone, signedUrlData.signedUrl, formData);
+    // Pass fileName and formData to sendWhatsAppTemplate for URL shortening logic
+    const whatsappResult = await sendWhatsAppTemplate(formData.phone, signedUrlData.signedUrl, fileName, formData);
 
     return new Response(JSON.stringify({
       success: true,
@@ -109,10 +110,10 @@ async function generateQuotePDF(formData: QuoteFormData): Promise<Uint8Array> {
     const browser = await puppeteer.default.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
     const page = await browser.newPage();
     await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
-    const pdfBuffer = await page.pdf({ 
-      format: 'A4', 
-      margin: { top: '1cm', right: '1cm', bottom: '1cm', left: '1cm' }, 
-      printBackground: true 
+    const pdfBuffer = await page.pdf({
+      format: 'A4',
+      margin: { top: '1cm', right: '1cm', bottom: '1cm', left: '1cm' },
+      printBackground: true
     });
     await browser.close();
     return new Uint8Array(pdfBuffer);
@@ -126,7 +127,7 @@ function generateRelianceHTML(formData: QuoteFormData): string {
   const productData = findProductData(formData, 'reliance');
   const totalPrice = productData ? Math.round(productData.pricePerWatt * parseFloat(productData.systemSize.replace(' kWp', ''))) : 'Contact for pricing';
   const annualSavings = productData ? Math.round(productData.monthlyGeneration * 12 * 8) : 'TBD';
-  
+
   return `<!DOCTYPE html>
     <html>
     <head>
@@ -162,7 +163,7 @@ function generateRelianceHTML(formData: QuoteFormData): string {
             <div class="field"><strong>Location:</strong> ${formData.project_location || 'TBD'}</div>
             <div class="field"><strong>Date:</strong> ${new Date().toLocaleDateString()}</div>
           </div>
-          
+
           ${productData ? `
           <div class="section">
             <h2>System Specifications</h2>
@@ -171,13 +172,13 @@ function generateRelianceHTML(formData: QuoteFormData): string {
             <div class="field"><strong>Technology:</strong> Reliance HJT (Heterojunction) Solar Modules</div>
             <div class="field"><strong>Warranty:</strong> 25 Years Performance + 12 Years Product</div>
           </div>
-          
+
           <div class="price-box">
             <div>Estimated System Cost</div>
             <div class="amount">₹${totalPrice.toLocaleString()}</div>
             <div style="font-size: 14px; color: #6b7280; margin-top: 5px;">*Final pricing subject to site survey</div>
           </div>
-          
+
           <div class="highlights">
             <h3 style="margin-top: 0; color: #2563eb;">Key Benefits</h3>
             <div class="field"><strong>Monthly Generation:</strong> ~${productData.monthlyGeneration} kWh</div>
@@ -193,7 +194,7 @@ function generateRelianceHTML(formData: QuoteFormData): string {
             <div class="field"><strong>Monthly Bill:</strong> ₹${formData.monthly_bill || 'TBD'}</div>
           </div>
           `}
-          
+
           <div style="margin-top: 30px; padding: 20px; background: #f9fafb; border-radius: 8px; text-align: center; font-size: 14px; color: #6b7280;">
             <p><strong>Next Steps:</strong> Our technical team will contact you within 24 hours for a detailed site assessment and final quotation.</p>
             <p>Contact: +91 90445 55572 | Email: info@arpitsolarshop.com</p>
@@ -208,7 +209,7 @@ function generateShaktiHTML(formData: QuoteFormData): string {
   const productData = findProductData(formData, 'shakti');
   const totalPrice = productData ? Math.round(productData.pricePerWatt * parseFloat(productData.systemSize.replace(' kWp', ''))) : 'Contact for pricing';
   const annualSavings = productData ? Math.round(productData.monthlyGeneration * 12 * 7.5) : 'TBD';
-  
+
   return `<!DOCTYPE html>
     <html>
     <head>
@@ -244,7 +245,7 @@ function generateShaktiHTML(formData: QuoteFormData): string {
             <div class="field"><strong>Location:</strong> ${formData.project_location || 'TBD'}</div>
             <div class="field"><strong>Date:</strong> ${new Date().toLocaleDateString()}</div>
           </div>
-          
+
           ${productData ? `
           <div class="section">
             <h2>System Specifications</h2>
@@ -253,13 +254,13 @@ function generateShaktiHTML(formData: QuoteFormData): string {
             <div class="field"><strong>Technology:</strong> Shakti Solar PERC Mono Crystalline Modules</div>
             <div class="field"><strong>Warranty:</strong> 25 Years Performance + 12 Years Product</div>
           </div>
-          
+
           <div class="price-box">
             <div>Estimated System Cost</div>
             <div class="amount">₹${totalPrice.toLocaleString()}</div>
             <div style="font-size: 14px; color: #6b7280; margin-top: 5px;">*Final pricing subject to site survey</div>
           </div>
-          
+
           <div class="highlights">
             <h3 style="margin-top: 0; color: #16a085;">Key Benefits</h3>
             <div class="field"><strong>Monthly Generation:</strong> ~${productData.monthlyGeneration} kWh</div>
@@ -275,7 +276,7 @@ function generateShaktiHTML(formData: QuoteFormData): string {
             <div class="field"><strong>Monthly Bill:</strong> ₹${formData.monthly_bill || 'TBD'}</div>
           </div>
           `}
-          
+
           <div style="margin-top: 30px; padding: 20px; background: #f9fafb; border-radius: 8px; text-align: center; font-size: 14px; color: #6b7280;">
             <p><strong>Next Steps:</strong> Our technical team will contact you within 24 hours for a detailed site assessment and final quotation.</p>
             <p>Contact: +91 90445 55572 | Email: info@arpitsolarshop.com</p>
@@ -302,12 +303,6 @@ function generateDefaultHTML(formData: QuoteFormData): string {
         <h1>Solar Quotation</h1>
         <p>Arpit Solar Shop</p>
       </div>
-      <div class="content">
-        <div class="field"><strong>Customer Name:</strong> ${formData.name}</div>
-        <div class="field"><strong>Phone:</strong> ${formData.phone}</div>
-        <div class="field"><strong>Product:</strong> ${formData.product_name || 'Solar Solution'}</div>
-        <div class="field"><strong>Date:</strong> ${new Date().toLocaleDateString()}</div>
-      </div>
     </body>
     </html>`;
 }
@@ -315,13 +310,13 @@ function generateDefaultHTML(formData: QuoteFormData): string {
 // Helper function to find product data based on system size and category
 function findProductData(formData: QuoteFormData, category: string) {
   if (!formData.product_name) return null;
-  
+
   // Extract kWp from product name (e.g., "2.14 kWp Solar System - 4 Modules")
   const systemSizeMatch = formData.product_name.match(/(\d+\.?\d*)\s*kWp/i);
   if (!systemSizeMatch) return null;
-  
+
   const systemSize = `${systemSizeMatch[1]} kWp`;
-  
+
   if (category === 'reliance') {
     // Check commercial first if customer_type is commercial
     if (formData.customer_type === 'commercial') {
@@ -333,7 +328,7 @@ function findProductData(formData: QuoteFormData, category: string) {
   } else if (category === 'shakti') {
     return shaktiResidentialData.find(item => item.systemSize === systemSize);
   }
-  
+
   return null;
 }
 
@@ -372,61 +367,56 @@ endobj
 endobj
 xref
 0 6
-0000000000 65535 f 
-0000000010 00000 n 
-0000000053 00000 n 
-0000000110 00000 n 
-0000000252 00000 n 
-0000000504 00000 n 
+0000000000 65535 f
+0000000010 00000 n
+0000000053 00000 n
+0000000110 00000 n
+0000000252 00000 n
+0000000504 00000 n
 trailer
 << /Size 6 /Root 1 0 R >>
 startxref
 561
 %%EOF`;
-  
+
   return new TextEncoder().encode(content);
 }
 
-async function sendWhatsAppTemplate(phone: string, pdfUrl: string, formData: QuoteFormData): Promise<any> {
+// Updated function to send WhatsApp template with document and URL shortening logic
+async function sendWhatsAppTemplate(phone: string, pdfUrl: string, fileName: string, formData: QuoteFormData): Promise<any> {
   const API_KEY = "key_o6Dp7MBLIwKlpKHlqcf4VaI8eGEyGkWfp76gluNY0gjjd3T5EuUblUNsbgqGMzj7LZhDfwbuoLbDxU8LTGehJW1m0sSDhqDvf2GAw4puBEAfInI5qV13rWPjpNPrvw812bitePsseEFcnJavcAOlVfqqg0bJoOA15DI06zDAhOhbXai7xW7LFWt0DdDpuby7kWHGc3pcsRrCqUGPDRvnjfSfBtlMcxwXzLJyi27Y6Mh4hfjcyU1bu1eZBmGo";
+  const SENDER_NUMBER = "+919044555572";
   
   // Clean and format phone number properly
   let cleanPhone = phone.replace(/[^\d]/g, ''); // Remove all non-digits
-  
+
   // Add country code if missing
   if (!cleanPhone.startsWith('91') && cleanPhone.length === 10) {
     cleanPhone = '91' + cleanPhone;
   }
-  
+
   // Ensure it starts with + for international format
   if (!cleanPhone.startsWith('+')) {
     cleanPhone = '+' + cleanPhone;
   }
-  
+
   console.log('Sending WhatsApp template to:', cleanPhone);
-  console.log('Sending PDF document via WhatsApp with URL:', pdfUrl);
+  console.log('PDF stored but not being sent to customer as requested');
 
-  // Generate filename from PDF URL - extract only the actual filename without query parameters
-  const urlParts = pdfUrl.split('/');
-  const lastPart = urlParts[urlParts.length - 1] || '';
-  // Remove query parameters (everything after '?') to get clean filename
-  const fileName = lastPart.split('?')[0] || `quote-${formData.name.replace(/\s+/g, '-')}-${Date.now()}.pdf`;
-
-  // Send template message WITH document attachment using quotation_document template
+  // Send template message WITHOUT document attachment (as requested)
   const payload = {
     messages: [{
       to: cleanPhone,
+      from: SENDER_NUMBER,
       content: {
-        templateName: "quotation_document",
+        templateName: "personalized_quotation_from_arpit_solar_shop_web_v2",
         language: "en",
         templateData: {
-          header: {
-            type: "DOCUMENT",
-            mediaUrl: pdfUrl,
-            filename: fileName
-          },
           body: {
-            placeholders: []
+            placeholders: [
+              formData.name,
+              formData.product_category || 'solar solution'
+            ]
           }
         }
       }
@@ -448,11 +438,11 @@ async function sendWhatsAppTemplate(phone: string, pdfUrl: string, formData: Quo
     const result = await response.json();
     console.log('DoubleTick API response status:', response.status);
     console.log('DoubleTick API response:', result);
-    
+
     if (!response.ok) {
       throw new Error(`DoubleTick API error (${response.status}): ${result.message || response.statusText}`);
     }
-    
+
     return result;
   } catch (error) {
     console.error('DoubleTick send error:', error);
