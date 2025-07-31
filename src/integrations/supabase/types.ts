@@ -14,6 +14,65 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_sessions: {
+        Row: {
+          admin_id: string
+          created_at: string
+          expires_at: string
+          id: string
+          token: string
+        }
+        Insert: {
+          admin_id: string
+          created_at?: string
+          expires_at: string
+          id?: string
+          token: string
+        }
+        Update: {
+          admin_id?: string
+          created_at?: string
+          expires_at?: string
+          id?: string
+          token?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "admin_sessions_admin_id_fkey"
+            columns: ["admin_id"]
+            isOneToOne: false
+            referencedRelation: "admin_users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      admin_users: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          name: string
+          password_hash: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          name: string
+          password_hash: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          password_hash?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       faqs: {
         Row: {
           answer: string
@@ -40,6 +99,7 @@ export type Database = {
           description: string | null
           id: string
           image_url: string | null
+          logo_url: string | null
           name: string
           specifications: Json | null
         }
@@ -50,6 +110,7 @@ export type Database = {
           description?: string | null
           id?: string
           image_url?: string | null
+          logo_url?: string | null
           name: string
           specifications?: Json | null
         }
@@ -60,6 +121,7 @@ export type Database = {
           description?: string | null
           id?: string
           image_url?: string | null
+          logo_url?: string | null
           name?: string
           specifications?: Json | null
         }
