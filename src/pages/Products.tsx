@@ -37,7 +37,8 @@ const Products = () => {
       const { data, error } = await supabase
         .from('products')
         .select('*')
-        .order('name');
+        .eq('is_published', true)
+        .order('sort_order', { ascending: true });
 
       if (error) throw error;
       setProducts(data || []);

@@ -95,35 +95,53 @@ export type Database = {
         Row: {
           brand: Database["public"]["Enums"]["company_brand"]
           category: string
+          company_info: Json | null
           created_at: string
           description: string | null
           id: string
           image_url: string | null
+          is_published: boolean
           logo_url: string | null
           name: string
+          pricing_data: Json | null
+          product_type: string | null
+          sort_order: number | null
           specifications: Json | null
+          system_configurations: Json | null
         }
         Insert: {
           brand: Database["public"]["Enums"]["company_brand"]
           category: string
+          company_info?: Json | null
           created_at?: string
           description?: string | null
           id?: string
           image_url?: string | null
+          is_published?: boolean
           logo_url?: string | null
           name: string
+          pricing_data?: Json | null
+          product_type?: string | null
+          sort_order?: number | null
           specifications?: Json | null
+          system_configurations?: Json | null
         }
         Update: {
           brand?: Database["public"]["Enums"]["company_brand"]
           category?: string
+          company_info?: Json | null
           created_at?: string
           description?: string | null
           id?: string
           image_url?: string | null
+          is_published?: boolean
           logo_url?: string | null
           name?: string
+          pricing_data?: Json | null
+          product_type?: string | null
+          sort_order?: number | null
           specifications?: Json | null
+          system_configurations?: Json | null
         }
         Relationships: []
       }

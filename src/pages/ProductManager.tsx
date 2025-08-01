@@ -6,7 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, Edit, Trash2, Upload } from "lucide-react";
+import { Plus, Edit, Trash2, Upload, Eye, EyeOff, Database } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import { seedProductData } from "@/utils/seedProductData";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -20,6 +22,12 @@ interface Product {
   image_url?: string;
   logo_url?: string;
   created_at: string;
+  is_published: boolean;
+  product_type?: string;
+  system_configurations?: any;
+  pricing_data?: any;
+  company_info?: any;
+  sort_order: number;
 }
 
 type BrandType = "Reliance" | "Sakti" | "Tata";
@@ -36,7 +44,13 @@ const ProductManager = () => {
     brand: "Reliance" as "Reliance" | "Sakti" | "Tata",
     specifications: {},
     image_url: "",
-    logo_url: ""
+    logo_url: "",
+    is_published: true,
+    product_type: "",
+    system_configurations: {},
+    pricing_data: {},
+    company_info: {},
+    sort_order: 0
   });
 
   useEffect(() => {
@@ -91,7 +105,13 @@ const ProductManager = () => {
         brand: "Reliance" as BrandType,
         specifications: {},
         image_url: "",
-        logo_url: ""
+        logo_url: "",
+        is_published: true,
+        product_type: "",
+        system_configurations: {},
+        pricing_data: {},
+        company_info: {},
+        sort_order: 0
       });
       fetchProducts();
     } catch (error) {
@@ -111,7 +131,13 @@ const ProductManager = () => {
       brand: product.brand,
       specifications: product.specifications || {},
       image_url: product.image_url || "",
-      logo_url: product.logo_url || ""
+      logo_url: product.logo_url || "",
+      is_published: product.is_published,
+      product_type: product.product_type || "",
+      system_configurations: product.system_configurations || {},
+      pricing_data: product.pricing_data || {},
+      company_info: product.company_info || {},
+      sort_order: product.sort_order
     });
     setDialogOpen(true);
   };
@@ -131,6 +157,38 @@ const ProductManager = () => {
     } catch (error) {
       console.error('Error deleting product:', error);
       toast.error('Failed to delete product');
+    }
+  };
+
+  const togglePublishStatus = async (product: Product) => {
+    try {
+      const { error } = await supabase
+        .from('products')
+        .update({ is_published: !product.is_published })
+        .eq('id', product.id);
+
+      if (error) throw error;
+      toast.success(`Product ${product.is_published ? 'unpublished' : 'published'} successfully`);
+      fetchProducts();
+    } catch (error) {
+      console.error('Error updating publish status:', error);
+      toast.error('Failed to update product status');
+    }
+  };
+
+  const handleSeedData = async () => {
+    if (!confirm('This will add sample product data to the database. Continue?')) return;
+
+    setLoading(true);
+    try {
+      await seedProductData();
+      toast.success('Sample data added successfully');
+      fetchProducts();
+    } catch (error) {
+      console.error('Error seeding data:', error);
+      toast.error('Failed to add sample data');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -169,30 +227,41 @@ const ProductManager = () => {
     <div className="container mx-auto p-6">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Product Manager</h1>
-        <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-          <DialogTrigger asChild>
-            <Button onClick={() => {
-              setEditingProduct(null);
-              setFormData({
-                name: "",
-                description: "",
-                category: "",
-                brand: "Reliance" as BrandType,
-                specifications: {},
-                image_url: "",
-                logo_url: ""
-              });
-            }}>
-              <Plus className="mr-2 h-4 w-4" />
-              Add Product
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-md">
-            <DialogHeader>
-              <DialogTitle>
-                {editingProduct ? 'Edit Product' : 'Add New Product'}
-              </DialogTitle>
-            </DialogHeader>
+        <div className="flex gap-2">
+          <Button variant="outline" onClick={handleSeedData} disabled={loading}>
+            <Database className="mr-2 h-4 w-4" />
+            Seed Sample Data
+          </Button>
+          <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+            <DialogTrigger asChild>
+              <Button onClick={() => {
+                setEditingProduct(null);
+                setFormData({
+                  name: "",
+                  description: "",
+                  category: "",
+                  brand: "Reliance" as BrandType,
+                  specifications: {},
+                  image_url: "",
+                  logo_url: "",
+                  is_published: true,
+                  product_type: "",
+                  system_configurations: {},
+                  pricing_data: {},
+                  company_info: {},
+                  sort_order: 0
+                });
+              }}>
+                <Plus className="mr-2 h-4 w-4" />
+                Add Product
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-md">
+              <DialogHeader>
+                <DialogTitle>
+                  {editingProduct ? 'Edit Product' : 'Add New Product'}
+                </DialogTitle>
+              </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <Label htmlFor="name">Product Name</Label>
@@ -241,6 +310,40 @@ const ProductManager = () => {
                     <SelectItem value="Tata Power Solar">Tata Power Solar</SelectItem>
                   </SelectContent>
                 </Select>
+              </div>
+
+              <div>
+                <Label htmlFor="product_type">Product Type</Label>
+                <Select value={formData.product_type} onValueChange={(value) => setFormData(prev => ({ ...prev, product_type: value }))}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select product type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Grid-Tie System">Grid-Tie System</SelectItem>
+                    <SelectItem value="Residential System">Residential System</SelectItem>
+                    <SelectItem value="Commercial System">Commercial System</SelectItem>
+                    <SelectItem value="Individual Product">Individual Product</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div>
+                <Label htmlFor="sort_order">Sort Order</Label>
+                <Input
+                  id="sort_order"
+                  type="number"
+                  value={formData.sort_order}
+                  onChange={(e) => setFormData(prev => ({ ...prev, sort_order: parseInt(e.target.value) || 0 }))}
+                />
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <Switch
+                  id="is_published"
+                  checked={formData.is_published}
+                  onCheckedChange={(checked) => setFormData(prev => ({ ...prev, is_published: checked }))}
+                />
+                <Label htmlFor="is_published">Published</Label>
               </div>
 
               <div>
@@ -297,7 +400,8 @@ const ProductManager = () => {
               </div>
             </form>
           </DialogContent>
-        </Dialog>
+          </Dialog>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -306,10 +410,26 @@ const ProductManager = () => {
             <CardHeader>
               <div className="flex justify-between items-start">
                 <div className="flex-1">
-                  <CardTitle className="text-lg">{product.name}</CardTitle>
-                  <p className="text-sm text-muted-foreground">{product.brand} • {product.category}</p>
+                  <CardTitle className="text-lg flex items-center gap-2">
+                    {product.name}
+                    {!product.is_published && (
+                      <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">DRAFT</span>
+                    )}
+                  </CardTitle>
+                  <p className="text-sm text-muted-foreground">
+                    {product.brand} • {product.category}
+                    {product.product_type && ` • ${product.product_type}`}
+                  </p>
                 </div>
                 <div className="flex gap-2">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    onClick={() => togglePublishStatus(product)}
+                    title={product.is_published ? 'Unpublish' : 'Publish'}
+                  >
+                    {product.is_published ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </Button>
                   <Button variant="outline" size="sm" onClick={() => handleEdit(product)}>
                     <Edit className="h-4 w-4" />
                   </Button>
