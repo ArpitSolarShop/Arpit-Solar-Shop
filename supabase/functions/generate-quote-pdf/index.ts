@@ -492,25 +492,68 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.52.0";
 
-// Product data structures
-const shaktiResidentialData = [
-  { systemSize: "2.14 kWp", pricePerWatt: 45, monthlyGeneration: 270, paybackPeriod: 4.5, modules: 4, components: "4 x 535W Modules, 1 x 2kW Inverter, Mounting Structure, DC/AC Cables" },
-  { systemSize: "3.21 kWp", pricePerWatt: 43, monthlyGeneration: 400, paybackPeriod: 4.2, modules: 6, components: "6 x 535W Modules, 1 x 3kW Inverter, Mounting Structure, DC/AC Cables" },
-  { systemSize: "5.35 kWp", pricePerWatt: 41, monthlyGeneration: 670, paybackPeriod: 4.0, modules: 10, components: "10 x 535W Modules, 1 x 5kW Inverter, Mounting Structure, DC/AC Cables" },
-  { systemSize: "10.70 kWp", pricePerWatt: 39, monthlyGeneration: 1340, paybackPeriod: 3.8, modules: 20, components: "20 x 535W Modules, 1 x 10kW Inverter, Mounting Structure, DC/AC Cables" }
+// Import actual data structures
+interface GridTieSystemData {
+  slNo: number
+  systemSize: number
+  noOfModules: number
+  inverterCapacity: number
+  phase: string
+  preGiElevatedWithGst?: number
+  preGiElevatedPrice?: number
+  hdgElevatedWithGst?: number
+  hdgElevatedPrice?: number
+}
+
+interface LargeSystemData {
+  slNo: number
+  systemSizeKWp: number
+  systemSizeKW: number
+  noOfModules: number
+  inverterCapacity: number
+  phase: string
+  shortRailTinShedPricePerWatt: number
+  shortRailTinShedPrice: number
+  hdgElevatedRccPricePerWatt: number
+  hdgElevatedRccPrice: number
+  preGiMmsPricePerWatt: number
+  preGiMmsPrice: number
+  priceWithoutMmsPricePerWatt: number
+  priceWithoutMmsPrice: number
+}
+
+// Reliance Solar Data - sourced from actual data file
+const relianceGridTieSystemData: GridTieSystemData[] = [
+  { slNo: 1, systemSize: 3.45, noOfModules: 5, inverterCapacity: 3, phase: "Single", hdgElevatedWithGst: 61.13, hdgElevatedPrice: 210900 },
+  { slNo: 2, systemSize: 5.52, noOfModules: 8, inverterCapacity: 5, phase: "Single", hdgElevatedWithGst: 60.22, hdgElevatedPrice: 332410 },
+  { slNo: 3, systemSize: 5.52, noOfModules: 8, inverterCapacity: 5, phase: "Three", hdgElevatedWithGst: 65.06, hdgElevatedPrice: 359153 },
+  { slNo: 4, systemSize: 8.28, noOfModules: 12, inverterCapacity: 10, phase: "Three", hdgElevatedWithGst: 58.55, hdgElevatedPrice: 484822 },
+  { slNo: 5, systemSize: 10.35, noOfModules: 15, inverterCapacity: 10, phase: "Three", hdgElevatedWithGst: 55.45, hdgElevatedPrice: 573910 },
+  { slNo: 6, systemSize: 13.8, noOfModules: 20, inverterCapacity: 10, phase: "Three", hdgElevatedWithGst: 53.49, hdgElevatedPrice: 738095 }
 ];
 
-const relianceResidentialData = [
-  { systemSize: "2.14 kWp", pricePerWatt: 48, monthlyGeneration: 280, paybackPeriod: 4.2, modules: 4, components: "4 x 535W HJT Modules, 1 x 2kW Inverter, Mounting Structure, DC/AC Cables" },
-  { systemSize: "3.21 kWp", pricePerWatt: 46, monthlyGeneration: 420, paybackPeriod: 4.0, modules: 6, components: "6 x 535W HJT Modules, 1 x 3kW Inverter, Mounting Structure, DC/AC Cables" },
-  { systemSize: "5.35 kWp", pricePerWatt: 44, monthlyGeneration: 700, paybackPeriod: 3.8, modules: 10, components: "10 x 535W HJT Modules, 1 x 5kW Inverter, Mounting Structure, DC/AC Cables" },
-  { systemSize: "10.70 kWp", pricePerWatt: 42, monthlyGeneration: 1400, paybackPeriod: 3.6, modules: 20, components: "20 x 535W HJT Modules, 1 x 10kW Inverter, Mounting Structure, DC/AC Cables" }
+const relianceLargeSystemData: LargeSystemData[] = [
+  { slNo: 1, systemSizeKWp: 19.32, systemSizeKW: 15, noOfModules: 28, inverterCapacity: 15, phase: "Three", shortRailTinShedPricePerWatt: 33.91, shortRailTinShedPrice: 655060, hdgElevatedRccPricePerWatt: 38.91, hdgElevatedRccPrice: 751660, preGiMmsPricePerWatt: 36.57, preGiMmsPrice: 706500, priceWithoutMmsPricePerWatt: 32.0761956, priceWithoutMmsPrice: 619560 },
+  { slNo: 2, systemSizeKWp: 33.12, systemSizeKW: 25, noOfModules: 48, inverterCapacity: 20, phase: "Three", shortRailTinShedPricePerWatt: 32.92, shortRailTinShedPrice: 1090460, hdgElevatedRccPricePerWatt: 37.92, hdgElevatedRccPrice: 1256060, preGiMmsPricePerWatt: 36.08, preGiMmsPrice: 1195060, priceWithoutMmsPricePerWatt: 31.08102946, priceWithoutMmsPrice: 1029460 },
+  { slNo: 3, systemSizeKWp: 52.44, systemSizeKW: 40, noOfModules: 76, inverterCapacity: 40, phase: "Three", shortRailTinShedPricePerWatt: 31.96, shortRailTinShedPrice: 1676180, hdgElevatedRccPricePerWatt: 36.96, hdgElevatedRccPrice: 1938380, preGiMmsPricePerWatt: 35.62, preGiMmsPrice: 1867900, priceWithoutMmsPricePerWatt: 30.12157948, priceWithoutMmsPrice: 1579480 },
+  { slNo: 4, systemSizeKWp: 65.55, systemSizeKW: 50, noOfModules: 95, inverterCapacity: 50, phase: "Three", shortRailTinShedPricePerWatt: 31.23, shortRailTinShedPrice: 2047350, hdgElevatedRccPricePerWatt: 36.23, hdgElevatedRccPrice: 2375100, preGiMmsPricePerWatt: 34.39, preGiMmsPrice: 2254300, priceWithoutMmsPricePerWatt: 29.39192655, priceWithoutMmsPrice: 1926550 },
+  { slNo: 5, systemSizeKWp: 105.57, systemSizeKW: 80, noOfModules: 153, inverterCapacity: 80, phase: "Three", shortRailTinShedPricePerWatt: 30.22, shortRailTinShedPrice: 3190020, hdgElevatedRccPricePerWatt: 35.22, hdgElevatedRccPrice: 3717870, preGiMmsPricePerWatt: 34.87, preGiMmsPrice: 3681725, priceWithoutMmsPricePerWatt: 28.37299552, priceWithoutMmsPrice: 2995520 },
+  { slNo: 6, systemSizeKWp: 124.2, systemSizeKW: 100, noOfModules: 180, inverterCapacity: 100, phase: "Three", shortRailTinShedPricePerWatt: 30.04, shortRailTinShedPrice: 3731500, hdgElevatedRccPricePerWatt: 35.04, hdgElevatedRccPrice: 4352500, preGiMmsPricePerWatt: 34.21, preGiMmsPrice: 4248400, priceWithoutMmsPricePerWatt: 28.2135032, priceWithoutMmsPrice: 3503200 },
+  { slNo: 7, systemSizeKWp: 165.6, systemSizeKW: 125, noOfModules: 240, inverterCapacity: 125, phase: "Three", shortRailTinShedPricePerWatt: 29.46, shortRailTinShedPrice: 4878300, hdgElevatedRccPricePerWatt: 34.46, hdgElevatedRccPrice: 5706300, preGiMmsPricePerWatt: 34.62, preGiMmsPrice: 5732600, priceWithoutMmsPricePerWatt: 27.6245734, priceWithoutMmsPrice: 4573400 }
 ];
 
-const relianceCommercialData = [
-  { systemSize: "25 kWp", pricePerWatt: 38, monthlyGeneration: 3250, paybackPeriod: 3.5, modules: 47, components: "47 x 535W HJT Modules, 1 x 25kW Inverter, Mounting Structure, DC/AC Cables" },
-  { systemSize: "50 kWp", pricePerWatt: 36, monthlyGeneration: 6500, paybackPeriod: 3.2, modules: 94, components: "94 x 535W HJT Modules, 2 x 25kW Inverters, Mounting Structure, DC/AC Cables" },
-  { systemSize: "100 kWp", pricePerWatt: 34, monthlyGeneration: 13000, paybackPeriod: 3.0, modules: 187, components: "187 x 535W HJT Modules, 4 x 25kW Inverters, Mounting Structure, DC/AC Cables" }
+// Shakti Solar Data - sourced from actual data file  
+const shaktiGridTieSystemData: GridTieSystemData[] = [
+  { slNo: 1, systemSize: 2.14, noOfModules: 4, inverterCapacity: 2, phase: "Single", preGiElevatedWithGst: 65000, preGiElevatedPrice: 130000 },
+  { slNo: 2, systemSize: 3.21, noOfModules: 6, inverterCapacity: 3, phase: "Single", preGiElevatedWithGst: 61666.67, preGiElevatedPrice: 185000 },
+  { slNo: 3, systemSize: 4.28, noOfModules: 8, inverterCapacity: 4, phase: "Single", preGiElevatedWithGst: 61250, preGiElevatedPrice: 245000 },
+  { slNo: 4, systemSize: 4.82, noOfModules: 9, inverterCapacity: 4, phase: "Single", preGiElevatedWithGst: 57000, preGiElevatedPrice: 285000 },
+  { slNo: 5, systemSize: 5.35, noOfModules: 10, inverterCapacity: 5, phase: "Single", preGiElevatedWithGst: 59000, preGiElevatedPrice: 295000 },
+  { slNo: 6, systemSize: 5.35, noOfModules: 10, inverterCapacity: 5, phase: "Single", preGiElevatedWithGst: 59000, preGiElevatedPrice: 315000 },
+  { slNo: 7, systemSize: 5.89, noOfModules: 11, inverterCapacity: 6, phase: "Three", preGiElevatedWithGst: 60000, preGiElevatedPrice: 330000 },
+  { slNo: 8, systemSize: 8.03, noOfModules: 15, inverterCapacity: 8, phase: "Three", preGiElevatedWithGst: 60833.33, preGiElevatedPrice: 365000 },
+  { slNo: 9, systemSize: 9.63, noOfModules: 18, inverterCapacity: 9, phase: "Three", preGiElevatedWithGst: 60625, preGiElevatedPrice: 485000 },
+  { slNo: 10, systemSize: 10, noOfModules: 10, inverterCapacity: 10, phase: "Three", preGiElevatedWithGst: 60500, preGiElevatedPrice: 605000 }
 ];
 
 const corsHeaders = {
@@ -1810,18 +1853,54 @@ function findProductData(formData: QuoteFormData, category: string) {
         return null;
     }
 
-    const systemSize = `${systemSizeMatch[1]} kWp`;
+    const targetSystemSize = parseFloat(systemSizeMatch[1]);
 
     if (category === 'reliance') {
-        // Check commercial first if customer_type is commercial
-        if (formData.customer_type === 'commercial') {
-            const commercialMatch = relianceCommercialData.find(item => item.systemSize === systemSize);
-            if (commercialMatch) return commercialMatch;
+        // Check large system data first if it's commercial or large system
+        if (formData.customer_type === 'commercial' || targetSystemSize > 13.8) {
+            const largeMatch = relianceLargeSystemData.find(item => 
+                Math.abs(item.systemSizeKWp - targetSystemSize) < 0.1
+            );
+            if (largeMatch) {
+                return {
+                    systemSize: `${largeMatch.systemSizeKWp} kWp`,
+                    pricePerWatt: largeMatch.hdgElevatedRccPricePerWatt,
+                    monthlyGeneration: Math.round(largeMatch.systemSizeKWp * 4.5 * 30), // Assuming 4.5 units per kWp per day
+                    paybackPeriod: Math.round((largeMatch.hdgElevatedRccPrice / (largeMatch.systemSizeKWp * 4.5 * 30 * 12 * 8)) * 10) / 10,
+                    modules: largeMatch.noOfModules,
+                    components: `${largeMatch.noOfModules} x 690W HJT Modules, ${largeMatch.inverterCapacity}kW Inverter, HDG Mounting Structure, DC/AC Cables`
+                };
+            }
         }
-        // Then check residential
-        return relianceResidentialData.find(item => item.systemSize === systemSize);
+        
+        // Check grid-tie residential systems
+        const gridTieMatch = relianceGridTieSystemData.find(item => 
+            Math.abs(item.systemSize - targetSystemSize) < 0.1
+        );
+        if (gridTieMatch) {
+            return {
+                systemSize: `${gridTieMatch.systemSize} kWp`,
+                pricePerWatt: gridTieMatch.hdgElevatedWithGst || 60,
+                monthlyGeneration: Math.round(gridTieMatch.systemSize * 4.5 * 30),
+                paybackPeriod: Math.round(((gridTieMatch.hdgElevatedPrice || 0) / (gridTieMatch.systemSize * 4.5 * 30 * 12 * 8)) * 10) / 10,
+                modules: gridTieMatch.noOfModules,
+                components: `${gridTieMatch.noOfModules} x 690W HJT Modules, ${gridTieMatch.inverterCapacity}kW Inverter, HDG Mounting Structure, DC/AC Cables`
+            };
+        }
     } else if (category === 'shakti') {
-        return shaktiResidentialData.find(item => item.systemSize === systemSize);
+        const shaktiMatch = shaktiGridTieSystemData.find(item => 
+            Math.abs(item.systemSize - targetSystemSize) < 0.1
+        );
+        if (shaktiMatch) {
+            return {
+                systemSize: `${shaktiMatch.systemSize} kWp`,
+                pricePerWatt: (shaktiMatch.preGiElevatedPrice || 0) / (shaktiMatch.systemSize * 1000),
+                monthlyGeneration: Math.round(shaktiMatch.systemSize * 4.2 * 30), // Slightly lower for Shakti
+                paybackPeriod: Math.round(((shaktiMatch.preGiElevatedPrice || 0) / (shaktiMatch.systemSize * 4.2 * 30 * 12 * 7.5)) * 10) / 10,
+                modules: shaktiMatch.noOfModules,
+                components: `${shaktiMatch.noOfModules} x 535W Modules, ${shaktiMatch.inverterCapacity}kW Inverter, Mounting Structure, DC/AC Cables`
+            };
+        }
     }
 
     return null;
@@ -1898,15 +1977,21 @@ async function sendWhatsAppTemplate(phone: string, pdfUrl: string, fileName: str
   console.log('Sending WhatsApp template to:', cleanPhone);
   console.log('PDF stored but not being sent to customer as requested');
 
-  // Send template message WITHOUT document attachment (as requested)
+  // Send template message WITH document attachment
   const payload = {
     messages: [{
       to: cleanPhone,
       from: SENDER_NUMBER,
       content: {
-        templateName: "personalized_quotation_from_arpit_solar_shop_web_v2",
+        templateName: "quotation_document",
         language: "en",
         templateData: {
+          header: {
+            document: {
+              link: pdfUrl,
+              filename: fileName.length > 60 ? fileName.substring(0, 57) + "..." : fileName
+            }
+          },
           body: {
             placeholders: [
               formData.name,
