@@ -1705,9 +1705,7 @@ const SAKTI_QUOTATION_HTML_TEMPLATE = `<!DOCTYPE html>
 // --- Updated HTML Generation Functions ---
 
 function getRelianceQuotationHtml(formData: QuoteFormData): string {
-    console.log('getRelianceQuotationHtml called with:', JSON.stringify(formData, null, 2));
     const productData = findProductData(formData, 'reliance');
-    console.log('Found product data:', JSON.stringify(productData, null, 2));
 
     const systemSizeKw = productData ? parseFloat(productData.systemSize.replace(' kWp', '')) : null;
     const pricePerWatt = productData ? productData.pricePerWatt : null;
@@ -1856,7 +1854,6 @@ function findProductData(formData: QuoteFormData, category: string) {
     }
 
     const targetSystemSize = parseFloat(systemSizeMatch[1]);
-    console.log(`findProductData: Looking for system size ${targetSystemSize} kWp in category ${category}`);
 
     if (category === 'reliance') {
         // Check large system data first if it's commercial or large system
@@ -1978,22 +1975,27 @@ async function sendWhatsAppTemplate(phone: string, pdfUrl: string, fileName: str
   }
 
   console.log('Sending WhatsApp template to:', cleanPhone);
-  console.log('PDF URL:', pdfUrl);
+  console.log('PDF stored but not being sent to customer as requested');
 
-  // Send simple text message with PDF link
+  // Send template message WITH document attachment
   const payload = {
     messages: [{
       to: cleanPhone,
       from: SENDER_NUMBER,
       content: {
-        templateName: "quotation_ready",
+        templateName: "quotation_document",
         language: "en",
         templateData: {
+          header: {
+            document: {
+              link: pdfUrl,
+              filename: fileName.length > 60 ? fileName.substring(0, 57) + "..." : fileName
+            }
+          },
           body: {
             placeholders: [
               formData.name,
-              formData.product_category || 'Solar System',
-              pdfUrl
+              formData.product_category || 'solar solution'
             ]
           }
         }
