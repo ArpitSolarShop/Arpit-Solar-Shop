@@ -1,10 +1,8 @@
-
-
 "use client"
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -22,15 +20,16 @@ interface RelianceQuoteFormProps {
   onOpenChange: (open: boolean) => void
   productName?: string
   isLargeSystem?: boolean
+  powerDemandKw?: number | null
   productType?: "residential" | "commercial" | "cables" | "kit"
 }
-
 const RelianceQuoteForm = ({
   open,
   onOpenChange,
   productName = "Reliance Solar Product",
   isLargeSystem = false,
   productType = "residential",
+  powerDemandKw = null,
 }: RelianceQuoteFormProps) => {
   const { toast } = useToast()
   const [loading, setLoading] = useState(false)
@@ -48,9 +47,23 @@ const RelianceQuoteForm = ({
     referral_phone: "",
   })
 
+
+  useEffect(() => {
+    if (powerDemandKw !== null && powerDemandKw !== undefined) {
+      setFormData((prev) => ({
+        ...prev,
+        power_demand_kw: String(powerDemandKw),
+      }))
+    }
+  }, [powerDemandKw])
+
+
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
+
+
 
     try {
       // Submit to Supabase database
@@ -82,7 +95,7 @@ const RelianceQuoteForm = ({
         const pdfResponse = await supabase.functions.invoke('generate-quote-pdf', {
           body: { formData: insertData }
         });
-        
+
         if (pdfResponse.error) {
           console.error('PDF generation error:', pdfResponse.error);
         } else {
@@ -319,6 +332,8 @@ const RelianceQuoteForm = ({
                     className="h-10 border-gray-300"
                   />
                 </div>
+
+
                 <div className="space-y-2">
                   <Label htmlFor="power_demand_kw" className="text-sm font-medium text-gray-700">
                     Power Demand (kW)
@@ -327,11 +342,19 @@ const RelianceQuoteForm = ({
                     id="power_demand_kw"
                     type="number"
                     value={formData.power_demand_kw}
-                    onChange={(e) => handleInputChange("power_demand_kw", e.target.value)}
+                    onChange={(e) => {
+                      if (powerDemandKw === null || powerDemandKw === undefined) {
+                        handleInputChange("power_demand_kw", e.target.value)
+                      }
+                    }}
+                    readOnly={powerDemandKw !== null && powerDemandKw !== undefined}
                     placeholder="e.g. 5"
                     className="h-10 border-gray-300"
                   />
                 </div>
+
+
+
               </div>
 
               <div className="space-y-2">
@@ -399,4 +422,12 @@ const RelianceQuoteForm = ({
 }
 
 export default RelianceQuoteForm
+
+
+
+
+
+
+
+
 

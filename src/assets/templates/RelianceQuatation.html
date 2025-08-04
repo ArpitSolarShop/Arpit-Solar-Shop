@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Power Generation System Quotation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        /* Base Styles */
+        body {
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding-top: 100px; /* Space for fixed header */
+            padding-bottom: 70px; /* Space for fixed footer */
+            background: #fdfdfd;
+            color: #333;
+            font-size: 11pt; /* Base font size for PDF */
+            line-height: 1.6;
+        }
+
+        .document {
+            max-width: 21cm; /* A4 width */
+            margin: 0 auto; /* Center the document */
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+            position: relative;
+            background: white;
+            padding: 0 30px;
+            box-sizing: border-box;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            border-bottom: 2px solid #e0e7ff;
+            background-color: #f8faff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+        .header .logo {
+            height: 60px; /* Adjust logo size */
+            width: auto;
+        }
+        .header .logo.left { margin-right: auto; }
+        .header .logo.right { margin-left: auto; }
+
+        /* Main Content Styling */
+        .content {
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 24pt;
+            color: #1a237e;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #3f51b5;
+            padding-bottom: 10px;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 16pt;
+            color: #3f51b5;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #c5cae9;
+            padding-bottom: 5px;
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: 14pt;
+            color: #5c6bc0;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        ul li {
+            margin-bottom: 5px;
+        }
+        ul.alpha-list {
+            list-style-type: lower-alpha;
+        }
+
+        strong {
+            font-weight: 600;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 10.5pt;
+        }
+        table th, table td {
+            border: 1px solid #e0e0e0;
+            padding: 10px 12px;
+            text-align: left;
+        }
+        table th {
+            background-color: #e8eaf6;
+            color: #3f51b5;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        table td {
+            background-color: #ffffff;
+        }
+        table tr:nth-child(even) td {
+            background-color: #f7f8fc;
+        }
+        .table-note {
+            font-size: 9.5pt;
+            color: #616161;
+            margin-top: -15px;
+            margin-bottom: 15px;
+            padding-left: 5px;
+        }
+        .table-financials td:nth-child(2),
+        .table-financials td:nth-child(3),
+        .table-financials td:nth-child(4) {
+            text-align: right;
+            font-family: 'Inter', monospace;
+        }
+        .table-financials th:nth-child(2),
+        .table-financials th:nth-child(3),
+        .table-financials th:nth-child(4) {
+            text-align: right;
+        }
+        .total-row {
+            font-weight: 700;
+            background-color: #e8eaf6 !important;
+        }
+        .total-row td {
+             border-top: 2px solid #3f51b5;
+        }
+
+
+        /* Specific Sections */
+        .overview-box {
+            background-color: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        .overview-box p {
+            margin: 0;
+            font-size: 12pt;
+            color: #1e88e5;
+            font-weight: 500;
+        }
+
+        .note {
+            background-color: #fffde7;
+            border-left: 4px solid #ffca28;
+            padding: 15px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            font-size: 10.5pt;
+            color: #757575;
+        }
+
+        /* Footer */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px 30px;
+            font-size: 8.5pt;
+            color: #555;
+            text-align: center;
+            border-top: 1px solid #ccc;
+            background: #f0f0f0;
+            box-sizing: border-box;
+            z-index: 1000;
+        }
+        .footer p {
+            margin: 3px 0;
+            line-height: 1.3;
+        }
+        .footer a {
+            color: #3f51b5;
+            text-decoration: none;
+        }
+
+        /* Page Break Control for Puppeteer */
+        .page-break-after {
+            page-break-after: always;
+        }
+        .avoid-break {
+            page-break-inside: avoid;
+        }
+        .section-content {
+            page-break-inside: avoid;
+        }
+
+        /* Customer Acceptance */
+        .customer-acceptance {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px dashed #999;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            font-size: 10.5pt;
+            page-break-before: auto;
+            page-break-inside: avoid;
+        }
+        .customer-acceptance div {
+            width: 48%;
+        }
+        .customer-acceptance .signature-line {
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+            margin-top: 60px;
+        }
+        .customer-acceptance p {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="/logo.png" alt="Arpit Solar Shop Logo" class="logo left">
+        <img src="/reliance-industries-ltd.png" alt="Reliance New Energy Logo" class="logo right">
+    </div>
+
+    <div class="document">
+        <div class="content">
+            <h1>Quotation for Solar Power Generation System</h1>
+
+            <div class="overview-box avoid-break">
+                <p><strong>Proposed Solution:</strong> {{product_name}}</p>
+                <p>We propose the installation of a cutting-edge solar power generation system utilizing advanced Reliance New Energy HJT NDCR (Non-Destructive Cell Reconstruction) solar modules. This system is meticulously designed for commercial applications, offering unparalleled performance, efficiency, and exceptional longevity, ensuring a superior return on your investment.</p>
+            </div>
+
+            <div class="section-content">
+                <h2>1. Customer & Project Details</h2>
+                <p><strong>Customer Name:</strong> {{name}}</p>
+                <p><strong>Contact Number:</strong> {{phone}}</p>
+                <p><strong>Project Location:</strong> {{project_location}}</p>
+                <p><strong>Date of Quotation:</strong> {{date}}</p>
+                <p>This quotation outlines the specifications and financial proposal for a high-performance solar power generation system by Arpit Solar Shop, featuring Reliance New Energy's state-of-the-art HJT NDCR solar modules and robust Hot-Dip Galvanized structures. This solution is engineered for optimal energy yield and durability, specifically tailored for commercial establishments seeking sustainable and efficient energy independence.</p>
+            </div>
+
+            <div class="section-content">
+                <h2>2. Briefing on Key Technologies</h2>
+                <ul class="alpha-list">
+                    <li>
+                        <h3>a) Heterojunction (HJT) Technology:</h3>
+                        <p>Heterojunction Technology (HJT) represents a significant leap forward in solar cell efficiency, combining the best attributes of crystalline silicon and amorphous silicon technologies. This innovative approach yields superior performance characteristics:</p>
+                        <ul>
+                            <li><strong>Higher Efficiency:</strong> HJT cells achieve superior conversion efficiencies by minimizing energy losses due to electron recombination. They typically offer average efficiencies above 23%, significantly surpassing traditional PERC (Passivated Emitter and Rear Cell) technology.</li>
+                            <li><strong>Excellent Performance at Higher Temperatures:</strong> HJT modules exhibit a remarkably lower temperature coefficient, meaning their efficiency degrades less significantly at elevated temperatures. This characteristic makes them particularly well-suited for warmer climates like India, ensuring consistent power output even during peak heat.</li>
+                            <li><strong>Enhanced Bifacial Performance:</strong> Many HJT modules are bifacial by design, capable of absorbing sunlight from both the front and rear sides. This capability substantially increases overall energy generation, especially when installed in environments where reflected light (from rooftops, ground, etc.) can be effectively captured.</li>
+                            <li><strong>Superior Durability and Longevity:</strong> The unique cell structure and advanced passivation layers in HJT panels significantly reduce degradation mechanisms such as Potential Induced Degradation (PID) and Light-Induced Degradation (LID). This leads to an extended operational lifespan, often exceeding 25-30 years, ensuring long-term reliability.</li>
+                            <li><strong>Improved Low-Light Performance:</strong> HJT cells are engineered to generate power even in challenging low-light conditions, such as early mornings, late evenings, and cloudy days. This extends the daily energy harvest, maximizing the system's output throughout the day.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>b) Hot-Dip Galvanized (HDG) Structure:</h3>
+                        <p>The solar mounting structure will be meticulously fabricated from Hot-Dip Galvanized (HDG) steel. This proven process involves immersing fabricated steel components in a bath of molten zinc, resulting in a metallurgically bonded coating. This robust coating provides unparalleled protection against corrosion, offering a myriad of benefits:</p>
+                        <ul>
+                            <li><strong>Superior Corrosion Resistance:</strong> The zinc coating acts as a sacrificial barrier, effectively preventing rust and significantly extending the lifespan of the mounting structure. This ensures the structural integrity of your solar installation for decades, even in highly corrosive or harsh environmental conditions.</li>
+                            <li><strong>High Strength and Durability:</strong> HDG steel structures are renowned for their exceptional structural integrity and robust design. They are engineered to effectively withstand high wind loads, seismic activity, and various other environmental stresses, safeguarding your investment.</li>
+                            <li><strong>Low Maintenance:</strong> Due to its inherent and superior corrosion resistance, HDG structures require minimal to no maintenance throughout their extensive service life. This significantly reduces operational costs and the need for periodic inspections or repairs.</li>
+                            <li><strong>Sustainability:</strong> Both steel and zinc are 100% recyclable materials, making HDG structures an environmentally conscious and sustainable choice for your solar installation. This aligns with modern ecological standards and contributes to a greener future.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="page-break-after"></div>
+
+            <div class="section-content">
+                <h2>3. Scope of Work & Inclusions: Complete Kit Components</h2>
+                <p>The following is meticulously included in this comprehensive quotation, encompassing our complete scope of supply for your solar system package:</p>
+                <ul>
+                    <li><strong>Design & Engineering:</strong> Detailed system design and precise engineering tailored specifically to your site requirements, ensuring optimal performance and integration.</li>
+                    <li><strong>Supply of Components:</strong> Provision of all high-quality components necessary for a complete and operational solar power system:
+                        <ul class="alpha-list">
+                            <li>Reliance New Energy HJT NDCR Solar PV Modules (690-720 Wp)</li>
+                            <li>High-efficiency Solar Inverter (specific to system size)</li>
+                            <li>Hot-Dip Galvanized (HDG) Mounting Structure – engineered for durability and corrosion resistance.</li>
+                            <li>Net metering equipment (excluding actual net meter, which is typically provided by DISCOM)</li>
+                            <li>All necessary DC and AC cables, connectors, earthing kits, lightning arrestors, and other balance of system components required for a safe and efficient installation.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Installation:</strong> Professional, certified installation of the entire solar power generation system by our highly trained and experienced technicians, adhering to the highest safety and quality standards.</li>
+                    <li><strong>Testing & Commissioning:</strong> Comprehensive testing and meticulous commissioning of the entire system to verify optimal performance, safety, and grid synchronization.</li>
+                    <li><strong>Approvals & Documentation:</strong> Dedicated assistance with securing all necessary government approvals and detailed documentation required for grid connectivity and compliance (if applicable).</li>
+                    <li><strong>Warranty:</strong> Robust warranty coverage for your peace of mind:
+                        <ul class="alpha-list">
+                            <li>30-year performance warranty on Reliance New Energy HJT solar panels, guaranteeing long-term energy output.</li>
+                            <li>5-year complete system warranty (including inverter and workmanship).</li>
+                            <li>10-year inverter warranty, ensuring the reliability of the system's core component.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>Component Breakdown:</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sr No.</th>
+                            <th>Component</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>Module</td><td>RIL 690-720 Wp Module - Silicon</td><td>Included</td></tr>
+                        <tr><td>2</td><td>Inverter</td><td>3 String Inverter (According to system size)</td><td>Included</td></tr>
+                        <tr><td>3</td><td>ACDB</td><td>ACDB, IP65 Protected with MCB 4P-1 Nos.</td><td>Included</td></tr>
+                        <tr><td>4</td><td>MC4 Connector</td><td>Male & female (both)</td><td>Included</td></tr>
+                        <tr><td>5</td><td>Monitoring Device</td><td>Network device, with 5 year of network service</td><td>Included</td></tr>
+                        <tr><td>6</td><td>MMS</td><td>Mounting Structure</td><td>Included</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="page-break-after"></div>
+
+            <div class="section-content">
+                <h2>4. (a) Bill of Quantity (BOQ)</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>Description</th>
+                            <th>Unit</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>Reliance New Energy 690 Wp HJT NDCR Solar Modules</td><td>Nos.</td><td>8</td></tr>
+                        <tr><td>2</td><td>On-Grid Solar Inverter 5KW 1PH</td><td>Unit</td><td>1</td></tr>
+                        <tr><td>3</td><td>Hot-Dip Galvanized (HDG) Mounting Structure</td><td>Set</td><td>1</td></tr>
+                        <tr><td>4</td><td>AC Distribution Box (ACDB)</td><td>Unit</td><td>1</td></tr>
+                        <tr><td>5</td><td>DC Distribution Box (DCDB)</td><td>Unit</td><td>1</td></tr>
+                        <tr><td>6</td><td>AC Cables (Inverter to ACDB Copper, ACDB to Load Aluminium)</td><td>Meter</td><td>60</td></tr>
+                        <tr><td>7</td><td>DC Cables (Solar Panels to DCDB)</td><td>Meter</td><td>10</td></tr>
+                        <tr><td>8</td><td>Earthing Kit (Main & Module Earthing)</td><td>Set</td><td>3</td></tr>
+                        <tr><td>9</td><td>Lightning Arrester</td><td>Unit</td><td>1</td></tr>
+                        <tr><td>10</td><td>Installation, Testing & Commissioning</td><td>Lumpsum</td><td>1</td></tr>
+                        <tr><td>11</td><td>Transportation</td><td>Lumpsum</td><td>1</td></tr>
+                    </tbody>
+                </table>
+                <p class="table-note"><strong>Note:</strong> Excluding Net Metering equipment (typically provided by DISCOM).</p>
+
+                <h2>4. (b) Financials & Performance Estimates</h2>
+                <table class="table-financials">
+                    <thead>
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>Description</th>
+                            <th>Quantity</th>
+                            <th>Unit Price (INR)</th>
+                            <th>Total Price (INR)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1.</td>
+                            <td>{{system_size}} Reliance New Energy HJT NDCR Solar Power Generation System (Includes Modules, Inverter, HDG Structure, BOS, Installation, Testing & Commissioning)</td>
+                            <td>1</td>
+                            <td>₹ {{estimated_cost}}</td>
+                            <td>₹ {{estimated_cost}}</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="4">Grand Total</td>
+                            <td>₹ {{estimated_cost}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">Applicable Taxes (GST @ 13.8%)</td>
+                            <td>Including</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="4">TOTAL QUOTED PRICE (INR)</td>
+                            <td>₹ {{estimated_cost}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Performance Projections:</h3>
+                <ul>
+                    <li><strong>Estimated Monthly Generation:</strong> ~{{monthly_generation}} kWh</li>
+                    <li><strong>Estimated Payback Period:</strong> ~{{payback_period}} years</li>
+                </ul>
+
+                <div class="note avoid-break">
+                    <p><strong>Note:</strong></p>
+                    <ul>
+                        <li>Prices are subject to change based on market fluctuations at the time of final order.</li>
+                        <li>The above price is an estimate for an on-grid system. Pricing for off-grid or hybrid systems will will differ and will be provided upon specific request.</li>
+                        <li>Performance projections are estimates based on average solar irradiance for Varanasi and typical system efficiency. Actual generation may vary based on specific site conditions, weather, and usage patterns.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="page-break-after"></div>
+
+            <div class="section-content">
+                <h2>5. Payment Terms</h2>
+                <ul>
+                    <li><strong>Advance Payment:</strong> 20% of the total quoted price upon acceptance of this quotation and signing of the agreement. Upon receipt of this advance, the structure fabrication work will commence.</li>
+                    <li><strong>Second Instalment:</strong> 70% against Proforma Invoice before the main components (modules, inverter, major structure components) are dispatched to your site.</li>
+                    <li><strong>Final Payment:</strong> 10% upon successful commissioning and hand-over of the complete solar power generation system, after all tests are verified and the system is fully operational.</li>
+                </ul>
+            </div>
+
+            <div class="section-content">
+                <h2>6. Project Timeline</h2>
+                <ul>
+                    <li><strong>System Delivery:</strong> Approximately 4-6 weeks from the date of advance payment and final design approval.</li>
+                    <li><strong>Installation & Commissioning:</strong> Approximately 10-15 working days from the date of equipment delivery at your site, subject to site readiness and weather conditions.</li>
+                </ul>
+            </div>
+
+            <div class="section-content">
+                <p style="margin-top: 40px;">Sincerely,</p>
+                <p>We are confident that this Reliance New Energy HJT solar power generation system, coupled with our professional installation and maintenance services, will prove to be a highly valuable, reliable, and sustainable investment for your property. This system is designed to provide significant energy savings and contribute positively to your environmental goals.</p>
+                <p>Please feel free to contact us for any clarifications, to discuss custom requirements, or to schedule a detailed site visit at your earliest convenience. Our team is ready to assist you.</p>
+                <p>Thank you for considering Arpit Solar Shop as your trusted solar partner. We look forward to powering your future with clean energy.</p>
+
+                <div class="customer-acceptance">
+                    <div>
+                        <p style="margin-bottom: 5px;">For Arpit Solar Shop</p>
+                        <p style="font-weight: 700; font-size: 12pt;">Ratnesh Mishra</p>
+                        <p style="font-style: italic; margin-top: -5px;">(Proprietor)</p>
+                        <p>M/s. Arpit Solar Shop</p>
+                    </div>
+                    <div>
+                        <p>(Customer acceptance with sign)</p>
+                        <div class="signature-line"></div>
+                        <p style="font-size: 9pt; margin-top: 5px;">Name: __________________________</p>
+                        <p style="font-size: 9pt;">Date: ___________________________</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><strong>M/s. Arpit Solar Shop</strong></p>
+        <p>Authorized Channel Partner: Reliance New Energy</p>
+        <p>Office: Sh16/114-25-K-2, Sharvodayanagar, Kadipur, Shivpur, Varanasi 221003(UP)</p>
+        <p>Branches: Ballia | Gorakhpur</p>
+        <p>Contact: <a href="tel:+919005770466">9005770466</a> | WA Chatbot: <a href="https://wa.me/919044555572">9044555572</a> | Email: <a href="mailto:info@arpitsolar.com">info@arpitsolar.com</a> | Web: <a href="https://www.arpitsolar.com" target="_blank">www.arpitsolar.com</a></p>
+        <p>GSTIN: 09APKPM6299L1ZW</p>
+    </div>
+</body>
+</html>

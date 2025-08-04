@@ -710,11 +710,18 @@ export default function Reliance() {
           }
           isLargeSystem={selectedProduct?.systemSize === 0 || selectedProduct?.systemSizeKWp === 0}
           productType={productType}
+          powerDemandKw={selectedProduct?.systemSize || selectedProduct?.systemSizeKW || null}
         />
+
       </div>
     </div>
   )
 }
+
+
+
+
+
 
 
 
