@@ -1,5 +1,8 @@
 "use client"
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
+ 
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -154,7 +157,8 @@ const Services = () => {
   const [selectedService, setSelectedService] = useState<Service | null>(null)
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pt-20">
+      <Navbar />
       {/* Header */}
       <section className="bg-blue-600 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -370,6 +374,7 @@ const Services = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   )
 }

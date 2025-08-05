@@ -1,5 +1,6 @@
 "use client"
-
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -163,7 +164,8 @@ function RelianceCommercialTable({ onRowClick }: { onRowClick: (product: Relianc
     })
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 pt-16">
+     <Navbar /> 
       <div className="flex items-center space-x-2">
         <Search className="h-4 w-4 text-gray-400" />
         <Input
@@ -649,6 +651,7 @@ export default function CommercialIndustrial() {
         isLargeSystem={selectedRelianceProduct?.systemSize === 0}
         productType="commercial"
       />
+        <Footer />
     </div>
   )
 }

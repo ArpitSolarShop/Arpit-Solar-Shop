@@ -121,7 +121,7 @@ const HowItWorks = () => {
                 <div className="text-sm text-gray-500">Year Warranty</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-amber-600">$0</div>
+                <div className="text-2xl font-bold text-amber-600">₹0</div>
                 <div className="text-sm text-gray-500">Down Payment</div>
               </div>
             </div>

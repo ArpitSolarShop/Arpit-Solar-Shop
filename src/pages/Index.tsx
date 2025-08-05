@@ -8,6 +8,10 @@ import Certifications from "@/components/sections/Certifications";
 import FAQ from "@/components/sections/FAQ";
 import CleanEnergySolution from "@/components/sections/CleanEnergySolution";
 
+import TrustedPartnersSection from '@/components/sections/TrustedPartnersSection'; 
+
+
+
 const Index = () => {
   return (
     <div className="min-h-screen">
@@ -16,9 +20,9 @@ const Index = () => {
         <HeroSection />
         <CleanEnergySolution />
         <HowItWorks />
+        <TrustedPartnersSection />
         <ProjectHighlights />
         <Certifications />
-       
         <FAQ />
       </main>
       <Footer />

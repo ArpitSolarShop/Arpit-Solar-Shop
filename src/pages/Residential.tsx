@@ -1,10 +1,6 @@
-// import RelianceQuoteForm from "@/components/forms/reliance-quote-form"
-// import ShaktiQuoteForm from "@/components/forms//shakti-quote-form"
-
-
-
 "use client"
-
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -16,6 +12,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ArrowUpDown, Search, Home, Sun, TrendingUp, DollarSign, Battery, CheckCircle, Lock } from "lucide-react"
 import RelianceQuoteForm from "@/components/forms/reliance-quote-form"
 import ShaktiQuoteForm from "@/components/forms//shakti-quote-form"
+
+
+
+
 import {
   shaktiResidentialData,
   relianceResidentialData,
@@ -62,41 +62,6 @@ const ChecklistItem = ({ text }: { text: string }) => (
     <p className="text-gray-600">{text}</p>
   </div>
 )
-
-// // Reusable Installation Step Component
-// const InstallationStep = ({
-//   title,
-//   description,
-//   image,
-//   alt,
-//   reverse,
-// }: {
-//   title: string
-//   description: string
-//   image: string
-//   alt: string
-//   reverse: boolean
-// }) => (
-//   <motion.div
-//     className={`flex flex-col ${reverse ? "md:flex-row-reverse" : "md:flex-row"} items-center gap-6 mb-8`}
-//     initial={{ opacity: 0, y: 20 }}
-//     whileInView={{ opacity: 1, y: 0 }}
-//     viewport={{ once: true }}
-//     transition={{ duration: 0.5 }}
-//   >
-//     <img src={image || "/placeholder.svg"} alt={alt} className="w-full md:w-1/2 h-64 object-cover rounded-lg" />
-//     <div className="md:w-1/2">
-//       <h3 className="text-2xl font-semibold text-gray-800 mb-2">{title}</h3>
-//       <p className="text-gray-600">{description}</p>
-//     </div>
-//   </motion.div>
-// )
-
-
-
-
-
-
 
 // Reusable Installation Step Component
 const InstallationStep = ({
@@ -239,7 +204,10 @@ function ShaktiResidentialTable({ onRowClick }: { onRowClick: (product: ShaktiRe
     })
 
   return (
-    <div className="space-y-4">
+    
+    <div className="space-y-4 pt-16">
+      <Navbar /> 
+    
       <div className="flex items-center space-x-2">
         <Search className="h-4 w-4 text-gray-400" />
         <Input
@@ -997,6 +965,7 @@ export default function Residential() {
         isLargeSystem={selectedRelianceProduct?.systemSize === 0}
         productType="residential"
       />
-    </div>
+       <Footer />
+    </div> 
   )
 }

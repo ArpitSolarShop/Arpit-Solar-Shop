@@ -54,12 +54,12 @@ const FAQ = () => {
   return (
     <section className="py-20 bg-gradient-to-b from-white to-gray-50 text-gray-800">
       <div className="container mx-auto px-4 max-w-4xl">
-        <h2 className="text-4xl font-bold text-center text-primary mb-4">
-          Frequently Asked Questions
-        </h2>
-        <p className="text-center text-muted-foreground mb-10">
-          Answers to common questions about solar energy, government support, savings, and more.
-        </p>
+        <h2 className="text-4xl font-bold text-center mb-4">
+    <span className="text-black">Frequently Asked</span> <span className="text-amber-500">Questions</span>
+</h2>
+<p className="text-center text-gray-700 mb-10">
+    Answers to common questions about solar energy, government support, savings, and more.
+</p>
 
         <div className="space-y-5">
           {faqs.map((faq, index) => {

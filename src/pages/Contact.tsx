@@ -238,3 +238,84 @@ const Contact = () => {
 };
 
 export default Contact;
+
+
+
+
+
+
+
+
+
+
+
+
+// import React from 'react';
+// import { Helmet } from 'react-helmet';
+// import Navbar from '@/components/layout/Navbar';
+// import Footer from '@/components/layout/Footer';
+
+// const AboutUs = () => {
+//   return (
+//     <>
+//       <Helmet>
+//         <title>About Us - Arpit Solar</title>
+//         <meta name="description" content="Learn more about Arpit Solar Shop - your trusted solar energy partner." />
+//       </Helmet>
+
+//       <Navbar />
+
+//       <main className="pt-20 bg-white text-gray-900">
+//         {/* Hero Section */}
+//         <section className="text-center py-12 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+//           <div className="container mx-auto px-4">
+//             <h1 className="text-4xl font-bold mb-4">About Arpit Solar Shop</h1>
+//             <p className="text-lg">Empowering homes and businesses with clean solar energy across India.</p>
+//           </div>
+//         </section>
+
+//         {/* Our Vision and Mission */}
+//         <section className="py-12 container mx-auto px-4">
+//           <div className="grid md:grid-cols-2 gap-8">
+//             <div>
+//               <h2 className="text-2xl font-semibold mb-2">Our Vision</h2>
+//               <p>To lead the transition towards sustainable and renewable energy solutions for a brighter, cleaner future.</p>
+//             </div>
+//             <div>
+//               <h2 className="text-2xl font-semibold mb-2">Our Mission</h2>
+//               <p>Deliver high-quality solar systems with unmatched customer service and long-term performance support.</p>
+//             </div>
+//           </div>
+//         </section>
+
+//         {/* Our Team */}
+//         <section className="bg-gray-100 py-12">
+//           <div className="container mx-auto px-4 text-center">
+//             <h2 className="text-3xl font-semibold mb-6">Meet the Team</h2>
+//             <p className="max-w-3xl mx-auto">Arpit Solar is powered by a passionate team of engineers, technicians, and support staff committed to delivering excellence in every project.</p>
+//           </div>
+//         </section>
+
+//         {/* Google Map Location */}
+//         <section className="py-12 container mx-auto px-4">
+//           <h2 className="text-3xl font-semibold text-center mb-6">Our Location</h2>
+//           <div className="flex justify-center">
+//             <iframe
+//               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3605.536770874559!2d82.94755207516889!3d25.35332077761076!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e2db16a9c907f%3A0xe094345c3bcc59c2!2sArpit%20Solar%20Shop!5e0!3m2!1sen!2sin!4v1754391428818!5m2!1sen!2sin"
+//               width="100%"
+//               height="450"
+//               style={{ border: 0 }}
+//               allowFullScreen
+//               loading="lazy"
+//               referrerPolicy="no-referrer-when-downgrade"
+//             ></iframe>
+//           </div>
+//         </section>
+//       </main>
+
+//       <Footer />
+//     </>
+//   );
+// };
+
+// export default AboutUs;
