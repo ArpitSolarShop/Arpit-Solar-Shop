@@ -252,7 +252,6 @@ export default function ShaktiSolar() {
                 : "Shakti Solar Product"
           }
           isLargeSystem={selectedProduct?.systemSize === 0}
-          powerDemandKw={selectedProduct?.systemSize === 0 ? null : selectedProduct?.systemSize || null}
         />
       </div>
     </div>
