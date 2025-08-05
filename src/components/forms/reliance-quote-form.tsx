@@ -237,15 +237,25 @@ const RelianceQuoteForm = ({
                   <Label htmlFor="phone" className="text-sm font-medium text-gray-700">
                     Phone Number *
                   </Label>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    required
-                    value={formData.phone}
-                    onChange={(e) => handleInputChange("phone", e.target.value)}
-                    placeholder="+91 98765 43210"
-                    className="h-10 border-gray-300"
-                  />
+                  <div className="flex">
+                    <Select value="+91" disabled>
+                      <SelectTrigger className="w-24 h-10 border-gray-300 rounded-r-none">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="+91">+91 India</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      required
+                      value={formData.phone}
+                      onChange={(e) => handleInputChange("phone", e.target.value)}
+                      placeholder="98765 43210"
+                      className="h-10 border-gray-300 rounded-l-none border-l-0"
+                    />
+                  </div>
                 </div>
               </div>
 

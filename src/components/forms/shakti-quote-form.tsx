@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -20,6 +20,7 @@ interface ShaktiQuoteFormProps {
   onOpenChange: (open: boolean) => void
   productName?: string
   isLargeSystem?: boolean
+  powerDemandKw?: number | null
 }
 
 const ShaktiQuoteForm = ({
@@ -27,6 +28,7 @@ const ShaktiQuoteForm = ({
   onOpenChange,
   productName = "Shakti Solar Product",
   isLargeSystem = false,
+  powerDemandKw = null,
 }: ShaktiQuoteFormProps) => {
   const { toast } = useToast()
   const [loading, setLoading] = useState(false)
@@ -43,6 +45,15 @@ const ShaktiQuoteForm = ({
     referral_name: "",
     referral_phone: "",
   })
+
+  useEffect(() => {
+    if (powerDemandKw !== null && powerDemandKw !== undefined) {
+      setFormData((prev) => ({
+        ...prev,
+        power_demand_kw: String(powerDemandKw),
+      }))
+    }
+  }, [powerDemandKw])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -206,15 +217,25 @@ const ShaktiQuoteForm = ({
                   <Label htmlFor="phone" className="text-sm font-medium text-gray-700">
                     Phone Number *
                   </Label>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    required
-                    value={formData.phone}
-                    onChange={(e) => handleInputChange("phone", e.target.value)}
-                    placeholder="+91 98765 43210"
-                    className="h-10 border-gray-300"
-                  />
+                  <div className="flex">
+                    <Select value="+91" disabled>
+                      <SelectTrigger className="w-24 h-10 border-gray-300 rounded-r-none">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="+91">+91 India</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      required
+                      value={formData.phone}
+                      onChange={(e) => handleInputChange("phone", e.target.value)}
+                      placeholder="98765 43210"
+                      className="h-10 border-gray-300 rounded-l-none border-l-0"
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -309,7 +330,12 @@ const ShaktiQuoteForm = ({
                     id="power_demand_kw"
                     type="number"
                     value={formData.power_demand_kw}
-                    onChange={(e) => handleInputChange("power_demand_kw", e.target.value)}
+                    onChange={(e) => {
+                      if (powerDemandKw === null || powerDemandKw === undefined) {
+                        handleInputChange("power_demand_kw", e.target.value)
+                      }
+                    }}
+                    readOnly={powerDemandKw !== null && powerDemandKw !== undefined}
                     placeholder="e.g. 5"
                     className="h-10 border-gray-300"
                   />
