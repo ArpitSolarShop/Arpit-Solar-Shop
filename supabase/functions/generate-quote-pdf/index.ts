@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.52.0";
+import { PDFDocument, rgb, StandardFonts } from "https://esm.sh/pdf-lib@1.17.1";
 
 // Import actual data structures
 interface GridTieSystemData {
@@ -164,7 +165,7 @@ async function generateQuotePDF(formData: QuoteFormData): Promise<Uint8Array> {
     return new Uint8Array(pdfBuffer);
   } catch (e) {
     console.warn('Puppeteer failed:', e);
-    return createSimplePDF(formData);
+    return await createSimplePDF(formData);
   }
 }
 
@@ -569,16 +570,221 @@ function populateHtmlTemplate(template: string, formData: QuoteFormData): string
     return populatedHtml;
 }
 
-function createSimplePDF(formData: QuoteFormData): Uint8Array {
-  // Create a basic text-based PDF for fallback
-  const content = `QUOTATION
-Name: ${formData.name}
-Phone: ${formData.phone}
-Product: ${formData.product_name || 'Solar System'}
-Date: ${new Date().toLocaleDateString()}`;
-  
-  // Simple text to bytes conversion - not a real PDF
-  return new TextEncoder().encode(content);
+async function createSimplePDF(formData: QuoteFormData): Promise<Uint8Array> {
+  try {
+    const pdfDoc = await PDFDocument.create();
+    const page = pdfDoc.addPage([595.28, 841.89]); // A4 size
+    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    const boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+    
+    const { width, height } = page.getSize();
+    let yPosition = height - 80;
+    
+    // Find product data for pricing
+    const category = formData.product_category?.toLowerCase() || '';
+    const productData = findProductData(formData, category);
+    const systemSize = productData?.systemSize || productData?.systemSizeKWp || 'TBD';
+    const estimatedCost = productData?.hdgElevatedPrice || productData?.preGiElevatedPrice || productData?.hdgElevatedRccPrice || 'Contact for pricing';
+    
+    // Header
+    page.drawText('SOLAR POWER GENERATION SYSTEM QUOTATION', {
+      x: 50,
+      y: yPosition,
+      size: 20,
+      font: boldFont,
+      color: rgb(0, 0.4, 0.8),
+    });
+    yPosition -= 50;
+    
+    // Company info
+    page.drawText('Arpit Solar Shop', {
+      x: 50,
+      y: yPosition,
+      size: 16,
+      font: boldFont,
+    });
+    yPosition -= 25;
+    
+    page.drawText('Contact: +91 90445 55572 | Email: info@arpitsolarshop.com', {
+      x: 50,
+      y: yPosition,
+      size: 10,
+      font: font,
+    });
+    yPosition -= 40;
+    
+    // Customer Details
+    page.drawText('Customer Details:', {
+      x: 50,
+      y: yPosition,
+      size: 14,
+      font: boldFont,
+    });
+    yPosition -= 25;
+    
+    const customerDetails = [
+      `Name: ${formData.name}`,
+      `Phone: ${formData.phone}`,
+      `Email: ${formData.email || 'Not provided'}`,
+      `Location: ${formData.project_location || 'TBD'}`,
+      `Date: ${new Date().toLocaleDateString()}`
+    ];
+    
+    customerDetails.forEach(detail => {
+      page.drawText(detail, {
+        x: 70,
+        y: yPosition,
+        size: 11,
+        font: font,
+      });
+      yPosition -= 20;
+    });
+    
+    yPosition -= 20;
+    
+    // System Details
+    page.drawText('System Details:', {
+      x: 50,
+      y: yPosition,
+      size: 14,
+      font: boldFont,
+    });
+    yPosition -= 25;
+    
+    const systemDetails = [
+      `Product: ${formData.product_name || 'Solar System'}`,
+      productData ? `System Size: ${systemSize} kWp` : '',
+      productData ? `Number of Modules: ${productData.noOfModules}` : '',
+      productData ? `Inverter Capacity: ${productData.inverterCapacity} kW` : '',
+      productData ? `Phase: ${productData.phase}` : ''
+    ].filter(detail => detail);
+    
+    systemDetails.forEach(detail => {
+      page.drawText(detail, {
+        x: 70,
+        y: yPosition,
+        size: 11,
+        font: font,
+      });
+      yPosition -= 20;
+    });
+    
+    yPosition -= 20;
+    
+    // Pricing
+    if (estimatedCost !== 'Contact for pricing') {
+      page.drawText('Estimated System Cost:', {
+        x: 50,
+        y: yPosition,
+        size: 14,
+        font: boldFont,
+      });
+      yPosition -= 25;
+      
+      page.drawText(`₹${estimatedCost.toLocaleString()}`, {
+        x: 70,
+        y: yPosition,
+        size: 16,
+        font: boldFont,
+        color: rgb(0, 0.6, 0),
+      });
+      yPosition -= 15;
+      
+      page.drawText('*Final pricing subject to site survey', {
+        x: 70,
+        y: yPosition,
+        size: 9,
+        font: font,
+        color: rgb(0.5, 0.5, 0.5),
+      });
+      yPosition -= 30;
+    }
+    
+    // Key Benefits
+    page.drawText('Key Benefits:', {
+      x: 50,
+      y: yPosition,
+      size: 14,
+      font: boldFont,
+    });
+    yPosition -= 25;
+    
+    const benefits = [
+      '• 25 Years Performance Warranty + 12 Years Product Warranty',
+      '• High Efficiency Solar Technology',
+      '• Complete System Solutions',
+      '• Professional Installation',
+      '• Government Subsidy Support'
+    ];
+    
+    benefits.forEach(benefit => {
+      page.drawText(benefit, {
+        x: 70,
+        y: yPosition,
+        size: 11,
+        font: font,
+      });
+      yPosition -= 20;
+    });
+    
+    // Footer
+    yPosition -= 30;
+    page.drawText('Next Steps:', {
+      x: 50,
+      y: yPosition,
+      size: 12,
+      font: boldFont,
+    });
+    yPosition -= 20;
+    
+    page.drawText('Our technical team will contact you within 24 hours for a detailed', {
+      x: 50,
+      y: yPosition,
+      size: 10,
+      font: font,
+    });
+    yPosition -= 15;
+    
+    page.drawText('site assessment and final quotation.', {
+      x: 50,
+      y: yPosition,
+      size: 10,
+      font: font,
+    });
+    
+    const pdfBytes = await pdfDoc.save();
+    return new Uint8Array(pdfBytes);
+  } catch (error) {
+    console.error('Error creating PDF with pdf-lib:', error);
+    // Ultimate fallback - create a minimal PDF
+    const pdfDoc = await PDFDocument.create();
+    const page = pdfDoc.addPage();
+    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    
+    page.drawText('Solar Quotation', {
+      x: 50,
+      y: 750,
+      size: 20,
+      font: font,
+    });
+    
+    page.drawText(`Name: ${formData.name}`, {
+      x: 50,
+      y: 700,
+      size: 12,
+      font: font,
+    });
+    
+    page.drawText(`Phone: ${formData.phone}`, {
+      x: 50,
+      y: 680,
+      size: 12,
+      font: font,
+    });
+    
+    const pdfBytes = await pdfDoc.save();
+    return new Uint8Array(pdfBytes);
+  }
 }
 
 async function sendWhatsAppTemplate(phone: string, pdfUrl: string, fileName: string, formData: QuoteFormData) {
