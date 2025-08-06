@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const About = () => {
+const Sustainability = () => {
   const solarBenefits = [
     {
       icon: Leaf,
@@ -92,13 +92,13 @@ const About = () => {
         <div className="bg-gradient-primary text-white py-16 mb-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                About Solar Technology & Our Company
-              </h1>
-              <p className="text-xl opacity-90 max-w-3xl mx-auto">
-                Discover the power of solar energy and learn about our mission to 
-                transform India's energy landscape with sustainable solutions.
-              </p>
+               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
+                 Solar Technology & Sustainability
+               </h1>
+               <p className="text-lg sm:text-xl opacity-90 max-w-3xl mx-auto px-4">
+                 Discover the power of solar energy and learn about our commitment to 
+                 sustainable solutions that transform India's energy landscape.
+               </p>
             </div>
           </div>
         </div>
@@ -119,7 +119,7 @@ const About = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 mb-16">
               {solarBenefits.map((benefit, index) => {
                 const IconComponent = benefit.icon;
                 return (
@@ -145,7 +145,7 @@ const About = () => {
               <h3 className="text-2xl md:text-3xl font-bold text-center mb-12">
                 How Solar Technology Works
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                 {howItWorks.map((step, index) => (
                   <div key={index} className="relative">
                     <Card className="border-0 bg-card/50 backdrop-blur-sm h-full">
@@ -172,9 +172,9 @@ const About = () => {
             </div>
 
             {/* Environmental Benefits */}
-            <div className="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/10 dark:to-blue-900/10 rounded-3xl p-8">
+            <div className="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/10 dark:to-blue-900/10 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8">
               <h3 className="text-2xl font-bold mb-6 text-center">Environmental Impact</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
                 <div className="text-center">
                   <div className="text-3xl font-bold text-green-600 mb-2">0%</div>
                   <div className="text-sm text-muted-foreground">Carbon Emissions</div>
@@ -325,4 +325,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default Sustainability;

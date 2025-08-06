@@ -7,8 +7,8 @@ import Index from "./pages/Index";
 import GetQuote from "./pages/GetQuote";
 import Products from "./pages/Products";
 import Services from "./pages/Services";
-import About from "./pages/About";
-import AboutSolarTechnology from "./pages/AboutSolarTechnology";
+import Sustainability from "./pages/Sustainability";
+
 import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
 import Reliance from "./pages/Reliance";
@@ -38,8 +38,8 @@ const App = () => (
           <Route path="/get-quote" element={<GetQuote />} />
           <Route path="/products" element={<Products />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/about/sustainability" element={<AboutSolarTechnology />} />
+          <Route path="/about/sustainability" element={<Sustainability />} />
+          
           <Route path="/about/us" element={<AboutUs />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/reliance" element={<Reliance />} />

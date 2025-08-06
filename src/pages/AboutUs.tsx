@@ -102,11 +102,11 @@ const AboutUs = () => {
             <Badge className="mb-4 text-sm font-medium bg-white/20 text-white border-white/30">
               About Arpit Solar
             </Badge>
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-6">
               Pioneering Solar
               <span className="text-accent block">Energy Solutions</span>
             </h1>
-            <p className="text-xl text-white/90 mb-8 leading-relaxed">
+            <p className="text-lg sm:text-xl text-white/90 mb-8 leading-relaxed px-4">
               For over a decade, we've been at the forefront of India's renewable energy revolution, 
               delivering cutting-edge solar solutions that power progress and protect our planet.
             </p>
@@ -120,7 +120,7 @@ const AboutUs = () => {
       {/* Mission, Vision & Values */}
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 mb-16">
             {/* Mission */}
             <Card className="text-center hover:shadow-lg transition-shadow">
               <CardHeader>
@@ -183,7 +183,7 @@ const AboutUs = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {companyValues.map((value, index) => (
               <Card key={index} className="text-center hover:shadow-lg transition-shadow">
                 <CardHeader>
@@ -213,7 +213,7 @@ const AboutUs = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
             {teamStats.map((stat, index) => (
               <Card key={index} className="text-center hover:shadow-lg transition-shadow">
                 <CardContent className="pt-6">
@@ -241,7 +241,7 @@ const AboutUs = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {milestones.map((milestone, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow">
                 <CardHeader>
@@ -269,7 +269,7 @@ const AboutUs = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {certifications.map((cert, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow">
                 <CardContent className="p-4">
