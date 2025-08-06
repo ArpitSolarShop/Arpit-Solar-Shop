@@ -106,10 +106,10 @@ const Navbar = () => {
           },
           {
             name: "Tata Solar",
-            href: "/products?company=tata",
+            href: "/tata-solar",
             image: "/Tata%20Power%20Solar.png",
-            description: "Trusted solar power systems",
-            recommended: "Currently Out of Stock",
+            description: "Coming Soon - Stay Tuned",
+            recommended: "Coming Soon",
           },
         ],
       },

@@ -13,6 +13,7 @@ import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
 import Reliance from "./pages/Reliance";
 import ShaktiSolar from "./pages/ShaktiSolar";
+import TataSolar from "./pages/TataSolar";
 import Residential from "./pages/Residential";
 import CommercialIndustrial from "./pages/CommercialIndustrial";
 import NotFound from "./pages/NotFound";
@@ -44,6 +45,7 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/reliance" element={<Reliance />} />
           <Route path="/shakti-solar" element={<ShaktiSolar />} />
+          <Route path="/tata-solar" element={<TataSolar />} />
           <Route path="/solutions/residential" element={<Residential />} />
           <Route path="/solutions/commercial-industrial" element={<CommercialIndustrial />} />
           <Route path="/admin" element={<Admin />} />
