@@ -52,6 +52,13 @@ const RelianceQuoteForm = ({
 
 
   useEffect(() => {
+    console.log('RelianceQuoteForm props:', { 
+      productType, 
+      powerDemandKw, 
+      dcCables,
+      productName 
+    });
+    
     if (powerDemandKw !== null && powerDemandKw !== undefined) {
       setFormData((prev) => ({
         ...prev,
@@ -64,7 +71,7 @@ const RelianceQuoteForm = ({
         cables: dcCables,
       }))
     }
-  }, [powerDemandKw, dcCables])
+  }, [powerDemandKw, dcCables, productType, productName])
 
 
 
