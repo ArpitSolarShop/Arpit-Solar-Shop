@@ -650,7 +650,6 @@ export default function CommercialIndustrial() {
         }
         isLargeSystem={selectedRelianceProduct?.systemSize === 0}
         productType="commercial"
-        powerDemandKw={selectedRelianceProduct?.systemSize || null}
       />
         <Footer />
     </div>
