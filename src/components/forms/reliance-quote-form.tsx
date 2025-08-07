@@ -42,6 +42,7 @@ const RelianceQuoteForm = ({
     estimated_area_sqft: "",
     monthly_bill: "",
     power_demand_kw: "",
+    cables: "",
     project_location: "",
     referral_name: "",
     referral_phone: "",
@@ -53,9 +54,11 @@ const RelianceQuoteForm = ({
       setFormData((prev) => ({
         ...prev,
         power_demand_kw: String(powerDemandKw),
+        // Auto-populate cables for commercial systems
+        cables: productType === "commercial" ? "DC Cable ble Insulated X - 500 Mtrs" : prev.cables,
       }))
     }
-  }, [powerDemandKw])
+  }, [powerDemandKw, productType])
 
 
 
@@ -123,6 +126,7 @@ const RelianceQuoteForm = ({
         estimated_area_sqft: "",
         monthly_bill: "",
         power_demand_kw: "",
+        cables: "",
         project_location: "",
         referral_name: "",
         referral_phone: "",
@@ -343,10 +347,9 @@ const RelianceQuoteForm = ({
                   />
                 </div>
 
-
                 <div className="space-y-2">
                   <Label htmlFor="power_demand_kw" className="text-sm font-medium text-gray-700">
-                    Power Demand (kW)
+                    {productType === "commercial" ? "System Size (kWp)" : "Power Demand (kW)"}
                   </Label>
                   <Input
                     id="power_demand_kw"
@@ -358,13 +361,29 @@ const RelianceQuoteForm = ({
                       }
                     }}
                     readOnly={powerDemandKw !== null && powerDemandKw !== undefined}
-                    placeholder="e.g. 5"
+                    placeholder={productType === "commercial" ? "e.g. 25" : "e.g. 5"}
                     className="h-10 border-gray-300"
                   />
                 </div>
+              </div>
 
-
-
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="cables" className="text-sm font-medium text-gray-700">
+                    Cables Required
+                  </Label>
+                  <Input
+                    id="cables"
+                    type="text"
+                    value={formData.cables}
+                    onChange={(e) => handleInputChange("cables", e.target.value)}
+                    placeholder="e.g. DC Cable ble Insulated X - 500 Mtrs"
+                    className="h-10 border-gray-300"
+                  />
+                </div>
+                <div className="space-y-2">
+                  {/* Empty div to maintain grid layout */}
+                </div>
               </div>
 
               <div className="space-y-2">
