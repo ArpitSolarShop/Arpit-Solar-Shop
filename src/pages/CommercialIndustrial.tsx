@@ -650,6 +650,8 @@ export default function CommercialIndustrial() {
         }
         isLargeSystem={selectedRelianceProduct?.systemSize === 0}
         productType="commercial"
+        powerDemandKw={selectedRelianceProduct?.systemSize || null}
+        dcCables={selectedRelianceProduct ? `LSZH DC Cable - ${Math.ceil(selectedRelianceProduct.systemSize * 2)} meters` : null}
       />
         <Footer />
     </div>

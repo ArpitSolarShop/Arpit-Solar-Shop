@@ -22,6 +22,7 @@ interface RelianceQuoteFormProps {
   isLargeSystem?: boolean
   powerDemandKw?: number | null
   productType?: "residential" | "commercial" | "cables" | "kit"
+  dcCables?: string | null
 }
 const RelianceQuoteForm = ({
   open,
@@ -30,6 +31,7 @@ const RelianceQuoteForm = ({
   isLargeSystem = false,
   productType = "residential",
   powerDemandKw = null,
+  dcCables = null,
 }: RelianceQuoteFormProps) => {
   const { toast } = useToast()
   const [loading, setLoading] = useState(false)
@@ -45,6 +47,7 @@ const RelianceQuoteForm = ({
     project_location: "",
     referral_name: "",
     referral_phone: "",
+    cables: "",
   })
 
 
@@ -55,7 +58,13 @@ const RelianceQuoteForm = ({
         power_demand_kw: String(powerDemandKw),
       }))
     }
-  }, [powerDemandKw])
+    if (dcCables !== null && dcCables !== undefined) {
+      setFormData((prev) => ({
+        ...prev,
+        cables: dcCables,
+      }))
+    }
+  }, [powerDemandKw, dcCables])
 
 
 
@@ -126,6 +135,7 @@ const RelianceQuoteForm = ({
         project_location: "",
         referral_name: "",
         referral_phone: "",
+        cables: "",
       })
       onOpenChange(false)
     } catch (error) {
@@ -346,7 +356,7 @@ const RelianceQuoteForm = ({
 
                 <div className="space-y-2">
                   <Label htmlFor="power_demand_kw" className="text-sm font-medium text-gray-700">
-                    Power Demand (kW)
+                    {productType === "commercial" ? "System Size (kWp)" : "Power Demand (kW)"}
                   </Label>
                   <Input
                     id="power_demand_kw"
@@ -358,7 +368,7 @@ const RelianceQuoteForm = ({
                       }
                     }}
                     readOnly={powerDemandKw !== null && powerDemandKw !== undefined}
-                    placeholder="e.g. 5"
+                    placeholder={productType === "commercial" ? "e.g. 19.32" : "e.g. 5"}
                     className="h-10 border-gray-300"
                   />
                 </div>
@@ -367,18 +377,39 @@ const RelianceQuoteForm = ({
 
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="project_location" className="text-sm font-medium text-gray-700">
-                  Project Location
-                </Label>
-                <Input
-                  id="project_location"
-                  type="text"
-                  value={formData.project_location}
-                  onChange={(e) => handleInputChange("project_location", e.target.value)}
-                  placeholder="City, State"
-                  className="h-10 border-gray-300"
-                />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="project_location" className="text-sm font-medium text-gray-700">
+                    Project Location
+                  </Label>
+                  <Input
+                    id="project_location"
+                    type="text"
+                    value={formData.project_location}
+                    onChange={(e) => handleInputChange("project_location", e.target.value)}
+                    placeholder="City, State"
+                    className="h-10 border-gray-300"
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="cables" className="text-sm font-medium text-gray-700">
+                    Cables
+                  </Label>
+                  <Input
+                    id="cables"
+                    type="text"
+                    value={formData.cables}
+                    onChange={(e) => {
+                      if (dcCables === null || dcCables === undefined) {
+                        handleInputChange("cables", e.target.value)
+                      }
+                    }}
+                    readOnly={dcCables !== null && dcCables !== undefined}
+                    placeholder="e.g. LSZH DC Cable - 50 meters"
+                    className="h-10 border-gray-300"
+                  />
+                </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
