@@ -3,314 +3,227 @@ import Footer from "@/components/layout/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { 
-  Users, 
-  Target, 
-  Eye, 
-  Heart, 
-  Award, 
-  MapPin,
-  Calendar,
-  Zap,
-  CheckCircle,
-  Phone
-} from "lucide-react";
+import { CheckCircle, Award, Factory, Shield, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const AboutUs = () => {
-  const companyValues = [
-    {
-      title: "Innovation",
-      description: "Continuously adopting cutting-edge solar technologies to provide the best solutions.",
-      icon: Zap
-    },
-    {
-      title: "Quality",
-      description: "Committed to delivering premium solar products with exceptional performance and durability.",
-      icon: Award
-    },
-    {
-      title: "Sustainability",
-      description: "Dedicated to promoting clean energy solutions for a greener future.",
-      icon: Heart
-    },
-    {
-      title: "Customer Focus",
-      description: "Prioritizing customer satisfaction through personalized service and support.",
-      icon: Users
-    }
-  ];
-
-  const milestones = [
-    {
-      year: "2015",
-      title: "Company Founded",
-      description: "Started with a vision to make solar energy accessible to everyone."
-    },
-    {
-      year: "2017",
-      title: "1000+ Installations",
-      description: "Reached our first major milestone with over 1000 successful installations."
-    },
-    {
-      year: "2019",
-      title: "Commercial Expansion",
-      description: "Expanded into commercial and industrial solar solutions."
-    },
-    {
-      year: "2021",
-      title: "Technology Partnership",
-      description: "Partnered with leading solar manufacturers like Reliance, Shakti, and Tata."
-    },
-    {
-      year: "2023",
-      title: "5000+ Happy Customers",
-      description: "Celebrated serving over 5000 satisfied customers across the region."
-    },
-    {
-      year: "2024",
-      title: "Sustainability Leader",
-      description: "Recognized as a regional leader in renewable energy solutions."
-    }
-  ];
-
-  const teamStats = [
-    { number: "50+", label: "Expert Engineers", icon: Users },
-    { number: "5000+", label: "Happy Customers", icon: CheckCircle },
-    { number: "10+", label: "Years Experience", icon: Calendar },
-    { number: "24/7", label: "Customer Support", icon: Phone }
-  ];
-
-  const certifications = [
-    "ISO 9001:2015 Quality Management",
-    "IEC 61215 Solar Panel Standards",
-    "MNRE (Ministry of New and Renewable Energy) Approved",
-    "Bureau of Indian Standards (BIS) Certified",
-    "Electrical Safety Certification",
-    "Environmental Management ISO 14001"
-  ];
-
+export default function AboutUs() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gray-50">
       <Navbar />
-      
-      {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-primary via-primary-dark to-secondary overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/src/assets/reliance-facility.jpg')] bg-cover bg-center opacity-10"></div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            <Badge className="mb-4 text-sm font-medium bg-white/20 text-white border-white/30">
-              About Arpit Solar
-            </Badge>
-            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-6">
-              Pioneering Solar
-              <span className="text-accent block">Energy Solutions</span>
-            </h1>
-            <p className="text-lg sm:text-xl text-white/90 mb-8 leading-relaxed px-4">
-              For over a decade, we've been at the forefront of India's renewable energy revolution, 
-              delivering cutting-edge solar solutions that power progress and protect our planet.
-            </p>
-            <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90">
-              <Link to="/contact">Get in Touch</Link>
-            </Button>
+
+      {/* Hero */}
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 py-16 md:py-20 text-center">
+          <div className="flex items-center justify-center mb-6">
+            <img src="/logo.png" alt="Arpit Solar Logo" className="h-16 w-auto md:h-20" />
           </div>
-        </div>
-      </section>
-
-      {/* Mission, Vision & Values */}
-      <section className="py-16 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 mb-16">
-            {/* Mission */}
-            <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <Target className="w-6 h-6 text-primary" />
-                </div>
-                <CardTitle className="text-2xl text-primary">Our Mission</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  To democratize clean energy by making high-quality solar solutions accessible, 
-                  affordable, and reliable for every home and business in India.
-                </p>
-              </CardContent>
-            </Card>
-
-            {/* Vision */}
-            <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <Eye className="w-6 h-6 text-primary" />
-                </div>
-                <CardTitle className="text-2xl text-primary">Our Vision</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  To be India's most trusted solar energy partner, leading the transition to 
-                  sustainable energy while creating a cleaner future for generations to come.
-                </p>
-              </CardContent>
-            </Card>
-
-            {/* Location */}
-            <Card className="text-center hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <MapPin className="w-6 h-6 text-primary" />
-                </div>
-                <CardTitle className="text-2xl text-primary">Our Reach</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Based in India, serving customers nationwide with comprehensive solar solutions 
-                  from residential rooftops to large-scale commercial installations.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-
-
-          
-
-          {/* Company Values */}
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Our Core Values
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              The principles that guide our commitment to excellence and sustainable energy solutions.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {companyValues.map((value, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <value.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <CardTitle className="text-lg">{value.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">{value.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Team Stats */}
-      <section className="py-16 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Our Impact in Numbers
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Measurable results that showcase our commitment to excellence and customer satisfaction.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
-            {teamStats.map((stat, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
-                <CardContent className="pt-6">
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <stat.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <div className="text-3xl font-bold text-primary mb-2">{stat.number}</div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Company Journey */}
-      <section className="py-16 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Our Journey
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Key milestones in our evolution as a leading solar energy solutions provider.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {milestones.map((milestone, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <Badge variant="outline" className="w-fit mb-2">{milestone.year}</Badge>
-                  <CardTitle className="text-lg">{milestone.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">{milestone.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Certifications */}
-      <section className="py-16 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Certifications & Standards
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Our commitment to quality is backed by industry-leading certifications and standards.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-            {certifications.map((cert, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-4">
-                  <div className="flex items-center">
-                    <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center mr-3">
-                      <Award className="w-4 h-4 text-primary" />
-                    </div>
-                    <p className="text-sm font-medium">{cert}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Call to Action */}
-      <section className="py-16 bg-gradient-to-r from-primary to-primary-dark">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Ready to Join Our Solar Revolution?
-          </h2>
-          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Let's work together to create a sustainable future with clean, renewable solar energy.
+          <h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 leading-tight">
+            Arpit Solar: Pioneering Sustainable Energy Solutions Since 2013
+          </h1>
+          <p className="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+            Founded by engineers in Varanasi, we deliver reliable, affordable and turnkey solar EPC solutions
+            that power homes and businesses with clean, sustainable energy.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90">
-              <Link to="/get-quote">Get Your Quote</Link>
+          <div className="mt-6 flex gap-4 justify-center">
+            <Button asChild className="bg-blue-600 hover:bg-blue-700">
+              <Link to="/get-quote">Get a Quote</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
+            <Button asChild variant="outline" className="bg-transparent">
               <Link to="/contact">Contact Us</Link>
             </Button>
           </div>
         </div>
       </section>
 
+      {/* Our Story */}
+      <section className="py-12 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
+          <Card className="border-0 shadow-sm">
+            <CardHeader>
+              <CardTitle className="text-2xl md:text-3xl">Our Story</CardTitle>
+              <CardDescription>
+                Founded in Varanasi by a dedicated team of engineers in 2013
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="text-gray-700 space-y-4 leading-relaxed">
+              <p>
+                Arpit Solar was born from a vision to address one of our time's most critical challenges:
+                the need for a reliable and uninterrupted supply of clean energy. We are a leading Solar
+                EPC (Engineering, Procurement, and Construction) company committed to providing turnkey
+                solutions that are both renewable and affordable. At our core, we believe in harnessing the
+                power of the sun to build a brighter, greener future for all.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      {/* Expertise & Commitment to Quality */}
+      <section className="py-12 md:py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card className="border-0 shadow-sm">
+              <CardHeader>
+                <CardTitle className="text-2xl md:text-3xl">Our Expertise & Commitment to Quality</CardTitle>
+                <CardDescription>Technical mastery with a proven track record</CardDescription>
+              </CardHeader>
+              <CardContent className="text-gray-700 space-y-4">
+                <p>
+                  We have established ourselves as one of Varanasi's top solar players, a reputation built on the
+                  quality of our installations and our technical expertise. Our exceptionally talented team
+                  specializes in the seamless integration of:
+                </p>
+                <ul className="list-disc list-inside space-y-2">
+                  <li>On-Grid, Off-Grid, and Hybrid Solar Systems</li>
+                  <li>Rooftop and Ground-Mounted Projects</li>
+                </ul>
+                <p>
+                  With a portfolio of successfully installed projects exceeding a combined capacity of <strong>25MW</strong>,
+                  our work stands as a testament to our capabilities. This commitment to excellence is recognized through our
+                  credentials in <strong>O&amp;M tracking</strong>, timely project execution, and cost optimization.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-0 shadow-sm">
+              <CardHeader>
+                <CardTitle className="text-2xl md:text-3xl">What Sets Us Apart</CardTitle>
+                <CardDescription>Excellence, reliability, and value</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {[{title: 'Quality First', icon: Shield, text: 'Premium components and robust engineering standards.'},
+                    {title: 'Experienced Team', icon: Users, text: 'Engineer-led execution with process discipline.'},
+                    {title: 'Scale & Track Record', icon: Factory, text: '25MW+ deployed across varied use-cases.'},
+                    {title: 'Recognition', icon: Award, text: 'Known for timely execution and O&M excellence.'}
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex items-start gap-3">
+                      <item.icon className="h-5 w-5 text-blue-600 mt-1" />
+                      <div>
+                        <div className="font-semibold text-gray-900">{item.title}</div>
+                        <div className="text-sm text-gray-600">{item.text}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Trusted Partner */}
+      <section className="py-12 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
+          <Card className="border-0 shadow-sm">
+            <CardHeader>
+              <CardTitle className="text-2xl md:text-3xl">A Trusted Partner in India's Energy Transition</CardTitle>
+              <CardDescription>Empaneled, partnered, and trusted by industry leaders</CardDescription>
+            </CardHeader>
+            <CardContent className="text-gray-700 space-y-6">
+              <p>
+                Arpit Solar is proud to be an officially empaneled agency by <strong>UPNEDA</strong> for the Government of India's
+                prestigious <strong>PM Surya Ghar: Muft Bijli Yojna</strong>, facilitating subsidies from the MNRE for our valued customers.
+              </p>
+              <p>
+                Our credibility is further reinforced by our strategic alliances. We are honored to be associated with
+                <strong> Indian Oil Corporation Ltd. (IOCL)</strong> under their Solarization Subsidy Scheme to install solar power systems on their
+                retail outlets. Furthermore, we are official channel partners in Uttar Pradesh for industry leaders like
+                <strong> Reliance New Energy</strong>, <strong>Shakti Pumps</strong>, and <strong>Tata Power Solar</strong>.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {['UPNEDA Empaneled', 'PM Surya Ghar', 'IOCL Association', 'Reliance New Energy', 'Shakti Pumps', 'Tata Power Solar'].map((b) => (
+                  <Badge key={b} variant="secondary" className="text-sm">{b}</Badge>
+                ))}
+              </div>
+              <p>
+                At Arpit Solar, we combine technical mastery with last-mile reach to deliver unparalleled quality and
+                customer satisfaction. Join us in the renewable energy revolution.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      {/* Option 2 (Concise & Impactful) */}
+      <section className="py-12 md:py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
+          <Card className="border-0 shadow-sm">
+            <CardHeader>
+              <CardTitle className="text-2xl md:text-3xl">Concise & Impactful</CardTitle>
+              <CardDescription>Perfect for a shorter section on the homepage or in a brochure</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6 text-gray-700">
+              <div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Arpit Solar: Your Trusted Partner for Solar Energy in Varanasi</h3>
+                <p>
+                  Since 2013, Arpit Solar has been a leading Solar EPC company in Varanasi, delivering excellence in turnkey
+                  solar solutions. Founded by engineers, our mission is to provide clean, affordable, and sustainable energy through
+                  superior quality installations.
+                </p>
+                <p className="mt-3">
+                  With over <strong>25MW</strong> of rooftop and ground-mounted systems installed, our expertise spans
+                  <strong> On-Grid, Off-Grid, and Hybrid</strong> projects. We are recognized for our timely execution, cost optimization,
+                  and meticulous O&amp;M services.
+                </p>
+              </div>
+
+              <div>
+                <h4 className="text-lg font-semibold text-gray-900 mb-2">Why Choose Arpit Solar?</h4>
+                <ul className="space-y-2">
+                  {[ 
+                    'UPNEDA Empaneled: Officially approved for the PM Surya Ghar: Muft Bijli Yojna subsidy program.',
+                    'Proven Track Record: A portfolio of over 25MW of successful solar installations.',
+                    'Industry-Leading Partners: Channel partners for Reliance New Energy, Shakti Pumps, Tata Power Solar; associated with IOCL for their solarization scheme.',
+                    'Expert Team: Our foundation in engineering ensures technical excellence and complete customer satisfaction.'
+                  ].map((point, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="pt-2">
+                <Button asChild className="bg-blue-600 hover:bg-blue-700">
+                  <Link to="/get-quote">Partner with Arpit Solar</Link>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      {/* Key Improvements Made (as provided) */}
+      <section className="py-12 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
+          <Card className="border-0 shadow-sm">
+            <CardHeader>
+              <CardTitle className="text-2xl md:text-3xl">Key improvements made</CardTitle>
+              <CardDescription>As highlighted in the redesigned content</CardDescription>
+            </CardHeader>
+            <CardContent className="text-gray-700">
+              <ul className="space-y-2">
+                {[
+                  'Professional Tone: Formal and confident language throughout.',
+                  'Clear Structure: Grouped under headings like Our Story, Expertise, and Trusted Partner.',
+                  'Highlights Key Achievements: Emphasizes 25MW, UPNEDA, and major partners.',
+                  'Improved Flow: Guides the reader smoothly through the company story and strengths.',
+                  'Clarity: Government schemes and partnerships are explained to build trust.'
+                ].map((txt, idx) => (
+                  <li key={idx} className="flex items-start gap-2">
+                    <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
+                    <span>{txt}</span>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
-};
-
-export default AboutUs;
-
-
+}

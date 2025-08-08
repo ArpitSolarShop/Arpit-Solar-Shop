@@ -1,465 +1,116 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { 
-  MapPin, 
-  Phone, 
-  Mail, 
-  Clock, 
-  MessageCircle,
-  ArrowRight
-} from "lucide-react";
-import { Link } from "react-router-dom";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { MapPin, Phone, Mail, MessageCircle, Globe, Shield } from "lucide-react";
 
-const Contact = () => {
-  const contactInfo = [
-    {
-      icon: MapPin,
-      title: "Our Location",
-      details: [
-        "Arpit Solar Shop",
-        "123 Green Energy Park",
-        "Sector 45, Gurgaon",
-        "Haryana 122003, India"
-      ]
-    },
-    {
-      icon: Phone,
-      title: "Phone Numbers",
-      details: [
-        "+91 98765 43210",
-        "+91 87654 32109",
-        "Toll Free: 1800-123-SOLAR"
-      ]
-    },
-    {
-      icon: Mail,
-      title: "Email Address",
-      details: [
-        "info@arpitsolar.com",
-        "sales@arpitsolar.com",
-        "support@arpitsolar.com"
-      ]
-    },
-    {
-      icon: Clock,
-      title: "Business Hours",
-      details: [
-        "Monday - Friday: 9:00 AM - 7:00 PM",
-        "Saturday: 9:00 AM - 5:00 PM",
-        "Sunday: 10:00 AM - 4:00 PM",
-        "Emergency Support: 24/7"
-      ]
-    }
-  ];
-
-  const quickActions = [
-    {
-      title: "Get Free Quote",
-      description: "Start your solar journey with a personalized quote",
-      link: "/get-quote",
-      icon: ArrowRight,
-      primary: true
-    },
-    {
-      title: "Schedule Consultation",
-      description: "Book a free on-site consultation with our experts",
-      link: "/get-quote",
-      icon: MessageCircle,
-      primary: false
-    }
-  ];
-
+export default function Contact() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white text-black">
       <Navbar />
-      <main className="pt-24 pb-16">
-        {/* Hero Section */}
-        <div className="bg-gradient-primary text-white py-16 mb-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                Get in Touch
-              </h1>
-              <p className="text-xl opacity-90 max-w-3xl mx-auto">
-                Ready to start your solar journey? Our team is here to help you 
-                with all your solar energy needs. Contact us today!
-              </p>
-            </div>
+
+      {/* Hero */}
+      <section className="pt-24 pb-10">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
+          <div className="text-center">
+            <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight">Contact Arpit Solar Shop</h1>
+            <div className="w-24 h-1 bg-yellow-500 mx-auto mt-4 rounded"></div>
+            <p className="mt-4 text-lg md:text-xl text-gray-700">
+              M/s. Arpit Solar Shop — Authorized Channel Partner: Reliance New Energy
+            </p>
           </div>
         </div>
+      </section>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Quick Actions */}
-          <section className="mb-16">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {quickActions.map((action, index) => {
-                const IconComponent = action.icon;
-                return (
-                  <Card 
-                    key={index} 
-                    className={`group hover:shadow-xl transition-all duration-300 cursor-pointer ${
-                      action.primary 
-                        ? 'border-primary/50 bg-primary/5' 
-                        : 'border-0 bg-card/50 backdrop-blur-sm'
-                    }`}
-                  >
-                    <Link to={action.link}>
-                      <CardHeader className="text-center">
-                        <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 ${
-                          action.primary 
-                            ? 'bg-primary text-white' 
-                            : 'bg-gradient-primary text-white'
-                        }`}>
-                          <IconComponent className="w-8 h-8" />
-                        </div>
-                        <CardTitle className="text-xl group-hover:text-primary transition-colors duration-300">
-                          {action.title}
-                        </CardTitle>
-                        <CardDescription className="text-muted-foreground">
-                          {action.description}
-                        </CardDescription>
-                      </CardHeader>
-                    </Link>
-                  </Card>
-                );
-              })}
-            </div>
-          </section>
+      {/* Contact Card */}
+      <section className="pb-10">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
+          <Card className="border-black/10 shadow-sm">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-2xl font-bold">Company Details</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-start gap-3">
+                <MapPin className="h-5 w-5 text-yellow-500 mt-1" />
+                <p>
+                  <span className="font-semibold">Office:</span> Sh16/114-25-K-2, Sharvodayanagar, Kadipur, Shivpur, Varanasi 221003 (UP)
+                </p>
+              </div>
+              <div className="flex items-start gap-3">
+                <Shield className="h-5 w-5 text-yellow-500 mt-1" />
+                <p>
+                  <span className="font-semibold">Authorized Channel Partner:</span> Reliance New Energy
+                </p>
+              </div>
+              <div className="flex items-start gap-3">
+                <MapPin className="h-5 w-5 text-yellow-500 mt-1" />
+                <p>
+                  <span className="font-semibold">Branches:</span> Ballia | Gorakhpur
+                </p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="flex items-start gap-3">
+                  <Phone className="h-5 w-5 text-yellow-500 mt-1" />
+                  <p>
+                    <span className="font-semibold">Contact:</span> 9005770466
+                  </p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <MessageCircle className="h-5 w-5 text-yellow-500 mt-1" />
+                  <p>
+                    <span className="font-semibold">WA Chatbot:</span> 9044555572
+                  </p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Mail className="h-5 w-5 text-yellow-500 mt-1" />
+                  <p>
+                    <span className="font-semibold">Email:</span> info@arpitsolar.com
+                  </p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Globe className="h-5 w-5 text-yellow-500 mt-1" />
+                  <p>
+                    <span className="font-semibold">Web:</span> www.arpitsolar.com
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <Shield className="h-5 w-5 text-yellow-500 mt-1" />
+                <p>
+                  <span className="font-semibold">GSTIN:</span> 09APKPM6299L1ZW
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
 
-          {/* Contact Information */}
-          <section className="mb-16">
-            <div className="text-center mb-12">
-              <Badge variant="secondary" className="mb-4 text-sm font-semibold px-4 py-2">
-                Contact Information
-              </Badge>
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Reach Out to Us
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Multiple ways to connect with our solar experts. Choose what works best for you.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {contactInfo.map((info, index) => {
-                const IconComponent = info.icon;
-                return (
-                  <Card key={index} className="border-0 bg-card/50 backdrop-blur-sm hover:shadow-lg transition-all duration-300">
-                    <CardHeader className="text-center pb-4">
-                      <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center mx-auto mb-4">
-                        <IconComponent className="w-6 h-6 text-white" />
-                      </div>
-                      <CardTitle className="text-lg">{info.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-2">
-                        {info.details.map((detail, detailIndex) => (
-                          <p key={detailIndex} className="text-sm text-muted-foreground text-center">
-                            {detail}
-                          </p>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
-          </section>
-
-          {/* Map Section */}
-          <section className="mb-16">
-            <div className="text-center mb-8">
-              <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-                Find Us on the Map
-              </h3>
-              <p className="text-muted-foreground">
-                Visit our showroom to see our solar products and meet our team
-              </p>
-            </div>
-
-            <div className="bg-muted rounded-3xl overflow-hidden">
-              <div className="aspect-video flex items-center justify-center">
+      {/* Map */}
+      <section className="pb-16">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
+          <Card className="border-black/10 overflow-hidden">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-xl font-semibold">Find Us on Google Maps</CardTitle>
+            </CardHeader>
+            <CardContent className="p-0">
+              <div className="w-full" style={{ height: 450 }}>
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.525258341956!2d77.06889731455052!3d28.457523999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d18f2b3d3a3ab%3A0x8b1f1f1f1f1f1f1f!2sSector%2045%2C%20Gurugram%2C%20Haryana!5e0!3m2!1sen!2sin!4v1234567890123"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3605.536770874559!2d82.94755207516889!3d25.35332077761076!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e2db16a9c907f%3A0xe094345c3bcc59c2!2sArpit%20Solar%20Shop!5e0!3m2!1sen!2sin!4v1754655482123!5m2!1sen!2sin"
                   width="100%"
-                  height="100%"
+                  height="450"
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   title="Arpit Solar Shop Location"
-                  className="rounded-3xl"
+                  className="w-full"
                 />
               </div>
-            </div>
-          </section>
-
-          {/* Additional Information */}
-          <section>
-            <div className="bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-900/10 dark:to-green-900/10 rounded-3xl p-8">
-              <div className="text-center">
-                <h3 className="text-2xl font-bold mb-4">
-                  Need Immediate Assistance?
-                </h3>
-                <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                  For urgent solar system issues or emergency support, 
-                  our technical team is available 24/7 to help you.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button 
-                    size="lg" 
-                    className="font-semibold px-8"
-                    onClick={() => window.open('tel:+919876543210')}
-                  >
-                    <Phone className="mr-2 w-5 h-5" />
-                    Call Emergency Support
-                  </Button>
-                  <Button 
-                    size="lg" 
-                    variant="outline"
-                    className="font-semibold px-8"
-                    onClick={() => window.open('mailto:support@arpitsolar.com')}
-                  >
-                    <Mail className="mr-2 w-5 h-5" />
-                    Send Email
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </section>
+            </CardContent>
+          </Card>
         </div>
-      </main>
+      </section>
+
       <Footer />
     </div>
   );
-};
-
-export default Contact;
-
-
-
-
-
-
-
-
-
-// import Image from "next/image"
-// import { Card, CardContent } from "@/components/ui/card"
-// import { Button } from "@/components/ui/button"
-// import { Badge } from "@/components/ui/badge"
-// import { MapPin, Phone, Mail, Clock, MessageCircle, ArrowRight, Globe } from 'lucide-react'
-
-// const Contact = () => {
-//   const contactInfo = {
-//     address: "Sh16/114-25-K2, Sarvodynagar, Kadipur, Shivpur, Varanasi (UP)-221 003",
-//     phone: "+91-904 4555 574",
-//     email: "info@arpitsolarshop.com"
-//   }
-
-//   const businessHours = [
-//     "Monday - Friday: 9:00 AM - 7:00 PM",
-//     "Saturday: 9:00 AM - 5:00 PM", 
-//     "Sunday: 10:00 AM - 4:00 PM"
-//   ]
-
-//   return (
-//     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-//       <main className="py-12 px-4 sm:px-6 lg:px-8">
-//         <div className="max-w-6xl mx-auto">
-//           {/* Hero Section */}
-//           <div className="text-center mb-12">
-//             <Badge variant="secondary" className="mb-4 text-sm font-semibold px-4 py-2 bg-yellow-100 text-yellow-600">
-//               Contact Us
-//             </Badge>
-//             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-//               <span className="text-yellow-500">Get in</span>{' '}
-//               <span className="text-black dark:text-white">Touch</span>
-//             </h1>
-//             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-//               Ready to start your solar journey? Contact Arpit Solar Shop for all your renewable energy needs.
-//             </p>
-//           </div>
-
-//           {/* Main Contact Card - Visiting Card Style */}
-//           <div className="mb-12">
-//             <Card className="overflow-hidden shadow-2xl border-0 bg-white dark:bg-gray-800">
-//               <div className="grid grid-cols-1 lg:grid-cols-2">
-//                 {/* Left Side - Business Card Info */}
-//                 <div className="p-8 lg:p-12 bg-gradient-to-br from-blue-600 to-green-600 text-white">
-//                   <div className="flex flex-col h-full justify-between">
-//                     {/* Logo and Company Name */}
-//                     <div className="mb-8">
-//                       <div className="flex items-center mb-6">
-//                         <div className="w-16 h-16 bg-white rounded-xl p-2 mr-4">
-//                           <Image
-//                             src="/logo.png"
-//                             alt="Arpit Solar Shop Logo"
-//                             width={60}
-//                             height={60}
-//                             className="w-full h-full object-contain"
-//                           />
-//                         </div>
-//                         <div>
-//                           <h2 className="text-2xl font-bold">Arpit Solar Shop</h2>
-//                           <p className="text-blue-100">Solar Energy Solutions</p>
-//                         </div>
-//                       </div>
-//                     </div>
-
-//                     {/* Contact Information */}
-//                     <div className="space-y-6">
-//                       <div className="flex items-start space-x-4">
-//                         <MapPin className="w-6 h-6 mt-1 flex-shrink-0" />
-//                         <div>
-//                           <h3 className="font-semibold mb-1">Address</h3>
-//                           <p className="text-blue-100 leading-relaxed">
-//                             {contactInfo.address}
-//                           </p>
-//                         </div>
-//                       </div>
-
-//                       <div className="flex items-center space-x-4">
-//                         <Phone className="w-6 h-6 flex-shrink-0" />
-//                         <div>
-//                           <h3 className="font-semibold mb-1">Phone</h3>
-//                           <a 
-//                             href={`tel:${contactInfo.phone}`}
-//                             className="text-blue-100 hover:text-white transition-colors"
-//                           >
-//                             {contactInfo.phone}
-//                           </a>
-//                         </div>
-//                       </div>
-
-//                       <div className="flex items-center space-x-4">
-//                         <Mail className="w-6 h-6 flex-shrink-0" />
-//                         <div>
-//                           <h3 className="font-semibold mb-1">Email</h3>
-//                           <a 
-//                             href={`mailto:${contactInfo.email}`}
-//                             className="text-blue-100 hover:text-white transition-colors"
-//                           >
-//                             {contactInfo.email}
-//                           </a>
-//                         </div>
-//                       </div>
-//                     </div>
-
-//                     {/* Action Buttons */}
-//                     <div className="mt-8 space-y-3">
-//                       <Button 
-//                         className="w-full bg-white text-blue-600 hover:bg-blue-50"
-//                         onClick={() => {
-//                           if (typeof window !== 'undefined') {
-//                             window.location.href = `tel:${contactInfo.phone}`;
-//                           }
-//                         }}
-//                       >
-//                         <Phone className="mr-2 w-4 h-4" />
-//                         Call Now
-//                       </Button>
-//                       <Button 
-//                         variant="outline" 
-//                         className="w-full bg-white text-blue-600 hover:bg-blue-50 border-0"
-//                         onClick={() => {
-//                           if (typeof window !== 'undefined') {
-//                             window.location.href = `mailto:${contactInfo.email}?subject=Solar Energy Inquiry&body=Hello, I would like to know more about your solar energy solutions.`;
-//                           }
-//                         }}
-//                       >
-//                         <Mail className="mr-2 w-4 h-4" />
-//                         Send Email
-//                       </Button>
-//                     </div>
-//                   </div>
-//                 </div>
-
-//                 {/* Right Side - Map */}
-//                 <div className="p-0">
-//                   <div className="h-full min-h-[500px] lg:min-h-[600px]">
-//                     <iframe
-//                       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3605.5367708745584!2d82.94755207538691!3d25.353320777610783!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e2db16a9c907f%3A0xe094345c3bcc59c2!2sArpit%20Solar%20Shop!5e0!3m2!1sen!2sin!4v1754479644816!5m2!1sen!2sin"
-//                       width="100%"
-//                       height="100%"
-//                       style={{ border: 0 }}
-//                       allowFullScreen
-//                       loading="lazy"
-//                       referrerPolicy="no-referrer-when-downgrade"
-//                       title="Arpit Solar Shop Location"
-//                       className="w-full h-full"
-//                     />
-//                   </div>
-//                 </div>
-//               </div>
-//             </Card>
-//           </div>
-
-//           {/* Additional Information Cards */}
-//           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-//             {/* Business Hours */}
-//             <Card className="border-0 bg-white/80 backdrop-blur-sm shadow-lg">
-//               <CardContent className="p-6">
-//                 <div className="flex items-center mb-4">
-//                   <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-green-500 rounded-xl flex items-center justify-center">
-//                     <Clock className="w-6 h-6 text-white" />
-//                   </div>
-//                   <h3 className="text-lg font-semibold ml-3">Business Hours</h3>
-//                 </div>
-//                 <div className="space-y-2">
-//                   {businessHours.map((hour, index) => (
-//                     <p key={index} className="text-sm text-muted-foreground">
-//                       {hour}
-//                     </p>
-//                   ))}
-//                 </div>
-//               </CardContent>
-//             </Card>
-
-//             {/* Quick Quote */}
-//             <Card className="border-0 bg-gradient-to-br from-blue-500 to-green-500 text-white shadow-lg">
-//               <CardContent className="p-6">
-//                 <div className="flex items-center mb-4">
-//                   <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-//                     <MessageCircle className="w-6 h-6" />
-//                   </div>
-//                   <h3 className="text-lg font-semibold ml-3">Get Free Quote</h3>
-//                 </div>
-//                 <p className="text-blue-100 mb-4 text-sm">
-//                   Start your solar journey with a personalized quote tailored to your needs.
-//                 </p>
-//                 <Button className="w-full bg-white text-blue-600 hover:bg-blue-50">
-//                   <ArrowRight className="mr-2 w-4 h-4" />
-//                   Request Quote
-//                 </Button>
-//               </CardContent>
-//             </Card>
-
-//             {/* Services */}
-//             <Card className="border-0 bg-white/80 backdrop-blur-sm shadow-lg">
-//               <CardContent className="p-6">
-//                 <div className="flex items-center mb-4">
-//                   <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-xl flex items-center justify-center">
-//                     <Globe className="w-6 h-6 text-white" />
-//                   </div>
-//                   <h3 className="text-lg font-semibold ml-3">Our Services</h3>
-//                 </div>
-//                 <div className="space-y-2 text-sm text-muted-foreground">
-//                   <p>• Solar Panel Installation</p>
-//                   <p>• Solar System Maintenance</p>
-//                   <p>• Energy Consultation</p>
-//                   <p>• 24/7 Technical Support</p>
-//                 </div>
-//               </CardContent>
-//             </Card>
-//           </div>
-//         </div>
-//       </main>
-//     </div>
-//   )
-// }
-
-// export default Contact
+}

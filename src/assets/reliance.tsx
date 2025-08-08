@@ -207,7 +207,7 @@ function LargeSystemTable({ onRowClick }: { onRowClick: (product: LargeSystemDat
                       <ArrowUpDown className="ml-2 h-4 w-4" />
                     </Button>
                   </TableHead>
-                  <TableHead className="font-semibold">System Size (kW)</TableHead>
+                  {/* <TableHead className="font-semibold">System Size (kW)</TableHead> */}
                   <TableHead className="font-semibold">No. of Modules</TableHead>
                   <TableHead className="font-semibold">Inverter Capacity (kW)</TableHead>
                   <TableHead className="font-semibold">Phase</TableHead>
@@ -221,7 +221,7 @@ function LargeSystemTable({ onRowClick }: { onRowClick: (product: LargeSystemDat
                   <TableRow key={item.slNo} className="hover:bg-gray-50">
                     <TableCell className="font-medium">{item.slNo}</TableCell>
                     <TableCell>{item.systemSizeKWp}</TableCell>
-                    <TableCell>{item.systemSizeKW}</TableCell>
+                    {/* <TableCell>{item.systemSizeKW}</TableCell> */}
                     <TableCell>{item.noOfModules}</TableCell>
                     <TableCell>{item.inverterCapacity}</TableCell>
                     <TableCell>
@@ -257,7 +257,7 @@ function LargeSystemTable({ onRowClick }: { onRowClick: (product: LargeSystemDat
                 <TableRow className="bg-gray-50">
                   <TableHead className="font-semibold">Sl No.</TableHead>
                   <TableHead className="font-semibold">System Size (kWp)</TableHead>
-                  <TableHead className="font-semibold">System Size (kW)</TableHead>
+                  {/* <TableHead className="font-semibold">System Size (kW)</TableHead> */}
                   <TableHead className="font-semibold">No. of Modules</TableHead>
                   <TableHead className="font-semibold">Inverter Capacity (kW)</TableHead>
                   <TableHead className="font-semibold">Phase</TableHead>
@@ -271,7 +271,7 @@ function LargeSystemTable({ onRowClick }: { onRowClick: (product: LargeSystemDat
                   <TableRow key={item.slNo} className="hover:bg-gray-50">
                     <TableCell className="font-medium">{item.slNo}</TableCell>
                     <TableCell>{item.systemSizeKWp}</TableCell>
-                    <TableCell>{item.systemSizeKW}</TableCell>
+                    {/* <TableCell>{item.systemSizeKW}</TableCell> */}
                     <TableCell>{item.noOfModules}</TableCell>
                     <TableCell>{item.inverterCapacity}</TableCell>
                     <TableCell>
@@ -307,7 +307,7 @@ function LargeSystemTable({ onRowClick }: { onRowClick: (product: LargeSystemDat
                 <TableRow className="bg-gray-50">
                   <TableHead className="font-semibold">Sl No.</TableHead>
                   <TableHead className="font-semibold">System Size (kWp)</TableHead>
-                  <TableHead className="font-semibold">System Size (kW)</TableHead>
+                  {/* <TableHead className="font-semibold">System Size (kW)</TableHead> */}
                   <TableHead className="font-semibold">No. of Modules</TableHead>
                   <TableHead className="font-semibold">Inverter Capacity (kW)</TableHead>
                   <TableHead className="font-semibold">Phase</TableHead>
@@ -321,7 +321,7 @@ function LargeSystemTable({ onRowClick }: { onRowClick: (product: LargeSystemDat
                   <TableRow key={item.slNo} className="hover:bg-gray-50">
                     <TableCell className="font-medium">{item.slNo}</TableCell>
                     <TableCell>{item.systemSizeKWp}</TableCell>
-                    <TableCell>{item.systemSizeKW}</TableCell>
+                    {/* <TableCell>{item.systemSizeKW}</TableCell> */}
                     <TableCell>{item.noOfModules}</TableCell>
                     <TableCell>{item.inverterCapacity}</TableCell>
                     <TableCell>
@@ -357,7 +357,7 @@ function LargeSystemTable({ onRowClick }: { onRowClick: (product: LargeSystemDat
                 <TableRow className="bg-gray-50">
                   <TableHead className="font-semibold">Sl No.</TableHead>
                   <TableHead className="font-semibold">System Size (kWp)</TableHead>
-                  <TableHead className="font-semibold">System Size (kW)</TableHead>
+                  {/* <TableHead className="font-semibold">System Size (kW)</TableHead> */}
                   <TableHead className="font-semibold">No. of Modules</TableHead>
                   <TableHead className="font-semibold">Inverter Capacity (kW)</TableHead>
                   <TableHead className="font-semibold">Phase</TableHead>
@@ -371,7 +371,7 @@ function LargeSystemTable({ onRowClick }: { onRowClick: (product: LargeSystemDat
                   <TableRow key={item.slNo} className="hover:bg-gray-50">
                     <TableCell className="font-medium">{item.slNo}</TableCell>
                     <TableCell>{item.systemSizeKWp}</TableCell>
-                    <TableCell>{item.systemSizeKW}</TableCell>
+                    {/* <TableCell>{item.systemSizeKW}</TableCell> */}
                     <TableCell>{item.noOfModules}</TableCell>
                     <TableCell>{item.inverterCapacity}</TableCell>
                     <TableCell>
@@ -517,10 +517,12 @@ export default function Reliance() {
   const [isFormOpen, setIsFormOpen] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState<any>(null)
   const [productType, setProductType] = useState<"residential" | "commercial" | "cables" | "kit">("residential")
+  const [selectedCommercialType, setSelectedCommercialType] = useState<string>("")
 
   const handleRowClick = (product: any, type: string) => {
     setSelectedProduct(product)
     setProductType(type.includes("commercial") ? "commercial" : (type as any))
+    setSelectedCommercialType(type)
     setIsFormOpen(true)
   }
 
@@ -692,6 +694,47 @@ export default function Reliance() {
           </CardContent>
         </Card>
 
+        {/* Terms and Conditions */}
+        <Card className="bg-white">
+          <CardHeader>
+            <CardTitle className="text-gray-900">Terms and Conditions</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div>
+              <h3 className="text-lg font-semibold text-gray-800">Payment Schedule</h3>
+              <ul className="list-disc list-inside text-gray-700 mt-2 space-y-1">
+                <li><strong>10% Advance:</strong> Due when the order is placed.</li>
+                <li><strong>80% Pre-Dispatch:</strong> Due when the materials are ready for shipment.</li>
+                <li><strong>10% Final Payment:</strong> Due after the project has been fully installed and commissioned.</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-gray-800">Project Timeline</h3>
+              <ul className="list-disc list-inside text-gray-700 mt-2 space-y-1">
+                <li><strong>Material Delivery:</strong> Materials will be supplied 30 days after 90% of the payment (Advance + Pre-Dispatch) is received.</li>
+                <li><strong>Commissioning:</strong> The system will be installed and operational within 8 to 10 weeks after the materials arrive at the project site.</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-gray-800">Scope &amp; Costs</h3>
+              <ul className="list-disc list-inside text-gray-700 mt-2 space-y-1">
+                <li><strong>Included:</strong> The quoted price covers Installation &amp; Commissioning (I&amp;C) and transportation.</li>
+                <li><strong>Excluded:</strong> The cost of any required civil work (like foundation work) isnot included. Above 8Kw Net-Feed-in/Net-Billing in Customer's Scope.</li>
+                <li><strong>Customer's Responsibility:</strong> The customer is responsible for arranging Net-Metering or Net-Billing with the utility company.</li>
+                <li><strong>Annual Maintenance Contract (AMC):</strong> After project handover, an optional AMC is available at a rate of 650 per KWp per year.</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-gray-800">Warranties</h3>
+              <ul className="list-disc list-inside text-gray-700 mt-2 space-y-1">
+                <li><strong>Complete System:</strong> 5 years</li>
+                <li><strong>Solar Modules:</strong> 30 years (performance warranty 90%)</li>
+                <li><strong>Inverter:</strong> 10 years</li>
+              </ul>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Footer */}
         <div className="text-center text-sm text-gray-500 border-t pt-8">
           <p>All prices are subject to change. Contact us for the latest pricing and availability.</p>
@@ -705,12 +748,20 @@ export default function Reliance() {
             selectedProduct?.systemSize === 0 || selectedProduct?.systemSizeKWp === 0
               ? "Large Scale Solar System (Above 165.6 kWp)"
               : selectedProduct
-                ? getProductName(selectedProduct, productType)
+                ? getProductName(selectedProduct, selectedCommercialType || productType)
                 : "Reliance Solar Product"
           }
           isLargeSystem={selectedProduct?.systemSize === 0 || selectedProduct?.systemSizeKWp === 0}
           productType={productType}
-          powerDemandKw={selectedProduct?.systemSize || selectedProduct?.systemSizeKW || null}
+          powerDemandKw={productType === "commercial" ? selectedProduct?.systemSizeKWp || null : selectedProduct?.systemSize || selectedProduct?.systemSizeKW || null}
+          mountingType={(() => {
+            if (!selectedCommercialType) return null;
+            if (selectedCommercialType.includes("tin-shed")) return "Tin Shed";
+            if (selectedCommercialType.includes("rcc")) return "RCC Elevated";
+            if (selectedCommercialType.includes("mms")) return "Pre GI MMS";
+            if (selectedCommercialType.includes("without-mms")) return "Without MMS";
+            return null;
+          })()}
         />
 
       </div>

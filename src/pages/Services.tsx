@@ -51,8 +51,8 @@ const services: Service[] = [
       "Before and after efficiency reports",
       "Safe cleaning procedures for all roof types",
     ],
-    contactNumber: "+91 98765 43210",
-    contactEmail: "cleaning@reliancesolar.com",
+    contactNumber: "9044555572",
+    contactEmail: "info@arpitsolar.com",
     availability: "7 Days a Week, 8 AM - 6 PM",
     price: "Starting from ₹5 per panel",
   },
@@ -70,8 +70,8 @@ const services: Service[] = [
       "Documentation and warranty registration",
       "Post-installation performance verification",
     ],
-    contactNumber: "+91 98765 43211",
-    contactEmail: "installation@reliancesolar.com",
+    contactNumber: "9044555572",
+    contactEmail: "info@arpitsolar.com",
     availability: "Monday to Saturday, 9 AM - 5 PM",
     price: "Free quote based on system size",
   },
@@ -89,8 +89,8 @@ const services: Service[] = [
       "Component replacement services",
       "Emergency repair services",
     ],
-    contactNumber: "+91 98765 43212",
-    contactEmail: "maintenance@reliancesolar.com",
+    contactNumber: "9044555572",
+    contactEmail: "info@arpitsolar.com",
     availability: "24/7 Emergency Support",
     price: "AMC starting from ₹2,500/year",
   },
@@ -108,8 +108,8 @@ const services: Service[] = [
       "Remote diagnostics and troubleshooting",
       "Energy production analytics",
     ],
-    contactNumber: "+91 98765 43213",
-    contactEmail: "monitoring@reliancesolar.com",
+    contactNumber: "9044555572",
+    contactEmail: "info@arpitsolar.com",
     availability: "24/7 Online Support",
     price: "₹500/month per system",
   },
@@ -127,8 +127,8 @@ const services: Service[] = [
       "System optimization recommendations",
       "Training for system operation",
     ],
-    contactNumber: "+91 98765 43214",
-    contactEmail: "support@reliancesolar.com",
+    contactNumber: "9044555572",
+    contactEmail: "info@arpitsolar.com",
     availability: "Monday to Friday, 9 AM - 7 PM",
     price: "Free for warranty customers",
   },
@@ -146,8 +146,8 @@ const services: Service[] = [
       "Efficiency optimization upgrades",
       "Technology refresh services",
     ],
-    contactNumber: "+91 98765 43215",
-    contactEmail: "upgrades@reliancesolar.com",
+    contactNumber: "9044555572",
+    contactEmail: "info@arpitsolar.com",
     availability: "Monday to Saturday, 10 AM - 6 PM",
     price: "Quote based on upgrade requirements",
   },
@@ -344,7 +344,7 @@ const Services = () => {
               className="bg-white text-blue-600 hover:bg-gray-100 font-semibold px-8"
             >
               <Phone className="mr-2 w-5 h-5" />
-              Call +91 98765 43210
+              Call 9044555572
             </Button>
             <Button
               size="lg"
@@ -368,7 +368,7 @@ const Services = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white font-semibold">
               <Phone className="mr-2 w-5 h-5" />
-              Emergency: +91 98765 99999
+              Emergency: 9044555572
             </Button>
             <span className="text-red-700 font-medium">Available 24/7 for emergencies</span>
           </div>

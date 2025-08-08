@@ -14,8 +14,10 @@ const Footer = () => {
           {/* Company Info */}
           <div className="space-y-4">
             <Link to="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 sunset-gradient rounded-lg flex items-center justify-center">
-                <Sun className="w-5 h-5 text-white" />
+              <div className="w-8 h-8  rounded-lg flex items-center justify-center">
+                {/* <Sun className="w-5 h-5 text-white" /> */}
+                <img src="/logo.png" alt="Logo" className="w-5 h-5" />
+
               </div>
               <span className="font-bold text-xl">Arpit Solar</span>
             </Link>

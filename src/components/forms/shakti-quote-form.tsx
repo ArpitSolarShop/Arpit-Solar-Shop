@@ -13,7 +13,6 @@ import { Badge } from "@/components/ui/badge"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { useToast } from "@/hooks/use-toast"
 import { CheckCircle, AlertCircle } from "lucide-react"
-import { supabase } from "@/integrations/supabase/client"
 
 interface ShaktiQuoteFormProps {
   open: boolean
@@ -80,26 +79,27 @@ const ShaktiQuoteForm = ({
         referral_source: formData.referral_name ? "referral" : null,
       };
 
-      const { error } = await supabase.from("quotes").insert(insertData);
 
-      if (error) throw error;
 
-      // Call edge function to generate PDF and send via WhatsApp
-      try {
-        const pdfResponse = await supabase.functions.invoke('generate-quote-pdf', {
-          body: { formData: insertData }
-        });
-        
-        if (pdfResponse.error) {
-          console.error('PDF generation error:', pdfResponse.error);
-        } else {
-          console.log('PDF generated and sent successfully:', pdfResponse.data);
-        }
-      } catch (pdfError) {
-        console.error('Error calling PDF function:', pdfError);
-        // Don't throw - we don't want to fail the whole process if PDF fails
-      }
+      
+    // --- INSERT THIS CODE HERE --- Secondry Server 
+   try {
+    await fetch('http://localhost:3000/generate-quote', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(insertData),
+    });
+  } catch (err) {
+    console.warn("Secondary server failed:", err);
+  }
+      // --- END INSERT ---
 
+
+
+
+
+      
+      
       toast({
         title: "Quote Request Submitted!",
         description: isLargeSystem

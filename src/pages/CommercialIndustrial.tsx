@@ -24,6 +24,7 @@ import {
 import RelianceQuoteForm from "@/components/forms/reliance-quote-form"
 import { relianceCommercialData, RELIANCE_COMPANY_NAME } from "./commercial-data"
 import type { RelianceCommercialData } from "./commercial-data"
+import { largeSystemData } from "@/assets/reliance-solar-data"
 import heroImage from "@/assets/factory-businessmen-doing-sales-presentation-shareholders.jpg"
 import Step1 from "@/assets/1.jpg";
 import Step2 from "@/assets/2.jpg";
@@ -192,18 +193,14 @@ function RelianceCommercialTable({ onRowClick }: { onRowClick: (product: Relianc
               <TableHead className="font-semibold">Phase</TableHead>
               <TableHead className="font-semibold">Monthly Generation (kWh)</TableHead>
               <TableHead className="font-semibold">Roof Area (sq ft)</TableHead>
-              <TableHead className="font-semibold">
-                <Button variant="ghost" onClick={() => handleSort("pricePerWatt")} className="h-auto p-0 font-semibold">
-                  Price/Watt (₹)
-                  <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-              </TableHead>
-              <TableHead className="font-semibold">
-                <Button variant="ghost" onClick={() => handleSort("totalPrice")} className="h-auto p-0 font-semibold">
-                  Total Price (₹)
-                  <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-              </TableHead>
+              <TableHead className="font-semibold">Tin Shed (₹/W)</TableHead>
+              <TableHead className="font-semibold">Tin Shed Total (₹)</TableHead>
+              <TableHead className="font-semibold">RCC Elevated (₹/W)</TableHead>
+              <TableHead className="font-semibold">RCC Elevated Total (₹)</TableHead>
+              <TableHead className="font-semibold">Pre GI MMS (₹/W)</TableHead>
+              <TableHead className="font-semibold">Pre GI MMS Total (₹)</TableHead>
+              <TableHead className="font-semibold">Without MMS (₹/W)</TableHead>
+              <TableHead className="font-semibold">Without MMS Total (₹)</TableHead>
               <TableHead className="font-semibold">Monthly Savings (₹)</TableHead>
               <TableHead className="font-semibold">Payback (Years)</TableHead>
               <TableHead className="font-semibold">CO₂ Reduction (tons/year)</TableHead>
@@ -211,7 +208,9 @@ function RelianceCommercialTable({ onRowClick }: { onRowClick: (product: Relianc
             </TableRow>
           </TableHeader>
           <TableBody>
-            {filteredAndSortedData.map((item) => (
+            {filteredAndSortedData.map((item) => {
+              const matchedLarge = largeSystemData.find((d) => d.systemSizeKWp === item.systemSize)
+              return (
               <TableRow key={item.slNo} className="hover:bg-gray-50">
                 <TableCell className="font-medium">{item.slNo}</TableCell>
                 <TableCell className="font-medium text-blue-600">{item.systemSize}</TableCell>
@@ -226,8 +225,14 @@ function RelianceCommercialTable({ onRowClick }: { onRowClick: (product: Relianc
                   {item.monthlyGeneration.toLocaleString("en-IN")}
                 </TableCell>
                 <TableCell>{item.roofAreaRequired.toLocaleString("en-IN")}</TableCell>
-                <TableCell className="font-medium">₹{item.pricePerWatt.toFixed(2)}</TableCell>
-                <TableCell className="font-bold text-green-600">₹{item.totalPrice.toLocaleString("en-IN")}</TableCell>
+                <TableCell className="font-medium">₹{matchedLarge ? matchedLarge.shortRailTinShedPricePerWatt.toFixed(2) : "-"}</TableCell>
+                <TableCell className="font-bold text-green-600">₹{matchedLarge ? matchedLarge.shortRailTinShedPrice.toLocaleString("en-IN") : "-"}</TableCell>
+                <TableCell className="font-medium">₹{matchedLarge ? matchedLarge.hdgElevatedRccPricePerWatt.toFixed(2) : "-"}</TableCell>
+                <TableCell className="font-bold text-green-600">₹{matchedLarge ? matchedLarge.hdgElevatedRccPrice.toLocaleString("en-IN") : "-"}</TableCell>
+                <TableCell className="font-medium">₹{matchedLarge ? matchedLarge.preGiMmsPricePerWatt.toFixed(2) : "-"}</TableCell>
+                <TableCell className="font-bold text-green-600">₹{matchedLarge ? matchedLarge.preGiMmsPrice.toLocaleString("en-IN") : "-"}</TableCell>
+                <TableCell className="font-medium">₹{matchedLarge ? matchedLarge.priceWithoutMmsPricePerWatt.toFixed(2) : "-"}</TableCell>
+                <TableCell className="font-bold text-green-600">₹{matchedLarge ? matchedLarge.priceWithoutMmsPrice.toLocaleString("en-IN") : "-"}</TableCell>
                 <TableCell className="font-medium text-green-600">
                   ₹{item.monthlySavings.toLocaleString("en-IN")}
                 </TableCell>
@@ -244,7 +249,7 @@ function RelianceCommercialTable({ onRowClick }: { onRowClick: (product: Relianc
                   </Button>
                 </TableCell>
               </TableRow>
-            ))}
+            )})}
           </TableBody>
         </Table>
       </div>

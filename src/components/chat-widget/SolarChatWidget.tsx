@@ -2,10 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent } from "@/components/ui/card";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Sun, Send, Shield, Phone, Building, Home, MapPin, Ruler, Lightbulb, Users, CheckCircle, Calendar, Mail, User, UserCheck, MessageCircle, X } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -140,19 +137,18 @@ export default function SolarChatWidget({ isOpen, onClose }: SolarChatWidgetProp
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages, showResults]);
 
   useEffect(() => {
-    // Auto-start conversation when component loads and modal is open
+    // Auto-start conversation when component loads and panel is open
     if (isOpen && !isStarted && messages.length === 0) {
       setTimeout(() => {
         addMessage("👋 Hi there! Want to bring your electricity bill to nearly zero with solar? I'm Yami, your personal solar assistant.", false);
         addMessage("Let's calculate your exact savings and the government subsidy you can get in just a few quick steps! ⚡", false, 1500);
-        
         setTimeout(() => {
           startCalculation();
         }, 3000);
-      }, 1000);
+      }, 800);
     }
   }, [isOpen]);
 
@@ -172,7 +168,7 @@ export default function SolarChatWidget({ isOpen, onClose }: SolarChatWidgetProp
     setIsTyping(true);
     setTimeout(() => {
       setIsTyping(false);
-    }, 1500);
+    }, 1200);
   };
 
   const startCalculation = () => {
@@ -186,24 +182,20 @@ export default function SolarChatWidget({ isOpen, onClose }: SolarChatWidgetProp
       setTimeout(() => {
         const step = steps[currentStep];
         let question = step.question;
-        
-        // Special handling for contact step to use actual name
         if (step.id === 'contact' && userData.name) {
           question = `Thank you, ${userData.name}! How should we send your free solar savings report? We can send it instantly via WhatsApp.`;
         }
-        
         addMessage(question, false);
         setCurrentStep(prev => prev + 1);
-      }, 1500);
+      }, 1200);
     } else {
-      // All steps completed, submit data
       submitSolarLead();
     }
   };
 
   const submitSolarLead = async () => {
     addMessage("🎉 Amazing! Let me calculate your personalized solar savings...", false);
-    
+
     try {
       const insertData = {
         name: userData.name || '',
@@ -221,209 +213,119 @@ export default function SolarChatWidget({ isOpen, onClose }: SolarChatWidgetProp
         referral_source: userData.referralSource || null,
       };
 
-      const { error } = await supabase.from("quotes").insert(insertData);
+      try {
+        await fetch('http://localhost:3000/generate-quote', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(insertData),
+        });
+      } catch (e) {
+        console.warn('Secondary server request failed:', e);
+      }
 
-      if (error) throw error;
-
-      // Calculate mock results based on user data
       const calculateResults = () => {
         let annualSavings = 25000;
         let systemSize = '3 kW';
         let subsidyAmount = 30000;
-        
         if (userData.monthlyBill === 'mid') {
-          annualSavings = 35000;
-          systemSize = '4 kW';
-          subsidyAmount = 40000;
+          annualSavings = 35000; systemSize = '4 kW'; subsidyAmount = 40000;
         } else if (userData.monthlyBill === 'high') {
-          annualSavings = 60000;
-          systemSize = '6 kW';
-          subsidyAmount = 60000;
+          annualSavings = 60000; systemSize = '6 kW'; subsidyAmount = 60000;
         } else if (userData.monthlyBill === 'vip') {
-          annualSavings = 100000;
-          systemSize = '10 kW';
-          subsidyAmount = 78000;
+          annualSavings = 100000; systemSize = '10 kW'; subsidyAmount = 78000;
         }
-        
-        return {
-          annualSavings,
-          systemSize,
-          subsidyAmount,
-          totalSavings: annualSavings * 25
-        };
+        return { annualSavings, systemSize, subsidyAmount, totalSavings: annualSavings * 25 };
       };
 
       const results = calculateResults();
       setSolarResults(results);
       setShowResults(true);
 
-      toast({
-        title: "Quote Submitted!",
-        description: "Your solar assessment has been completed successfully.",
-      });
+      toast({ title: "Quote Submitted!", description: "Your solar assessment has been completed successfully." });
     } catch (error) {
       console.error("Error submitting quote:", error);
-      toast({
-        title: "Error",
-        description: "Failed to submit quote. Please try again.",
-        variant: "destructive"
-      });
+      toast({ title: "Error", description: "Failed to submit quote. Please try again.", variant: "destructive" });
     }
   };
 
   const handleTextSubmit = () => {
     if (!inputValue.trim()) return;
-    
     const step = steps[currentStep - 1];
-    
-    // Validation
-    if (step.validation) {
-      const error = step.validation(inputValue);
+    if ((step as any).validation) {
+      const error = (step as any).validation(inputValue);
       if (error) {
-        setTimeout(() => {
-          addMessage(error, false);
-        }, 500);
+        setTimeout(() => { addMessage(error, false); }, 500);
         return;
       }
     }
-
-    // Update user data
-    setUserData(prev => ({
-      ...prev,
-      [step.id]: inputValue
-    }));
-
+    setUserData(prev => ({ ...prev, [step.id]: inputValue }));
     addMessage(inputValue, true);
     setInputValue('');
-    
-    setTimeout(() => {
-      proceedToNextStep();
-    }, 1000);
+    setTimeout(() => { proceedToNextStep(); }, 800);
   };
 
   const handleButtonSelect = (value: string, label: string) => {
     const step = steps[currentStep - 1];
-    
-    setUserData(prev => ({
-      ...prev,
-      [step.id]: value
-    }));
-
+    setUserData(prev => ({ ...prev, [step.id]: value }));
     addMessage(label, true);
-    
-    // Special handling for monthly bill
     if (step.id === 'monthlyBill') {
       setTimeout(() => {
         let systemSize = '2.5 kW';
         if (value === 'mid') systemSize = '3.5 kW';
         else if (value === 'high') systemSize = '5 kW';
         else if (value === 'vip') systemSize = '7.5 kW';
-        
         addMessage(`Thanks! A bill like that suggests you'd benefit from a ${systemSize} solar system.`, false);
-      }, 500);
+      }, 400);
     }
-    
-    // Special handling for referral - skip to referral contact step
     if (step.id === 'referralSource' && value === 'referral') {
-      setTimeout(() => {
-        proceedToNextStep(); // This will go to referral contact step
-      }, 1000);
+      setTimeout(() => { proceedToNextStep(); }, 800);
       return;
     }
-    
-    // For non-referral selections, skip referral contact step
     if (step.id === 'referralSource' && value !== 'referral') {
-      setCurrentStep(prev => prev + 1); // Skip referral contact step
+      setCurrentStep(prev => prev + 1);
     }
-    
-    setTimeout(() => {
-      proceedToNextStep();
-    }, 1000);
+    setTimeout(() => { proceedToNextStep(); }, 800);
   };
 
   const handleContactSubmit = () => {
     const phoneInput = document.getElementById('phoneInput') as HTMLInputElement;
     const emailInput = document.getElementById('emailInput') as HTMLInputElement;
-    
     const phone = phoneInput?.value.trim();
     const email = emailInput?.value.trim();
-    
     if (!phone) {
-      toast({
-        title: "Phone Required",
-        description: "Please enter your mobile number",
-        variant: "destructive"
-      });
+      toast({ title: "Phone Required", description: "Please enter your mobile number", variant: "destructive" });
       return;
     }
-    
-    // Auto-format phone number to Indian standard
     const formattedPhone = phone.replace(/\D/g, '').replace(/(\d{2})(\d{5})(\d{5})/, '+$1 $2 $3');
-    
-    setUserData(prev => ({
-      ...prev,
-      phone: formattedPhone,
-      email: email || undefined
-    }));
-    
+    setUserData(prev => ({ ...prev, phone: formattedPhone, email: email || undefined }));
     addMessage(`📱 ${formattedPhone}${email ? `\n📧 ${email}` : ''}`, true);
-    
-    setTimeout(() => {
-      proceedToNextStep();
-    }, 1000);
+    setTimeout(() => { proceedToNextStep(); }, 800);
   };
 
   const handleReferralContactSubmit = () => {
     const nameInput = document.getElementById('referralNameInput') as HTMLInputElement;
     const phoneInput = document.getElementById('referralPhoneInput') as HTMLInputElement;
-    
     const name = nameInput?.value.trim();
     const phone = phoneInput?.value.trim();
-    
     if (!name) {
-      toast({
-        title: "Name Required",
-        description: "Please enter the referral name",
-        variant: "destructive"
-      });
+      toast({ title: "Name Required", description: "Please enter the referral name", variant: "destructive" });
       return;
     }
-    
     let messageContent = `👤 ${name}`;
-    let formattedPhone = null;
-    
+    let formattedPhone: string | null = null;
     if (phone) {
-      // Auto-format phone number to Indian standard
       formattedPhone = phone.replace(/\D/g, '').replace(/(\d{2})(\d{5})(\d{5})/, '+$1 $2 $3');
       messageContent += `\n📱 ${formattedPhone}`;
     }
-    
-    setUserData(prev => ({
-      ...prev,
-      referralName: name,
-      referralPhone: formattedPhone
-    }));
-    
+    setUserData(prev => ({ ...prev, referralName: name, referralPhone: formattedPhone || undefined }));
     addMessage(messageContent, true);
-    
-    setTimeout(() => {
-      // Auto-complete after referral info
-      submitSolarLead();
-    }, 1000);
+    setTimeout(() => { submitSolarLead(); }, 800);
   };
 
   const handleSkipReferralContact = () => {
-    setUserData(prev => ({
-      ...prev,
-      referralName: null,
-      referralPhone: null
-    }));
-    
+    setUserData(prev => ({ ...prev, referralName: undefined, referralPhone: undefined }));
     addMessage("Skipped referral contact information", true);
-    
-    setTimeout(() => {
-      submitSolarLead();
-    }, 1000);
+    setTimeout(() => { submitSolarLead(); }, 800);
   };
 
   const getCurrentStep = () => {
@@ -433,294 +335,241 @@ export default function SolarChatWidget({ isOpen, onClose }: SolarChatWidgetProp
 
   const currentStepData = getCurrentStep();
 
+  if (!isOpen) return null;
+
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-md mx-auto bg-white shadow-2xl rounded-lg overflow-hidden min-h-[600px] max-h-[800px] flex flex-col p-0">
-        {/* Chat Header */}
-        <div className="bg-gradient-to-r from-solar-blue to-solar-orange p-4 flex items-center space-x-3 shadow-lg">
-          <div className="relative">
-            <div className="w-12 h-12 bg-gradient-to-r from-solar-orange to-solar-gold rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
-              <Sun className="w-6 h-6" />
-            </div>
-            <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+    <div className="fixed bottom-24 right-6 z-50 w-[360px] max-w-[92vw] bg-white shadow-2xl rounded-lg overflow-hidden flex flex-col border border-black/10">
+      {/* Chat Header */}
+      <div className="bg-gradient-to-r from-solar-blue to-solar-orange p-4 flex items-center space-x-3 shadow-lg">
+        <div className="relative">
+          <div className="w-12 h-12 bg-gradient-to-r from-solar-orange to-solar-gold rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+            <Sun className="w-6 h-6" />
           </div>
-          <div className="flex-1">
-            <h2 className="text-white font-semibold text-lg">Yami</h2>
-            <p className="text-blue-100 text-sm">Solar Assistant • Online</p>
-          </div>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={onClose}
-            className="text-white hover:bg-white/20"
-          >
-            <X className="w-5 h-5" />
-          </Button>
+          <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
         </div>
+        <div className="flex-1">
+          <h2 className="text-white font-semibold text-lg">Yami</h2>
+          <p className="text-blue-100 text-sm">Solar Assistant • Online</p>
+        </div>
+        {/* Single close button */}
+        <Button variant="ghost" size="sm" onClick={onClose} className="text-white hover:bg-white/20">
+          <X className="w-5 h-5" />
+        </Button>
+      </div>
 
-        {/* Progress Bar */}
-        {isStarted && (
-          <div className="bg-gray-100 px-4 py-2">
-            <div className="flex items-center justify-between text-xs text-gray-600 mb-1">
-              <span>Progress</span>
-              <span>Step {Math.min(currentStep, steps.length)} of {steps.length}</span>
-            </div>
-            <div className="w-full bg-gray-300 rounded-full h-2">
-              <div 
-                className="bg-gradient-to-r from-solar-orange to-solar-gold h-2 rounded-full transition-all duration-500"
-                style={{ width: `${(Math.min(currentStep, steps.length) / steps.length) * 100}%` }}
-              ></div>
-            </div>
+      {/* Progress Bar */}
+      {isStarted && (
+        <div className="bg-gray-100 px-4 py-2">
+          <div className="flex items-center justify-between text-xs text-gray-600 mb-1">
+            <span>Progress</span>
+            <span>Step {Math.min(currentStep, steps.length)} of {steps.length}</span>
           </div>
-        )}
+          <div className="w-full bg-gray-300 rounded-full h-2">
+            <div
+              className="bg-gradient-to-r from-solar-orange to-solar-gold h-2 rounded-full transition-all duration-500"
+              style={{ width: `${(Math.min(currentStep, steps.length) / steps.length) * 100}%` }}
+            />
+          </div>
+        </div>
+      )}
 
-        {/* Chat Messages */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-gray-50 to-white">
-          <AnimatePresence>
-            {messages.map((message) => (
-              <motion.div
-                key={message.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                className={`flex ${message.isUser ? 'justify-end items-start space-x-2' : 'items-start space-x-2'}`}
-              >
-                {!message.isUser && (
-                  <div className="w-8 h-8 bg-gradient-to-r from-solar-orange to-solar-gold rounded-full flex items-center justify-center text-white text-sm">
-                    <UserCheck className="w-4 h-4" />
-                  </div>
-                )}
-                {message.isUser && (
-                  <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm ml-2">
-                    <User className="w-4 h-4" />
-                  </div>
-                )}
-                <div className={`${
-                  message.isUser 
-                    ? 'bg-blue-600 text-white rounded-lg rounded-tr-none' 
-                    : 'bg-white border rounded-lg rounded-tl-none'
-                } p-3 max-w-xs shadow-md`}>
-                  <p className="text-sm leading-relaxed whitespace-pre-line">{message.content}</p>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-
-          {/* Typing Indicator */}
-          {isTyping && (
+      {/* Chat Messages */}
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-gray-50 to-white">
+        <AnimatePresence>
+          {messages.map((message) => (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="flex items-start space-x-2"
+              key={message.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className={`flex ${message.isUser ? 'justify-end items-start space-x-2' : 'items-start space-x-2'}`}
             >
-              <div className="w-8 h-8 bg-gradient-to-r from-solar-orange to-solar-gold rounded-full flex items-center justify-center text-white text-sm">
-                <UserCheck className="w-4 h-4" />
-              </div>
-              <div className="bg-gray-200 rounded-lg rounded-tl-none p-3">
-                <div className="flex space-x-1">
-                  <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></div>
-                  <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                  <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+              {!message.isUser && (
+                <div className="w-8 h-8 bg-gradient-to-r from-solar-orange to-solar-gold rounded-full flex items-center justify-center text-white text-sm">
+                  <UserCheck className="w-4 h-4" />
                 </div>
+              )}
+              {message.isUser && (
+                <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm ml-2">
+                  <User className="w-4 h-4" />
+                </div>
+              )}
+              <div className={`${
+                message.isUser
+                  ? 'bg-blue-600 text-white rounded-lg rounded-tr-none'
+                  : 'bg-white border rounded-lg rounded-tl-none'
+              } p-3 max-w-xs shadow-md`}>
+                <p className="text-sm leading-relaxed whitespace-pre-line">{message.content}</p>
               </div>
             </motion.div>
-          )}
+          ))}
+        </AnimatePresence>
 
-          <div ref={messagesEndRef} />
-        </div>
-
-        {/* Chat Input Area */}
-        {isStarted && currentStepData && (
-          <div className="border-t bg-white p-4">
-            {currentStepData.type === 'text' && (
-              <div className="flex items-center space-x-2">
-                <div className="flex-1 relative">
-                  <Input
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                    placeholder={currentStepData.placeholder || 'Type your answer...'}
-                    onKeyPress={(e) => e.key === 'Enter' && handleTextSubmit()}
-                    className="rounded-full focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-                <Button 
-                  onClick={handleTextSubmit}
-                  disabled={!inputValue.trim()}
-                  className="bg-gradient-to-r from-solar-orange to-solar-gold text-white p-3 rounded-full hover:opacity-90"
-                >
-                  <Send className="w-4 h-4" />
-                </Button>
+        {/* Typing Indicator */}
+        {isTyping && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-start space-x-2">
+            <div className="w-8 h-8 bg-gradient-to-r from-solar-orange to-solar-gold rounded-full flex items-center justify-center text-white text-sm">
+              <UserCheck className="w-4 h-4" />
+            </div>
+            <div className="bg-gray-200 rounded-lg rounded-tl-none p-3">
+              <div className="flex space-x-1">
+                <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></div>
+                <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
               </div>
-            )}
-
-            {currentStepData.type === 'contact' && (
-              <div className="space-y-3">
-                <div>
-                  <Label className="block text-sm font-medium text-gray-700 mb-1">
-                    Mobile Number (for instant WhatsApp/SMS results!) *
-                  </Label>
-                  <Input
-                    id="phoneInput"
-                    type="tel"
-                    placeholder="+91 98765 43210"
-                    className="focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-                <div>
-                  <Label className="block text-sm font-medium text-gray-700 mb-1">
-                    Email (optional – for a detailed PDF backup)
-                  </Label>
-                  <Input
-                    id="emailInput"
-                    type="email"
-                    placeholder="your.email@example.com"
-                    className="focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-                <Button 
-                  onClick={handleContactSubmit}
-                  className="w-full bg-gradient-to-r from-solar-orange to-solar-gold text-white hover:opacity-90"
-                >
-                  Continue
-                </Button>
-              </div>
-            )}
-
-            {currentStepData.type === 'referral_contact' && (
-              <div className="space-y-3">
-                <div>
-                  <Label className="block text-sm font-medium text-gray-700 mb-1">
-                    Referral Name *
-                  </Label>
-                  <Input
-                    id="referralNameInput"
-                    type="text"
-                    placeholder="Enter their full name"
-                    className="focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-                <div>
-                  <Label className="block text-sm font-medium text-gray-700 mb-1">
-                    Referral Contact Number (optional)
-                  </Label>
-                  <Input
-                    id="referralPhoneInput"
-                    type="tel"
-                    placeholder="+91 98765 43210"
-                    className="focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-                <div className="flex gap-2">
-                  <Button 
-                    onClick={handleReferralContactSubmit}
-                    className="flex-1 bg-gradient-to-r from-solar-orange to-solar-gold text-white hover:opacity-90"
-                  >
-                    Complete Assessment
-                  </Button>
-                  <Button 
-                    onClick={handleSkipReferralContact}
-                    variant="outline"
-                    className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700"
-                  >
-                    Skip
-                  </Button>
-                </div>
-              </div>
-            )}
-
-            {currentStepData.type === 'buttons' && (
-              <div className="flex flex-wrap gap-2">
-                {currentStepData.options?.map((option) => (
-                  <Button
-                    key={option.value}
-                    variant="outline"
-                    onClick={() => handleButtonSelect(option.value, option.label)}
-                    className="bg-gray-100 hover:bg-blue-600 hover:text-white text-gray-700 rounded-full text-sm font-medium transition-colors duration-200"
-                  >
-                    {option.label}
-                  </Button>
-                ))}
-              </div>
-            )}
-          </div>
+            </div>
+          </motion.div>
         )}
 
-        {/* Trust Badge */}
-        <div className="bg-green-50 border-t border-green-200 p-3 text-center">
-          <p className="text-green-700 text-xs font-medium flex items-center justify-center space-x-2">
-            <Shield className="w-4 h-4" />
-            <span>🔒 Your information is 100% secure with us. No spam, ever.</span>
-          </p>
-        </div>
-
-        {/* Results Modal */}
-        <Dialog open={showResults} onOpenChange={setShowResults}>
-          <DialogContent className="max-w-md">
-            <div className="p-6">
-              <div className="text-center mb-6">
-                <div className="w-16 h-16 bg-gradient-to-r from-solar-orange to-solar-gold rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Sun className="w-8 h-8 text-white" />
+        {/* Results Inside Panel */}
+        {showResults && (
+          <div className="mt-2">
+            <div className="p-4 border rounded-lg bg-white/90">
+              <div className="text-center mb-4">
+                <div className="w-14 h-14 bg-gradient-to-r from-solar-orange to-solar-gold rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Sun className="w-7 h-7 text-white" />
                 </div>
-                <h2 className="text-2xl font-bold text-gray-800 mb-2">🎉 Amazing Results!</h2>
+                <h2 className="text-xl font-bold text-gray-800 mb-1">🎉 Amazing Results!</h2>
                 <p className="text-gray-600">
                   {userData.name}, here's what your solar-powered future in {userData.location} looks like:
                 </p>
               </div>
-
               {solarResults && (
                 <>
-                  {/* Savings Summary */}
-                  <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-4 mb-6">
-                    <div className="grid grid-cols-2 gap-4 text-center">
+                  <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-3 mb-4">
+                    <div className="grid grid-cols-2 gap-3 text-center">
                       <div>
-                        <p className="text-2xl font-bold text-green-600">₹{solarResults.annualSavings.toLocaleString()}</p>
-                        <p className="text-sm text-gray-600">Annual Savings</p>
+                        <p className="text-xl font-bold text-green-600">₹{solarResults.annualSavings.toLocaleString()}</p>
+                        <p className="text-xs text-gray-600">Annual Savings</p>
                       </div>
                       <div>
-                        <p className="text-2xl font-bold text-blue-600">{solarResults.systemSize}</p>
-                        <p className="text-sm text-gray-600">Recommended System</p>
+                        <p className="text-xl font-bold text-blue-600">{solarResults.systemSize}</p>
+                        <p className="text-xs text-gray-600">Recommended System</p>
                       </div>
                     </div>
                   </div>
-
-                  {/* Government Subsidy */}
-                  <div className="bg-orange-50 rounded-lg p-4 mb-6">
-                    <h3 className="font-semibold text-orange-800 mb-2">🏛️ Government Subsidy</h3>
+                  <div className="bg-orange-50 rounded-lg p-3 mb-4">
+                    <h3 className="font-semibold text-orange-800 mb-1">🏛️ Government Subsidy</h3>
                     <p className="text-sm text-orange-700">
-                      Great news! You are eligible for the PM Surya Ghar: Muft Bijli Yojana subsidy, up to{' '}
-                      <strong>₹{solarResults.subsidyAmount.toLocaleString()}</strong> for this system!
+                      Eligible for up to <strong>₹{solarResults.subsidyAmount.toLocaleString()}</strong> under PM Surya Ghar.
                     </p>
                   </div>
-
-                  {/* 25-Year Projection */}
-                  <div className="bg-blue-50 rounded-lg p-4 mb-6">
-                    <h3 className="font-semibold text-blue-800 mb-2">📈 Long-term Savings</h3>
+                  <div className="bg-blue-50 rounded-lg p-3 mb-4">
+                    <h3 className="font-semibold text-blue-800 mb-1">📈 Long-term Savings</h3>
                     <p className="text-sm text-blue-700">
-                      Over 25 years, that's over <strong>₹{solarResults.totalSavings.toLocaleString()}</strong> in savings!
+                      Over 25 years: <strong>₹{solarResults.totalSavings.toLocaleString()}</strong>
                     </p>
                   </div>
                 </>
               )}
-
-              {/* Action Buttons */}
-              <div className="space-y-3">
+              <div className="space-y-2">
                 <Button className="w-full bg-gradient-to-r from-solar-orange to-solar-gold text-white hover:opacity-90">
-                  <Phone className="w-4 h-4 mr-2" />
-                  📞 Speak to an Expert Now
+                  <Phone className="w-4 h-4 mr-2" /> Speak to an Expert
                 </Button>
                 <Button className="w-full bg-gradient-to-r from-solar-blue to-solar-orange text-white hover:opacity-90">
-                  <Calendar className="w-4 h-4 mr-2" />
-                  📅 Schedule a Free Site Survey
+                  <Calendar className="w-4 h-4 mr-2" /> Schedule Site Survey
                 </Button>
                 <Button variant="outline" className="w-full">
-                  <Mail className="w-4 h-4 mr-2" />
-                  📧 Email My Full Report
+                  <Mail className="w-4 h-4 mr-2" /> Email My Full Report
+                </Button>
+                <Button variant="ghost" className="w-full" onClick={() => setShowResults(false)}>Back to Chat</Button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div ref={messagesEndRef} />
+      </div>
+
+      {/* Chat Input Area */}
+      {isStarted && !showResults && currentStepData && (
+        <div className="border-t bg-white p-4">
+          {currentStepData.type === 'text' && (
+            <div className="flex items-center space-x-2">
+              <div className="flex-1 relative">
+                <Input
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  placeholder={currentStepData.placeholder || 'Type your answer...'}
+                  onKeyPress={(e) => e.key === 'Enter' && handleTextSubmit()}
+                  className="rounded-full focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <Button
+                onClick={handleTextSubmit}
+                disabled={!inputValue.trim()}
+                className="bg-gradient-to-r from-solar-orange to-solar-gold text-white p-3 rounded-full hover:opacity-90"
+              >
+                <Send className="w-4 h-4" />
+              </Button>
+            </div>
+          )}
+
+          {currentStepData.type === 'contact' && (
+            <div className="space-y-3">
+              <div>
+                <Label className="block text-sm font-medium text-gray-700 mb-1">
+                  Mobile Number (for instant WhatsApp/SMS results!) *
+                </Label>
+                <Input id="phoneInput" type="tel" placeholder="+91 98765 43210" className="focus:ring-2 focus:ring-blue-500" />
+              </div>
+              <div>
+                <Label className="block text-sm font-medium text-gray-700 mb-1">
+                  Email (optional – for a detailed PDF backup)
+                </Label>
+                <Input id="emailInput" type="email" placeholder="your.email@example.com" className="focus:ring-2 focus:ring-blue-500" />
+              </div>
+              <Button onClick={handleContactSubmit} className="w-full bg-gradient-to-r from-solar-orange to-solar-gold text-white hover:opacity-90">
+                Continue
+              </Button>
+            </div>
+          )}
+
+          {currentStepData.type === 'referral_contact' && (
+            <div className="space-y-3">
+              <div>
+                <Label className="block text-sm font-medium text-gray-700 mb-1">Referral Name *</Label>
+                <Input id="referralNameInput" type="text" placeholder="Enter their full name" className="focus:ring-2 focus:ring-blue-500" />
+              </div>
+              <div>
+                <Label className="block text-sm font-medium text-gray-700 mb-1">Referral Contact Number (optional)</Label>
+                <Input id="referralPhoneInput" type="tel" placeholder="+91 98765 43210" className="focus:ring-2 focus:ring-blue-500" />
+              </div>
+              <div className="flex gap-2">
+                <Button onClick={handleReferralContactSubmit} className="flex-1 bg-gradient-to-r from-solar-orange to-solar-gold text-white hover:opacity-90">
+                  Complete Assessment
+                </Button>
+                <Button onClick={handleSkipReferralContact} variant="outline" className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700">
+                  Skip
                 </Button>
               </div>
             </div>
-          </DialogContent>
-        </Dialog>
-      </DialogContent>
-    </Dialog>
+          )}
+
+          {currentStepData.type === 'buttons' && (
+            <div className="flex flex-wrap gap-2">
+              {currentStepData.options?.map((option: any) => (
+                <Button
+                  key={option.value}
+                  variant="outline"
+                  onClick={() => handleButtonSelect(option.value, option.label)}
+                  className="bg-gray-100 hover:bg-blue-600 hover:text-white text-gray-700 rounded-full text-sm font-medium transition-colors duration-200"
+                >
+                  {option.label}
+                </Button>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Trust Badge */}
+      <div className="bg-green-50 border-t border-green-200 p-3 text-center">
+        <p className="text-green-700 text-xs font-medium flex items-center justify-center space-x-2">
+          <Shield className="w-4 h-4" />
+          <span>🔒 Your information is 100% secure with us. No spam, ever.</span>
+        </p>
+      </div>
+    </div>
   );
 }
