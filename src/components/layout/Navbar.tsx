@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { GetQuoteForm } from "@/pages/GetQuote"
 import {
   Menu,
   X,
@@ -61,6 +63,7 @@ const Navbar = () => {
   const [darkMode, setDarkMode] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const [isQuoteOpen, setIsQuoteOpen] = useState(false)
   const location = useLocation()
   const menuCloseTimer = useRef<NodeJS.Timeout | null>(null)
 
@@ -436,12 +439,13 @@ const Navbar = () => {
                   {darkMode ? "Light Mode" : "Dark Mode"}
                 </Button>
                 <Button
-                  asChild
                   className="flex-1 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-all duration-200"
+                  onClick={() => {
+                    setIsQuoteOpen(true)
+                    closeMobileMenu()
+                  }}
                 >
-                  <Link to="/get-quote" onClick={closeMobileMenu}>
-                    Get Quote
-                  </Link>
+                  Get Quote
                 </Button>
               </div>
             </div>
@@ -530,10 +534,10 @@ const Navbar = () => {
                   </Button>
 
                   <Button
-                    asChild
+                    onClick={() => setIsQuoteOpen(true)}
                     className="hidden lg:flex bg-white/20 hover:bg-white/30 text-white font-semibold px-4 sm:px-6 py-2 rounded-full border border-white/30 transition-all duration-200 text-sm"
                   >
-                    <Link to="/get-quote">Get Quote</Link>
+                    Get Quote
                   </Button>
 
                   {/* Mobile Menu Button */}
@@ -624,10 +628,10 @@ const Navbar = () => {
                   </Button>
 
                   <Button
-                    asChild
+                    onClick={() => setIsQuoteOpen(true)}
                     className="hidden lg:flex bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 sm:px-6 py-2 rounded-full transition-all duration-200 text-sm"
                   >
-                    <Link to="/get-quote">Get Quote</Link>
+                    Get Quote
                   </Button>
 
                   {/* Mobile Menu Button */}
@@ -650,6 +654,16 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         <MobileMenu />
+
+        {/* Get Quote Modal */}
+        <Dialog open={isQuoteOpen} onOpenChange={setIsQuoteOpen}>
+          <DialogContent className="sm:max-w-3xl w-[95vw] max-h-[90vh] p-0 gap-0 border-0 bg-white text-black">
+            <div className="h-1 w-full sunset-gradient" />
+            <div className="p-4 sm:p-6 overflow-y-auto">
+              <GetQuoteForm compact showHeader={false} />
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </>
   )

@@ -12,6 +12,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Badge } from "@/components/ui/badge"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { useToast } from "@/hooks/use-toast"
+import { supabase } from "@/integrations/supabase/client"
 import { CheckCircle, AlertCircle } from "lucide-react"
 
 interface RelianceQuoteFormProps {
@@ -66,7 +67,7 @@ const RelianceQuoteForm = ({
         power_demand_kw: String(powerDemandKw),
       }))
     }
-    if (dcCables !== null && dcCables !== undefined) {
+    if (productType === "cables" && dcCables !== null && dcCables !== undefined) {
       setFormData((prev) => ({
         ...prev,
         cables: dcCables,
@@ -104,21 +105,23 @@ const RelianceQuoteForm = ({
         mounting_type: mountingType || null,
       };
 
+      // Insert into Supabase: solar_quote_requests
+      try {
+        await supabase.from<any>('solar_quote_requests').insert(insertData)
+      } catch (dbErr) {
+        console.warn('DB insert failed:', dbErr)
+      }
 
-
-
-      
-    // --- INSERT THIS CODE HERE --- Secondry Server 
-   try {
-    await fetch('http://localhost:3000/generate-quote', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(insertData),
-    });
-  } catch (err) {
-    console.warn("Secondary server failed:", err);
-  }
-      // --- END INSERT ---
+      // Optional secondary server
+      try {
+        await fetch('http://localhost:3000/generate-quote', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(insertData),
+        });
+      } catch (err) {
+        console.warn("Secondary server failed:", err);
+      }
 
 
 
@@ -391,36 +394,38 @@ const RelianceQuoteForm = ({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="project_location" className="text-sm font-medium text-gray-700">
-                    Project Location
+                    Project Location *
                   </Label>
                   <Input
                     id="project_location"
                     type="text"
+                    required
                     value={formData.project_location}
                     onChange={(e) => handleInputChange("project_location", e.target.value)}
                     placeholder="City, State"
                     className="h-10 border-gray-300"
                   />
                 </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="cables" className="text-sm font-medium text-gray-700">
-                    Cables
-                  </Label>
-                  <Input
-                    id="cables"
-                    type="text"
-                    value={formData.cables}
-                    onChange={(e) => {
-                      if (dcCables === null || dcCables === undefined) {
-                        handleInputChange("cables", e.target.value)
-                      }
-                    }}
-                    readOnly={dcCables !== null && dcCables !== undefined}
-                    placeholder="e.g. LSZH DC Cable - 50 meters"
-                    className="h-10 border-gray-300"
-                  />
-                </div>
+                {productType === "cables" && (
+                  <div className="space-y-2">
+                    <Label htmlFor="cables" className="text-sm font-medium text-gray-700">
+                      Cables
+                    </Label>
+                    <Input
+                      id="cables"
+                      type="text"
+                      value={formData.cables}
+                      onChange={(e) => {
+                        if (dcCables === null || dcCables === undefined) {
+                          handleInputChange("cables", e.target.value)
+                        }
+                      }}
+                      readOnly={dcCables !== null && dcCables !== undefined}
+                      placeholder="e.g. LSZH DC Cable - 50 meters"
+                      className="h-10 border-gray-300"
+                    />
+                  </div>
+                )}
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -456,7 +461,7 @@ const RelianceQuoteForm = ({
               <div className="pt-4">
                 <Button
                   type="submit"
-                  disabled={loading || !formData.name || !formData.phone}
+                  disabled={loading || !formData.name || !formData.phone || !formData.project_location}
                   className="w-full bg-black hover:bg-gray-800 text-white font-semibold h-12 text-base"
                 >
                   {loading ? "Submitting..." : isLargeSystem ? "Contact Sales Team" : "Get My Reliance Solar Quote"}

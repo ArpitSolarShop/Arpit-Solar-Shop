@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -8,17 +8,20 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ArrowUpDown, Search } from "lucide-react"
 import ShaktiQuoteForm from "@/components/forms/shakti-quote-form"
-import {
-  gridTieSystemData,
-  SYSTEM_SIZE_LIMIT,
-  COMPANY_NAME,
-  PRODUCT_DESCRIPTION,
-  WORK_SCOPE,
-} from "@/assets/shakti-solar-data"
-import type { GridTieSystemData } from "@/assets/shakti-solar-data"
+import { supabase } from "@/integrations/supabase/client"
+
+type GridTieSystemData = {
+  slNo: number
+  systemSize: number
+  noOfModules: number
+  inverterCapacity: number
+  phase: string
+  preGiElevatedWithGst: number
+  preGiElevatedPrice: number
+}
 
 // Components
-function GridTieSystemTable({ onRowClick }: { onRowClick: (product: GridTieSystemData) => void }) {
+function GridTieSystemTable({ data, onRowClick }: { data: GridTieSystemData[]; onRowClick: (product: GridTieSystemData) => void }) {
   const [sortField, setSortField] = useState<keyof GridTieSystemData | null>(null)
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc")
   const [searchTerm, setSearchTerm] = useState("")
@@ -32,7 +35,7 @@ function GridTieSystemTable({ onRowClick }: { onRowClick: (product: GridTieSyste
     }
   }
 
-  const filteredAndSortedData = gridTieSystemData
+  const filteredAndSortedData = data
     .filter(
       (item) =>
         item.phase.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -150,6 +153,39 @@ function GridTieSystemTable({ onRowClick }: { onRowClick: (product: GridTieSyste
 export default function ShaktiSolar() {
   const [isFormOpen, setIsFormOpen] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState<GridTieSystemData | null>(null)
+  const [gridData, setGridData] = useState<GridTieSystemData[]>([])
+  const [systemSizeLimit, setSystemSizeLimit] = useState<number>(10)
+  const [companyName, setCompanyName] = useState<string>("Shakti Solar")
+  const [productDescription, setProductDescription] = useState<string>("DCR RIL 535 Wp Modules with String Inverter")
+  const [workScope, setWorkScope] = useState<string>("Complete Work Excluding Civil Material")
+
+  useEffect(() => {
+    const loadData = async () => {
+      // Grid tie systems
+      const { data: grid, error: gridErr } = await supabase.from<any>('shakti_grid_tie_systems').select('*').order('sl_no', { ascending: true })
+      if (!gridErr && grid) {
+        setGridData(grid.map((r: any) => ({
+          slNo: r.sl_no,
+          systemSize: Number(r.system_size),
+          noOfModules: r.no_of_modules,
+          inverterCapacity: Number(r.inverter_capacity),
+          phase: r.phase,
+          preGiElevatedWithGst: Number(r.pre_gi_elevated_with_gst),
+          preGiElevatedPrice: Number(r.pre_gi_elevated_price),
+        })))
+      }
+      // Config
+      const { data: cfg, error: cfgErr } = await supabase.from<any>('shakti_config').select('*')
+      if (!cfgErr && cfg) {
+        const config = Object.fromEntries(cfg.map((c: any) => [c.config_key, c.config_value]))
+        if (config['system_size_limit']) setSystemSizeLimit(parseFloat(config['system_size_limit']))
+        if (config['company_name']) setCompanyName(config['company_name'])
+        if (config['product_description']) setProductDescription(config['product_description'])
+        if (config['work_scope']) setWorkScope(config['work_scope'])
+      }
+    }
+    loadData()
+  }, [])
 
   const handleRowClick = (product: GridTieSystemData) => {
     setSelectedProduct(product)
@@ -163,10 +199,10 @@ export default function ShaktiSolar() {
         <div className="text-center space-y-4">
           <div className="flex items-center justify-center gap-4 mb-4">
             <img src="/Shakti Solar.png" alt="Shakti Solar" className="h-12 w-auto" />
-            <h1 className="text-4xl font-bold text-gray-900">{COMPANY_NAME} System Pricing</h1>
+            <h1 className="text-4xl font-bold text-gray-900">{companyName} System Pricing</h1>
           </div>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Grid Tie System - {PRODUCT_DESCRIPTION} ({WORK_SCOPE})
+            Grid Tie System - {productDescription} ({workScope})
           </p>
           <div className="flex flex-wrap justify-center gap-2">
             <Badge variant="secondary" className="text-sm">
@@ -194,7 +230,7 @@ export default function ShaktiSolar() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <GridTieSystemTable onRowClick={handleRowClick} />
+            <GridTieSystemTable data={gridData} onRowClick={handleRowClick} />
           </CardContent>
         </Card>
 
@@ -203,10 +239,10 @@ export default function ShaktiSolar() {
           <CardContent className="pt-6">
             <div className="text-center space-y-2">
               <h3 className="text-lg font-semibold text-gray-900">
-                Need a system larger than {SYSTEM_SIZE_LIMIT} kWp?
+                Need a system larger than {systemSizeLimit} kWp?
               </h3>
               <p className="text-gray-600">
-                For commercial and industrial installations above {SYSTEM_SIZE_LIMIT} kWp, please contact our sales team
+                For commercial and industrial installations above {systemSizeLimit} kWp, please contact our sales team
                 for customized pricing and solutions.
               </p>
               <Button

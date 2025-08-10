@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, TableFooter } from "@/components/ui/table"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -9,18 +9,52 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Calculator, Cable, Package, ArrowUpDown, Search, CheckCircle, Zap } from "lucide-react"
 import RelianceQuoteForm from "@/components/forms/reliance-quote-form"
-import {
-  gridTieSystemData,
-  largeSystemData,
-  dcCableData,
-  kitItems,
-  COMMERCIAL_SYSTEM_SIZE_LIMIT,
-  PRODUCT_DESCRIPTION,
-} from "@/assets/reliance-solar-data"
-import type { GridTieSystemData, LargeSystemData } from "@/assets/reliance-solar-data"
+import { supabase } from "@/integrations/supabase/client"
+
+type GridTieSystemData = {
+  slNo: number
+  systemSize: number
+  noOfModules: number
+  inverterCapacity: number
+  phase: string
+  hdgElevatedWithGst: number
+  hdgElevatedPrice: number
+}
+
+type LargeSystemData = {
+  slNo: number
+  systemSizeKWp: number
+  systemSizeKW: number
+  noOfModules: number
+  inverterCapacity: number
+  phase: string
+  shortRailTinShedPricePerWatt: number
+  shortRailTinShedPrice: number
+  hdgElevatedRccPricePerWatt: number
+  hdgElevatedRccPrice: number
+  preGiMmsPricePerWatt: number
+  preGiMmsPrice: number
+  priceWithoutMmsPricePerWatt: number
+  priceWithoutMmsPrice: number
+}
+
+type DCCableData = {
+  srNo: number
+  productDescription: string
+  uom: string
+  quantity: number
+  price: number
+  total: number
+}
+
+type KitItem = {
+  srNo: number
+  item: string
+  description: string
+}
 
 // Components
-function GridTieSystemTable({ onRowClick }: { onRowClick: (product: GridTieSystemData, type: string) => void }) {
+function GridTieSystemTable({ data, onRowClick }: { data: GridTieSystemData[]; onRowClick: (product: GridTieSystemData, type: string) => void }) {
   const [sortField, setSortField] = useState<keyof GridTieSystemData | null>(null)
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc")
   const [searchTerm, setSearchTerm] = useState("")
@@ -34,7 +68,7 @@ function GridTieSystemTable({ onRowClick }: { onRowClick: (product: GridTieSyste
     }
   }
 
-  const filteredAndSortedData = gridTieSystemData
+  const filteredAndSortedData = data
     .filter(
       (item) =>
         item.phase.toLowerCase().includes(searchTerm.toLowerCase()) || item.systemSize.toString().includes(searchTerm),
@@ -141,7 +175,7 @@ function GridTieSystemTable({ onRowClick }: { onRowClick: (product: GridTieSyste
   )
 }
 
-function LargeSystemTable({ onRowClick }: { onRowClick: (product: LargeSystemData, type: string) => void }) {
+function LargeSystemTable({ data, onRowClick }: { data: LargeSystemData[]; onRowClick: (product: LargeSystemData, type: string) => void }) {
   const [searchTerm, setSearchTerm] = useState("")
   const [sortField, setSortField] = useState<keyof LargeSystemData | null>(null)
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc")
@@ -155,7 +189,7 @@ function LargeSystemTable({ onRowClick }: { onRowClick: (product: LargeSystemDat
     }
   }
 
-  const filteredAndSortedData = largeSystemData
+  const filteredAndSortedData = data
     .filter(
       (item) => item.systemSizeKWp.toString().includes(searchTerm) || item.systemSizeKW.toString().includes(searchTerm),
     )
@@ -404,8 +438,8 @@ function LargeSystemTable({ onRowClick }: { onRowClick: (product: LargeSystemDat
   )
 }
 
-function DCCableTable({ onRowClick }: { onRowClick: (product: any, type: string) => void }) {
-  const totalAmount = dcCableData.reduce((sum, item) => sum + item.total, 0)
+function DCCableTable({ data, onRowClick }: { data: DCCableData[]; onRowClick: (product: any, type: string) => void }) {
+  const totalAmount = data.reduce((sum, item) => sum + item.total, 0)
 
   return (
     <div className="space-y-4">
@@ -423,7 +457,7 @@ function DCCableTable({ onRowClick }: { onRowClick: (product: any, type: string)
             </TableRow>
           </TableHeader>
           <TableBody>
-            {dcCableData.map((item) => (
+            {data.map((item) => (
               <TableRow key={item.srNo} className="hover:bg-gray-50">
                 <TableCell className="font-medium">{item.srNo}</TableCell>
                 <TableCell>{item.productDescription}</TableCell>
@@ -462,7 +496,7 @@ function DCCableTable({ onRowClick }: { onRowClick: (product: any, type: string)
   )
 }
 
-function KitItemsTable() {
+function KitItemsTable({ items }: { items: KitItem[] }) {
   return (
     <div className="space-y-4">
       <div className="rounded-md border overflow-x-auto">
@@ -476,7 +510,7 @@ function KitItemsTable() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {kitItems.map((item) => (
+            {items.map((item) => (
               <TableRow key={item.srNo} className="hover:bg-gray-50">
                 <TableCell className="font-medium">{item.srNo}</TableCell>
                 <TableCell>
@@ -519,6 +553,85 @@ export default function Reliance() {
   const [productType, setProductType] = useState<"residential" | "commercial" | "cables" | "kit">("residential")
   const [selectedCommercialType, setSelectedCommercialType] = useState<string>("")
 
+  const [gridData, setGridData] = useState<GridTieSystemData[]>([])
+  const [largeData, setLargeData] = useState<LargeSystemData[]>([])
+  const [cableData, setCableData] = useState<DCCableData[]>([])
+  const [kitData, setKitData] = useState<KitItem[]>([])
+  const [productDescription, setProductDescription] = useState<string>("RIL 690-720 Wp HJT Solar Modules")
+  const [commercialLimit, setCommercialLimit] = useState<number>(165.6)
+  const [loading, setLoading] = useState<boolean>(true)
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        // Grid tie systems
+        const { data: grid, error: gridErr } = await supabase.from<any>('reliance_grid_tie_systems').select('*').order('sl_no', { ascending: true })
+        if (!gridErr && grid) {
+          setGridData(grid.map((r: any) => ({
+            slNo: r.sl_no,
+            systemSize: Number(r.system_size),
+            noOfModules: r.no_of_modules,
+            inverterCapacity: Number(r.inverter_capacity),
+            phase: r.phase,
+            hdgElevatedWithGst: Number(r.price_per_watt ?? r.hdg_elevated_with_gst ?? 0),
+            hdgElevatedPrice: Number(r.hdg_elevated_price ?? 0),
+          })))
+        }
+        // Large systems
+        const { data: large, error: largeErr } = await supabase.from<any>('reliance_large_systems').select('*').order('sl_no', { ascending: true })
+        if (!largeErr && large) {
+          setLargeData(large.map((r: any) => ({
+            slNo: r.sl_no,
+            systemSizeKWp: Number(r.system_size_kwp),
+            systemSizeKW: Number(r.system_size_kw),
+            noOfModules: r.no_of_modules,
+            inverterCapacity: Number(r.inverter_capacity),
+            phase: r.phase,
+            shortRailTinShedPricePerWatt: Number(r.short_rail_tin_shed_price_per_watt),
+            shortRailTinShedPrice: Number(r.short_rail_tin_shed_price),
+            hdgElevatedRccPricePerWatt: Number(r.hdg_elevated_rcc_price_per_watt),
+            hdgElevatedRccPrice: Number(r.hdg_elevated_rcc_price),
+            preGiMmsPricePerWatt: Number(r.pre_gi_mms_price_per_watt),
+            preGiMmsPrice: Number(r.pre_gi_mms_price),
+            priceWithoutMmsPricePerWatt: Number(r.price_without_mms_price_per_watt),
+            priceWithoutMmsPrice: Number(r.price_without_mms_price),
+          })))
+        }
+        // DC cables
+        const { data: cables, error: cablesErr } = await supabase.from<any>('reliance_dc_cable_data').select('*').order('sr_no', { ascending: true })
+        if (!cablesErr && cables) {
+          setCableData(cables.map((r: any) => ({
+            srNo: r.sr_no,
+            productDescription: r.product_description,
+            uom: r.uom,
+            quantity: r.quantity,
+            price: Number(r.price),
+            total: Number(r.total),
+          })))
+        }
+        // Kit items
+        const { data: kits, error: kitsErr } = await supabase.from<any>('reliance_kit_items').select('*').order('sr_no', { ascending: true })
+        if (!kitsErr && kits) {
+          setKitData(kits.map((r: any) => ({
+            srNo: r.sr_no,
+            item: r.item,
+            description: r.description,
+          })))
+        }
+        // Config
+        const { data: cfg, error: cfgErr } = await supabase.from<any>('reliance_system_config').select('*')
+        if (!cfgErr && cfg) {
+          const config = Object.fromEntries(cfg.map((c: any) => [c.key, c.value]))
+          if (config['PRODUCT_DESCRIPTION']) setProductDescription(config['PRODUCT_DESCRIPTION'])
+          if (config['COMMERCIAL_SYSTEM_SIZE_LIMIT']) setCommercialLimit(parseFloat(config['COMMERCIAL_SYSTEM_SIZE_LIMIT']))
+        }
+      } finally {
+        setLoading(false)
+      }
+    }
+    loadData()
+  }, [])
+
   const handleRowClick = (product: any, type: string) => {
     setSelectedProduct(product)
     setProductType(type.includes("commercial") ? "commercial" : (type as any))
@@ -534,9 +647,12 @@ export default function Reliance() {
         ? "Tin Shed"
         : type.includes("rcc")
           ? "RCC Elevated"
-          : type.includes("mms")
-            ? "Pre GI MMS"
-            : "Without MMS"
+          // Important: check "without-mms" BEFORE generic "mms" to avoid substring collision
+          : type.includes("without-mms")
+            ? "Without MMS"
+            : type.includes("mms")
+              ? "Pre GI MMS"
+              : "Without MMS"
       return `${product.systemSizeKWp} kWp Commercial Solar System - ${mountingType} - ${product.noOfModules} Modules`
     } else if (type === "cables") {
       return `${product.productDescription} - ${product.quantity} ${product.uom}`
@@ -556,7 +672,7 @@ export default function Reliance() {
             <h1 className="text-4xl font-bold text-gray-900">HJT Solar System Pricing</h1>
           </div>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Comprehensive pricing for {PRODUCT_DESCRIPTION} and complete system packages
+            Comprehensive pricing for {productDescription} and complete system packages
           </p>
           <div className="flex flex-wrap justify-center gap-2">
             <Badge variant="secondary" className="text-sm">
@@ -604,7 +720,7 @@ export default function Reliance() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <GridTieSystemTable onRowClick={handleRowClick} />
+                <GridTieSystemTable data={gridData} onRowClick={handleRowClick} />
               </CardContent>
             </Card>
           </TabsContent>
@@ -621,7 +737,7 @@ export default function Reliance() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <LargeSystemTable onRowClick={handleRowClick} />
+                <LargeSystemTable data={largeData} onRowClick={handleRowClick} />
               </CardContent>
             </Card>
           </TabsContent>
@@ -638,7 +754,7 @@ export default function Reliance() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <DCCableTable onRowClick={handleRowClick} />
+                <DCCableTable data={cableData} onRowClick={handleRowClick} />
               </CardContent>
             </Card>
           </TabsContent>
@@ -655,7 +771,7 @@ export default function Reliance() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <KitItemsTable />
+                <KitItemsTable items={kitData} />
               </CardContent>
             </Card>
           </TabsContent>
@@ -666,10 +782,10 @@ export default function Reliance() {
           <CardContent className="pt-6">
             <div className="text-center space-y-2">
               <h3 className="text-lg font-semibold text-gray-900">
-                Need a system larger than {COMMERCIAL_SYSTEM_SIZE_LIMIT} kWp?
+                Need a system larger than {commercialLimit} kWp?
               </h3>
               <p className="text-gray-600">
-                For utility-scale installations above {COMMERCIAL_SYSTEM_SIZE_LIMIT} kWp, please contact our sales team
+                For utility-scale installations above {commercialLimit} kWp, please contact our sales team
                 for customized pricing and solutions.
               </p>
               <Button
@@ -685,6 +801,8 @@ export default function Reliance() {
                   }
                   setSelectedProduct(largeSystemProduct)
                   setProductType("commercial")
+                  // Clear any previous commercial selection to ensure mounting_type is null for large-system quotes
+                  setSelectedCommercialType("")
                   setIsFormOpen(true)
                 }}
               >
@@ -758,8 +876,9 @@ export default function Reliance() {
             if (!selectedCommercialType) return null;
             if (selectedCommercialType.includes("tin-shed")) return "Tin Shed";
             if (selectedCommercialType.includes("rcc")) return "RCC Elevated";
-            if (selectedCommercialType.includes("mms")) return "Pre GI MMS";
+            // Check "without-mms" BEFORE generic "mms" to avoid substring collision
             if (selectedCommercialType.includes("without-mms")) return "Without MMS";
+            if (selectedCommercialType.includes("mms")) return "Pre GI MMS";
             return null;
           })()}
         />

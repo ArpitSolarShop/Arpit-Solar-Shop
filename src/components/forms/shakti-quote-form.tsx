@@ -12,6 +12,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Badge } from "@/components/ui/badge"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { useToast } from "@/hooks/use-toast"
+import { supabase } from "@/integrations/supabase/client"
 import { CheckCircle, AlertCircle } from "lucide-react"
 
 interface ShaktiQuoteFormProps {
@@ -59,7 +60,7 @@ const ShaktiQuoteForm = ({
     setLoading(true)
 
     try {
-      // Submit to Supabase database
+      // Build payload
       const insertData = {
         name: formData.name,
         phone: formData.phone,
@@ -79,20 +80,23 @@ const ShaktiQuoteForm = ({
         referral_source: formData.referral_name ? "referral" : null,
       };
 
+      // Insert into Supabase
+      try {
+        await supabase.from<any>('solar_quote_requests').insert(insertData)
+      } catch (dbErr) {
+        console.warn('DB insert failed:', dbErr)
+      }
 
-
-      
-    // --- INSERT THIS CODE HERE --- Secondry Server 
-   try {
-    await fetch('http://localhost:3000/generate-quote', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(insertData),
-    });
-  } catch (err) {
-    console.warn("Secondary server failed:", err);
-  }
-      // --- END INSERT ---
+      // Optional secondary server
+      try {
+        await fetch('http://localhost:3000/generate-quote', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(insertData),
+        });
+      } catch (err) {
+        console.warn("Secondary server failed:", err);
+      }
 
 
 
@@ -344,11 +348,12 @@ const ShaktiQuoteForm = ({
 
               <div className="space-y-2">
                 <Label htmlFor="project_location" className="text-sm font-medium text-gray-700">
-                  Project Location
+                  Project Location *
                 </Label>
                 <Input
                   id="project_location"
                   type="text"
+                  required
                   value={formData.project_location}
                   onChange={(e) => handleInputChange("project_location", e.target.value)}
                   placeholder="City, State"
@@ -389,7 +394,7 @@ const ShaktiQuoteForm = ({
               <div className="pt-4">
                 <Button
                   type="submit"
-                  disabled={loading || !formData.name || !formData.phone}
+                  disabled={loading || !formData.name || !formData.phone || !formData.project_location}
                   className="w-full bg-black hover:bg-gray-800 text-white font-semibold h-12 text-base"
                 >
                   {loading ? "Submitting..." : isLargeSystem ? "Contact Sales Team" : "Get My Shakti Solar Quote"}
