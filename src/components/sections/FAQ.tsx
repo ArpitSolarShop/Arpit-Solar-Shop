@@ -40,7 +40,7 @@ const faqs: FAQItem[] = [
   {
     question: "How long do solar panels last?",
     answer:
-      "Most solar panels come with a warranty of 25 years and can function efficiently for even longer with minimal degradation.",
+      "Most solar panels come with a warranty of 25 years and can function efficiently for even longer with minimal degradation.HJT Panel can last upto 30 years with minimal degradation.",
   },
 ];
 
