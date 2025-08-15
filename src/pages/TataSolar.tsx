@@ -1,232 +1,88 @@
+"use client"
+
+import { useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { 
-  Clock, 
-  Bell, 
-  Star, 
-  Zap, 
-  Shield, 
-  Award,
-  ArrowRight,
-  Mail
-} from "lucide-react";
-import { Link } from "react-router-dom";
+import TataSolarPricingPage from "@/assets/tata-solar"; // This path is now updated
+import GetQuote from "@/pages/GetQuote";
+import { Zap } from "lucide-react";
 
-const TataSolar = () => {
-  const comingSoonFeatures = [
-    {
-      icon: Zap,
-      title: "High Efficiency Panels",
-      description: "Advanced solar technology with industry-leading efficiency ratings"
-    },
-    {
-      icon: Shield,
-      title: "25-Year Warranty",
-      description: "Comprehensive warranty coverage for long-term peace of mind"
-    },
-    {
-      icon: Award,
-      title: "Premium Quality",
-      description: "Tata's trusted brand quality and reliability standards"
-    }
-  ];
+const SolarSolutionCard = ({ title, image, features, benefits }: any) => (
+  <div className="bg-gray-100 rounded-xl p-6 shadow-md h-full">
+    <div className="w-full h-48 flex items-center justify-center mb-5">
+      <img src={image} alt={title} className="max-h-full object-contain" />
+    </div>
+    <h3 className="text-2xl font-bold mb-4 text-center">{title}</h3>
+    <h4 className="text-xl font-semibold text-blue-700 mb-2">Features</h4>
+    <ul className="list-disc list-inside mb-4 space-y-1">{features.map((f: string, i: number) => <li key={i}>{f}</li>)}</ul>
+    <h4 className="text-xl font-semibold text-blue-700 mb-2">Benefits</h4>
+    <ul className="list-disc list-inside space-y-1">{benefits.map((b: string, i: number) => <li key={i}>{b}</li>)}</ul>
+  </div>
+);
+
+export default function TataSolar() {
+  const [isQuoteOpen, setIsQuoteOpen] = useState(false);
+  const faqs = [
+      { q: "Why choose Tata Power Solar?", a: "With over 32 years of experience, Tata Power Solar is India's most trusted solar brand, guaranteeing quality and reliability." },
+      { q: "What is the PM Surya Ghar Yojana?", a: "It is a government scheme promoting residential solar adoption by providing significant financial subsidies to make solar affordable." }
+    ];
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white text-gray-800">
       <Navbar />
-      
-      {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-primary via-primary/90 to-secondary overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/Tata%20Power%20Solar.png')] bg-cover bg-center opacity-10"></div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            <Badge className="mb-4 text-sm font-medium bg-white/20 text-white border-white/30">
-              <Clock className="w-4 h-4 mr-2" />
-              Coming Soon
-            </Badge>
-            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-6">
-              Tata Solar
-              <span className="text-accent block">Power Solutions</span>
-            </h1>
-            <p className="text-lg sm:text-xl text-white/90 mb-8 leading-relaxed px-4">
-              Get ready for premium solar solutions from India's most trusted brand. 
-              Tata Solar is coming soon with cutting-edge technology and reliability you can count on.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90">
-                <Link to="/contact">Notify Me When Available</Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
-                <Link to="/products">View Other Products</Link>
-              </Button>
+      <main>
+        <section className="w-full bg-[#E6F3FF] py-16">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center px-4 gap-10">
+            <div className="flex-1 text-center md:text-left space-y-4">
+              <p className="uppercase text-sm text-blue-800 font-semibold">TATA POWER SOLAR ROOFTOP SOLUTIONS</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 leading-snug">Harness the Sun with India's #1 Solar Rooftop Company.</h2>
+              <button onClick={() => setIsQuoteOpen(true)} className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">Request a Free Consultation</button>
+            </div>
+            <div className="flex-1 flex justify-center">
+              <img src="/Tata Power Solar.png" alt="Tata Power Solar" className="w-full max-w-md object-contain" />
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Coming Soon Features */}
-      <section className="py-16 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              What to Expect
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Tata Solar will bring you the latest in solar technology with the trust and reliability of the Tata brand.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
-            {comingSoonFeatures.map((feature, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <feature.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <CardTitle className="text-xl">{feature.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    {feature.description}
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stay Tuned Section */}
-      <section className="py-16 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-6">
-              <Bell className="w-8 h-8 text-primary" />
+        </section>
+        {isQuoteOpen && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => setIsQuoteOpen(false)}>
+            <div className="bg-white rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+              <div className="p-6 relative"><button onClick={() => setIsQuoteOpen(false)} className="absolute top-3 right-3 text-gray-500 hover:text-gray-800">✖</button><GetQuote /></div>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-              Stay Tuned!
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-              We're working hard to bring you the best Tata Solar solutions. 
-              Our team is finalizing partnerships and preparing to offer you 
-              premium solar products with unmatched quality and service.
-            </p>
-            
-            <Card className="max-w-2xl mx-auto">
-              <CardContent className="p-6">
-                <div className="flex items-center justify-center mb-4">
-                  <Star className="w-6 h-6 text-yellow-500 mr-2" />
-                  <span className="font-semibold text-lg">Be the First to Know</span>
-                </div>
-                <p className="text-muted-foreground mb-6">
-                  Subscribe to get notified when Tata Solar products become available. 
-                  Early subscribers will get exclusive access to special launch offers.
-                </p>
-                <Button asChild size="lg" className="w-full sm:w-auto">
-                  <Link to="/contact" className="flex items-center justify-center">
-                    <Mail className="w-4 h-4 mr-2" />
-                    Get Notified
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
           </div>
-        </div>
-      </section>
-
-      {/* Alternative Options */}
-      <section className="py-16 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Available Now
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              While you wait for Tata Solar, explore our other premium solar solutions.
-            </p>
+        )}
+        <section className="py-16 bg-white text-center">
+          <h2 className="text-3xl font-bold mb-12">Our Solar Solutions</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 max-w-7xl mx-auto">
+            <SolarSolutionCard title="Solar PV Modules" image="/tata-module.png" features={["High-Efficiency Mono PERC", "PID Resistant", "Durable Build"]} benefits={["Maximize energy generation", "Reliable for 25+ years", "Great ROI"]} />
+            <SolarSolutionCard title="String Inverters" image="/tata-inverter.png" features={["High Conversion Efficiency", "IP65 Rated", "Remote Monitoring"]} benefits={["Optimize power output", "Safe operation", "Track performance"]} />
+            <SolarSolutionCard title="Mounting Structures" image="/tata-mounting.png" features={["Corrosion-Resistant GI", "High Wind Speed Design", "Quick Installation"]} benefits={["Ensures panel safety", "Long lifespan", "Optimal orientation"]} />
           </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader className="text-center">
-                <img 
-                  src="/reliance-industries-ltd.png" 
-                  alt="Reliance Solar" 
-                  className="w-20 h-20 object-contain mx-auto mb-4"
-                />
-                <CardTitle className="text-xl">Reliance Solar</CardTitle>
-                <Badge variant="secondary" className="w-fit mx-auto">
-                  Recommended for Commercial
-                </Badge>
-              </CardHeader>
-              <CardContent className="text-center">
-                <CardDescription className="mb-4">
-                  Leading renewable energy solutions with cutting-edge technology
-                </CardDescription>
-                <Button asChild className="w-full">
-                  <Link to="/reliance">
-                    Explore Reliance Solar
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader className="text-center">
-                <img 
-                  src="/Shakti%20Solar.png" 
-                  alt="Shakti Solar" 
-                  className="w-20 h-20 object-contain mx-auto mb-4"
-                />
-                <CardTitle className="text-xl">Shakti Solar</CardTitle>
-                <Badge variant="secondary" className="w-fit mx-auto">
-                  Recommended for Residential
-                </Badge>
-              </CardHeader>
-              <CardContent className="text-center">
-                <CardDescription className="mb-4">
-                  Innovative solar solutions perfect for residential installations
-                </CardDescription>
-                <Button asChild className="w-full">
-                  <Link to="/shakti-solar">
-                    Explore Shakti Solar
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
+        </section>
+        <section className="bg-gray-50 py-16"><TataSolarPricingPage /></section>
+        <section className="py-16 bg-gradient-to-r from-blue-700 to-blue-900 text-white text-center">
+          <div className="max-w-7xl mx-auto px-4">
+            <h2 className="text-4xl font-bold mb-4 flex items-center justify-center gap-4"><Zap className="w-12 h-12 text-yellow-300" />PM Surya Ghar <span className="text-yellow-300">मुफ्त बिजली योजना</span></h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+              <div className="bg-white text-gray-800 p-6 rounded-lg shadow-lg"><p className="text-4xl font-bold text-green-600 mb-2">₹30,000</p><p>per kWp up to 2 kWp</p></div>
+              <div className="bg-white text-gray-800 p-6 rounded-lg shadow-lg"><p className="text-4xl font-bold text-green-600 mb-2">₹18,000</p><p>for additional capacity up to 3 kWp</p></div>
+              <div className="bg-white text-gray-800 p-6 rounded-lg shadow-lg"><p className="text-4xl font-bold text-green-600 mb-2">₹78,000</p><p>Total subsidy for systems &gt; 3 kWp</p></div>
+            </div>
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-primary to-primary/80">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Questions About Solar Solutions?
-          </h2>
-          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Our solar experts are here to help you choose the right solution for your needs.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90">
-              <Link to="/get-quote">Get Free Quote</Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
-              <Link to="/contact">Contact Us</Link>
-            </Button>
+        </section>
+        <section className="py-16">
+          <div className="max-w-4xl mx-auto px-4">
+            <h3 className="text-2xl font-bold mb-8 text-center">Frequently Asked Questions</h3>
+            <div className="space-y-4">{faqs.map((item, idx) => (
+              <div key={idx} className="border rounded-lg overflow-hidden">
+                <button onClick={() => setOpenIndex(openIndex === idx ? null : idx)} className="w-full text-left p-4 font-medium flex justify-between items-center">{item.q}<span>{openIndex === idx ? "−" : "+"}</span></button>
+                {openIndex === idx && <p className="p-4 pt-0 text-gray-600">{item.a}</p>}
+              </div>
+            ))}</div>
           </div>
-        </div>
-      </section>
-
+        </section>
+      </main>
       <Footer />
     </div>
   );
-};
-
-export default TataSolar;
+}
