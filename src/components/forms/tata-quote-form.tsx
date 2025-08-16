@@ -90,6 +90,18 @@
 //       const { error } = await supabase.from('solar_quote_requests').insert(insertData)
 //       if (error) throw error
 
+//       // Optional secondary server
+//       try {
+//         // await fetch('https://solar-quote-server.onrender.com/generate-quote', {
+//         await fetch('https://solar-quote-server.onrender.com/generate-quote', {
+//           method: 'POST',
+//           headers: { 'Content-Type': 'application/json' },
+//           body: JSON.stringify(insertData),
+//         });
+//       } catch (err) {
+//         console.warn("Secondary server failed:", err);
+//       }
+
 //       toast({
 //         title: "Quote Request Submitted!",
 //         description: isLargeSystem
@@ -219,8 +231,6 @@
 // }
 
 // export default TataQuoteForm
-
-
 
 
 
@@ -445,6 +455,38 @@ const TataQuoteForm = ({
                 <Label htmlFor="project_location" className="text-sm font-medium">Project Location *</Label>
                 <Input id="project_location" type="text" required value={formData.project_location} onChange={(e) => handleInputChange("project_location", e.target.value)} placeholder="City, State" />
               </div>
+
+              {/* START: Added Referral Fields */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="referral_name" className="text-sm font-medium text-gray-700">
+                    Referral Name (Optional)
+                  </Label>
+                  <Input
+                    id="referral_name"
+                    type="text"
+                    value={formData.referral_name}
+                    onChange={(e) => handleInputChange("referral_name", e.target.value)}
+                    placeholder="Name of person who referred you"
+                    className="h-10 border-gray-300"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="referral_phone" className="text-sm font-medium text-gray-700">
+                    Referral Phone Number (Optional)
+                  </Label>
+                  <Input
+                    id="referral_phone"
+                    type="tel"
+                    value={formData.referral_phone}
+                    onChange={(e) => handleInputChange("referral_phone", e.target.value)}
+                    placeholder="+91 98765 43210"
+                    className="h-10 border-gray-300"
+                  />
+                </div>
+              </div>
+              {/* END: Added Referral Fields */}
+
               <div className="pt-4">
                 <Button type="submit" disabled={loading || !formData.name || !formData.phone || !formData.project_location} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold h-12 text-base">
                   {loading ? "Submitting..." : isLargeSystem ? "Contact Sales Team" : "Get My Tata Power Solar Quote"}
