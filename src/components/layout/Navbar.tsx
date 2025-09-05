@@ -474,7 +474,7 @@ const Navbar = () => {
                   <img
                     src="/logo.png"
                     alt="Arpit Solar Logo"
-                    className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
+                    className="w-28 h-28 sm:w-32 sm:h-32 object-contain"
                     loading="eager"
                   />
                 </Link>
@@ -566,7 +566,7 @@ const Navbar = () => {
                   <img
                     src="/logo.png"
                     alt="Arpit Solar Logo"
-                    className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
+                    className="w-20 h-20 sm:w-24 sm:h-24 object-contain"
                     loading="eager"
                   />
                 </Link>
@@ -670,11 +670,3 @@ const Navbar = () => {
 }
 
 export default Navbar
-
-
-
-
-
-
-
-
