@@ -21,8 +21,8 @@ const Index = () => {
         <CleanEnergySolution />
         <HowItWorks />
         <TrustedPartnersSection />
-        <TVCard/>
         <ProjectHighlights />
+        <TVCard/>
         <Certifications />
         <FAQ />
       </main>
