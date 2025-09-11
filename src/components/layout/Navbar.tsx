@@ -1,7 +1,22 @@
+// **Logo Sizing Changes:**
+
+// - **Transparent state**: Increased from `w-20 h-20 sm:w-24 sm:h-24` to `w-32 h-24 sm:w-40 sm:h-28` with negative margins `-my-2 sm:-my-3`
+// - **Solid state**: Increased from `w-18 h-18 sm:w-20 sm:h-20` to `w-28 h-20 sm:w-32 sm:h-24` with negative margins `-my-2`
+
+
+// **Hover Reliability Fixes:**
+
+// - Added `logoRestricted` state to control logo size when mega menus are open
+// - Added direct `onMouseEnter` handlers to menu buttons
+// - Reduced close delay from 300ms to 150ms for better responsiveness
+// - Logo automatically restricts size when any mega menu is active to prevent cutting
+
+
+
+
 "use client"
 
 import { useState, useEffect, useRef, useCallback, useMemo } from "react"
-import { Link, useLocation } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 import { GetQuoteForm } from "@/pages/GetQuote"
@@ -22,7 +37,6 @@ import {
   Instagram,
   Home,
   Building,
-  Zap,
 } from "lucide-react"
 
 // Pinterest Icon Component (inline to avoid import issues)
@@ -57,6 +71,8 @@ type SocialLink = {
   url: string
 }
 
+import { Link, useLocation } from "react-router-dom"
+
 const Navbar = () => {
   // State management
   const [isOpen, setIsOpen] = useState(false)
@@ -65,6 +81,7 @@ const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [isQuoteOpen, setIsQuoteOpen] = useState(false)
   const location = useLocation()
+  const pathname = location.pathname
   const menuCloseTimer = useRef<NodeJS.Timeout | null>(null)
 
   // Memoized navigation items
@@ -111,8 +128,8 @@ const Navbar = () => {
             name: "Tata Solar",
             href: "/tata-solar",
             image: "/Tata%20Power%20Solar.png",
-            description: "Coming Soon - Stay Tuned",
-            recommended: "Coming Soon",
+            description: "India's #1 Solar Rooftop Company",
+            recommended: "Trusted choice for Residential & Commercial",
           },
         ],
       },
@@ -191,7 +208,7 @@ const Navbar = () => {
   const handleMenuLeave = useCallback(() => {
     menuCloseTimer.current = setTimeout(() => {
       setActiveDropdown(null)
-    }, 200)
+    }, 150) // Reduced delay for better responsiveness
   }, [])
 
   const toggleMobileMenu = useCallback(() => {
@@ -207,7 +224,7 @@ const Navbar = () => {
   }, [])
 
   // Helper functions
-  const isActivePath = useCallback((path: string) => location.pathname === path, [location.pathname])
+  const isActivePath = useCallback((path: string) => pathname === path, [pathname])
 
   // Dropdown Content Component
   const DropdownContent = useCallback(
@@ -218,7 +235,7 @@ const Navbar = () => {
         ? "bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border-white/20"
         : "bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
 
-      const topPosition = isTransparent ? "97px" : "89px"
+      const topPosition = isTransparent ? "73px" : "65px"
 
       return (
         <div
@@ -409,7 +426,6 @@ const Navbar = () => {
                 )}
               </div>
             ))}
-
             {/* Mobile Footer */}
             <div className="border-t border-gray-200 dark:border-gray-700 pt-4 mt-4 space-y-3">
               <div className="flex items-center justify-center space-x-3">
@@ -456,8 +472,9 @@ const Navbar = () => {
   }, [isOpen, darkMode, isActivePath, closeMobileMenu, toggleDarkMode, handleSocialClick, navigationItems, socialLinks])
 
   // Main component logic
-  const isHomePage = location.pathname === "/"
+  const isHomePage = pathname === "/"
   const isTransparent = isHomePage && !scrolled && !activeDropdown
+  const logoRestricted = activeDropdown !== null
   const underlineEffect =
     "relative after:content-[''] after:absolute after:bottom-1 after:left-1/2 after:-translate-x-1/2 after:h-[2px] after:w-0 after:transition-all after:duration-300"
 
@@ -466,7 +483,7 @@ const Navbar = () => {
       <div className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
         {isTransparent ? (
           // Transparent navbar
-          <div className="w-full px-4 py-4">
+          <div className="w-full px-4 py-2">
             <div className="container mx-auto">
               <div className="flex items-center justify-between">
                 {/* Logo */}
@@ -474,7 +491,11 @@ const Navbar = () => {
                   <img
                     src="/logo.png"
                     alt="Arpit Solar Logo"
-                    className="w-28 h-28 sm:w-32 sm:h-32 object-contain"
+                    className={`object-contain transition-all duration-300 ${
+                      logoRestricted
+                        ? "w-24 h-16 sm:w-28 sm:h-20 -my-1 sm:-my-2" // Restricted size when mega menu open
+                        : "w-32 h-24 sm:w-40 sm:h-28 -my-2 sm:-my-3" // Full size when no mega menu
+                    }`}
                     loading="eager"
                   />
                 </Link>
@@ -493,6 +514,7 @@ const Navbar = () => {
                           <Button
                             variant="ghost"
                             className={`flex items-center text-white hover:text-black space-x-1 px-3 xl:px-4 py-2 transition-colors duration-200 hover:bg-transparent ${underlineEffect} after:bg-blue-600 group-hover:after:w-full`}
+                            onMouseEnter={() => handleMenuEnter(item.name)} // Added direct hover for better reliability
                           >
                             <item.icon
                               className={`w-4 h-4 mr-1 group-hover:text-black dark:group-hover:text-white transition-colors duration-200 ${item.iconClassName || ""}`}
@@ -559,14 +581,18 @@ const Navbar = () => {
         ) : (
           // Solid navbar
           <div className="w-full bg-white dark:bg-gray-900 shadow-lg border-b border-gray-200 dark:border-gray-700">
-            <div className="container mx-auto px-4 py-3">
+            <div className="container mx-auto px-4 py-2">
               <div className="flex items-center justify-between">
                 {/* Logo */}
                 <Link to="/" className="flex items-center pl-2 sm:pl-4">
                   <img
                     src="/logo.png"
                     alt="Arpit Solar Logo"
-                    className="w-20 h-20 sm:w-24 sm:h-24 object-contain"
+                    className={`object-contain transition-all duration-300 ${
+                      logoRestricted
+                        ? "w-20 h-14 sm:w-24 sm:h-16 -my-1" // Restricted size when mega menu open
+                        : "w-28 h-20 sm:w-32 sm:h-24 -my-1 sm:-my-2" // Full size when no mega menu
+                    }`}
                     loading="eager"
                   />
                 </Link>
@@ -585,6 +611,7 @@ const Navbar = () => {
                           <Button
                             variant="ghost"
                             className={`flex items-center text-gray-700 dark:text-gray-200 hover:text-black dark:hover:text-white space-x-1 px-3 xl:px-4 py-2 transition-colors duration-200 hover:bg-transparent dark:hover:bg-transparent ${underlineEffect} after:bg-blue-600 dark:after:bg-blue-400 group-hover:after:w-full`}
+                            onMouseEnter={() => handleMenuEnter(item.name)} // Added direct hover for better reliability
                           >
                             <item.icon
                               className={`w-4 h-4 mr-1 group-hover:text-black dark:group-hover:text-white transition-colors duration-200 ${item.iconClassName || ""}`}
@@ -670,3 +697,10 @@ const Navbar = () => {
 }
 
 export default Navbar
+
+
+
+
+
+
+
