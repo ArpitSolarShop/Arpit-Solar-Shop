@@ -1,4 +1,0 @@
-project_id = "hfbssqbrgogwtvkdvpmr"
-
-[functions.generate-quote-pdf]
-verify_jwt = false
