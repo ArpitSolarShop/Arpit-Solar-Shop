@@ -58,7 +58,7 @@ export default function IntegratedQuoteForm({
         power_demand_kw: powerDemandKw !== null && powerDemandKw !== undefined ? String(powerDemandKw) : prev.power_demand_kw,
         // If product is selected, also fill estimated_system_size_kw and phase
         estimated_system_size_kw: product && product.system_kw !== undefined ? String(product.system_kw) : prev.estimated_system_size_kw,
-        phase: product?.phase ?? prev.phase,
+        phase: (product?.phase === 'Single' || product?.phase === 'Three') ? product.phase : prev.phase,
       }))
     }
     return () => {
@@ -72,7 +72,7 @@ export default function IntegratedQuoteForm({
     if (!formData.name) return 'Name is required'
     if (!formData.phone || !phoneRegex.test(formData.phone)) return 'Valid phone number is required (10 digits, starting with 6-9)'
     if (formData.email && !emailRegex.test(formData.email)) return 'Invalid email format'
-    if (!formData.phase) return 'Phase is required (Single or Three)'
+    if (!formData.phase && !product?.phase) return 'Phase is required (Single or Three)'
     // Require at least one of estimated system size or power demand (product.system_kw counts too)
     if (!product?.system_kw && !formData.estimated_system_size_kw && !formData.power_demand_kw) return 'Please provide an estimated system size (kW) or power demand (kW)'
     if (!formData.project_location) return 'Project location is required'
@@ -158,7 +158,7 @@ export default function IntegratedQuoteForm({
         }
         console.log('Sending payload to secondary quote server:', secondaryPayload)
         await fetch('https://solar-quote-server.onrender.com/generate-quote', {
-        // const response = await fetch('http://localhost:3000/generate-quote', {
+          // const response = await fetch('http://localhost:3000/generate-quote', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(secondaryPayload),
@@ -305,13 +305,6 @@ export default function IntegratedQuoteForm({
                     <SelectContent><SelectItem value="Residential">Residential Solar</SelectItem><SelectItem value="Commercial">Commercial Solar</SelectItem></SelectContent>
                   </Select>
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="phase" className="text-sm font-medium">Phase *</Label>
-                  <Select value={formData.phase} onValueChange={(value) => handleInputChange('phase', value)} disabled={!!product}><SelectTrigger><SelectValue placeholder="Select phase" /></SelectTrigger>
-                    <SelectContent><SelectItem value="Single">Single</SelectItem><SelectItem value="Three">Three</SelectItem></SelectContent>
-                  </Select>
-                  {product && <p className="text-xs text-slate-500">Auto-selected from the chosen product.</p>}
-                </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -329,7 +322,7 @@ export default function IntegratedQuoteForm({
                 <Input id="project_location" type="text" required value={formData.project_location} onChange={(e) => handleInputChange('project_location', e.target.value)} placeholder="City, State" />
               </div>
               <div className="pt-4">
-                <Button type="submit" disabled={loading || !formData.name || !formData.phone || !formData.project_location || !formData.phase || (!product?.system_kw && !formData.estimated_system_size_kw && !formData.power_demand_kw)} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold h-12 text-base">
+                <Button type="submit" disabled={loading || !formData.name || !formData.phone || !formData.project_location || (!formData.phase && !product?.phase) || (!product?.system_kw && !formData.estimated_system_size_kw && !formData.power_demand_kw)} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold h-12 text-base">
                   {loading ? 'Submitting...' : isLargeSystem ? 'Contact Sales Team' : 'Get My Quote'}
                 </Button>
                 <p className="text-xs text-gray-500 text-center mt-3">By submitting this form, you agree to be contacted by our representatives</p>
